@@ -1,0 +1,78 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 1600 3360
+<< locali >>
+rect 0 620 704 700
+rect 0 1420 704 1500
+rect 0 2220 704 2300
+rect 672 840 840 904
+rect 1056 1720 1120 1888
+rect 744 1646 912 1710
+rect 744 2086 912 2150
+rect 832 2090 1094 2150
+rect 976 2086 1144 2150
+rect 976 2566 1144 2630
+rect 1064 2570 1118 2630
+rect 1058 2530 1118 2600
+rect 1056 920 1120 1000
+rect 1056 1720 1120 1800
+rect 1056 2520 1120 2600
+rect 672 2440 992 2520
+rect -96 840 96 920
+<< viali >>
+rect 684 846 736 898
+rect 776 846 828 898
+rect 1062 1732 1114 1784
+rect 1062 1824 1114 1876
+rect 756 1652 808 1704
+rect 848 1652 900 1704
+rect 756 2092 808 2144
+rect 848 2092 900 2144
+rect 988 2092 1040 2144
+rect 1080 2092 1132 2144
+rect 988 2572 1040 2624
+rect 1080 2572 1132 2624
+<< metal1 >>
+rect 672 840 848 908
+rect 1056 1720 1124 1896
+rect 760 840 794 900
+rect 794 1720 1090 1780
+rect 794 840 854 1780
+rect 744 1646 920 1714
+rect 802 1680 862 2150
+rect 744 2086 920 2154
+rect 976 2086 1152 2154
+rect 1034 2120 1094 2630
+rect 976 2566 1152 2634
+use REYATR_NCH_2C1F2 xin<4> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 480
+box 0 480 1600 1280
+use REYATR_NCH_2C1F2 xin<5> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 1280
+box 0 1280 1600 2080
+use REYATR_NCH_2C1F2 xin<6> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 2080
+box 0 2080 1600 2880
+use REYATR_NCH_2CTAPBOT xstack_n_ring_b_bot ../REY_ATR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1600 480
+use REYATR_NCH_2CTAPTOP xstack_n_ring_b_top ../REY_ATR_SKY130A
+transform 1 0 0 0 1 2880
+box 0 2880 1600 3360
+<< labels >>
+flabel locali s 1056 920 1120 1000 0 FreeSans 400 0 0 0 N3
+port 1 nsew signal bidirectional
+flabel locali s 1056 1720 1120 1800 0 FreeSans 400 0 0 0 N4
+port 2 nsew signal bidirectional
+flabel locali s 1056 2520 1120 2600 0 FreeSans 400 0 0 0 N5
+port 3 nsew signal bidirectional
+flabel locali s 672 2440 992 2520 0 FreeSans 400 0 0 0 N6
+port 4 nsew signal bidirectional
+flabel locali s -96 840 96 920 0 FreeSans 400 0 0 0 VSS
+port 5 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 1600 3360
+<< end >>

@@ -1,0 +1,129 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 16476 11332
+<< locali >>
+rect 96 11140 16476 11320
+rect 96 11140 16476 11320
+rect 15716 11140 15780 11308
+rect 0 9300 192 11320
+rect 1600 10100 1792 11320
+rect 3200 10100 3392 11320
+rect 4800 10100 4992 11320
+rect 6400 10100 6592 11320
+rect 8000 10100 8192 11320
+rect 9600 10100 9792 11320
+rect 11200 10100 11392 11320
+rect 12800 10100 12992 11320
+rect 96 0 16476 180
+rect 96 0 16476 180
+rect 15176 0 15240 168
+rect 9600 0 9792 1220
+rect 11200 0 11392 1220
+rect 12800 0 12992 1220
+rect 8000 0 8192 1220
+rect 6400 0 6592 1220
+rect 3200 0 3392 1460
+rect 0 0 192 1460
+rect 7616 2820 7680 2900
+rect 7616 2020 7680 2100
+rect 7616 1220 7680 1300
+rect 4416 7780 4480 7860
+rect 15126 830 15306 890
+<< metal3 >>
+rect 15666 620 15842 11320
+rect 15716 11140 15792 11332
+rect 15126 0 15302 620
+rect 15176 0 15252 192
+<< viali >>
+rect 15722 11152 15774 11204
+rect 15722 11244 15774 11296
+rect 15182 12 15234 64
+rect 15182 104 15234 156
+<< metal1 >>
+rect 15716 11140 15784 11316
+rect 15176 0 15244 176
+<< via1 >>
+rect 15722 11152 15778 11208
+rect 15722 11248 15778 11304
+rect 15182 12 15238 68
+rect 15182 108 15238 164
+<< metal2 >>
+rect 15716 11140 15784 11316
+rect 15176 0 15244 176
+<< via2 >>
+rect 15722 11152 15778 11208
+rect 15722 11248 15778 11304
+rect 15182 12 15238 68
+rect 15182 108 15238 164
+use REY_PLL_ROSC_DIG xdig 
+transform 1 0 14496 0 1 300
+box 14496 300 16476 1420
+use REY_PLL_ROSC_N_BIAS xn_bias 
+transform 1 0 9696 0 1 300
+box 9696 300 11392 5260
+use REY_PLL_ROSC_N_RING_A xn_ring_a 
+transform 1 0 11296 0 1 300
+box 11296 300 12992 4460
+use REY_PLL_ROSC_N_RING_B xn_ring_b 
+transform 1 0 12896 0 1 300
+box 12896 300 14592 3660
+use REY_PLL_ROSC_N_SU xn_su 
+transform 1 0 8096 0 1 300
+box 8096 300 9792 3660
+use REY_PLL_ROSC_N_SW xn_sw 
+transform 1 0 6496 0 1 300
+box 6496 300 8192 3660
+use REY_PLL_ROSC_P_DIODE xp_diode 
+transform 1 0 96 0 1 6060
+box 96 6060 1792 10220
+use REY_PLL_ROSC_P_MIRB xp_mirb 
+transform 1 0 1696 0 1 6060
+box 1696 6060 3392 11020
+use REY_PLL_ROSC_P_ST0 xp_st0 
+transform 1 0 3296 0 1 6060
+box 3296 6060 4992 11020
+use REY_PLL_ROSC_P_ST1 xp_st1 
+transform 1 0 4896 0 1 6060
+box 4896 6060 6592 11020
+use REY_PLL_ROSC_P_ST2 xp_st2 
+transform 1 0 6496 0 1 6060
+box 6496 6060 8192 11020
+use REY_PLL_ROSC_P_ST3 xp_st3 
+transform 1 0 8096 0 1 6060
+box 8096 6060 9792 11020
+use REY_PLL_ROSC_P_ST4 xp_st4 
+transform 1 0 9696 0 1 6060
+box 9696 6060 11392 11020
+use REY_PLL_ROSC_P_ST5 xp_st5 
+transform 1 0 11296 0 1 6060
+box 11296 6060 12992 11020
+use REY_PLL_ROSC_P_ST6 xp_st6 
+transform 1 0 12896 0 1 6060
+box 12896 6060 14592 11020
+use REY_PLL_ROSC_R_FIX xr_fix 
+transform 1 0 3296 0 1 300
+box 3296 300 6592 4460
+use REY_PLL_ROSC_R_TRIM xr_trim 
+transform 1 0 96 0 1 300
+box 96 300 3392 5260
+<< labels >>
+flabel locali s 96 11140 16476 11320 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew power bidirectional
+flabel locali s 96 0 16476 180 0 FreeSans 400 0 0 0 VSS
+port 2 nsew ground bidirectional
+flabel locali s 7616 2820 7680 2900 0 FreeSans 400 0 0 0 TRIM0
+port 3 nsew signal bidirectional
+flabel locali s 7616 2020 7680 2100 0 FreeSans 400 0 0 0 TRIM1
+port 4 nsew signal bidirectional
+flabel locali s 7616 1220 7680 1300 0 FreeSans 400 0 0 0 TRIM2
+port 5 nsew signal bidirectional
+flabel locali s 4416 7780 4480 7860 0 FreeSans 400 0 0 0 VCTRL
+port 6 nsew signal bidirectional
+flabel locali s 15126 830 15306 890 0 FreeSans 400 0 0 0 CK
+port 7 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 16476 11332
+<< end >>

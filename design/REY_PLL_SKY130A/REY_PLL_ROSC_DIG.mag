@@ -1,0 +1,30 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 1980 1120
+<< locali >>
+rect 630 530 810 590
+rect 270 130 450 190
+<< metal3 >>
+rect 1170 320 1346 1120
+rect 630 0 806 320
+use REYTR_IVX1_CV xo0 ../REY_TR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1980 320
+use REYTR_IVX4_CV xo1 ../REY_TR_SKY130A
+transform 1 0 0 0 1 320
+box 0 320 1980 1120
+<< labels >>
+flabel locali s 630 530 810 590 0 FreeSans 400 0 0 0 CK
+port 1 nsew signal bidirectional
+flabel locali s 270 130 450 190 0 FreeSans 400 0 0 0 N6
+port 2 nsew signal bidirectional
+flabel metal3 s 1170 320 1346 1120 0 FreeSans 400 0 0 0 VDD_1V8
+port 3 nsew power bidirectional
+flabel metal3 s 630 0 806 320 0 FreeSans 400 0 0 0 VSS
+port 4 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 1980 1120
+<< end >>

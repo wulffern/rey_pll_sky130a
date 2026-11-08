@@ -25,9 +25,10 @@ temperature the way the ring's swing does and f ~ 1/(R C)
   xmn2[]        LVT follower VX -> VG, closes the loop
   xms1, xms2[], xms3  startup: an inverter on VG; while VG is low MS3 pulls
                 VBP down and returns the current into VG, through R
-  xrf*, xrt*    R: 38.5 kOhm fixed (RPPO4 + 2 x RPPO2 parallel), then 7.7,
-                15.4 and 30.8 kOhm sections, each shorted by xst<k> when
-                TRIM<k> is high (less R, more current, higher frequency)
+  xrf*, xrt*    R in REYATR_RES_36C2F0 units (15.3 kOhm): 38.3 kOhm fixed
+                (2 in series + 2 in parallel), then 7.65, 15.3 and 30.6 kOhm
+                sections, each shorted by xst<k> when TRIM<k> is high (less
+                R, more current, higher frequency)
 Bias, BIAS=ext: only the PMOS diode, VBP is a pin (CELL=REY_PLL_ROSC_IEXT)
 
 Output: REYTR_IVX1 then REYTR_IVX4 on VDD_1V8, from the last ring node to
@@ -56,8 +57,7 @@ FOL = A + os.environ.get("FOL", "REYATR_LVT_NCH_2C5F0") + ".sym"
 NCH5 = A + "REYATR_NCH_2C5F0.sym"
 PCH5 = A + "REYATR_PCH_2C5F0.sym"
 SW = A + "REYATR_NCH_4C1F2.sym"
-RPPO2 = A + "REYATR_RPPO2.sym"
-RPPO4 = A + "REYATR_RPPO4.sym"
+RES = A + "REYATR_RES_36C2F0.sym"
 
 VDD, VSS = "VDD_1V8", "VSS"
 
@@ -182,23 +182,31 @@ if BIAS == "vt":
     text("While VG is low, XST is high and MS3 pulls VBP down into VG, "
          "through R, until MN1 turns on", -700, -280, 0.3)
 
-    #- Trim resistor, a chain left to right from VG down to VSS
-    text("Trim resistor: VG to VSS", -1450, -200)
-    xr, yr = -1450, -100
-    res(RPPO4, "xrf0", xr, yr, p="VG")
-    res(RPPO2, "xrf1[1:0]", xr + 200, yr)           # 2 in parallel
-    wlab(xr + 80, yr, xr + 200, yr, 3, "RF")
-    res(RPPO2, "xrt0[1:0]", xr + 400, yr)           # bit 0: 2 in parallel
-    wlab(xr + 280, yr, xr + 400, yr, 3, "RT0")
-    res(RPPO2, "xrt1", xr + 600, yr)                # bit 1
-    wlab(xr + 480, yr, xr + 600, yr, 3, "RT1")
-    res(RPPO4, "xrt2", xr + 800, yr, n=VSS)         # bit 2
-    wlab(xr + 680, yr, xr + 800, yr, 3, "RT2")
-    #- each section shorted by its switch, drawn under it
-    for k, (a, b_) in enumerate((("RT0", "RT1"), ("RT1", "RT2"),
-                                 ("RT2", VSS))):
-        nch(SW, f"xst{k}", xr + 420 + 200*k, yr + 120, g=f"TRIM{k}",
-            d=a, s=b_)
+    #- Trim resistor, a chain left to right from VG down to VSS, in
+    #- REYATR_RES_36C2F0 units (15.3 kOhm, 16 x 4 um, stacks like a
+    #- transistor). The composite RPPO cells lose their bulk pin when
+    #- cicpy splits the cell into columns.
+    xr, yr, dx = -1450, -100, 190
+    chain = [  # (name, from, to, note)
+        ("xrf0", "VG", "RFA"),
+        ("xrf1", "RFA", "RF"),
+        ("xrf2[1:0]", "RF", "RT0"),     # 2 in parallel
+        ("xrt0[1:0]", "RT0", "RT1"),    # bit 0, 2 in parallel
+        ("xrt1", "RT1", "RT2"),         # bit 1
+        ("xrt2a", "RT2", "RT2B"),       # bit 2, 2 in series
+        ("xrt2b", "RT2B", VSS),
+    ]
+    for i, (name, a_, b_) in enumerate(chain):
+        x = xr + dx*i
+        res(RES, name, x, yr, p=a_ if i == 0 else None,
+            n=b_ if i == len(chain) - 1 else None)
+        if i:
+            wlab(x - dx + 80, yr, x, yr, 3, a_)
+    #- each trim section shorted by its switch, drawn under it
+    for k, (a_, b_, i) in enumerate((("RT0", "RT1", 3), ("RT1", "RT2", 4),
+                                     ("RT2", VSS, 5))):
+        nch(SW, f"xst{k}", xr + dx*i + 40, yr + 120, g=f"TRIM{k}",
+            d=a_, s=b_)
     text("38.5k fixed, then 7.7k / 15.4k / 30.8k, each shorted when "
          "TRIM<k> is high", xr, yr + 200, 0.3)
 

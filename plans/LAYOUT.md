@@ -140,3 +140,40 @@ Before the first `make mag`, the generator needs:
 
 Order of work: ROSC layout (DRC/LVS clean, then extracted Kvco and corners
 with `Lay`), then the loop filter, CP/PFD/DIVN, the top, and the wrapper.
+
+## Status, REY_PLL_ROSC layout (2026-11-08)
+
+`design/REY_PLL_SKY130A/REY_PLL_ROSC.py`, built with `cd work && make mag
+CELL=REY_PLL_ROSC`. Placement is done: 82.4 x 56.7 um (4 670 um2, 26 % of a
+tile), every column five devices or fewer:
+
+```
+top (n-well):  p_diode p_mirb p_st0 .. p_st6
+bottom:        r_trim r_fix n_sw n_su n_bias n_ring_a n_ring_b dig
+```
+
+Changes the layout forced on the schematic, all in py/gen_rosc.py:
+
+- the trim resistor is REYATR_RES_36C2F0 units (15.3 kOhm), not RPPO2/RPPO4:
+  the composite RPPO cells lost their bulk pin when cicpy split the cell into
+  columns. Typical is unchanged within 0.3 %
+- the output buffer stays REYTR_IVX1 + IVX4: a discrete 2C1F2 first stage
+  loads the last ring node and slowed the ring by 20 %
+
+DRC (magic), routes still from the maze search:
+
+| Column   | Errors | Column   | Errors |
+|:---------|-------:|:---------|-------:|
+| P_DIODE  | 80     | N_SW     | 0      |
+| P_MIRB   | 0      | R_TRIM   | 21     |
+| P_ST0    | 33     | R_FIX    | 0      |
+| N_BIAS   | 79     | N_RING_A | 7      |
+| N_SU     | 157    | N_RING_B | 7      |
+| DIG      | 0      | top      | 616    |
+
+The errors are the searched routes: where a net is drawn as two legs, each
+leg puts a via pad at the joint, two pads 0.2 um apart (mcon.2, li.3,
+met1.2). Next: declare every column's nets as `paths` (straight trunks on
+named lanes, as REY_LDO does) column by column, with DRC after each, then
+the channel routes between the rows (VBP, VCTRL, VG, VX, XST, N0..N6, the
+RT nodes, TRIM, CK), then LVS and extraction.
