@@ -1,0 +1,64 @@
+*REY_PLL: closed loop lock from power up, 8 MHz reference, N = 64
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_PLL_lpe.spi
+#else
+.include ../../../work/xsch/REY_PLL.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param AVDD = {vdda}
+* the trim code, one per process (trim.py), set by a C<k> corner
+* (run with a C0..C7 corner)
+.param B0 = {TRIMCODE - 2*floor(TRIMCODE/2)}
+.param B1 = {floor(TRIMCODE/2) - 2*floor(TRIMCODE/4)}
+.param B2 = {floor(TRIMCODE/4)}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD_1V8  VSS  dc {AVDD}
+VT0  TRIM0    VSS  dc {B0*AVDD}
+VT1  TRIM1    VSS  dc {B1*AVDD}
+VT2  TRIM2    VSS  dc {B2*AVDD}
+VOH  OLH      VSS  dc 0
+VOL  OLL      VSS  dc 0
+VPU  PWRUP_1V8 VSS pwl 0 0 200n 0 201n {AVDD}
+VREF CK_REF   VSS  pulse 0 {AVDD} 50n 100p 100p 62.4n 125n
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+#ifdef Debug
+.save all
+#else
+.save v(xdut.VCTRL) v(xdut.VLPFZ) v(xdut.CK_FB) v(CK_REF) v(CKO3) v(CK) v(xdut.UP) v(xdut.DN_N) v(xdut.KICK)
+#endif
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+unset askquit
+tran 20p 16u
+* measurements: tran.meas
+write
+quit
+.endc
+.end

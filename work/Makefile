@@ -18,9 +18,12 @@ CELLS = REY_PLL
 
 include ../tech/make/core.make
 
-#- Loop filter unit cells (cic/lpf.json), compiled with cicpy against the
-#- rey_atr resistor patterns. Writes design/REY_PLL_SKY130A.cic and the
-#- REYPLL_* .mag/.sch/.sym views
+#- ciccreator cells (cic/ip.json), compiled with cicpy: the loop filter
+#- units (lpf.json, against rey_atr's resistor patterns, prefixed REYPLL_)
+#- and the digital blocks (pll.json, on the built rey_tr library,
+#- unprefixed, LVS'd against their xschem schematics, which the compile
+#- leaves alone: meta noSchematic). Writes design/REY_PLL_SKY130A.cic and
+#- the .mag/.sch/.sym views. rey_tr's own cells are not rewritten.
+CIC_EXCLUDE = (RPPO2|RPPO4|RES2|RES4|11CWALL|RESABUT[RM]|HRPPO2|HRPPO12)$$|^REYTR_
 cic:
-	cd ../design && cicpy compile --I ../cic --I ../../rey_atr_sky130a/cic --prefix REYPLL_ --exclude "(RPPO2|RPPO4|RES2|RES4|11CWALL|RESABUT[RM]|HRPPO2|HRPPO12)$$" --spice --magic --xschem ../cic/lpf.json ../cic/sky130.tech ${LIB}
-
+	cd ../design && cicpy compile --I ../cic --I ../../rey_atr_sky130a/cic --prefix REYPLL_ --exclude "${CIC_EXCLUDE}" --spice --magic --xschem ../cic/ip.json ../cic/sky130.tech ${LIB}

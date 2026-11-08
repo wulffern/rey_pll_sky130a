@@ -1,0 +1,138 @@
+{
+    "comment": [
+        "REY_PLL digital blocks, ciccreator object file compiled with",
+        "cicpy (cd work && make cic, through cic/ip.json). The cells are rey_tr standard",
+        "cells read from the built REY_TR_SKY130A library; routes are by",
+        "net name, no coordinates. Ported from sun_pll's SUN_PLL.json."
+    ],
+    "cells": [
+        {
+            "name": "REY_PLL_PFD",
+            "class": "cIcCore::LayoutCell",
+            "meta": {
+                "noSchematic": true
+            },
+            "boundaryIgnoreRouting": 0,
+            "noPowerRoute": 1,
+            "composite": 1,
+            "afterPlace": [
+                {
+                    "addRouteRings": [
+                        [
+                            "M1",
+                            "VSS",
+                            "tbrl",
+                            4,
+                            2
+                        ],
+                        [
+                            "M1",
+                            "VDD_1V8",
+                            "tbrl",
+                            4,
+                            2
+                        ]
+                    ]
+                },
+                {
+                    "addPowerRings": []
+                }
+            ],
+            "beforeRoute": {
+                "addDirectedRoutes": [
+                    [
+                        "M4",
+                        "VSS",
+                        "X:AVSS||rail_b_VSS",
+                        "routeWidth=wide_width"
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "X:AVDD||rail_t_VDD_1V8",
+                        "routeWidth=wide_width"
+                    ]
+                ],
+                "addConnectivityRoutes": [
+                    [
+                        "M2",
+                        "^(HAU|HAD|RN_U|RN_D)$",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M2",
+                        "^(HU|HD)$",
+                        "--|-",
+                        "onTopL"
+                    ],
+                    [
+                        "M3",
+                        "^RST$",
+                        "-|--",
+                        "onTopB"
+                    ],
+                    [
+                        "M3",
+                        "^PWRUP_N$",
+                        "-|--",
+                        "onTopB"
+                    ],
+                    [
+                        "M3",
+                        "^(DN|UP)$",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M2",
+                        "^(CK_REF|CK_FB)$",
+                        "-|--",
+                        ""
+                    ]
+                ]
+            },
+            "afterPaint": {
+                "resetOrigin": 1,
+                "addPortOnEdges": [
+                    [
+                        "M3",
+                        "CK_REF",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CK_FB",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "PWRUP_1V8",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "UP",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "DN_N",
+                        "right",
+                        "-|--",
+                        ""
+                    ]
+                ]
+            },
+            "noPrefix": 1
+        }
+    ]
+}

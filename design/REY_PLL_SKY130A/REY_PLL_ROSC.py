@@ -110,11 +110,12 @@ class REY_PLL_ROSC(SidecarCell):
         order = ['xin<4>', 'xin<5>', 'xin<6>']
 
     class dig(Stack):
-        """The output buffer, rey_tr standard cells."""
-        match = r'^(xo0|xo1)$'
+        """The output buffer, rey_tr standard cells, on their tap
+        cell. The cells' M4 supply strips join by abutment."""
+        match = r'^(xo0|xo1|xotap)$'
         group = "dig"
         fill = False
-        order = ['xo0', 'xo1']
+        order = ['xotap', 'xo0', 'xo1']
 
     supplies = [
         {"net": "VDD_1V8", "ring": "t", "strap": "top", "pin_strap": True},

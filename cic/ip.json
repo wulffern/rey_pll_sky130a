@@ -1,0 +1,16 @@
+{
+    "comment" : [
+        "REY_PLL's ciccreator cells, compiled with cicpy: cd work && make cic",
+        "lpf.json: loop filter unit cells, prefixed REYPLL_",
+        "pll.json: the digital blocks on rey_tr cells, unprefixed (noPrefix),",
+        "named as their xschem schematics"
+    ],
+    "library" : [
+        "../../rey_tr_sky130a/design/REY_TR_SKY130A.cic"
+    ],
+    "include" : [
+        "lpf.json",
+        "pll.json"
+    ],
+    "cells" : []
+}

@@ -12,6 +12,7 @@ C {devices/ipin.sym} -920 -740 0 0 {name=p3 lab=TRIM1}
 C {devices/ipin.sym} -760 -740 0 0 {name=p4 lab=TRIM2}
 C {devices/ipin.sym} -600 -740 0 0 {name=p5 lab=VCTRL}
 C {devices/opin.sym} -440 -740 0 0 {name=p6 lab=CK}
+C {devices/opin.sym} -280 -740 0 0 {name=p7 lab=VBP}
 T {Bias: I = Vgs(MN1) / R} -1450 -620 0 0 0.4 0.4 {}
 C {REY_ATR_SKY130A/REYATR_LVT_PCH_8C5F0.sym} -1200 -500 0 0 {name=xmpd[3:0]}
 C {devices/lab_pin.sym} -1160 -530 3 0 {name=l1 sig_type=std_logic lab=VDD_1V8}
@@ -159,3 +160,6 @@ C {REY_TR_SKY130A/REYTR_IVX4_CV.sym} 1570 -170 0 0 {name=xo1}
 C {devices/lab_pin.sym} 1610 -210 3 0 {name=l74 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} 1610 -130 1 0 {name=l75 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 1650 -170 2 0 {name=l76 sig_type=std_logic lab=CK}
+C {REY_TR_SKY130A/REYTR_TAPCELLB_CV.sym} 1790 -170 0 0 {name=xotap}
+C {devices/lab_pin.sym} 1790 -190 3 0 {name=l77 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_pin.sym} 1790 -150 1 0 {name=l78 sig_type=std_logic lab=VSS}

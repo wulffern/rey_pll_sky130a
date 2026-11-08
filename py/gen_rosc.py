@@ -62,7 +62,7 @@ RES = A + "REYATR_RES_36C2F0.sym"
 VDD, VSS = "VDD_1V8", "VSS"
 
 pins = [(VDD, "in"), (VSS, "in"), ("TRIM0", "in"), ("TRIM1", "in"),
-        ("TRIM2", "in"), ("VCTRL", "in"), ("CK", "out")]
+        ("TRIM2", "in"), ("VCTRL", "in"), ("CK", "out"), ("VBP", "out")]
 if BIAS == "ext":
     pins = [(VDD, "in"), (VSS, "in"), ("VBP", "in"), ("VCTRL", "in"),
             ("CK", "out")]
@@ -293,6 +293,11 @@ def inv(sym, name, x, y, a, yy):
 inv(T + "REYTR_IVX1_CV.sym", "xo0", xo, -170, f"N{N-1}", None)
 wlab(xo + 80, -170, xo + 200, -170, 3, "CKN")
 inv(T + "REYTR_IVX4_CV.sym", "xo1", xo + 200, -170, None, "CK")
+#- every rey_tr column needs a TAPCELLB (well and substrate taps) to be
+#- LVS clean. Pins: AVDD (0,-20) AVSS (0,20)
+inst(T + "REYTR_TAPCELLB_CV.sym", "xotap", xo + 420, -170)
+lab(xo + 420, -190, 3, VDD)
+lab(xo + 420, -150, 1, VSS)
 
 with open(os.path.join(outdir, cell + ".sch"), "w") as f:
     f.write("\n".join(L) + "\n")

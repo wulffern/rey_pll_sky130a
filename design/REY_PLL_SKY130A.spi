@@ -1,0 +1,555 @@
+
+*-------------------------------------------------------------
+* REYTR_PCHDL
+*-------------------------------------------------------------
+.SUBCKT REYTR_PCHDL D G S B
+XMM1 D G S B sky130_fd_pr__pfet_01v8  l=0.16  nf=1  w=0.9  
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_NCHDL
+*-------------------------------------------------------------
+.SUBCKT REYTR_NCHDL D G S B
+XMM1 D G S B sky130_fd_pr__nfet_01v8  l=0.16  nf=1  w=0.9  
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_TAPCELLB_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_TAPCELLB_CV AVDD AVSS
+XMN1 AVSS AVSS AVSS AVSS REYTR_NCHDL
+XMP1 AVDD AVDD AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_TIEH_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_TIEH_CV Y AVDD AVSS
+XMN0 A A AVSS AVSS REYTR_NCHDL
+XMP0 Y A AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_TIEL_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_TIEL_CV Y AVDD AVSS
+XMN0 Y A AVSS AVSS REYTR_NCHDL
+XMP0 A A AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_IVX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_IVX1_CV A Y AVDD AVSS
+XMN0 Y A AVSS AVSS REYTR_NCHDL
+XMP0 Y A AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_IVX2_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_IVX2_CV A Y AVDD AVSS
+XMN0 Y A AVSS AVSS REYTR_NCHDL
+XMN1 AVSS A Y AVSS REYTR_NCHDL
+XMP0 Y A AVDD AVDD REYTR_PCHDL
+XMP1 AVDD A Y AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_IVX4_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_IVX4_CV A Y AVDD AVSS
+XMN0 Y A AVSS AVSS REYTR_NCHDL
+XMN1 AVSS A Y AVSS REYTR_NCHDL
+XMN2 Y A AVSS AVSS REYTR_NCHDL
+XMN3 AVSS A Y AVSS REYTR_NCHDL
+XMP0 Y A AVDD AVDD REYTR_PCHDL
+XMP1 AVDD A Y AVDD REYTR_PCHDL
+XMP2 Y A AVDD AVDD REYTR_PCHDL
+XMP3 AVDD A Y AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_IVX8_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_IVX8_CV A Y AVDD AVSS
+XMN0 Y A AVSS AVSS REYTR_NCHDL
+XMN1 AVSS A Y AVSS REYTR_NCHDL
+XMN2 Y A AVSS AVSS REYTR_NCHDL
+XMN3 AVSS A Y AVSS REYTR_NCHDL
+XMN4 Y A AVSS AVSS REYTR_NCHDL
+XMN5 AVSS A Y AVSS REYTR_NCHDL
+XMN6 Y A AVSS AVSS REYTR_NCHDL
+XMN7 AVSS A Y AVSS REYTR_NCHDL
+XMP0 Y A AVDD AVDD REYTR_PCHDL
+XMP1 AVDD A Y AVDD REYTR_PCHDL
+XMP2 Y A AVDD AVDD REYTR_PCHDL
+XMP3 AVDD A Y AVDD REYTR_PCHDL
+XMP4 Y A AVDD AVDD REYTR_PCHDL
+XMP5 AVDD A Y AVDD REYTR_PCHDL
+XMP6 Y A AVDD AVDD REYTR_PCHDL
+XMP7 AVDD A Y AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_BFX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_BFX1_CV A Y AVDD AVSS
+XMN0 AVSS A B AVSS REYTR_NCHDL
+XMN1 Y B AVSS AVSS REYTR_NCHDL
+XMP0 AVDD A B AVDD REYTR_PCHDL
+XMP1 Y B AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_NRX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_NRX1_CV A B Y AVDD AVSS
+XMN0 Y A AVSS AVSS REYTR_NCHDL
+XMN1 AVSS B Y AVSS REYTR_NCHDL
+XMP0 N1 A AVDD AVDD REYTR_PCHDL
+XMP1 Y B N1 AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_NDX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_NDX1_CV A B Y AVDD AVSS
+XMN0 N1 A AVSS AVSS REYTR_NCHDL
+XMN1 Y B N1 AVSS REYTR_NCHDL
+XMP0 Y A AVDD AVDD REYTR_PCHDL
+XMP1 AVDD B Y AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ORX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ORX1_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NRX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ANX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ANX1_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NDX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_DFTSPCX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_DFTSPCX1_CV D CK Q AVDD AVSS
+XMN0 N1 D AVSS AVSS REYTR_NCHDL
+XMN2 N2 CK Q AVSS REYTR_NCHDL
+XMN1 AVSS N1 N2 AVSS REYTR_NCHDL
+XMP1 N3 D AVDD AVDD REYTR_PCHDL
+XMP0 N1 CK N3 AVDD REYTR_PCHDL
+XMP2 Q N1 AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_IVTRIX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_IVTRIX1_CV A C CN Y AVDD AVSS
+XMN0 N1 A AVSS AVSS REYTR_NCHDL
+XMN1 Y C N1 AVSS REYTR_NCHDL
+XMP0 N2 A AVDD AVDD REYTR_PCHDL
+XMP1 Y CN N2 AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_NDTRIX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_NDTRIX1_CV A C CN RN Y AVDD AVSS
+XMN2 N1 RN AVSS AVSS REYTR_NCHDL
+XMN0 N2 A N1 AVSS REYTR_NCHDL
+XMN1 Y C N2 AVSS REYTR_NCHDL
+XMP2 AVDD RN N2 AVDD REYTR_PCHDL
+XMP0 N2 A AVDD AVDD REYTR_PCHDL
+XMP1 Y CN N2 AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_DFRNQNX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_DFRNQNX1_CV D CK RN Q QN AVDD AVSS
+XA0 AVDD AVSS REYTR_TAPCELLB_CV
+XA1 CK RN CKN AVDD AVSS REYTR_NDX1_CV
+XA2 CKN CKB AVDD AVSS REYTR_IVX1_CV
+XA3 D CKN CKB A0 AVDD AVSS REYTR_IVTRIX1_CV
+XA4 A1 CKB CKN A0 AVDD AVSS REYTR_IVTRIX1_CV
+XA5 A0 A1 AVDD AVSS REYTR_IVX1_CV
+XA6 A1 CKB CKN QN AVDD AVSS REYTR_IVTRIX1_CV
+XA7 Q CKN CKB RN QN AVDD AVSS REYTR_NDTRIX1_CV
+XA8 QN Q AVDD AVSS REYTR_IVX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_SCX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_SCX1_CV A Y AVDD AVSS
+XA2 N1 A AVSS AVSS REYTR_NCHDL
+XA3 SCO A N1 AVSS REYTR_NCHDL
+XA4a AVDD SCO N1 AVSS REYTR_NCHDL
+XA4b AVDD SCO N1 AVSS REYTR_NCHDL
+XA5 Y SCO AVSS AVSS REYTR_NCHDL
+XB0 N2 A AVDD AVDD REYTR_PCHDL
+XB1 SCO A N2 AVDD REYTR_PCHDL
+XB3a N2 SCO AVSS AVDD REYTR_PCHDL
+XB3b N2 SCO AVSS AVDD REYTR_PCHDL
+XB4 Y SCO AVDD AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_TGPD_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_TGPD_CV C A B AVDD AVSS
+XMN0 AVSS C CN AVSS REYTR_NCHDL
+XMN1 B C AVSS AVSS REYTR_NCHDL
+XMN2 A CN B AVSS REYTR_NCHDL
+XMP0 AVDD C CN AVDD REYTR_PCHDL
+XMP1_DMY B AVDD AVDD AVDD REYTR_PCHDL
+XMP2 A C B AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ANX2_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ANX2_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NDX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX2_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ANX4_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ANX4_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NDX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX4_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ANX8_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ANX8_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NDX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX8_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ORX2_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ORX2_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NRX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX2_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ORX4_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ORX4_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NRX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX4_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_ORX8_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_ORX8_CV A B Y AVDD AVSS
+XA1 A B YN AVDD AVSS REYTR_NRX1_CV
+XA2 YN Y AVDD AVSS REYTR_IVX8_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_IVTRICX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_IVTRICX1_CV A C Y AVDD AVSS
+XA1 C CN AVDD AVSS REYTR_IVX1_CV
+XA2 A C CN Y AVDD AVSS REYTR_IVTRIX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_DFQNX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_DFQNX1_CV D CK Q QN AVDD AVSS
+XA0 AVDD AVSS REYTR_TAPCELLB_CV
+XA1 CK CKN AVDD AVSS REYTR_IVX1_CV
+XA2 CKN CKB AVDD AVSS REYTR_IVX1_CV
+XA3 D CKN CKB A0 AVDD AVSS REYTR_IVTRIX1_CV
+XA4 A1 CKB CKN A0 AVDD AVSS REYTR_IVTRIX1_CV
+XA5 A0 A1 AVDD AVSS REYTR_IVX1_CV
+XA6 A1 CKB CKN QN AVDD AVSS REYTR_IVTRIX1_CV
+XA7 Q CKN CKB QN AVDD AVSS REYTR_IVTRIX1_CV
+XA8 QN Q AVDD AVSS REYTR_IVX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_EONX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_EONX1_CV A B AN BN Y AVDD AVSS
+XMN1 N1 A AVSS AVSS REYTR_NCHDL
+XMN2 Y BN N3 AVSS REYTR_NCHDL
+XMN3 N1 B Y AVSS REYTR_NCHDL
+XMN4 AVSS AN N3 AVSS REYTR_NCHDL
+XMP1 NP1 A Y AVDD REYTR_PCHDL
+XMP2 AVDD BN NP1 AVDD REYTR_PCHDL
+XMP3 NP2 B AVDD AVDD REYTR_PCHDL
+XMP4 Y AN NP2 AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_EOX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_EOX1_CV A B Y AVDD AVSS
+XA1 A AN AVDD AVSS REYTR_IVX1_CV
+XA2 B BN AVDD AVSS REYTR_IVX1_CV
+XA3 A B AN BN Y AVDD AVSS REYTR_EONX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_LSX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_LSX1_CV A AN YN Y AVDD AVSS
+xb1_0 Y AN AVSS AVSS REYTR_NCHDL
+xb1_1 Y AN AVSS AVSS REYTR_NCHDL
+xb2_0 YN A AVSS AVSS REYTR_NCHDL
+xb2_1 YN A AVSS AVSS REYTR_NCHDL
+xc1a net2 YN AVDD AVDD REYTR_PCHDL
+xc1b Y YN net2 AVDD REYTR_PCHDL
+xc2a net1 Y AVDD AVDD REYTR_PCHDL
+xc2b YN Y net1 AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_TGX2_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_TGX2_CV A C B AVDD AVSS
+XMN0 AVSS C CN AVSS REYTR_NCHDL
+XMN1 B C A AVSS REYTR_NCHDL
+XMN1b B C A AVSS REYTR_NCHDL
+XMP0 AVDD C CN AVDD REYTR_PCHDL
+XMP1 B CN A AVDD REYTR_PCHDL
+XMP1b B CN A AVDD REYTR_PCHDL
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_DFTRIX1_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_DFTRIX1_CV D CK C CN Y AVDD AVSS
+XA3 AVDD AVSS REYTR_TAPCELLB_CV
+XA2 D CK C NC QN AVDD AVSS REYTR_DFRNQNX1_CV
+XA0 QN C CN Y AVDD AVSS REYTR_IVTRIX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_CKDIV2_CV
+*-------------------------------------------------------------
+.SUBCKT REYTR_CKDIV2_CV AVDD AVSS CKI CKO CKO50DC RN
+XA12v AVDD AVSS REYTR_TAPCELLB_CV
+XA1 CKI CKIB AVDD AVSS REYTR_BFX1_CV
+XA2 CKIB CKIN AVDD AVSS REYTR_IVX1_CV
+XA4 QNI CKIN RN CKO50DC QN AVDD AVSS REYTR_DFRNQNX1_CV
+XA3 CKO50DC QNI AVDD AVSS REYTR_IVX1_CV
+XA5 CKO50DC CKI CKO AVDD AVSS REYTR_ANX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYTR_TOP
+*-------------------------------------------------------------
+.SUBCKT REYTR_TOP AVDD AVSS
+XA0 AVDD AVSS REYTR_TAPCELLB_CV
+XA1 Y1 AVDD AVSS REYTR_TIEH_CV
+XA2 Y2 AVDD AVSS REYTR_TIEL_CV
+XB0 AVDD AVSS REYTR_TAPCELLB_CV
+XB3 A3 Y3 AVDD AVSS REYTR_IVX1_CV
+XB4 A4 Y4 AVDD AVSS REYTR_IVX2_CV
+XB5 A5 Y5 AVDD AVSS REYTR_IVX4_CV
+XB6 A6 Y6 AVDD AVSS REYTR_IVX8_CV
+XC0 AVDD AVSS REYTR_TAPCELLB_CV
+XC7 A7 Y7 AVDD AVSS REYTR_BFX1_CV
+XD0 AVDD AVSS REYTR_TAPCELLB_CV
+XD8 A8 B8 Y8 AVDD AVSS REYTR_NRX1_CV
+XD9 A9 B9 Y9 AVDD AVSS REYTR_NDX1_CV
+XD10 A10 B10 Y10 AVDD AVSS REYTR_ORX1_CV
+XD11 A11 B11 Y11 AVDD AVSS REYTR_ANX1_CV
+XE0 AVDD AVSS REYTR_TAPCELLB_CV
+XE12 A12 Y12 AVDD AVSS REYTR_SCX1_CV
+XG0 AVDD AVSS REYTR_TAPCELLB_CV
+XG1 A16 C16 B16 AVDD AVSS REYTR_TGX2_CV
+XL0 AVDD AVSS REYTR_TAPCELLB_CV
+XL1 AVDD AVSS CKI21 CKO21 CKO50DC21 RN21 REYTR_CKDIV2_CV
+XM0 AVDD AVSS REYTR_TAPCELLB_CV
+XM1 D22 CK22 C22 CN22 Y22 AVDD AVSS REYTR_DFTRIX1_CV
+XM2 D23 CK23 Q23 AVDD AVSS REYTR_DFTSPCX1_CV
+XN0 AVDD AVSS REYTR_TAPCELLB_CV
+XN2 D25 CK25 RN25 Q25 QN25 AVDD AVSS REYTR_DFRNQNX1_CV
+XQ0 AVDD AVSS REYTR_TAPCELLB_CV
+XQ1 A32 B32 Y32 AVDD AVSS REYTR_ANX2_CV
+XQ2 A33 B33 Y33 AVDD AVSS REYTR_ANX4_CV
+XQ3 A34 B34 Y34 AVDD AVSS REYTR_ANX8_CV
+XR0 AVDD AVSS REYTR_TAPCELLB_CV
+XR1 A35 B35 Y35 AVDD AVSS REYTR_ORX2_CV
+XR2 A36 B36 Y36 AVDD AVSS REYTR_ORX4_CV
+XR3 A37 B37 Y37 AVDD AVSS REYTR_ORX8_CV
+XS0 AVDD AVSS REYTR_TAPCELLB_CV
+XS1 A38 C38 Y38 AVDD AVSS REYTR_IVTRICX1_CV
+XW0 AVDD AVSS REYTR_TAPCELLB_CV
+XW2 C43 A43 B43 AVDD AVSS REYTR_TGPD_CV
+XT0 AVDD AVSS REYTR_TAPCELLB_CV
+XT1 D39 CK39 Q39 QN39 AVDD AVSS REYTR_DFQNX1_CV
+XU0 AVDD AVSS REYTR_TAPCELLB_CV
+XU1 A40 B40 Y40 AVDD AVSS REYTR_EOX1_CV
+XV0 AVDD AVSS REYTR_TAPCELLB_CV
+XV1 A41 AN41 YN41 Y41 AVDD AVSS REYTR_LSX1_CV
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_11CWALL
+*-------------------------------------------------------------
+.SUBCKT REYPLL_11CWALL 
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RES4
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RES4 N P B
+XRR1_0 N INT_0 B sky130_fd_pr__res_high_po  l=7.2  w=0.36  
+XRR1_1 INT_0 INT_1 B sky130_fd_pr__res_high_po  l=7.2  w=0.36  
+XRR1_2 INT_1 INT_2 B sky130_fd_pr__res_high_po  l=7.2  w=0.36  
+XRR1_3 INT_2 P B sky130_fd_pr__res_high_po  l=7.2  w=0.36  
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RPPO4
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RPPO4 P N B
+XA2  REYPLL_11CWALL
+XA3  REYPLL_11CWALL
+XA4  REYPLL_11CWALL
+XA5  REYPLL_11CWALL
+XA7 N P B REYPLL_RES4
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RES2
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RES2 N P B
+XRR1_0 N INT_0 B sky130_fd_pr__res_high_po  l=7.2  w=0.36  
+XRR1_1 INT_0 P B sky130_fd_pr__res_high_po  l=7.2  w=0.36  
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RPPO2
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RPPO2 P N B
+XA2  REYPLL_11CWALL
+XA3  REYPLL_11CWALL
+XA4  REYPLL_11CWALL
+XA5  REYPLL_11CWALL
+XA7 N P B REYPLL_RES2
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RES_36CTAPBOT
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RES_36CTAPBOT 
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RES_36CTAPTOP
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RES_36CTAPTOP 
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RES_36C2F0
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RES_36C2F0 N P B
+XRR1_0 N INT_0 B sky130_fd_pr__res_high_po  l=8.16  w=0.4  
+XRR1_1 INT_0 P B sky130_fd_pr__res_high_po  l=8.16  w=0.4  
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_HRPPO2
+*-------------------------------------------------------------
+.SUBCKT REYPLL_HRPPO2 P0 N0 B
+XA1  REYPLL_RES_36CTAPBOT
+XA2 N0 P0 B REYPLL_RES_36C2F0
+XA3  REYPLL_RES_36CTAPTOP
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_HRPPO8
+*-------------------------------------------------------------
+.SUBCKT REYPLL_HRPPO8 P0 N0 P1 N1 P2 N2 P3 N3 B
+XA1  REYPLL_RES_36CTAPBOT
+XA2 N0 P0 B REYPLL_RES_36C2F0
+XA3 N1 P1 B REYPLL_RES_36C2F0
+XA4 N2 P2 B REYPLL_RES_36C2F0
+XA5 N3 P3 B REYPLL_RES_36C2F0
+XA6  REYPLL_RES_36CTAPTOP
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_HRPPO12
+*-------------------------------------------------------------
+.SUBCKT REYPLL_HRPPO12 P0 N0 P1 N1 P2 N2 P3 N3 P4 N4 P5 N5 B
+XA1  REYPLL_RES_36CTAPBOT
+XA2 N0 P0 B REYPLL_RES_36C2F0
+XA3 N1 P1 B REYPLL_RES_36C2F0
+XA4 N2 P2 B REYPLL_RES_36C2F0
+XA5 N3 P3 B REYPLL_RES_36C2F0
+XA6 N4 P4 B REYPLL_RES_36C2F0
+XA7 N5 P5 B REYPLL_RES_36C2F0
+XA8  REYPLL_RES_36CTAPTOP
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RESABUTR
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RESABUTR P1 N1 P2 N2 B
+XR1 P1 N1 B REYPLL_RPPO2
+XR2 P2 N2 B REYPLL_RPPO2
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RESABUTM
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RESABUTM P1 N1 B
+XR1 P1 N1 B REYPLL_RPPO2
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_MIMU16
+*-------------------------------------------------------------
+.SUBCKT REYPLL_MIMU16 A B
+C1 B A sky130_fd_pr__cap_mim_m3_1  
+.ENDS
+
+*-------------------------------------------------------------
+* REYPLL_RCU
+*-------------------------------------------------------------
+.SUBCKT REYPLL_RCU P0 N0 P1 N1 P2 N2 P3 N3 BR A B
+XR P0 N0 P1 N1 P2 N2 P3 N3 BR REYPLL_HRPPO8
+XC A B REYPLL_MIMU16
+.ENDS
+
+*-------------------------------------------------------------
+* REY_PLL_PFD
+*-------------------------------------------------------------
+.SUBCKT REY_PLL_PFD VDD_1V8 VSS PWRUP_1V8 CK_REF CK_FB UP DN_N
+XA0 VDD_1V8 VSS REYTR_TAPCELLB_CV
+XA1 VDD_1V8 CK_REF RN_U UP UP_N VDD_1V8 VSS REYTR_DFRNQNX1_CV
+XA2 HU CK_REF HAU VDD_1V8 VSS REYTR_ANX1_CV
+XA3 HAU RST HU VDD_1V8 VSS REYTR_ORX1_CV
+XA4 HU PWRUP_N RN_U VDD_1V8 VSS REYTR_NRX1_CV
+XA5 UP DN RST VDD_1V8 VSS REYTR_ANX1_CV
+XB0 VDD_1V8 VSS REYTR_TAPCELLB_CV
+XB1 VDD_1V8 CK_FB RN_D DN DN_N VDD_1V8 VSS REYTR_DFRNQNX1_CV
+XB2 HD CK_FB HAD VDD_1V8 VSS REYTR_ANX1_CV
+XB3 HAD RST HD VDD_1V8 VSS REYTR_ORX1_CV
+XB4 HD PWRUP_N RN_D VDD_1V8 VSS REYTR_NRX1_CV
+XB5 PWRUP_1V8 PWRUP_N VDD_1V8 VSS REYTR_IVX1_CV
+.ENDS

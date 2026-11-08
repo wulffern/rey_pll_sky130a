@@ -1,0 +1,32 @@
+fck:
+  src:
+    - tck
+  name: Output frequency, 200 periods
+  typ: 512
+  min: 510
+  max: 514
+  scale: 1
+  digits: 4
+  unit: MHz
+fckfb:
+  src:
+    - tfb
+  name: Feedback frequency, 8 periods
+  typ: 8
+  min: 7.97
+  max: 8.03
+  digits: 4
+  unit: MHz
+vctrl:
+  src:
+    - vctrl
+  name: VCTRL at lock
+  digits: 3
+  unit: V
+vripple:
+  src:
+    - vctrl_max
+  name: VCTRL ripple, peak to peak
+  max: 0.03
+  digits: 3
+  unit: V

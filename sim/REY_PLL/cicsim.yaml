@@ -1,0 +1,25 @@
+options:
+  useTmpDir: False
+  sha: True
+corner:
+  C0: |
+    .param TRIMCODE = 0
+  C1: |
+    .param TRIMCODE = 1
+  C2: |
+    .param TRIMCODE = 2
+  C3: |
+    .param TRIMCODE = 3
+  C4: |
+    .param TRIMCODE = 4
+  C5: |
+    .param TRIMCODE = 5
+  C6: |
+    .param TRIMCODE = 6
+  C7: |
+    .param TRIMCODE = 7
+  Lay: ''
+  Sch: ''
+ngspice:
+  library: REY_PLL_SKY130A
+  cell: REY_PLL
