@@ -51,8 +51,17 @@ class REY_PLL_CP(SidecarCell):
         {"net": "VSS", "ring": "b", "strap": "bottom", "pin_strap": True},
     ]
 
-    channel = 4
-    routes = []
+    #- the nets that cross between the rows, one channel track each
+    channel = 6
+    routes = [
+        #- VCTRL's drop in p_src comes from the right: on the left it ran
+        #- into the stack's own VPS (source to switch) wire
+        {"net": "VCTRL", "track": 0,
+         "drops": [[n_sink, "M2", "left"], [n_park, "M2", "left"],
+                   [p_src, "M2", "right"], [p_ref, "M2", "left"]]},
+        {"net": "VBN", "track": 2},
+        {"net": "VBP", "track": 4},
+    ]
 
 
 REY_PLL_CP.rows = [[REY_PLL_CP.n_sink, REY_PLL_CP.n_park],
