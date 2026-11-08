@@ -1,0 +1,95 @@
+*REY_PLL_ROSC: frequency versus TRIM code and VCTRL (Kvco)
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_PLL_ROSC_lpe.spi
+#else
+.include ../../../work/xsch/REY_PLL_ROSC.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param TRF = 10p
+
+.param AVDD = {vdda}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD_1V8  VSS  dc {AVDD}
+VT0  TRIM0    VSS  dc 0
+VT1  TRIM1    VSS  dc {AVDD}
+VT2  TRIM2    VSS  dc 0
+* VCTRL = VDD_1V8 - x, so the sweep reaches the supply in all corners
+VCT  VDD_1V8  VCTRL  dc 1.8
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+#ifdef Debug
+.save all
+#else
+.save v(CK) v(VCTRL) v(xdut.N0) v(xdut.VBP) v(xdut.VBN)
+#endif
+
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+set color0=white
+set color1=black
+unset askquit
+
+#ifdef Debug
+alter VCT 1.2
+tran 10p 50n 1p
+write
+#else
+* code b2 b1 b0, VCTRL 0 to 1.8 V
+let code = 0
+while code le 7
+let b0 = code - 2*floor(code/2)
+let b1 = floor(code/2) - 2*floor(code/4)
+let b2 = floor(code/4)
+alter VT0 b0*1.8
+alter VT1 b1*1.8
+alter VT2 b2*1.8
+let v_act = 1.8
+while v_act ge -0.01
+set appendwrite
+alter VCT v_act
+tran 10p 200n
+meas tran trim avg v(TRIM0)
+let trimcode = code
+print trimcode
+meas tran vctrl avg v(VCTRL)
+meas tran vbp avg v(xdut.VBP)
+meas tran vbn avg v(xdut.VBN)
+meas tran tpd trig v(xdut.N0) val='0.6' td=100n rise=1 targ v(xdut.N0) val='0.6' td=100n rise=11
+meas tran tck trig v(CK) val='0.9' td=100n rise=1 targ v(CK) val='0.9' td=100n rise=11
+write
+let v_act = v_act - 0.6
+end
+let code = code + 1
+end
+#endif
+quit
+
+.endc
+
+.end
