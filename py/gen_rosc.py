@@ -15,8 +15,9 @@ Topology (osc_ring_adv_tikz.svg):
     MS1-3       startup: MS1/MS2 inverter on VBN, MS3 pulls VBP low while
                 no current flows
   Bias, BIAS=r: PMOS diode on VBP with an RPPO ladder to VSS
-  Bias, BIAS=vt: Vgs/R source, MN1 gate on R, MN2 follower; R is the
-                trim ladder (46k fixed + 7.7k, 15.4k, 30.8k switched)
+  Bias, BIAS=vt (default): Vgs/R source, MN1 gate on R, LVT MN2 follower;
+                R is the trim ladder (38.5k fixed + 7.7k, 15.4k, 30.8k
+                switched); startup MS3 returns its current into R
   Bias, BIAS=ext: PMOS diode on pin VBP, current from outside (CELL=..._IEXT)
   MPF<k>_<j>    PMOS mirror, S=VDD G=VBP D=VS<k>    fixed current, sets f_min
   MPC<k>_<j>    PMOS mirror, S=VDD G=VBP D=NC<k>    tunable current
@@ -32,9 +33,10 @@ import sys, os
 
 N = int(os.environ.get("NSTAGE", 7))
 USE_CAP = int(os.environ.get("USE_CAP", 0))
-BIAS = os.environ.get("BIAS", "gm")
+BIAS = os.environ.get("BIAS", "vt")
 ND = int(os.environ.get("ND", 9 if BIAS == "r" else 4))   # diode units
 K = int(os.environ.get("K", 4))     # beta multiplier ratio
+NFOL = int(os.environ.get("NFOL", 4))  # Vgs/R bias: MN2 follower units
 NF = int(os.environ.get("NF", 2))   # fixed units per stage
 NT = int(os.environ.get("NT", 1))   # tunable units per stage
 lib = "REY_PLL_SKY130A"
@@ -120,6 +122,7 @@ def res(sym, name, x, y, p, n):
 HRPPO8 = "REY_ATR_SKY130A/REYATR_HRPPO8.sym"
 NCH5 = "REY_ATR_SKY130A/REYATR_NCH_2C5F0.sym"
 PCH5 = "REY_ATR_SKY130A/REYATR_PCH_2C5F0.sym"
+NCH_FOL = "REY_ATR_SKY130A/" + os.environ.get("FOL", "REYATR_LVT_NCH_2C5F0") + ".sym"
 
 
 def hr8(name, x, y, p, n):
@@ -163,7 +166,9 @@ elif BIAS == "vt":
         pch(PCH_MIR, f"XMP0_{j}", -200, -200 - 120*j, "VBP", "VBP", "VDD_1V8", "VDD_1V8")
         pch(PCH_MIR, f"XMPB_{j}", -350, -200 - 120*j, "VX", "VBP", "VDD_1V8", "VDD_1V8")
     nch(NCH5, "XMN1", -350, 100, "VX", "VG", "VSS", "VSS")
-    nch(NCH5, "XMN2", -200, 100, "VBP", "VX", "VG", "VSS")
+    #- MN2 is LVT: VX = VG + Vgs(MN2) must leave MPB in saturation
+    for j in range(NFOL):
+        nch(NCH_FOL, f"XMN2_{j}", -200, 100 + 120*j, "VBP", "VX", "VG", "VSS")
     # Startup: while VG (= I R) is low, MS3 pulls VBP down INTO VG, so
     # the startup current goes through R and lifts VG until the MS1/MS2
     # inverter turns MS3 off (to VSS it latched: VG never rose)
@@ -171,9 +176,12 @@ elif BIAS == "vt":
     for j in range(2):
         nch(SW, f"XMS2_{j}", -500, 220 + 120*j, "XST", "VG", "VSS", "VSS")
     nch(SW, "XMS3", -500, 500, "VBP", "XST", "VG", "VSS")
-    # R from VG to VSS: fixed 3 x RPPO2 (46k), then trim 7.7k, 15.4k, 30.8k
+    # R from VG to VSS: fixed 38.5k (RPPO4 + 2 x RPPO2 parallel), then
+    # trim 7.7k, 15.4k, 30.8k. 38.5k centres the range: Kss needs the
+    # top codes, Kff the bottom ones
     res(RPPO4, "XRF0", xr, -400, "VG", "RF")
-    res(RPPO2, "XRF1", xr, -340, "RF", "RT0")
+    res(RPPO2, "XRF1_0", xr, -340, "RF", "RT0")
+    res(RPPO2, "XRF1_1", xr, -310, "RF", "RT0")
     res(RPPO2, "XRT0_0", xr, -280, "RT0", "RT1")
     res(RPPO2, "XRT0_1", xr, -220, "RT0", "RT1")
     nch(SW, "XST0", xr + 200, -250, "RT0", "TRIM0", "RT1", "VSS")

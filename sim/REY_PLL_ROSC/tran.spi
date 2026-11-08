@@ -42,7 +42,7 @@ VCT  VDD_1V8  VCTRL  dc 1.8
 #ifdef Debug
 .save all
 #else
-.save v(CK) v(VCTRL) v(xdut.N0) v(xdut.VBP) v(xdut.VG)
+.save v(CK) v(VCTRL) v(xdut.N0) v(xdut.VBP) v(xdut.VG) v(xdut.VX) v(xdut.XST)
 #endif
 
 
@@ -80,6 +80,8 @@ print trimcode
 meas tran vctrl avg v(VCTRL)
 meas tran vbp avg v(xdut.VBP)
 meas tran vbn avg v(xdut.VG)
+meas tran vx avg v(xdut.VX) from=100n to=200n
+meas tran xst max v(xdut.XST) from=100n to=200n
 meas tran tpd trig v(xdut.N0) val='0.6' td=100n rise=1 targ v(xdut.N0) val='0.6' td=100n rise=11
 meas tran tck trig v(CK) val='0.9' td=100n rise=1 targ v(CK) val='0.9' td=100n rise=11
 write

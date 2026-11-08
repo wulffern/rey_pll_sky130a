@@ -1,0 +1,80 @@
+*REY_PLL_ROSC: startup from a supply ramp, slow and fast
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_PLL_ROSC_lpe.spi
+#else
+.include ../../../work/xsch/REY_PLL_ROSC.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param TRF = 10p
+
+.param AVDD = {vdda}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD_1V8  VSS  pwl 0 0 {TRAMP} {AVDD}
+.param TRAMP = 10u
+VT0  TRIM0    VSS  dc 0
+VT1  TRIM1    VSS  dc 0
+VT2  TRIM2    VSS  dc 0
+* VCTRL = VDD_1V8 - x, so the sweep reaches the supply in all corners
+VCT  VDD_1V8  VCTRL  dc 0.9
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+#ifdef Debug
+.save all
+#else
+.save v(VDD_1V8) v(xdut.N0) v(xdut.VG) v(xdut.XST)
+#endif
+
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+unset askquit
+* code 0 (least current) and code 7, slow and fast supply ramp
+foreach c 0 7
+foreach tr 10u 100n
+alterparam TRAMP = $tr
+reset
+let tv = $c*1.8/7
+alter VT0 tv
+alter VT1 tv
+alter VT2 tv
+set appendwrite
+tran 1n 14u
+let trimcode = $c
+print trimcode
+meas tran ramp find v(VDD_1V8) at=0
+echo "ramp $tr"
+meas tran vg find v(xdut.VG) at=13.9u
+meas tran xst find v(xdut.XST) at=13.9u
+meas tran tpd trig v(xdut.N0) val='0.6' td=13u rise=1 targ v(xdut.N0) val='0.6' td=13u rise=11
+write
+end
+end
+quit
+.endc
+
+.end
