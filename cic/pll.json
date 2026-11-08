@@ -820,17 +820,31 @@
                 {
                     "addRouteRings": [
                         [
-                            "M1",
+                            "M2",
                             "VSS",
                             "tbrl",
                             4,
                             2
                         ],
                         [
-                            "M1",
+                            "M2",
                             "VDD_1V8",
                             "tbrl",
                             4,
+                            2
+                        ],
+                        [
+                            "M5",
+                            "VCTRL",
+                            "l",
+                            1,
+                            2
+                        ],
+                        [
+                            "M5",
+                            "VLPFZ",
+                            "r",
+                            1,
                             2
                         ]
                     ]
@@ -840,59 +854,289 @@
                 }
             ],
             "beforeRoute": {
-                "addConnectivityRoutes": [
-                    [
-                        "M2",
-                        "^R\\d+$",
-                        "-|--",
-                        ""
-                    ],
-                    [
-                        "M5",
-                        "^VLPFZ$",
-                        "-|--",
-                        ""
-                    ],
-                    [
-                        "M4",
-                        "^VCTRL$",
-                        "-|--",
-                        "onTopL"
-                    ]
-                ],
                 "addDirectedRoutes": [
                     [
                         "M4",
                         "VDD_1V8",
-                        "X:A||rail_t_VDD_1V8",
+                        "XA\\d+:A||rail_t_VDD_1V8",
                         ""
                     ],
                     [
-                        "M1",
+                        "M2",
                         "VSS",
-                        "X:BR||rail_b_VSS",
+                        "XA\\d+:BR||rail_b_VSS",
                         ""
-                    ]
-                ]
-            },
-            "afterPaint": {
-                "resetOrigin": 1,
-                "addPortOnEdges": [
+                    ],
                     [
                         "M4",
-                        "VCTRL",
-                        "left",
-                        "--|-",
+                        "VDD_1V8",
+                        "XB\\d+:A||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M2",
+                        "VSS",
+                        "XB\\d+:BR||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XC\\d+:A||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M2",
+                        "VSS",
+                        "XC\\d+:BR||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XD\\d+:A||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M2",
+                        "VSS",
+                        "XD\\d+:BR||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M2",
+                        "R1",
+                        "XA0:N0-|--XA0:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R2",
+                        "XA0:N1-|--XA0:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R3",
+                        "XA0:N2-|--XA0:P3",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R4",
+                        "XA0:N3-|--XA1:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R5",
+                        "XA1:N0-|--XA1:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R6",
+                        "XA1:N1-|--XA1:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R7",
+                        "XA1:N2-|--XA1:P3",
+                        "track1"
+                    ],
+                    [
+                        "M3",
+                        "R8",
+                        "XA1:N3-|--XB0:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R9",
+                        "XB0:N0-|--XB0:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R10",
+                        "XB0:N1-|--XB0:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R11",
+                        "XB0:N2-|--XB0:P3",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R12",
+                        "XB0:N3-|--XB1:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R13",
+                        "XB1:N0-|--XB1:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R14",
+                        "XB1:N1-|--XB1:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R15",
+                        "XB1:N2-|--XB1:P3",
+                        "track1"
+                    ],
+                    [
+                        "M3",
+                        "R16",
+                        "XB1:N3-|--XC0:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R17",
+                        "XC0:N0-|--XC0:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R18",
+                        "XC0:N1-|--XC0:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R19",
+                        "XC0:N2-|--XC0:P3",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R20",
+                        "XC0:N3-|--XC1:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R21",
+                        "XC1:N0-|--XC1:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R22",
+                        "XC1:N1-|--XC1:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R23",
+                        "XC1:N2-|--XC1:P3",
+                        "track1"
+                    ],
+                    [
+                        "M3",
+                        "R24",
+                        "XC1:N3-|--XD0:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R25",
+                        "XD0:N0-|--XD0:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R26",
+                        "XD0:N1-|--XD0:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R27",
+                        "XD0:N2-|--XD0:P3",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R28",
+                        "XD0:N3-|--XD1:P0",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R29",
+                        "XD1:N0-|--XD1:P1",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R30",
+                        "XD1:N1-|--XD1:P2",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "R31",
+                        "XD1:N2-|--XD1:P3",
+                        "track1"
+                    ],
+                    [
+                        "M5",
+                        "VLPFZ",
+                        "XB0:B-XD0:B",
                         ""
                     ],
                     [
                         "M5",
                         "VLPFZ",
-                        "right",
-                        "-|--",
+                        "XA1:B-XD1:B",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "VCTRL",
+                        "XA0:P0-rail_l_VCTRL",
+                        ""
+                    ],
+                    [
+                        "M5",
+                        "VCTRL",
+                        "XA0:B-rail_l_VCTRL",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "VLPFZ",
+                        "XD1:N3-rail_r_VLPFZ",
+                        ""
+                    ],
+                    [
+                        "M5",
+                        "VLPFZ",
+                        "XD0:B-rail_r_VLPFZ",
+                        ""
+                    ],
+                    [
+                        "M5",
+                        "VLPFZ",
+                        "XD1:B-rail_r_VLPFZ",
                         ""
                     ]
-                ]
+                ],
+                "addRouteConnections": [],
+                "addConnectivityRoutes": []
+            },
+            "afterPaint": {
+                "resetOrigin": 1
             },
             "noPrefix": 1
         }

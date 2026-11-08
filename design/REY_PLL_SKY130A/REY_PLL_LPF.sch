@@ -9,7 +9,7 @@ C {devices/ipin.sym} -1400 -740 0 0 {name=p0 lab=VDD_1V8}
 C {devices/ipin.sym} -1240 -740 0 0 {name=p1 lab=VSS}
 C {devices/ipin.sym} -1080 -740 0 0 {name=p2 lab=VCTRL}
 C {devices/ipin.sym} -920 -740 0 0 {name=p3 lab=VLPFZ}
-T {R: 32 x 15.3 kOhm in series, VCTRL (R0) to VLPFZ (R32). C1: 7 MiM, VLPFZ to VDD_1V8. C2: 1 MiM, VCTRL to VDD_1V8} -1450 -660 0 0 0.3 0.3 {}
+T {R: 32 x 15.3 kOhm in series, VCTRL (R0) to VLPFZ (R32). C2: 1 MiM (cell XA0), VCTRL to VDD_1V8. C1: 7 MiM, VLPFZ to VDD_1V8} -1450 -660 0 0 0.3 0.3 {}
 T {MiM bottom plates (A) on VDD_1V8, so their parasitic to substrate does not load VCTRL} -1450 -630 0 0 0.3 0.3 {}
 T {A: R0..R8} -1360 -500 0 0 0.35 0.35 {}
 C {REY_PLL_SKY130A/REYPLL_RCU.sym} -1300 -420 0 0 {name=XA0}
@@ -23,7 +23,7 @@ C {devices/lab_pin.sym} -1320 -300 0 0 {name=l7 sig_type=std_logic lab=R3}
 C {devices/lab_pin.sym} -1320 -280 0 0 {name=l8 sig_type=std_logic lab=R4}
 C {devices/lab_pin.sym} -1320 -260 0 0 {name=l9 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} -1320 -240 0 0 {name=l10 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} -1320 -220 0 0 {name=l11 sig_type=std_logic lab=VLPFZ}
+C {devices/lab_pin.sym} -1320 -220 0 0 {name=l11 sig_type=std_logic lab=VCTRL}
 T {XA0} -1180 -426.0 0 0 0.25 0.25 {}
 C {REY_PLL_SKY130A/REYPLL_RCU.sym} -1300 -160 0 0 {name=XA1}
 C {devices/lab_pin.sym} -1320 -160 0 0 {name=l12 sig_type=std_logic lab=R4}
@@ -117,5 +117,5 @@ C {devices/lab_pin.sym} 120 -40 0 0 {name=l84 sig_type=std_logic lab=R31}
 C {devices/lab_pin.sym} 120 -20 0 0 {name=l85 sig_type=std_logic lab=VLPFZ}
 C {devices/lab_pin.sym} 120 0 0 0 {name=l86 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 120 20 0 0 {name=l87 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 120 40 0 0 {name=l88 sig_type=std_logic lab=VCTRL}
+C {devices/lab_pin.sym} 120 40 0 0 {name=l88 sig_type=std_logic lab=VLPFZ}
 T {XD1} 260 -166.0 0 0 0.25 0.25 {}

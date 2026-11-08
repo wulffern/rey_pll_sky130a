@@ -231,8 +231,10 @@ def _lpf_columns():
             for k in range(4):
                 conn[f"P{k}"] = _r(4*i + k)
                 conn[f"N{k}"] = _r(4*i + k + 1)
+            #- C2 is the FIRST cell: VCTRL's resistor end (R0) and its
+            #- plate are then both at the left edge, VLPFZ's at the right
             conn.update(BR=VSS, A=VDD,
-                        B="VLPFZ" if i < NC1 else "VCTRL")
+                        B="VCTRL" if i < NRCU - NC1 else "VLPFZ")
             insts.append((f"X{L}{j}", "REYPLL_RCU", conn))
         cols.append((f"{L}: R{8*c}..R{8*c+8}", insts))
     return cols
@@ -242,8 +244,8 @@ LPF = dict(
     cell="REY_PLL_LPF", pins=LPF_PINS,
     title="REY_PLL_LPF: loop filter on VDD_1V8, eight REYPLL_RCU",
     notes=[f"R: {4*NRCU} x 15.3 kOhm in series, VCTRL (R0) to VLPFZ "
-           f"(R{4*NRCU}). C1: {NC1} MiM, VLPFZ to VDD_1V8. C2: "
-           f"{NRCU - NC1} MiM, VCTRL to VDD_1V8",
+           f"(R{4*NRCU}). C2: {NRCU - NC1} MiM (cell XA0), VCTRL to "
+           f"VDD_1V8. C1: {NC1} MiM, VLPFZ to VDD_1V8",
            "MiM bottom plates (A) on VDD_1V8, so their parasitic to "
            "substrate does not load VCTRL"],
     columns=_lpf_columns())
@@ -411,6 +413,7 @@ def main():
     cic = os.path.join(os.path.dirname(__file__), "..", "cic")
     write_spi(os.path.join(cic, "pll.spi"))
     divn_layout(cic)
+    lpf_layout(cic)
 
 
 
@@ -522,6 +525,81 @@ def divn_layout(cic):
         c['afterPaint'] = {"resetOrigin": 1}
     json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
     log.info(f"pll.json: REY_PLL_DIVN, {len(directed)} directed routes")
+
+
+
+#- --------------------------------------------------------------------
+#- REY_PLL_LPF's routes
+#- --------------------------------------------------------------------
+#- The MiMs cover each RCU on M4/M5 (met3/met4): unrelated met3 must
+#- keep 1.34 um from a MiM, via2/via3 keep clear of it too. So the
+#- resistor chain stays on M2 (hops in a column) and M3 (column to
+#- column), VCTRL and VLPFZ leave sideways on M3 and climb to M5 only on
+#- their bars outside the cells; the top plates join along the cells'
+#- bottom margins on M5, the bottom plates (VDD) by a strap per column.
+LTRK = "track1"          # chain hops: trunk right of the resistor pins
+
+
+def lpf_layout(cic):
+    import json
+    spi = open(os.path.join(cic, "pll.spi")).read()
+    body = spi[spi.index(".subckt REY_PLL_LPF"):]
+    body = body[:body.index(".ends")]
+    ports = ["P0", "N0", "P1", "N1", "P2", "N2", "P3", "N3", "BR", "A", "B"]
+    cells = [(t[0], dict(zip(ports, t[1:12])))
+             for t in (l.split() for l in body.split("\n")[1:])
+             if t and t[0].startswith("X")]
+    directed = []
+    for L in sorted({n[1] for n, _ in cells}):
+        directed += [["M4", "VDD_1V8", f"X{L}\\d+:A||rail_t_VDD_1V8", ""],
+                     ["M2", "VSS", f"X{L}\\d+:BR||rail_b_VSS", ""]]
+    #- the chain: N<k> to the next resistor's P, in the cell or the next
+    for idx, (name, p) in enumerate(cells):
+        for k in range(4):
+            net = p[f"N{k}"]
+            if k < 3:
+                directed.append(["M2", net, f"{name}:N{k}-|--{name}:P{k+1}",
+                                 LTRK])
+            elif idx + 1 < len(cells):
+                nxt = cells[idx + 1][0]
+                lay = "M2" if nxt[1] == name[1] else "M3"
+                directed.append([lay, net, f"{name}:N3-|--{nxt}:P0", LTRK])
+    #- top plates: VLPFZ along each row's bottom margin, straight on M5
+    rows = {}
+    for name, p in cells:
+        rows.setdefault(name[2:], []).append((name, p["B"]))
+    for _, row in sorted(rows.items()):
+        vl = [n for n, b in row if b == "VLPFZ"]
+        if len(vl) > 1:
+            directed.append(["M5", "VLPFZ", f"{vl[0]}:B-{vl[-1]}:B", ""])
+    first, last = cells[0][0], cells[-1][0]
+    rightmost = [n for n, _ in cells if n[1] == last[1]]
+    #- to the bars by name: a connection by net and instance would take
+    #- every VCTRL pin on XA0, the resistor end AND the plate, and drop
+    #- an M1-M5 stack inside the MiM
+    directed += [["M3", "VCTRL", f"{first}:P0-rail_l_VCTRL", ""],     # R0
+                 ["M5", "VCTRL", f"{first}:B-rail_l_VCTRL", ""],      # C2
+                 ["M3", "VLPFZ", f"{last}:N3-rail_r_VLPFZ", ""]]      # R32
+    directed += [["M5", "VLPFZ", f"{n}:B-rail_r_VLPFZ", ""]
+                 for n in rightmost]
+    conn = []
+    o = json.load(open(os.path.join(cic, "pll.json")))
+    for c in o["cells"]:
+        if c["name"] != "REY_PLL_LPF":
+            continue
+        c.pop("alternateGroup", None)
+        #- supply rings on M2: on li they come too close to the RCUs'
+        #- own li at the cell edge (BR sticks out of the cell's box)
+        c["afterPlace"] = [{"addRouteRings": [
+            ["M2", "VSS", "tbrl", 4, 2], ["M2", "VDD_1V8", "tbrl", 4, 2],
+            ["M5", "VCTRL", "l", 1, 2], ["M5", "VLPFZ", "r", 1, 2]]},
+            {"addPowerRings": []}]
+        c["beforeRoute"] = {"addDirectedRoutes": directed,
+                            "addRouteConnections": conn,
+                            "addConnectivityRoutes": []}
+        c["afterPaint"] = {"resetOrigin": 1}
+    json.dump(o, open(os.path.join(cic, "pll.json"), "w"), indent=4)
+    log.info(f"pll.json: REY_PLL_LPF, {len(directed)} directed routes")
 
 
 if __name__ == "__main__":
