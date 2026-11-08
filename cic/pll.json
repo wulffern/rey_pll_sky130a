@@ -465,6 +465,13 @@
                             "tbrl",
                             4,
                             2
+                        ],
+                        [
+                            "M5",
+                            "CK",
+                            "l",
+                            1,
+                            2
                         ]
                     ]
                 },
@@ -477,120 +484,328 @@
                     [
                         "M4",
                         "VSS",
-                        "X:AVSS||rail_b_VSS",
+                        "XA\\d+:AVSS||rail_b_VSS",
                         ""
                     ],
                     [
                         "M4",
                         "VDD_1V8",
-                        "X:AVDD||rail_t_VDD_1V8",
-                        ""
-                    ]
-                ],
-                "addConnectivityRoutes": [
-                    [
-                        "M2",
-                        "^QN\\d$",
-                        "-|--",
-                        "nostartcut,onTopT,offsethighend"
-                    ],
-                    [
-                        "M3",
-                        "^(Q\\d|CK_FB)$",
-                        "-|--",
+                        "XA\\d+:AVDD||rail_t_VDD_1V8",
                         ""
                     ],
                     [
                         "M4",
-                        "^PWRUP_1V8$",
-                        "-|--",
-                        "onTopL"
+                        "VSS",
+                        "XB\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XB\\d+:AVDD||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XC\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XC\\d+:AVDD||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XD\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XD\\d+:AVDD||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XE\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XE\\d+:AVDD||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "QN0",
+                        "XA1:QN-|--XA1:D",
+                        "startLayer=M2,track13"
+                    ],
+                    [
+                        "M3",
+                        "QN1",
+                        "XA2:QN-|--XA2:D",
+                        "startLayer=M2,track13"
+                    ],
+                    [
+                        "M3",
+                        "QN2",
+                        "XB1:QN-|--XB1:D",
+                        "startLayer=M2,track-22"
+                    ],
+                    [
+                        "M3",
+                        "QN3",
+                        "XB3:QN-|--XB3:D",
+                        "startLayer=M2,track-22"
+                    ],
+                    [
+                        "M3",
+                        "QN4",
+                        "XC1:QN-|--XC1:D",
+                        "startLayer=M2,track13"
+                    ],
+                    [
+                        "M3",
+                        "QN5",
+                        "XC3:QN-|--XC3:D",
+                        "startLayer=M2,track13"
+                    ],
+                    [
+                        "M3",
+                        "QN6",
+                        "XD1:QN-|--XD1:D",
+                        "startLayer=M2,track-22"
+                    ],
+                    [
+                        "M3",
+                        "QN7",
+                        "XD3:QN-|--XD3:D",
+                        "startLayer=M2,track-22"
+                    ],
+                    [
+                        "M3",
+                        "QN8",
+                        "XE1:QN-|--XE1:D",
+                        "startLayer=M2,track13"
+                    ],
+                    [
+                        "M3",
+                        "QN9",
+                        "XE3:QN-|--XE3:D",
+                        "startLayer=M2,track13"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XA1:RN-XA1:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XA2:RN-XA2:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XB1:RN-XB1:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XB3:RN-XB3:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XC1:RN-XC1:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XC3:RN-XC3:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XD1:RN-XD1:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XD3:RN-XD3:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XE1:RN-XE1:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M5",
+                        "VDD_1V8",
+                        "XE3:RN-XE3:AVDD",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M2",
+                        "Q0",
+                        "XA1:Q-|--XA2:CK",
+                        "track-13,endoffsetcutlow"
+                    ],
+                    [
+                        "M2",
+                        "Q1",
+                        "XA2:Q-|--XA3:A",
+                        "track-13,endoffsetcutlow"
+                    ],
+                    [
+                        "M5",
+                        "Q1",
+                        "XA3:A-|--XB1:CK",
+                        "startLayer=M2,track16"
+                    ],
+                    [
+                        "M2",
+                        "Q2",
+                        "XB1:Q-|--XB2:A,XB3:CK",
+                        "track6,endoffsetcutlow"
+                    ],
+                    [
+                        "M2",
+                        "Q3",
+                        "XB3:Q-|--XB4:A",
+                        "track6,endoffsetcutlow"
+                    ],
+                    [
+                        "M5",
+                        "Q3",
+                        "XB4:A-|--XC1:CK",
+                        "startLayer=M2,track1"
+                    ],
+                    [
+                        "M2",
+                        "Q4",
+                        "XC1:Q-|--XC2:A,XC3:CK",
+                        "track-13,endoffsetcutlow"
+                    ],
+                    [
+                        "M2",
+                        "CK_FB",
+                        "XC3:Q-|--XC4:A",
+                        "track-13,endoffsetcutlow"
+                    ],
+                    [
+                        "M5",
+                        "CK_FB",
+                        "XC4:A-|--XD1:CK",
+                        "startLayer=M2,track16"
+                    ],
+                    [
+                        "M2",
+                        "Q6",
+                        "XD1:Q-|--XD2:A,XD3:CK",
+                        "track6,endoffsetcutlow"
+                    ],
+                    [
+                        "M2",
+                        "Q7",
+                        "XD3:Q-|--XD4:A",
+                        "track6,endoffsetcutlow"
+                    ],
+                    [
+                        "M5",
+                        "Q7",
+                        "XD4:A-|--XE1:CK",
+                        "startLayer=M2,track1"
+                    ],
+                    [
+                        "M2",
+                        "Q8",
+                        "XE1:Q-|--XE2:A,XE3:CK",
+                        "track-13,endoffsetcutlow"
+                    ],
+                    [
+                        "M2",
+                        "Q9",
+                        "XE3:Q-|--XE4:A",
+                        "track-13,endoffsetcutlow"
                     ]
-                ]
+                ],
+                "addRouteConnections": [
+                    [
+                        "^CK$",
+                        "XA1$",
+                        "left",
+                        "M4",
+                        ""
+                    ]
+                ],
+                "addConnectivityRoutes": []
             },
             "afterPaint": {
-                "resetOrigin": 1,
-                "addPortOnEdges": [
+                "resetOrigin": 1
+            },
+            "noPrefix": 1,
+            "afterRoute": {
+                "addPortOnRects": [
                     [
-                        "M3",
-                        "PWRUP_1V8",
-                        "left",
-                        "--|-",
-                        ""
-                    ],
-                    [
-                        "M3",
-                        "CK",
-                        "left",
-                        "--|-",
-                        ""
-                    ],
-                    [
-                        "M3",
-                        "CK_FB",
-                        "right",
-                        "-|--",
-                        ""
-                    ],
-                    [
-                        "M3",
                         "CKO0",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XB2:Y"
                     ],
                     [
-                        "M3",
                         "CKO1",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XB4:Y"
                     ],
                     [
-                        "M3",
                         "CKO2",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XC2:Y"
                     ],
                     [
-                        "M3",
                         "CKO3",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XC4:Y"
                     ],
                     [
-                        "M3",
                         "CKO4",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XD2:Y"
                     ],
                     [
-                        "M3",
                         "CKO5",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XD4:Y"
                     ],
                     [
-                        "M3",
                         "CKO6",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XE2:Y"
                     ],
                     [
-                        "M3",
                         "CKO7",
-                        "right",
-                        "-|--",
-                        ""
+                        "M1",
+                        "XE4:Y"
                     ]
                 ]
             },
-            "noPrefix": 1
+            "alternateGroup": 1
         },
         {
             "name": "REY_PLL_LPF",

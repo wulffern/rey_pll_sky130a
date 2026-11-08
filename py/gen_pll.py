@@ -28,6 +28,8 @@ import logging
 import os
 import sys
 
+log = logging.getLogger('gen_pll')
+
 from cicpy.eda.schgen import Sheet, box_symbol, RIGHT
 
 A = "REY_ATR_SKY130A/"
@@ -159,7 +161,7 @@ PFD = dict(
             g("XA11", "IVX1", A="DN", Y="DN_N")])])
 
 #- REY_PLL_DIVN ---------------------------------------------------------
-DIVN_PINS = ([(VDD, "in"), (VSS, "in"), ("PWRUP_1V8", "in"), ("CK", "in"),
+DIVN_PINS = ([(VDD, "in"), (VSS, "in"), ("CK", "in"),
               ("CK_FB", "out")]
              + [(f"CKO{k}", "out") for k in range(len(TAPS))])
 
@@ -169,18 +171,34 @@ def _q(i):
 
 
 def _divn_columns():
+    """Five columns of two stages. A stage is its flop with the tap
+    buffer right above it, so Q reaches the buffer and the next flop's
+    CK in one hop; Q of a column's top stage crosses to the next."""
     cols = []
     for c in range(NDIV // 2):
         L = "ABCDE"[c]
         insts = [tap(f"X{L}0")]
+        n = 1
         for j in range(2):
             k = 2*c + j
-            insts.append(g(f"X{L}{j+1}", "DFRNQNX1", D=f"QN{k}", CK=_q(k - 1),
-                           RN="PWRUP_1V8", Q=_q(k), QN=f"QN{k}"))
-        cols.append((f"{L}: flops {2*c} and {2*c+1}", insts))
-    cols.append(("F: tap buffers", [tap("XF0")] + [
-        g(f"XF{t+1}", "BFX1", A=_q(k), Y=f"CKO{t}")
-        for t, k in enumerate(TAPS)]))
+            #- RN tied high: a ripple divider of toggling flops runs from
+            #- any state, and the PFD does not care about the divider's
+            #- phase. Each RN reaches its own flop's VDD strip on M5
+            insts.append(g(f"X{L}{n}", "DFRNQNX1", D=f"QN{k}",
+                           CK=_q(k - 1), RN=VDD, Q=_q(k),
+                           QN=f"QN{k}"))
+            n += 1
+            if k == 1:
+                #- stage 1 has no tap; a dummy inverter gives its Q an
+                #- INPUT pin for the crossing to the next column to start
+                #- from (a flop's Q lies under its VSS strip on M4)
+                insts.append(g(f"X{L}{n}", "IVX1", A=_q(k), Y="Q1X"))
+                n += 1
+            if k in TAPS:
+                t = list(TAPS).index(k)
+                insts.append(g(f"X{L}{n}", "BFX1", A=_q(k), Y=f"CKO{t}"))
+                n += 1
+        cols.append((f"{L}: stages {2*c} and {2*c+1}", insts))
     return cols
 
 
@@ -188,9 +206,10 @@ DIVN = dict(
     cell="REY_PLL_DIVN", pins=DIVN_PINS,
     title=f"REY_PLL_DIVN: {NDIV} flop ripple divider, CK/{2**NFB} to the PFD",
     notes=["Flop k divides the previous one by two: Q<k> is CK/2^(k+1), "
-           f"D = QN<k>. Q{NFB-1} is CK_FB",
-           "Column F: one buffer per tap so the pins do not load the "
-           "chain, CKO<t> = Q<t+2>, CK/8 .. CK/1024"],
+           f"D = QN<k>. Q{NFB-1} is CK_FB. No reset: a ripple divider "
+           "runs from any state",
+           "Each tap has its buffer over its flop, so the pins do not "
+           "load the chain: CKO<t> = Q<t+2>, CK/8 .. CK/1024"],
     columns=_divn_columns())
 
 #- REY_PLL_LPF ----------------------------------------------------------
@@ -389,8 +408,120 @@ def main():
     s.write(outdir)
     subs[s.cell] = s
     top(subs).write(outdir)
-    write_spi(os.path.join(os.path.dirname(__file__), "..", "cic",
-                           "pll.spi"))
+    cic = os.path.join(os.path.dirname(__file__), "..", "cic")
+    write_spi(os.path.join(cic, "pll.spi"))
+    divn_layout(cic)
+
+
+
+#- --------------------------------------------------------------------
+#- REY_PLL_DIVN's routes, written into cic/pll.json from the netlist
+#- --------------------------------------------------------------------
+#- Columns B and D are mirrored (alternateGroup) so n-wells face n-wells;
+#- there the pins sit on the other side and the offsets differ. Offsets
+#- are in routing tracks from each route's default, never coordinates:
+DTRK, DTRK_M = "track13", "track-22"     # D = QN loop: trunk right of the
+                                         # flop's own M3 (x > 8.83 um)
+HTRK = "track-13,endoffsetcutlow"        # Q hops: trunk left of the input
+HTRK_M = "track6,endoffsetcutlow"        # pins; via low on BFX1.A (li.3)
+XOPT = "startLayer=M2,track16"           # crossings from a normal column:
+                                         # right of its M5 reset jumpers
+XOPT_M = "startLayer=M2,track1"          # ... from a mirrored column
+
+
+def divn_layout(cic):
+    """Directed routes for REY_PLL_DIVN, one per connection, generated
+    from the subckt in cic/pll.spi:
+
+      - D = QN: from M2 (the flop's own via on QN) out at QN's height,
+        down a trunk beyond the flop's own M3, into D
+      - RN tied high: a straight M5 jumper from RN onto the flop's own
+        VDD strip
+      - Q to the stage buffer and the next flop's CK in the column: one
+        hop on M2, trunk left of the input pins
+      - Q to the next column: on M5, from the stage buffer's (or the
+        dummy inverter's) INPUT pin, since a flop's Q lies under its VSS
+        strip on M4
+      - one supply strap per column to the rings
+    """
+    import json
+    spi = open(os.path.join(cic, 'pll.spi')).read()
+    body = spi[spi.index('.subckt REY_PLL_DIVN'):]
+    body = body[:body.index('.ends')]
+    insts = [l.split() for l in body.split('\n')[1:] if l.startswith('X')]
+    dffs = [(t[0], dict(zip(["D", "CK", "RN", "Q", "QN"], t[1:6])))
+            for t in insts if t[-1].endswith('DFRNQNX1_CV')]
+    ins = {}
+    for t in insts:
+        if t[-1] in ('REYTR_BFX1_CV', 'REYTR_IVX1_CV'):
+            ins.setdefault(t[1], []).append((t[0], 'A'))
+
+
+    def col(n):
+        return n[1]
+
+
+    def mir(n):
+        #- alternateGroup mirrors every other column (B, D) so n-wells
+        #- face n-wells; there the pins sit on the other side
+        return n[1] in "BD"
+
+
+    def opt(*xs):
+        return ",".join(x for x in xs if x)
+
+
+    #- one strap per column: "X:AVDD||rail" joins every column's strips
+    #- into ONE strap at one x, and leaves the other columns open
+    directed = []
+    for L in sorted({t[0][1] for t in insts}):
+        directed += [["M4", "VSS", f"X{L}\\d+:AVSS||rail_b_VSS", ""],
+                     ["M4", "VDD_1V8", f"X{L}\\d+:AVDD||rail_t_VDD_1V8", ""]]
+    for name, p in dffs:
+        #- D = QN: start on M2 where the flop has its own via on QN, out at
+        #- QN's height, down a trunk beyond the flop's own M3, into D
+        directed.append(["M3", p["QN"], f"{name}:QN-|--{name}:D",
+                         opt("startLayer=M2", DTRK_M if mir(name) else DTRK)])
+    for name, p in dffs:
+        #- RN tied high: from M2 (the flop's own via on RN) up to M5, across
+        #- the VSS strip, down onto the flop's own VDD strip
+        directed.append(["M5", "VDD_1V8", f"{name}:RN-{name}:AVDD",
+                         "startLayer=M2"])
+    for name, p in dffs:
+        q = p["Q"]
+        loc = [f"{i}:{pin}" for i, pin in ins.get(q, []) if col(i) == col(name)]
+        nxt = [n for n, pp in dffs if pp["CK"] == q]
+        loc += [f"{n}:CK" for n in nxt if col(n) == col(name)]
+        if loc:
+            directed.append(["M2", q, f"{name}:Q-|--{','.join(loc)}",
+                             HTRK_M if mir(name) else HTRK])
+        far = [n for n in nxt if col(n) != col(name)]
+        if far:
+            src = [i for i, pin in ins.get(q, []) if col(i) == col(name)][0]
+            #- a crossing from a normal column passes right of that
+            #- column's M5 reset jumpers; from a mirrored one it starts
+            #- right of them already
+            directed.append(["M5", q, f"{src}:A-|--{far[0]}:CK",
+                             XOPT_M if mir(name) else XOPT])
+
+    o = json.load(open(os.path.join(cic, 'pll.json')))
+    for c in o['cells']:
+        if c['name'] != 'REY_PLL_DIVN':
+            continue
+        c['alternateGroup'] = 1
+        c['afterPlace'] = [{"addRouteRings": [
+            ["M1", "VSS", "tbrl", 4, 2], ["M1", "VDD_1V8", "tbrl", 4, 2],
+            ["M5", "CK", "l", 1, 2]]},
+            {"addPowerRings": []}]
+        c['beforeRoute'] = {
+            "addDirectedRoutes": directed,
+            "addRouteConnections": [["^CK$", "XA1$", "left", "M4", ""]],
+            "addConnectivityRoutes": []}
+        c['afterRoute'] = {"addPortOnRects": [
+            [t[2], "M1", t[0] + ":Y"] for t in insts if t[-1] == 'REYTR_BFX1_CV']}
+        c['afterPaint'] = {"resetOrigin": 1}
+    json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
+    log.info(f"pll.json: REY_PLL_DIVN, {len(directed)} directed routes")
 
 
 if __name__ == "__main__":

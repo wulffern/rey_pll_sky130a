@@ -69,14 +69,13 @@ C {devices/lab_pin.sym} -250 -540 2 0 {name=l37 sig_type=std_logic lab=VBP}
 C {REY_PLL_SKY130A/REY_PLL_DIVN.sym} -400 -100 0 0 {name=xdivn}
 C {devices/lab_pin.sym} -550 -270 0 0 {name=l38 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -550 -250 0 0 {name=l39 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} -550 -230 0 0 {name=l40 sig_type=std_logic lab=PWRUP_1V8}
-C {devices/lab_pin.sym} -550 -210 0 0 {name=l41 sig_type=std_logic lab=CK}
-C {devices/lab_pin.sym} -250 -270 2 0 {name=l42 sig_type=std_logic lab=CK_FB}
-C {devices/lab_pin.sym} -250 -250 2 0 {name=l43 sig_type=std_logic lab=CKO0}
-C {devices/lab_pin.sym} -250 -230 2 0 {name=l44 sig_type=std_logic lab=CKO1}
-C {devices/lab_pin.sym} -250 -210 2 0 {name=l45 sig_type=std_logic lab=CKO2}
-C {devices/lab_pin.sym} -250 -190 2 0 {name=l46 sig_type=std_logic lab=CKO3}
-C {devices/lab_pin.sym} -250 -170 2 0 {name=l47 sig_type=std_logic lab=CKO4}
-C {devices/lab_pin.sym} -250 -150 2 0 {name=l48 sig_type=std_logic lab=CKO5}
-C {devices/lab_pin.sym} -250 -130 2 0 {name=l49 sig_type=std_logic lab=CKO6}
-C {devices/lab_pin.sym} -250 -110 2 0 {name=l50 sig_type=std_logic lab=CKO7}
+C {devices/lab_pin.sym} -550 -230 0 0 {name=l40 sig_type=std_logic lab=CK}
+C {devices/lab_pin.sym} -250 -270 2 0 {name=l41 sig_type=std_logic lab=CK_FB}
+C {devices/lab_pin.sym} -250 -250 2 0 {name=l42 sig_type=std_logic lab=CKO0}
+C {devices/lab_pin.sym} -250 -230 2 0 {name=l43 sig_type=std_logic lab=CKO1}
+C {devices/lab_pin.sym} -250 -210 2 0 {name=l44 sig_type=std_logic lab=CKO2}
+C {devices/lab_pin.sym} -250 -190 2 0 {name=l45 sig_type=std_logic lab=CKO3}
+C {devices/lab_pin.sym} -250 -170 2 0 {name=l46 sig_type=std_logic lab=CKO4}
+C {devices/lab_pin.sym} -250 -150 2 0 {name=l47 sig_type=std_logic lab=CKO5}
+C {devices/lab_pin.sym} -250 -130 2 0 {name=l48 sig_type=std_logic lab=CKO6}
+C {devices/lab_pin.sym} -250 -110 2 0 {name=l49 sig_type=std_logic lab=CKO7}
