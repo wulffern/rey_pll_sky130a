@@ -1,0 +1,194 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 3452 5472
+<< locali >>
+rect 2844 368 3084 5104
+rect 368 368 3084 608
+rect 368 4864 3084 5104
+rect 368 368 608 5104
+rect 2844 368 3084 5104
+rect 3212 0 3452 5472
+rect 0 0 3452 240
+rect 0 5232 3452 5472
+rect 0 0 240 5472
+rect 3212 0 3452 5472
+<< m1 >>
+rect 1096 1826 1246 1886
+rect 1246 1586 1456 1646
+rect 1246 1586 1306 1886
+rect 1096 2146 1246 2206
+rect 1246 1906 1456 1966
+rect 1246 1906 1306 2206
+rect 1096 2466 1246 2526
+rect 1246 2226 1456 2286
+rect 1246 2226 1306 2526
+rect 1096 2786 1246 2846
+rect 1246 2546 1456 2606
+rect 1246 2546 1306 2846
+rect 1096 3266 1246 3326
+rect 1246 2866 1456 2926
+rect 1246 2866 1306 3326
+rect 1096 4066 1246 4126
+rect 1246 3666 1456 3726
+rect 1246 3666 1306 4126
+<< m2 >>
+rect 1096 1506 1250 1582
+rect 1250 1266 1456 1342
+rect 1096 3106 1250 3182
+rect 1096 3586 1250 3662
+rect 1250 1266 1326 3662
+rect 0 3746 180 3806
+rect 0 4226 180 4286
+rect 0 1186 180 1246
+rect 3272 3186 3452 3246
+rect 3272 3666 3452 3726
+rect 3272 4626 3452 4686
+rect 0 1186 180 1246
+rect 866 1186 1096 1262
+rect 90 1186 866 1262
+rect 866 1186 942 1262
+rect 0 3746 180 3806
+rect 866 3746 1096 3822
+rect 90 3746 866 3822
+rect 866 3746 942 3822
+rect 0 4226 180 4286
+rect 866 4226 1096 4302
+rect 90 4226 866 4302
+rect 866 4226 942 4302
+rect 3272 3186 3452 3246
+rect 1456 3186 1610 3262
+rect 1610 3186 3362 3262
+rect 1610 3186 1686 3262
+rect 3272 3666 3452 3726
+rect 1456 3666 1610 3742
+rect 1610 3666 3362 3742
+rect 1610 3666 1686 3742
+rect 3272 4626 3452 4686
+rect 1456 4626 1610 4702
+rect 1610 4626 3362 4702
+rect 1610 4626 1686 4702
+use REYTR_TAPCELLB_CV XA0 ../REY_TR_SKY130A
+transform 1 0 736 0 1 736
+box 736 736 2716 1056
+use REYTR_IVX1_CV XA1 ../REY_TR_SKY130A
+transform 1 0 736 0 1 1056
+box 736 1056 2716 1376
+use REYTR_IVX1_CV XA2 ../REY_TR_SKY130A
+transform 1 0 736 0 1 1376
+box 736 1376 2716 1696
+use REYTR_IVX1_CV XA3 ../REY_TR_SKY130A
+transform 1 0 736 0 1 1696
+box 736 1696 2716 2016
+use REYTR_IVX1_CV XA4 ../REY_TR_SKY130A
+transform 1 0 736 0 1 2016
+box 736 2016 2716 2336
+use REYTR_IVX1_CV XA5 ../REY_TR_SKY130A
+transform 1 0 736 0 1 2336
+box 736 2336 2716 2656
+use REYTR_IVX1_CV XA6 ../REY_TR_SKY130A
+transform 1 0 736 0 1 2656
+box 736 2656 2716 2976
+use REYTR_NRX1_CV XA7 ../REY_TR_SKY130A
+transform 1 0 736 0 1 2976
+box 736 2976 2716 3456
+use REYTR_NRX1_CV XA8 ../REY_TR_SKY130A
+transform 1 0 736 0 1 3456
+box 736 3456 2716 3936
+use REYTR_ANX1_CV XA9 ../REY_TR_SKY130A
+transform 1 0 736 0 1 3936
+box 736 3936 2716 4736
+use REYPLL_cut_M1M2_2x1 xcut0 
+transform 1 0 1006 0 1 1826
+box 1006 1826 1190 1894
+use REYPLL_cut_M1M2_2x1 xcut1 
+transform 1 0 1366 0 1 1586
+box 1366 1586 1550 1654
+use REYPLL_cut_M1M2_2x1 xcut2 
+transform 1 0 1006 0 1 2146
+box 1006 2146 1190 2214
+use REYPLL_cut_M1M2_2x1 xcut3 
+transform 1 0 1366 0 1 1906
+box 1366 1906 1550 1974
+use REYPLL_cut_M1M2_2x1 xcut4 
+transform 1 0 1006 0 1 2466
+box 1006 2466 1190 2534
+use REYPLL_cut_M1M2_2x1 xcut5 
+transform 1 0 1366 0 1 2226
+box 1366 2226 1550 2294
+use REYPLL_cut_M1M2_2x1 xcut6 
+transform 1 0 1006 0 1 2786
+box 1006 2786 1190 2854
+use REYPLL_cut_M1M2_2x1 xcut7 
+transform 1 0 1366 0 1 2546
+box 1366 2546 1550 2614
+use REYPLL_cut_M1M2_2x1 xcut8 
+transform 1 0 1006 0 1 3266
+box 1006 3266 1190 3334
+use REYPLL_cut_M1M2_2x1 xcut9 
+transform 1 0 1366 0 1 2866
+box 1366 2866 1550 2934
+use REYPLL_cut_M1M3_2x1 xcut10 
+transform 1 0 1006 0 1 1506
+box 1006 1506 1206 1582
+use REYPLL_cut_M1M3_2x1 xcut11 
+transform 1 0 1366 0 1 1266
+box 1366 1266 1566 1342
+use REYPLL_cut_M1M3_2x1 xcut12 
+transform 1 0 1006 0 1 3106
+box 1006 3106 1206 3182
+use REYPLL_cut_M1M3_2x1 xcut13 
+transform 1 0 1006 0 1 3586
+box 1006 3586 1206 3662
+use REYPLL_cut_M1M2_2x1 xcut14 
+transform 1 0 1006 0 1 4066
+box 1006 4066 1190 4134
+use REYPLL_cut_M1M2_2x1 xcut15 
+transform 1 0 1366 0 1 3666
+box 1366 3666 1550 3734
+use REYPLL_cut_M1M4_2x1 xcut16 
+transform 1 0 1354 0 1 368
+box 1354 368 1554 444
+use REYPLL_cut_M1M4_2x1 xcut17 
+transform 1 0 1894 0 1 5232
+box 1894 5232 2094 5308
+use REYPLL_cut_M1M3_2x1 xcut18 
+transform 1 0 986 0 1 1186
+box 986 1186 1186 1262
+use REYPLL_cut_M1M3_2x1 xcut19 
+transform 1 0 986 0 1 3746
+box 986 3746 1186 3822
+use REYPLL_cut_M1M3_2x1 xcut20 
+transform 1 0 986 0 1 4226
+box 986 4226 1186 4302
+use REYPLL_cut_M1M3_2x1 xcut21 
+transform 1 0 1366 0 1 3186
+box 1366 3186 1566 3262
+use REYPLL_cut_M1M3_2x1 xcut22 
+transform 1 0 1366 0 1 3666
+box 1366 3666 1566 3742
+use REYPLL_cut_M1M3_2x1 xcut23 
+transform 1 0 1366 0 1 4626
+box 1366 4626 1566 4702
+<< labels >>
+flabel locali s 2844 368 3084 5104 0 FreeSans 400 0 0 0 VSS
+port 2 nsew signal bidirectional
+flabel locali s 3212 0 3452 5472 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew signal bidirectional
+flabel m2 s 0 3746 180 3806 0 FreeSans 400 0 0 0 OLH
+port 4 nsew signal bidirectional
+flabel m2 s 0 4226 180 4286 0 FreeSans 400 0 0 0 OLL
+port 5 nsew signal bidirectional
+flabel m2 s 0 1186 180 1246 0 FreeSans 400 0 0 0 PWRUP_1V8
+port 3 nsew signal bidirectional
+flabel m2 s 3272 3186 3452 3246 0 FreeSans 400 0 0 0 KICK
+port 6 nsew signal bidirectional
+flabel m2 s 3272 3666 3452 3726 0 FreeSans 400 0 0 0 VHI_N
+port 7 nsew signal bidirectional
+flabel m2 s 3272 4626 3452 4686 0 FreeSans 400 0 0 0 VLO
+port 8 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 3452 5472
+<< end >>

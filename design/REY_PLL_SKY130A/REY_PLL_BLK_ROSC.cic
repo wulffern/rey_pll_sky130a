@@ -1,0 +1,508 @@
+{
+    "cells": [
+        {
+            "class": "SidecarCell",
+            "x1": 0,
+            "y1": 0,
+            "x2": 823800,
+            "y2": 566600,
+            "layer": "PR",
+            "net": "",
+            "name": "REY_PLL_BLK_ROSC",
+            "has_pr": false,
+            "abstract": false,
+            "physicalOnly": false,
+            "libcell": false,
+            "ckt": {
+                "class": "",
+                "name": "REY_PLL_BLK_ROSC",
+                "nodes": [
+                    "CK",
+                    "TRIM0",
+                    "TRIM1",
+                    "TRIM2",
+                    "VBP",
+                    "VCTRL",
+                    "VDD_1V8",
+                    "VSS"
+                ],
+                "properties": {},
+                "devices": [],
+                "instances": [
+                    {
+                        "class": "",
+                        "name": "xrosc",
+                        "nodes": [
+                            "VDD_1V8",
+                            "VSS",
+                            "TRIM0",
+                            "TRIM1",
+                            "TRIM2",
+                            "VCTRL",
+                            "CK",
+                            "VBP"
+                        ],
+                        "properties": {},
+                        "subcktName": "REY_PLL_ROSC",
+                        "groupName": "xrosc",
+                        "deviceName": "subckt",
+                        "groupTag": null
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "class": "Instance",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 823800,
+                    "y2": 566600,
+                    "layer": "PR",
+                    "net": "",
+                    "name": "REY_PLL_ROSC",
+                    "has_pr": false,
+                    "abstract": false,
+                    "physicalOnly": false,
+                    "libcell": false,
+                    "ckt": {},
+                    "children": [
+                        {
+                            "class": "Port",
+                            "x1": 4800,
+                            "y1": 557000,
+                            "x2": 823800,
+                            "y2": 566000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VDD_1V8",
+                            "spicePort": true,
+                            "childName": "VDD_1V8"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 4800,
+                            "y1": 0,
+                            "x2": 823800,
+                            "y2": 9000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VSS",
+                            "spicePort": true,
+                            "childName": "VSS"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 380800,
+                            "y1": 141000,
+                            "x2": 384000,
+                            "y2": 145000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "TRIM0",
+                            "spicePort": true,
+                            "childName": "TRIM0"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 380800,
+                            "y1": 101000,
+                            "x2": 384000,
+                            "y2": 105000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "TRIM1",
+                            "spicePort": true,
+                            "childName": "TRIM1"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 380800,
+                            "y1": 61000,
+                            "x2": 384000,
+                            "y2": 65000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "TRIM2",
+                            "spicePort": true,
+                            "childName": "TRIM2"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 220800,
+                            "y1": 389000,
+                            "x2": 224000,
+                            "y2": 393000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VCTRL",
+                            "spicePort": true,
+                            "childName": "VCTRL"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 756300,
+                            "y1": 57500,
+                            "x2": 765300,
+                            "y2": 60500,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "CK",
+                            "spicePort": true,
+                            "childName": "CK"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 518400,
+                            "y1": 217000,
+                            "x2": 534400,
+                            "y2": 221000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VBP",
+                            "spicePort": true,
+                            "childName": "VBP"
+                        },
+                        {
+                            "class": "Text",
+                            "x1": 411900,
+                            "y1": 283300,
+                            "x2": 411900,
+                            "y2": 283300,
+                            "layer": "TXT",
+                            "net": "",
+                            "name": "xrosc"
+                        }
+                    ],
+                    "instanceName": "xrosc",
+                    "angle": "",
+                    "cell": "REY_PLL_ROSC",
+                    "libpath": "REY_PLL_SKY130A",
+                    "xcell": 0,
+                    "ycell": 0
+                },
+                {
+                    "class": "Port",
+                    "x1": 756300,
+                    "y1": 57500,
+                    "x2": 765300,
+                    "y2": 60500,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "CK",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 380800,
+                    "y1": 141000,
+                    "x2": 384000,
+                    "y2": 145000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "TRIM0",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 380800,
+                    "y1": 101000,
+                    "x2": 384000,
+                    "y2": 105000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "TRIM1",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 380800,
+                    "y1": 61000,
+                    "x2": 384000,
+                    "y2": 65000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "TRIM2",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 518400,
+                    "y1": 217000,
+                    "x2": 534400,
+                    "y2": 221000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VBP",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 220800,
+                    "y1": 389000,
+                    "x2": 224000,
+                    "y2": 393000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VCTRL",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 4800,
+                    "y1": 557000,
+                    "x2": 823800,
+                    "y2": 566000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VDD_1V8",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 4800,
+                    "y1": 0,
+                    "x2": 823800,
+                    "y2": 9000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VSS",
+                    "spicePort": true
+                }
+            ],
+            "useHalfHeight": false,
+            "alternateGroup": false,
+            "noPowerRoute": true,
+            "cellgroups": [
+                {
+                    "class": "CellGroup",
+                    "name": "rosc",
+                    "bbox": {
+                        "x1": 0,
+                        "y1": 0,
+                        "x2": 823800.0,
+                        "y2": 566600.0,
+                        "layer": "",
+                        "net": ""
+                    },
+                    "ports": [
+                        {
+                            "x1": 756300.0,
+                            "y1": 57500.0,
+                            "x2": 765300.0,
+                            "y2": 60500.0,
+                            "layer": "M1",
+                            "net": "CK",
+                            "name": "CK",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 380800.0,
+                            "y1": 141000.0,
+                            "x2": 384000.0,
+                            "y2": 145000.0,
+                            "layer": "M1",
+                            "net": "TRIM0",
+                            "name": "TRIM0",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 380800.0,
+                            "y1": 101000.0,
+                            "x2": 384000.0,
+                            "y2": 105000.0,
+                            "layer": "M1",
+                            "net": "TRIM1",
+                            "name": "TRIM1",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 380800.0,
+                            "y1": 61000.0,
+                            "x2": 384000.0,
+                            "y2": 65000.0,
+                            "layer": "M1",
+                            "net": "TRIM2",
+                            "name": "TRIM2",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 518400.0,
+                            "y1": 217000.0,
+                            "x2": 534400.0,
+                            "y2": 221000.0,
+                            "layer": "M1",
+                            "net": "VBP",
+                            "name": "VBP",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 220800.0,
+                            "y1": 389000.0,
+                            "x2": 224000.0,
+                            "y2": 393000.0,
+                            "layer": "M1",
+                            "net": "VCTRL",
+                            "name": "VCTRL",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 4800.0,
+                            "y1": 557000.0,
+                            "x2": 823800.0,
+                            "y2": 566000.0,
+                            "layer": "M1",
+                            "net": "VDD_1V8",
+                            "name": "VDD_1V8",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 4800.0,
+                            "y1": 0.0,
+                            "x2": 823800.0,
+                            "y2": 9000.0,
+                            "layer": "M1",
+                            "net": "VSS",
+                            "name": "VSS",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        }
+                    ],
+                    "stacks": [
+                        {
+                            "class": "StackGroup",
+                            "name": "blk_rosc",
+                            "kind": "stack",
+                            "bbox": {
+                                "x1": 0,
+                                "y1": 0,
+                                "x2": 823800.0,
+                                "y2": 566600.0,
+                                "layer": "",
+                                "net": ""
+                            },
+                            "ports": [
+                                {
+                                    "x1": 756300.0,
+                                    "y1": 57500.0,
+                                    "x2": 765300.0,
+                                    "y2": 60500.0,
+                                    "layer": "M1",
+                                    "net": "CK",
+                                    "name": "CK",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 380800.0,
+                                    "y1": 141000.0,
+                                    "x2": 384000.0,
+                                    "y2": 145000.0,
+                                    "layer": "M1",
+                                    "net": "TRIM0",
+                                    "name": "TRIM0",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 380800.0,
+                                    "y1": 101000.0,
+                                    "x2": 384000.0,
+                                    "y2": 105000.0,
+                                    "layer": "M1",
+                                    "net": "TRIM1",
+                                    "name": "TRIM1",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 380800.0,
+                                    "y1": 61000.0,
+                                    "x2": 384000.0,
+                                    "y2": 65000.0,
+                                    "layer": "M1",
+                                    "net": "TRIM2",
+                                    "name": "TRIM2",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 518400.0,
+                                    "y1": 217000.0,
+                                    "x2": 534400.0,
+                                    "y2": 221000.0,
+                                    "layer": "M1",
+                                    "net": "VBP",
+                                    "name": "VBP",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 220800.0,
+                                    "y1": 389000.0,
+                                    "x2": 224000.0,
+                                    "y2": 393000.0,
+                                    "layer": "M1",
+                                    "net": "VCTRL",
+                                    "name": "VCTRL",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 4800.0,
+                                    "y1": 557000.0,
+                                    "x2": 823800.0,
+                                    "y2": 566000.0,
+                                    "layer": "M1",
+                                    "net": "VDD_1V8",
+                                    "name": "VDD_1V8",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 4800.0,
+                                    "y1": 0.0,
+                                    "x2": 823800.0,
+                                    "y2": 9000.0,
+                                    "layer": "M1",
+                                    "net": "VSS",
+                                    "name": "VSS",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                }
+                            ],
+                            "preserve_order": true,
+                            "instances": [
+                                "xrosc"
+                            ],
+                            "tap_instances": [],
+                            "route_bundles": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

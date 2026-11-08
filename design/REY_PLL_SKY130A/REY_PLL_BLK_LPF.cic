@@ -1,0 +1,312 @@
+{
+    "cells": [
+        {
+            "class": "SidecarCell",
+            "x1": 0,
+            "y1": 0,
+            "x2": 713600,
+            "y2": 489600,
+            "layer": "PR",
+            "net": "",
+            "name": "REY_PLL_BLK_LPF",
+            "has_pr": false,
+            "abstract": false,
+            "physicalOnly": false,
+            "libcell": false,
+            "ckt": {
+                "class": "",
+                "name": "REY_PLL_BLK_LPF",
+                "nodes": [
+                    "VCTRL",
+                    "VDD_1V8",
+                    "VLPFZ",
+                    "VSS"
+                ],
+                "properties": {},
+                "devices": [],
+                "instances": [
+                    {
+                        "class": "",
+                        "name": "xlpf",
+                        "nodes": [
+                            "VDD_1V8",
+                            "VSS",
+                            "VCTRL",
+                            "VLPFZ"
+                        ],
+                        "properties": {},
+                        "subcktName": "REY_PLL_LPF",
+                        "groupName": "xlpf",
+                        "deviceName": "subckt",
+                        "groupTag": null
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "class": "Instance",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 713600,
+                    "y2": 489600,
+                    "layer": "PR",
+                    "net": "",
+                    "name": "REY_PLL_LPF",
+                    "has_pr": false,
+                    "abstract": false,
+                    "physicalOnly": false,
+                    "libcell": false,
+                    "ckt": {},
+                    "children": [
+                        {
+                            "class": "Port",
+                            "x1": 701600,
+                            "y1": 0,
+                            "x2": 713600,
+                            "y2": 489600,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VDD_1V8",
+                            "spicePort": true,
+                            "childName": "VDD_1V8"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 683200,
+                            "y1": 18400,
+                            "x2": 695200,
+                            "y2": 471200,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VSS",
+                            "spicePort": true,
+                            "childName": "VSS"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 0,
+                            "y1": 78800,
+                            "x2": 25600,
+                            "y2": 82800,
+                            "layer": "M4",
+                            "net": "",
+                            "name": "VCTRL",
+                            "spicePort": true,
+                            "childName": "VCTRL"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 688000,
+                            "y1": 414800,
+                            "x2": 713600,
+                            "y2": 418800,
+                            "layer": "M5",
+                            "net": "",
+                            "name": "VLPFZ",
+                            "spicePort": true,
+                            "childName": "VLPFZ"
+                        },
+                        {
+                            "class": "Text",
+                            "x1": 356800,
+                            "y1": 244800,
+                            "x2": 356800,
+                            "y2": 244800,
+                            "layer": "TXT",
+                            "net": "",
+                            "name": "xlpf"
+                        }
+                    ],
+                    "instanceName": "xlpf",
+                    "angle": "",
+                    "cell": "REY_PLL_LPF",
+                    "libpath": "REY_PLL_SKY130A",
+                    "xcell": 0,
+                    "ycell": 0
+                },
+                {
+                    "class": "Port",
+                    "x1": 0,
+                    "y1": 78800,
+                    "x2": 25600,
+                    "y2": 82800,
+                    "layer": "M4",
+                    "net": "",
+                    "name": "VCTRL",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 701600,
+                    "y1": 0,
+                    "x2": 713600,
+                    "y2": 489600,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VDD_1V8",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 688000,
+                    "y1": 414800,
+                    "x2": 713600,
+                    "y2": 418800,
+                    "layer": "M5",
+                    "net": "",
+                    "name": "VLPFZ",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 683200,
+                    "y1": 18400,
+                    "x2": 695200,
+                    "y2": 471200,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VSS",
+                    "spicePort": true
+                }
+            ],
+            "useHalfHeight": false,
+            "alternateGroup": false,
+            "noPowerRoute": true,
+            "cellgroups": [
+                {
+                    "class": "CellGroup",
+                    "name": "lpf",
+                    "bbox": {
+                        "x1": 0,
+                        "y1": 0,
+                        "x2": 713600.0,
+                        "y2": 489600.0,
+                        "layer": "",
+                        "net": ""
+                    },
+                    "ports": [
+                        {
+                            "x1": 0.0,
+                            "y1": 78800.0,
+                            "x2": 25600.0,
+                            "y2": 82800.0,
+                            "layer": "M4",
+                            "net": "VCTRL",
+                            "name": "VCTRL",
+                            "routeLayer": "M4",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 701600.0,
+                            "y1": 0.0,
+                            "x2": 713600.0,
+                            "y2": 489600.0,
+                            "layer": "M1",
+                            "net": "VDD_1V8",
+                            "name": "VDD_1V8",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 688000.0,
+                            "y1": 414800.0,
+                            "x2": 713600.0,
+                            "y2": 418800.0,
+                            "layer": "M5",
+                            "net": "VLPFZ",
+                            "name": "VLPFZ",
+                            "routeLayer": "M5",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 683200.0,
+                            "y1": 18400.0,
+                            "x2": 695200.0,
+                            "y2": 471200.0,
+                            "layer": "M1",
+                            "net": "VSS",
+                            "name": "VSS",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        }
+                    ],
+                    "stacks": [
+                        {
+                            "class": "StackGroup",
+                            "name": "blk_lpf",
+                            "kind": "stack",
+                            "bbox": {
+                                "x1": 0,
+                                "y1": 0,
+                                "x2": 713600.0,
+                                "y2": 489600.0,
+                                "layer": "",
+                                "net": ""
+                            },
+                            "ports": [
+                                {
+                                    "x1": 0.0,
+                                    "y1": 78800.0,
+                                    "x2": 25600.0,
+                                    "y2": 82800.0,
+                                    "layer": "M4",
+                                    "net": "VCTRL",
+                                    "name": "VCTRL",
+                                    "routeLayer": "M4",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 701600.0,
+                                    "y1": 0.0,
+                                    "x2": 713600.0,
+                                    "y2": 489600.0,
+                                    "layer": "M1",
+                                    "net": "VDD_1V8",
+                                    "name": "VDD_1V8",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 688000.0,
+                                    "y1": 414800.0,
+                                    "x2": 713600.0,
+                                    "y2": 418800.0,
+                                    "layer": "M5",
+                                    "net": "VLPFZ",
+                                    "name": "VLPFZ",
+                                    "routeLayer": "M5",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 683200.0,
+                                    "y1": 18400.0,
+                                    "x2": 695200.0,
+                                    "y2": 471200.0,
+                                    "layer": "M1",
+                                    "net": "VSS",
+                                    "name": "VSS",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                }
+                            ],
+                            "preserve_order": true,
+                            "instances": [
+                                "xlpf"
+                            ],
+                            "tap_instances": [],
+                            "route_bundles": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

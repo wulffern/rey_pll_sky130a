@@ -1,0 +1,59 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 3392 7320
+<< locali >>
+rect 96 7140 3392 7320
+rect 96 7140 3392 7320
+rect 1600 6100 1792 7320
+rect 0 6100 192 7320
+rect 96 0 3392 180
+rect 96 0 3392 180
+rect 1600 0 1792 1220
+rect 0 0 192 1220
+rect 2816 5380 2880 5460
+rect 1152 2020 1216 2100
+rect 1152 5380 1216 5460
+rect 2816 6180 2880 6260
+rect 2816 1220 2880 1300
+rect 2816 2020 2880 2100
+rect 2304 1140 2752 1220
+rect 2304 1940 2752 2020
+use REY_PLL_CP_N_PARK xn_park 
+transform 1 0 1696 0 1 300
+box 1696 300 3392 2860
+use REY_PLL_CP_N_SINK xn_sink 
+transform 1 0 96 0 1 300
+box 96 300 1792 3660
+use REY_PLL_CP_P_REF xp_ref 
+transform 1 0 1696 0 1 4460
+box 1696 4460 3392 7020
+use REY_PLL_CP_P_SRC xp_src 
+transform 1 0 96 0 1 4460
+box 96 4460 1792 7020
+<< labels >>
+flabel locali s 96 7140 3392 7320 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew power bidirectional
+flabel locali s 96 0 3392 180 0 FreeSans 400 0 0 0 VSS
+port 2 nsew ground bidirectional
+flabel locali s 2816 5380 2880 5460 0 FreeSans 400 0 0 0 VBP
+port 3 nsew signal bidirectional
+flabel locali s 1152 2020 1216 2100 0 FreeSans 400 0 0 0 UP
+port 4 nsew signal bidirectional
+flabel locali s 1152 5380 1216 5460 0 FreeSans 400 0 0 0 DN_N
+port 5 nsew signal bidirectional
+flabel locali s 2816 6180 2880 6260 0 FreeSans 400 0 0 0 VHI_N
+port 6 nsew signal bidirectional
+flabel locali s 2816 1220 2880 1300 0 FreeSans 400 0 0 0 VLO
+port 7 nsew signal bidirectional
+flabel locali s 2816 2020 2880 2100 0 FreeSans 400 0 0 0 KICK
+port 8 nsew signal bidirectional
+flabel locali s 2304 1140 2752 1220 0 FreeSans 400 0 0 0 VCTRL
+port 9 nsew signal bidirectional
+flabel locali s 2304 1940 2752 2020 0 FreeSans 400 0 0 0 VLPFZ
+port 10 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 3392 7320
+<< end >>

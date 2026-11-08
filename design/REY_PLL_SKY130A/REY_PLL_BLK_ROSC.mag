@@ -1,0 +1,38 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 16476 11332
+<< locali >>
+rect 15126 1150 15306 1210
+rect 7616 2820 7680 2900
+rect 7616 2020 7680 2100
+rect 7616 1220 7680 1300
+rect 10368 4340 10688 4420
+rect 4416 7780 4480 7860
+rect 96 11140 16476 11320
+rect 96 0 16476 180
+use REY_PLL_ROSC xrosc ../REY_PLL_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 16476 11332
+<< labels >>
+flabel locali s 15126 1150 15306 1210 0 FreeSans 400 0 0 0 CK
+port 1 nsew signal bidirectional
+flabel locali s 7616 2820 7680 2900 0 FreeSans 400 0 0 0 TRIM0
+port 2 nsew signal bidirectional
+flabel locali s 7616 2020 7680 2100 0 FreeSans 400 0 0 0 TRIM1
+port 3 nsew signal bidirectional
+flabel locali s 7616 1220 7680 1300 0 FreeSans 400 0 0 0 TRIM2
+port 4 nsew signal bidirectional
+flabel locali s 10368 4340 10688 4420 0 FreeSans 400 0 0 0 VBP
+port 5 nsew signal bidirectional
+flabel locali s 4416 7780 4480 7860 0 FreeSans 400 0 0 0 VCTRL
+port 6 nsew signal bidirectional
+flabel locali s 96 11140 16476 11320 0 FreeSans 400 0 0 0 VDD_1V8
+port 7 nsew power bidirectional
+flabel locali s 96 0 16476 180 0 FreeSans 400 0 0 0 VSS
+port 8 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 16476 11332
+<< end >>

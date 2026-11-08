@@ -1,0 +1,98 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 30748 22204
+<< locali >>
+rect 0 22024 30748 22204
+rect 0 22024 30748 22204
+rect 22332 19572 25628 22204
+rect 21996 12432 22236 22204
+rect 13112 12432 13352 22204
+rect 30508 300 30748 22204
+rect 18544 12432 18784 22204
+rect 96 11440 16476 22204
+rect 0 0 30748 180
+rect 0 0 30748 180
+rect 22332 0 25628 12612
+rect 21628 0 21868 17536
+rect 12744 0 12984 21536
+rect 30140 0 30380 9724
+rect 18176 0 18416 20576
+rect 96 0 16476 480
+rect 7616 3120 7680 3200
+rect 7616 2320 7680 2400
+rect 7616 1520 7680 1600
+<< metal2 >>
+rect 18784 13618 18964 13678
+rect 13352 13938 13532 13998
+rect 18784 16178 18964 16238
+rect 18784 16658 18964 16718
+rect 0 13938 180 13998
+rect 13172 13858 13352 13918
+rect 13172 14338 13352 14398
+rect 13172 14818 13352 14878
+rect 13172 15298 13352 15358
+rect 13172 15778 13352 15838
+rect 13172 16258 13352 16318
+rect 13172 16738 13352 16798
+rect 13172 17218 13352 17278
+use REY_PLL_BLK_CP xblk_cp 
+transform 1 0 22236 0 1 12432
+box 22236 12432 25628 19752
+use REY_PLL_BLK_CTRL xblk_ctrl 
+transform 1 0 18784 0 1 12432
+box 18784 12432 22236 17904
+use REY_PLL_BLK_DIVN xblk_divn 
+transform 1 0 0 0 1 12432
+box 0 12432 13352 21904
+use REY_PLL_BLK_LPF xblk_lpf 
+transform 1 0 16476 0 1 300
+box 16476 300 30748 10092
+use REY_PLL_BLK_PFD xblk_pfd 
+transform 1 0 13352 0 1 12432
+box 13352 12432 18784 20944
+use REY_PLL_BLK_ROSC xblk_rosc 
+transform 1 0 0 0 1 300
+box 0 300 16476 11632
+<< labels >>
+flabel locali s 0 22024 30748 22204 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew power bidirectional
+flabel locali s 0 0 30748 180 0 FreeSans 400 0 0 0 VSS
+port 2 nsew ground bidirectional
+flabel metal2 s 18784 13618 18964 13678 0 FreeSans 400 0 0 0 PWRUP_1V8
+port 3 nsew power bidirectional
+flabel metal2 s 13352 13938 13532 13998 0 FreeSans 400 0 0 0 CK_REF
+port 4 nsew signal bidirectional
+flabel locali s 7616 3120 7680 3200 0 FreeSans 400 0 0 0 TRIM0
+port 5 nsew signal bidirectional
+flabel locali s 7616 2320 7680 2400 0 FreeSans 400 0 0 0 TRIM1
+port 6 nsew signal bidirectional
+flabel locali s 7616 1520 7680 1600 0 FreeSans 400 0 0 0 TRIM2
+port 7 nsew signal bidirectional
+flabel metal2 s 18784 16178 18964 16238 0 FreeSans 400 0 0 0 OLH
+port 8 nsew signal bidirectional
+flabel metal2 s 18784 16658 18964 16718 0 FreeSans 400 0 0 0 OLL
+port 9 nsew signal bidirectional
+flabel metal2 s 0 13938 180 13998 0 FreeSans 400 0 0 0 CK
+port 10 nsew signal bidirectional
+flabel metal2 s 13172 13858 13352 13918 0 FreeSans 400 0 0 0 CKO0
+port 11 nsew signal bidirectional
+flabel metal2 s 13172 14338 13352 14398 0 FreeSans 400 0 0 0 CKO1
+port 12 nsew signal bidirectional
+flabel metal2 s 13172 14818 13352 14878 0 FreeSans 400 0 0 0 CKO2
+port 13 nsew signal bidirectional
+flabel metal2 s 13172 15298 13352 15358 0 FreeSans 400 0 0 0 CKO3
+port 14 nsew signal bidirectional
+flabel metal2 s 13172 15778 13352 15838 0 FreeSans 400 0 0 0 CKO4
+port 15 nsew signal bidirectional
+flabel metal2 s 13172 16258 13352 16318 0 FreeSans 400 0 0 0 CKO5
+port 16 nsew signal bidirectional
+flabel metal2 s 13172 16738 13352 16798 0 FreeSans 400 0 0 0 CKO6
+port 17 nsew signal bidirectional
+flabel metal2 s 13172 17218 13352 17278 0 FreeSans 400 0 0 0 CKO7
+port 18 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 30748 22204
+<< end >>

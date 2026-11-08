@@ -133,6 +133,378 @@
                 ]
             },
             "noPrefix": 1
+        },
+        {
+            "name": "REY_PLL_CTRL",
+            "class": "cIcCore::LayoutCell",
+            "meta": {
+                "noSchematic": true
+            },
+            "boundaryIgnoreRouting": 0,
+            "noPowerRoute": 1,
+            "composite": 1,
+            "afterPlace": [
+                {
+                    "addRouteRings": [
+                        [
+                            "M1",
+                            "VSS",
+                            "tbrl",
+                            4,
+                            2
+                        ],
+                        [
+                            "M1",
+                            "VDD_1V8",
+                            "tbrl",
+                            4,
+                            2
+                        ]
+                    ]
+                },
+                {
+                    "addPowerRings": []
+                }
+            ],
+            "beforeRoute": {
+                "addDirectedRoutes": [
+                    [
+                        "M4",
+                        "VSS",
+                        "X:AVSS||rail_b_VSS",
+                        "routeWidth=wide_width"
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "X:AVDD||rail_t_VDD_1V8",
+                        "routeWidth=wide_width"
+                    ]
+                ],
+                "addConnectivityRoutes": [
+                    [
+                        "M2",
+                        "^(KD[0-4])$",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "^PWRUP_N$",
+                        "-|--",
+                        "onTopL"
+                    ],
+                    [
+                        "M2",
+                        "^VHI_N$",
+                        "-|--",
+                        ""
+                    ]
+                ]
+            },
+            "afterPaint": {
+                "resetOrigin": 1,
+                "addPortOnEdges": [
+                    [
+                        "M3",
+                        "PWRUP_1V8",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "OLH",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "OLL",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "KICK",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "VHI_N",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "VLO",
+                        "right",
+                        "-|--",
+                        ""
+                    ]
+                ]
+            },
+            "noPrefix": 1,
+            "afterRoute": {
+                "addPortOnRects": [
+                    [
+                        "OLH",
+                        "M1",
+                        "XA8:B"
+                    ],
+                    [
+                        "OLL",
+                        "M1",
+                        "XA9:B"
+                    ]
+                ]
+            }
+        },
+        {
+            "name": "REY_PLL_DIVN",
+            "class": "cIcCore::LayoutCell",
+            "meta": {
+                "noSchematic": true
+            },
+            "boundaryIgnoreRouting": 0,
+            "noPowerRoute": 1,
+            "composite": 1,
+            "afterPlace": [
+                {
+                    "addRouteRings": [
+                        [
+                            "M1",
+                            "VSS",
+                            "tbrl",
+                            4,
+                            2
+                        ],
+                        [
+                            "M1",
+                            "VDD_1V8",
+                            "tbrl",
+                            4,
+                            2
+                        ]
+                    ]
+                },
+                {
+                    "addPowerRings": []
+                }
+            ],
+            "beforeRoute": {
+                "addDirectedRoutes": [
+                    [
+                        "M4",
+                        "VSS",
+                        "X:AVSS||rail_b_VSS",
+                        "routeWidth=wide_width"
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "X:AVDD||rail_t_VDD_1V8",
+                        "routeWidth=wide_width"
+                    ]
+                ],
+                "addConnectivityRoutes": [
+                    [
+                        "M2",
+                        "^QN\\d$",
+                        "-|--",
+                        "nostartcut,onTopT,offsethighend"
+                    ],
+                    [
+                        "M3",
+                        "^(Q\\d|CK_FB)$",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "^PWRUP_1V8$",
+                        "-|--",
+                        "onTopL"
+                    ]
+                ]
+            },
+            "afterPaint": {
+                "resetOrigin": 1,
+                "addPortOnEdges": [
+                    [
+                        "M3",
+                        "PWRUP_1V8",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CK",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CK_FB",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO0",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO1",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO2",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO3",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO4",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO5",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO6",
+                        "right",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO7",
+                        "right",
+                        "-|--",
+                        ""
+                    ]
+                ]
+            },
+            "noPrefix": 1
+        },
+        {
+            "name": "REY_PLL_LPF",
+            "class": "cIcCore::LayoutCell",
+            "meta": {
+                "noSchematic": true
+            },
+            "boundaryIgnoreRouting": 0,
+            "noPowerRoute": 1,
+            "composite": 1,
+            "afterPlace": [
+                {
+                    "addRouteRings": [
+                        [
+                            "M1",
+                            "VSS",
+                            "tbrl",
+                            4,
+                            2
+                        ],
+                        [
+                            "M1",
+                            "VDD_1V8",
+                            "tbrl",
+                            4,
+                            2
+                        ]
+                    ]
+                },
+                {
+                    "addPowerRings": []
+                }
+            ],
+            "beforeRoute": {
+                "addConnectivityRoutes": [
+                    [
+                        "M2",
+                        "^R\\d+$",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M5",
+                        "^VLPFZ$",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "^VCTRL$",
+                        "-|--",
+                        "onTopL"
+                    ]
+                ],
+                "addDirectedRoutes": [
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "X:A||rail_t_VDD_1V8",
+                        "routeWidth=wide_width"
+                    ],
+                    [
+                        "M1",
+                        "VSS",
+                        "X:BR||rail_b_VSS",
+                        ""
+                    ]
+                ]
+            },
+            "afterPaint": {
+                "resetOrigin": 1,
+                "addPortOnEdges": [
+                    [
+                        "M4",
+                        "VCTRL",
+                        "left",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M5",
+                        "VLPFZ",
+                        "right",
+                        "-|--",
+                        ""
+                    ]
+                ]
+            },
+            "noPrefix": 1
         }
     ]
 }

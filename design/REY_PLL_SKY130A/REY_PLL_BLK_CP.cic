@@ -1,0 +1,606 @@
+{
+    "cells": [
+        {
+            "class": "SidecarCell",
+            "x1": 0,
+            "y1": 0,
+            "x2": 169600,
+            "y2": 366000,
+            "layer": "PR",
+            "net": "",
+            "name": "REY_PLL_BLK_CP",
+            "has_pr": false,
+            "abstract": false,
+            "physicalOnly": false,
+            "libcell": false,
+            "ckt": {
+                "class": "",
+                "name": "REY_PLL_BLK_CP",
+                "nodes": [
+                    "DN_N",
+                    "KICK",
+                    "UP",
+                    "VBP",
+                    "VCTRL",
+                    "VDD_1V8",
+                    "VHI_N",
+                    "VLO",
+                    "VLPFZ",
+                    "VSS"
+                ],
+                "properties": {},
+                "devices": [],
+                "instances": [
+                    {
+                        "class": "",
+                        "name": "xcp",
+                        "nodes": [
+                            "VDD_1V8",
+                            "VSS",
+                            "VBP",
+                            "UP",
+                            "DN_N",
+                            "VHI_N",
+                            "VLO",
+                            "KICK",
+                            "VCTRL",
+                            "VLPFZ"
+                        ],
+                        "properties": {},
+                        "subcktName": "REY_PLL_CP",
+                        "groupName": "xcp",
+                        "deviceName": "subckt",
+                        "groupTag": null
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "class": "Instance",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 169600,
+                    "y2": 366000,
+                    "layer": "PR",
+                    "net": "",
+                    "name": "REY_PLL_CP",
+                    "has_pr": false,
+                    "abstract": false,
+                    "physicalOnly": false,
+                    "libcell": false,
+                    "ckt": {},
+                    "children": [
+                        {
+                            "class": "Port",
+                            "x1": 4800,
+                            "y1": 357000,
+                            "x2": 169600,
+                            "y2": 366000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VDD_1V8",
+                            "spicePort": true,
+                            "childName": "VDD_1V8"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 4800,
+                            "y1": 0,
+                            "x2": 169600,
+                            "y2": 9000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VSS",
+                            "spicePort": true,
+                            "childName": "VSS"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 140800,
+                            "y1": 269000,
+                            "x2": 144000,
+                            "y2": 273000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VBP",
+                            "spicePort": true,
+                            "childName": "VBP"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 57600,
+                            "y1": 101000,
+                            "x2": 60800,
+                            "y2": 105000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "UP",
+                            "spicePort": true,
+                            "childName": "UP"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 57600,
+                            "y1": 269000,
+                            "x2": 60800,
+                            "y2": 273000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "DN_N",
+                            "spicePort": true,
+                            "childName": "DN_N"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 140800,
+                            "y1": 309000,
+                            "x2": 144000,
+                            "y2": 313000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VHI_N",
+                            "spicePort": true,
+                            "childName": "VHI_N"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 140800,
+                            "y1": 61000,
+                            "x2": 144000,
+                            "y2": 65000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VLO",
+                            "spicePort": true,
+                            "childName": "VLO"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 140800,
+                            "y1": 101000,
+                            "x2": 144000,
+                            "y2": 105000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "KICK",
+                            "spicePort": true,
+                            "childName": "KICK"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 115200,
+                            "y1": 57000,
+                            "x2": 137600,
+                            "y2": 61000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VCTRL",
+                            "spicePort": true,
+                            "childName": "VCTRL"
+                        },
+                        {
+                            "class": "Port",
+                            "x1": 115200,
+                            "y1": 97000,
+                            "x2": 137600,
+                            "y2": 101000,
+                            "layer": "M1",
+                            "net": "",
+                            "name": "VLPFZ",
+                            "spicePort": true,
+                            "childName": "VLPFZ"
+                        },
+                        {
+                            "class": "Text",
+                            "x1": 84800,
+                            "y1": 183000,
+                            "x2": 84800,
+                            "y2": 183000,
+                            "layer": "TXT",
+                            "net": "",
+                            "name": "xcp"
+                        }
+                    ],
+                    "instanceName": "xcp",
+                    "angle": "",
+                    "cell": "REY_PLL_CP",
+                    "libpath": "REY_PLL_SKY130A",
+                    "xcell": 0,
+                    "ycell": 0
+                },
+                {
+                    "class": "Port",
+                    "x1": 57600,
+                    "y1": 269000,
+                    "x2": 60800,
+                    "y2": 273000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "DN_N",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 140800,
+                    "y1": 101000,
+                    "x2": 144000,
+                    "y2": 105000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "KICK",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 57600,
+                    "y1": 101000,
+                    "x2": 60800,
+                    "y2": 105000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "UP",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 140800,
+                    "y1": 269000,
+                    "x2": 144000,
+                    "y2": 273000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VBP",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 115200,
+                    "y1": 57000,
+                    "x2": 137600,
+                    "y2": 61000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VCTRL",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 4800,
+                    "y1": 357000,
+                    "x2": 169600,
+                    "y2": 366000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VDD_1V8",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 140800,
+                    "y1": 309000,
+                    "x2": 144000,
+                    "y2": 313000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VHI_N",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 140800,
+                    "y1": 61000,
+                    "x2": 144000,
+                    "y2": 65000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VLO",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 115200,
+                    "y1": 97000,
+                    "x2": 137600,
+                    "y2": 101000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VLPFZ",
+                    "spicePort": true
+                },
+                {
+                    "class": "Port",
+                    "x1": 4800,
+                    "y1": 0,
+                    "x2": 169600,
+                    "y2": 9000,
+                    "layer": "M1",
+                    "net": "",
+                    "name": "VSS",
+                    "spicePort": true
+                }
+            ],
+            "useHalfHeight": false,
+            "alternateGroup": false,
+            "noPowerRoute": true,
+            "cellgroups": [
+                {
+                    "class": "CellGroup",
+                    "name": "cp",
+                    "bbox": {
+                        "x1": 0,
+                        "y1": 0,
+                        "x2": 169600.0,
+                        "y2": 366000.0,
+                        "layer": "",
+                        "net": ""
+                    },
+                    "ports": [
+                        {
+                            "x1": 57600.0,
+                            "y1": 269000.0,
+                            "x2": 60800.0,
+                            "y2": 273000.0,
+                            "layer": "M1",
+                            "net": "DN_N",
+                            "name": "DN_N",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 140800.0,
+                            "y1": 101000.0,
+                            "x2": 144000.0,
+                            "y2": 105000.0,
+                            "layer": "M1",
+                            "net": "KICK",
+                            "name": "KICK",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 57600.0,
+                            "y1": 101000.0,
+                            "x2": 60800.0,
+                            "y2": 105000.0,
+                            "layer": "M1",
+                            "net": "UP",
+                            "name": "UP",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 140800.0,
+                            "y1": 269000.0,
+                            "x2": 144000.0,
+                            "y2": 273000.0,
+                            "layer": "M1",
+                            "net": "VBP",
+                            "name": "VBP",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 115200.0,
+                            "y1": 57000.0,
+                            "x2": 137600.0,
+                            "y2": 61000.0,
+                            "layer": "M1",
+                            "net": "VCTRL",
+                            "name": "VCTRL",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 4800.0,
+                            "y1": 357000.0,
+                            "x2": 169600.0,
+                            "y2": 366000.0,
+                            "layer": "M1",
+                            "net": "VDD_1V8",
+                            "name": "VDD_1V8",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 140800.0,
+                            "y1": 309000.0,
+                            "x2": 144000.0,
+                            "y2": 313000.0,
+                            "layer": "M1",
+                            "net": "VHI_N",
+                            "name": "VHI_N",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 140800.0,
+                            "y1": 61000.0,
+                            "x2": 144000.0,
+                            "y2": 65000.0,
+                            "layer": "M1",
+                            "net": "VLO",
+                            "name": "VLO",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 115200.0,
+                            "y1": 97000.0,
+                            "x2": 137600.0,
+                            "y2": 101000.0,
+                            "layer": "M1",
+                            "net": "VLPFZ",
+                            "name": "VLPFZ",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        },
+                        {
+                            "x1": 4800.0,
+                            "y1": 0.0,
+                            "x2": 169600.0,
+                            "y2": 9000.0,
+                            "layer": "M1",
+                            "net": "VSS",
+                            "name": "VSS",
+                            "routeLayer": "M1",
+                            "side": "boundary",
+                            "spicePort": false
+                        }
+                    ],
+                    "stacks": [
+                        {
+                            "class": "StackGroup",
+                            "name": "blk_cp",
+                            "kind": "stack",
+                            "bbox": {
+                                "x1": 0,
+                                "y1": 0,
+                                "x2": 169600.0,
+                                "y2": 366000.0,
+                                "layer": "",
+                                "net": ""
+                            },
+                            "ports": [
+                                {
+                                    "x1": 57600.0,
+                                    "y1": 269000.0,
+                                    "x2": 60800.0,
+                                    "y2": 273000.0,
+                                    "layer": "M1",
+                                    "net": "DN_N",
+                                    "name": "DN_N",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 140800.0,
+                                    "y1": 101000.0,
+                                    "x2": 144000.0,
+                                    "y2": 105000.0,
+                                    "layer": "M1",
+                                    "net": "KICK",
+                                    "name": "KICK",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 57600.0,
+                                    "y1": 101000.0,
+                                    "x2": 60800.0,
+                                    "y2": 105000.0,
+                                    "layer": "M1",
+                                    "net": "UP",
+                                    "name": "UP",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 140800.0,
+                                    "y1": 269000.0,
+                                    "x2": 144000.0,
+                                    "y2": 273000.0,
+                                    "layer": "M1",
+                                    "net": "VBP",
+                                    "name": "VBP",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 115200.0,
+                                    "y1": 57000.0,
+                                    "x2": 137600.0,
+                                    "y2": 61000.0,
+                                    "layer": "M1",
+                                    "net": "VCTRL",
+                                    "name": "VCTRL",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 4800.0,
+                                    "y1": 357000.0,
+                                    "x2": 169600.0,
+                                    "y2": 366000.0,
+                                    "layer": "M1",
+                                    "net": "VDD_1V8",
+                                    "name": "VDD_1V8",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 140800.0,
+                                    "y1": 309000.0,
+                                    "x2": 144000.0,
+                                    "y2": 313000.0,
+                                    "layer": "M1",
+                                    "net": "VHI_N",
+                                    "name": "VHI_N",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 140800.0,
+                                    "y1": 61000.0,
+                                    "x2": 144000.0,
+                                    "y2": 65000.0,
+                                    "layer": "M1",
+                                    "net": "VLO",
+                                    "name": "VLO",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 115200.0,
+                                    "y1": 97000.0,
+                                    "x2": 137600.0,
+                                    "y2": 101000.0,
+                                    "layer": "M1",
+                                    "net": "VLPFZ",
+                                    "name": "VLPFZ",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                },
+                                {
+                                    "x1": 4800.0,
+                                    "y1": 0.0,
+                                    "x2": 169600.0,
+                                    "y2": 9000.0,
+                                    "layer": "M1",
+                                    "net": "VSS",
+                                    "name": "VSS",
+                                    "routeLayer": "M1",
+                                    "side": "boundary",
+                                    "spicePort": false
+                                }
+                            ],
+                            "preserve_order": true,
+                            "instances": [
+                                "xcp"
+                            ],
+                            "tap_instances": [],
+                            "route_bundles": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

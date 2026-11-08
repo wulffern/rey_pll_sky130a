@@ -1,0 +1,54 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 13352 9472
+<< metal2 >>
+rect 0 1506 180 1566
+rect 13172 1426 13352 1486
+rect 13172 1906 13352 1966
+rect 13172 2386 13352 2446
+rect 13172 2866 13352 2926
+rect 13172 3346 13352 3406
+rect 13172 3826 13352 3886
+rect 13172 4306 13352 4366
+rect 13172 4786 13352 4846
+rect 13172 8626 13352 8686
+rect 0 4066 180 4126
+<< locali >>
+rect 13112 0 13352 9472
+rect 12744 368 12984 9104
+use REY_PLL_DIVN xdivn ../REY_PLL_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 13352 9472
+<< labels >>
+flabel metal2 s 0 1506 180 1566 0 FreeSans 400 0 0 0 CK
+port 1 nsew signal bidirectional
+flabel metal2 s 13172 1426 13352 1486 0 FreeSans 400 0 0 0 CKO0
+port 2 nsew signal bidirectional
+flabel metal2 s 13172 1906 13352 1966 0 FreeSans 400 0 0 0 CKO1
+port 3 nsew signal bidirectional
+flabel metal2 s 13172 2386 13352 2446 0 FreeSans 400 0 0 0 CKO2
+port 4 nsew signal bidirectional
+flabel metal2 s 13172 2866 13352 2926 0 FreeSans 400 0 0 0 CKO3
+port 5 nsew signal bidirectional
+flabel metal2 s 13172 3346 13352 3406 0 FreeSans 400 0 0 0 CKO4
+port 6 nsew signal bidirectional
+flabel metal2 s 13172 3826 13352 3886 0 FreeSans 400 0 0 0 CKO5
+port 7 nsew signal bidirectional
+flabel metal2 s 13172 4306 13352 4366 0 FreeSans 400 0 0 0 CKO6
+port 8 nsew signal bidirectional
+flabel metal2 s 13172 4786 13352 4846 0 FreeSans 400 0 0 0 CKO7
+port 9 nsew signal bidirectional
+flabel metal2 s 13172 8626 13352 8686 0 FreeSans 400 0 0 0 CK_FB
+port 10 nsew signal bidirectional
+flabel metal2 s 0 4066 180 4126 0 FreeSans 400 0 0 0 PWRUP_1V8
+port 11 nsew power bidirectional
+flabel locali s 13112 0 13352 9472 0 FreeSans 400 0 0 0 VDD_1V8
+port 12 nsew power bidirectional
+flabel locali s 12744 368 12984 9104 0 FreeSans 400 0 0 0 VSS
+port 13 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 13352 9472
+<< end >>
