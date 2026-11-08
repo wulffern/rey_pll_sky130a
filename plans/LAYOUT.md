@@ -160,20 +160,36 @@ Changes the layout forced on the schematic, all in py/gen_rosc.py:
 - the output buffer stays REYTR_IVX1 + IVX4: a discrete 2C1F2 first stage
   loads the last ring node and slowed the ring by 20 %
 
-DRC (magic), routes still from the maze search:
+DRC (magic), routes from cicpy's automatic stack routing. The sidecar
+declares no coordinates; supplies are blocked in the transistor columns
+(the guard carries them).
 
-| Column   | Errors | Column   | Errors |
-|:---------|-------:|:---------|-------:|
-| P_DIODE  | 80     | N_SW     | 0      |
-| P_MIRB   | 0      | R_TRIM   | 21     |
-| P_ST0    | 33     | R_FIX    | 0      |
-| N_BIAS   | 79     | N_RING_A | 7      |
-| N_SU     | 157    | N_RING_B | 7      |
-| DIG      | 0      | top      | 616    |
+| Column   | First build | cicpy fix/route-pad-spacing |
+|:---------|------------:|----------------------------:|
+| P_DIODE  | 80          | 0                           |
+| P_MIRB   | 0           | 0                           |
+| P_ST0..6 | 33 each     | 4 each                      |
+| N_BIAS   | 79          | 37                          |
+| N_SU     | 157         | 20                          |
+| N_SW     | 3           | 0                           |
+| R_TRIM   | 21          | 23                          |
+| R_FIX    | 0           | 0                           |
+| N_RING_A | 7           | 7                           |
+| N_RING_B | 7           | 7                           |
+| DIG      | 0           | 0, but NOT ROUTED           |
+| top      | 616         | 156                         |
 
-The errors are the searched routes: where a net is drawn as two legs, each
-leg puts a via pad at the joint, two pads 0.2 um apart (mcon.2, li.3,
-met1.2). Next: declare every column's nets as `paths` (straight trunks on
-named lanes, as REY_LDO does) column by column, with DRC after each, then
-the channel routes between the rows (VBP, VCTRL, VG, VX, XST, N0..N6, the
-RT nodes, TRIM, CK), then LVS and extraction.
+The fixes are in cicpy (branch fix/route-pad-spacing): a path joins its
+own nearby cut instead of placing a second one, routeVertical's
+one-cut-per-cluster check looks at the pads, and the stack search sees
+the metal of the nets it already routed (searched legs and canned rails
+with their landing pads). Open:
+
+- DIG: the router finds no path for CKN or the M4 supplies of the rey_tr
+  cells, so the column has no routes (0 DRC means nothing was drawn)
+- R_TRIM: VSS as five searched legs beside the RT0/RT2 trunks, li.3/met1.2
+- N_BIAS, N_SU, N_RING, P_ST: still to be looked at one by one
+- the router still picks some trunks as coordinates internally
+  (`trunkx=...`, logged as "not a pin anchor"); none of them are written
+  into the sidecar
+- then the channel routes between the rows, LVS and extraction

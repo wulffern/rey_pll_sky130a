@@ -1431,26 +1431,22 @@
                             "net": "VG"
                         },
                         {
-                            "class": "Instance",
-                            "x1": 53200,
-                            "y1": 86300,
-                            "x2": 62000,
-                            "y2": 89700,
-                            "layer": "PR",
-                            "net": "VG",
-                            "name": "cut_M1M2_2x1",
-                            "has_pr": false,
-                            "abstract": false,
-                            "physicalOnly": false,
-                            "libcell": false,
-                            "ckt": {},
-                            "children": [],
-                            "instanceName": "",
-                            "angle": "",
-                            "cell": "cut_M1M2_2x1",
-                            "libpath": "",
-                            "xcell": 0,
-                            "ycell": 0
+                            "class": "Rect",
+                            "x1": 56100,
+                            "y1": 88000,
+                            "x2": 59100,
+                            "y2": 91500,
+                            "layer": "M1",
+                            "net": "VG"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 56100,
+                            "y1": 88000,
+                            "x2": 59100,
+                            "y2": 91500,
+                            "layer": "M2",
+                            "net": "VG"
                         },
                         {
                             "class": "Rect",
@@ -1524,26 +1520,22 @@
                             "net": "VG"
                         },
                         {
-                            "class": "Instance",
-                            "x1": 30800,
-                            "y1": 112300,
-                            "x2": 39600,
-                            "y2": 115700,
-                            "layer": "PR",
-                            "net": "VG",
-                            "name": "cut_M1M2_2x1",
-                            "has_pr": false,
-                            "abstract": false,
-                            "physicalOnly": false,
-                            "libcell": false,
-                            "ckt": {},
-                            "children": [],
-                            "instanceName": "",
-                            "angle": "",
-                            "cell": "cut_M1M2_2x1",
-                            "libpath": "",
-                            "xcell": 0,
-                            "ycell": 0
+                            "class": "Rect",
+                            "x1": 33700,
+                            "y1": 108500,
+                            "x2": 36700,
+                            "y2": 114000,
+                            "layer": "M2",
+                            "net": "VG"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 33700,
+                            "y1": 108500,
+                            "x2": 36700,
+                            "y2": 114000,
+                            "layer": "M1",
+                            "net": "VG"
                         },
                         {
                             "class": "Rect",
@@ -1710,45 +1702,41 @@
                             "net": "XST"
                         },
                         {
-                            "class": "Instance",
-                            "x1": 37200,
-                            "y1": 82300,
-                            "x2": 46000,
-                            "y2": 85700,
-                            "layer": "PR",
-                            "net": "XST",
-                            "name": "cut_M1M2_2x1",
-                            "has_pr": false,
-                            "abstract": false,
-                            "physicalOnly": false,
-                            "libcell": false,
-                            "ckt": {},
-                            "children": [],
-                            "instanceName": "",
-                            "angle": "",
-                            "cell": "cut_M1M2_2x1",
-                            "libpath": "",
-                            "xcell": 0,
-                            "ycell": 0
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 80500,
+                            "x2": 43100,
+                            "y2": 84000,
+                            "layer": "M1",
+                            "net": "XST"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 80500,
+                            "x2": 43100,
+                            "y2": 84000,
+                            "layer": "M2",
+                            "net": "XST"
                         },
                         {
                             "class": "Rect",
                             "x1": 40100,
                             "y1": 84000,
                             "x2": 43100,
-                            "y2": 107500,
+                            "y2": 131500,
                             "layer": "M2",
                             "net": "XST"
                         },
                         {
                             "class": "Instance",
                             "x1": 37200,
-                            "y1": 104300,
+                            "y1": 128300,
                             "x2": 46000,
-                            "y2": 107700,
+                            "y2": 131700,
                             "layer": "PR",
                             "net": "XST",
-                            "name": "cut_M1M2_2x1",
+                            "name": "cut_M2M3_2x1",
                             "has_pr": false,
                             "abstract": false,
                             "physicalOnly": false,
@@ -1757,7 +1745,7 @@
                             "children": [],
                             "instanceName": "",
                             "angle": "",
-                            "cell": "cut_M1M2_2x1",
+                            "cell": "cut_M2M3_2x1",
                             "libpath": "",
                             "xcell": 0,
                             "ycell": 0
@@ -1765,21 +1753,21 @@
                         {
                             "class": "Rect",
                             "x1": 41600,
-                            "y1": 104500,
+                            "y1": 128500,
                             "x2": 57700,
-                            "y2": 107500,
-                            "layer": "M1",
+                            "y2": 131500,
+                            "layer": "M3",
                             "net": "XST"
                         },
                         {
                             "class": "Instance",
                             "x1": 51800,
-                            "y1": 104300,
+                            "y1": 128300,
                             "x2": 60600,
-                            "y2": 107700,
+                            "y2": 131700,
                             "layer": "PR",
                             "net": "XST",
-                            "name": "cut_M1M2_2x1",
+                            "name": "cut_M2M3_2x1",
                             "has_pr": false,
                             "abstract": false,
                             "physicalOnly": false,
@@ -1788,19 +1776,10 @@
                             "children": [],
                             "instanceName": "",
                             "angle": "",
-                            "cell": "cut_M1M2_2x1",
+                            "cell": "cut_M2M3_2x1",
                             "libpath": "",
                             "xcell": 0,
                             "ycell": 0
-                        },
-                        {
-                            "class": "Rect",
-                            "x1": 54700,
-                            "y1": 106000,
-                            "x2": 57700,
-                            "y2": 131500,
-                            "layer": "M2",
-                            "net": "XST"
                         },
                         {
                             "class": "Instance",
@@ -1881,13 +1860,13 @@
                             "anchor": {
                                 "kind": "fixed",
                                 "axis": "y",
-                                "value": 82000
+                                "value": 106000
                             },
                             "noext": false
                         },
                         {
                             "step": "layer",
-                            "layer": "M1"
+                            "layer": "M3"
                         },
                         {
                             "step": "movex",
@@ -1901,15 +1880,6 @@
                         {
                             "step": "layer",
                             "layer": "M2"
-                        },
-                        {
-                            "step": "movey",
-                            "anchor": {
-                                "kind": "fixed",
-                                "axis": "y",
-                                "value": 106000
-                            },
-                            "noext": false
                         },
                         {
                             "step": "layer",

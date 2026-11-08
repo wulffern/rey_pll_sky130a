@@ -1684,8 +1684,8 @@
                     "class": "Path",
                     "x1": 35200,
                     "y1": 34300,
-                    "x2": 46000,
-                    "y2": 205700,
+                    "x2": 51600,
+                    "y2": 205500,
                     "layer": "PR",
                     "net": "VS1",
                     "name": "VS1",
@@ -1699,16 +1699,16 @@
                             "class": "Rect",
                             "x1": 35200,
                             "y1": 34500,
-                            "x2": 42700,
+                            "x2": 48700,
                             "y2": 37500,
                             "layer": "M1",
                             "net": "VS1"
                         },
                         {
                             "class": "Instance",
-                            "x1": 36800,
+                            "x1": 42800,
                             "y1": 34300,
-                            "x2": 45600,
+                            "x2": 51600,
                             "y2": 37700,
                             "layer": "PR",
                             "net": "VS1",
@@ -1728,18 +1728,18 @@
                         },
                         {
                             "class": "Rect",
-                            "x1": 39700,
+                            "x1": 45700,
                             "y1": 36000,
-                            "x2": 42700,
+                            "x2": 48700,
                             "y2": 163500,
                             "layer": "M2",
                             "net": "VS1"
                         },
                         {
                             "class": "Instance",
-                            "x1": 36800,
+                            "x1": 42800,
                             "y1": 160300,
-                            "x2": 45600,
+                            "x2": 51600,
                             "y2": 163700,
                             "layer": "PR",
                             "net": "VS1",
@@ -1756,6 +1756,15 @@
                             "libpath": "",
                             "xcell": 0,
                             "ycell": 0
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 39700,
+                            "y1": 160500,
+                            "x2": 47200,
+                            "y2": 163500,
+                            "layer": "M1",
+                            "net": "VS1"
                         },
                         {
                             "class": "Rect",
@@ -1776,26 +1785,40 @@
                             "net": "VS1"
                         },
                         {
-                            "class": "Instance",
-                            "x1": 37200,
-                            "y1": 162300,
-                            "x2": 46000,
-                            "y2": 165700,
-                            "layer": "PR",
-                            "net": "VS1",
-                            "name": "cut_M1M2_2x1",
-                            "has_pr": false,
-                            "abstract": false,
-                            "physicalOnly": false,
-                            "libcell": false,
-                            "ckt": {},
-                            "children": [],
-                            "instanceName": "",
-                            "angle": "",
-                            "cell": "cut_M1M2_2x1",
-                            "libpath": "",
-                            "xcell": 0,
-                            "ycell": 0
+                            "class": "Rect",
+                            "x1": 41600,
+                            "y1": 162500,
+                            "x2": 48700,
+                            "y2": 165500,
+                            "layer": "M1",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 45700,
+                            "y1": 160500,
+                            "x2": 48700,
+                            "y2": 164000,
+                            "layer": "M1",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 41600,
+                            "y1": 162500,
+                            "x2": 48700,
+                            "y2": 165500,
+                            "layer": "M2",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 45700,
+                            "y1": 160500,
+                            "x2": 48700,
+                            "y2": 164000,
+                            "layer": "M2",
+                            "net": "VS1"
                         },
                         {
                             "class": "Rect",
@@ -1838,11 +1861,65 @@
                             "net": "VS1"
                         },
                         {
+                            "class": "Rect",
+                            "x1": 41600,
+                            "y1": 202500,
+                            "x2": 48700,
+                            "y2": 205500,
+                            "layer": "M1",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 202500,
+                            "x2": 47200,
+                            "y2": 205500,
+                            "layer": "M1",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 200500,
+                            "x2": 43100,
+                            "y2": 204000,
+                            "layer": "M1",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 202500,
+                            "x2": 47200,
+                            "y2": 205500,
+                            "layer": "M2",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 200500,
+                            "x2": 43100,
+                            "y2": 204000,
+                            "layer": "M2",
+                            "net": "VS1"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 45700,
+                            "y1": 80500,
+                            "x2": 48700,
+                            "y2": 204000,
+                            "layer": "M2",
+                            "net": "VS1"
+                        },
+                        {
                             "class": "Instance",
-                            "x1": 37200,
-                            "y1": 202300,
-                            "x2": 46000,
-                            "y2": 205700,
+                            "x1": 42800,
+                            "y1": 80300,
+                            "x2": 51600,
+                            "y2": 83700,
                             "layer": "PR",
                             "net": "VS1",
                             "name": "cut_M1M2_2x1",
@@ -1861,34 +1938,21 @@
                         },
                         {
                             "class": "Rect",
-                            "x1": 40100,
+                            "x1": 39700,
                             "y1": 80500,
-                            "x2": 43100,
-                            "y2": 204000,
-                            "layer": "M2",
+                            "x2": 47200,
+                            "y2": 83500,
+                            "layer": "M1",
                             "net": "VS1"
                         },
                         {
-                            "class": "Instance",
-                            "x1": 37200,
-                            "y1": 80300,
-                            "x2": 46000,
-                            "y2": 83700,
-                            "layer": "PR",
-                            "net": "VS1",
-                            "name": "cut_M1M2_2x1",
-                            "has_pr": false,
-                            "abstract": false,
-                            "physicalOnly": false,
-                            "libcell": false,
-                            "ckt": {},
-                            "children": [],
-                            "instanceName": "",
-                            "angle": "",
-                            "cell": "cut_M1M2_2x1",
-                            "libpath": "",
-                            "xcell": 0,
-                            "ycell": 0
+                            "class": "Rect",
+                            "x1": 41200,
+                            "y1": 80500,
+                            "x2": 43100,
+                            "y2": 83500,
+                            "layer": "M1",
+                            "net": "VS1"
                         },
                         {
                             "class": "Rect",
@@ -1911,7 +1975,7 @@
                             "anchor": {
                                 "kind": "fixed",
                                 "axis": "x",
-                                "value": 41200
+                                "value": 47200
                             },
                             "noext": false
                         },
@@ -1931,6 +1995,15 @@
                         {
                             "step": "layer",
                             "layer": "M1"
+                        },
+                        {
+                            "step": "movex",
+                            "anchor": {
+                                "kind": "fixed",
+                                "axis": "x",
+                                "value": 41200
+                            },
+                            "noext": false
                         },
                         {
                             "step": "end"
@@ -1962,6 +2035,15 @@
                             "step": "start"
                         },
                         {
+                            "step": "movex",
+                            "anchor": {
+                                "kind": "fixed",
+                                "axis": "x",
+                                "value": 47200
+                            },
+                            "noext": false
+                        },
+                        {
                             "step": "layer",
                             "layer": "M2"
                         },
@@ -1977,6 +2059,15 @@
                         {
                             "step": "layer",
                             "layer": "M1"
+                        },
+                        {
+                            "step": "movex",
+                            "anchor": {
+                                "kind": "fixed",
+                                "axis": "x",
+                                "value": 41200
+                            },
+                            "noext": false
                         },
                         {
                             "step": "end"

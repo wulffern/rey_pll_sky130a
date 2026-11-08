@@ -1539,26 +1539,22 @@
                             "net": "N5"
                         },
                         {
-                            "class": "Instance",
-                            "x1": 48800,
-                            "y1": 104300,
-                            "x2": 57600,
-                            "y2": 107700,
-                            "layer": "PR",
-                            "net": "N5",
-                            "name": "cut_M1M2_2x1",
-                            "has_pr": false,
-                            "abstract": false,
-                            "physicalOnly": false,
-                            "libcell": false,
-                            "ckt": {},
-                            "children": [],
-                            "instanceName": "",
-                            "angle": "",
-                            "cell": "cut_M1M2_2x1",
-                            "libpath": "",
-                            "xcell": 0,
-                            "ycell": 0
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 104500,
+                            "x2": 53200,
+                            "y2": 107500,
+                            "layer": "M1",
+                            "net": "N5"
+                        },
+                        {
+                            "class": "Rect",
+                            "x1": 40100,
+                            "y1": 104500,
+                            "x2": 53200,
+                            "y2": 107500,
+                            "layer": "M2",
+                            "net": "N5"
                         },
                         {
                             "class": "Rect",
