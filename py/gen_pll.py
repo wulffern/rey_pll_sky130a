@@ -134,22 +134,29 @@ PFD = dict(
            "HU = RST or (HU and CK_REF), RN_U = PWRUP and not HU; the same "
            "for DN on CK_FB"],
     columns=[
-        ("A: UP side", [
+        #- one column, bottom to top. Each latch sits over its flop, by
+        #- the flop's RN pin (high in the flop); RST = UP and DN over the
+        #- UP flop, by its Q. D is PWRUP_1V8, high whenever the PLL runs
+        #- (powered down the flops are held in reset anyway). Nets that
+        #- are not a hop between neighbours run on rings round the block
+        ("A: UP flop, RST, UP latch, PWRUP_N, DN flop, DN latch", [
             tap("XA0"),
-            g("XA1", "DFRNQNX1", D=VDD, CK="CK_REF", RN="RN_U", Q="UP",
-              QN="UP_N"),
-            g("XA2", "ANX1", A="HU", B="CK_REF", Y="HAU"),
-            g("XA3", "ORX1", A="HAU", B="RST", Y="HU"),
-            g("XA4", "NRX1", A="HU", B="PWRUP_N", Y="RN_U"),
-            g("XA5", "ANX1", A="UP", B="DN", Y="RST")]),
-        ("B: DN side", [
-            tap("XB0"),
-            g("XB1", "DFRNQNX1", D=VDD, CK="CK_FB", RN="RN_D", Q="DN",
-              QN="DN_N"),
-            g("XB2", "ANX1", A="HD", B="CK_FB", Y="HAD"),
-            g("XB3", "ORX1", A="HAD", B="RST", Y="HD"),
-            g("XB4", "NRX1", A="HD", B="PWRUP_N", Y="RN_D"),
-            g("XB5", "IVX1", A="PWRUP_1V8", Y="PWRUP_N")])])
+            g("XA1", "DFRNQNX1", D="PWRUP_1V8", CK="CK_REF", RN="RN_U",
+              Q="UP", QN="UP_N"),
+            g("XA2", "ANX1", A="UP", B="DN", Y="RST"),
+            g("XA3", "NRX1", A="HU", B="PWRUP_N", Y="RN_U"),
+            g("XA4", "ORX1", A="HAU", B="RST", Y="HU"),
+            g("XA5", "ANX1", A="HU", B="CK_REF", Y="HAU"),
+            g("XA6", "IVX1", A="PWRUP_1V8", Y="PWRUP_N"),
+            g("XA7", "DFRNQNX1", D="PWRUP_1V8", CK="CK_FB", RN="RN_D",
+              Q="DN", QN="DN_Q_N"),
+            g("XA8", "NRX1", A="HD", B="PWRUP_N", Y="RN_D"),
+            g("XA9", "ORX1", A="HAD", B="RST", Y="HD"),
+            g("XA10", "ANX1", A="HD", B="CK_FB", Y="HAD"),
+            #- DN_N from DN: the flop's own QN carries a via of the
+            #- flop's wiring right on the pin, which an outside stack
+            #- cannot share
+            g("XA11", "IVX1", A="DN", Y="DN_N")])])
 
 #- REY_PLL_DIVN ---------------------------------------------------------
 DIVN_PINS = ([(VDD, "in"), (VSS, "in"), ("PWRUP_1V8", "in"), ("CK", "in"),
