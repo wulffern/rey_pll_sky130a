@@ -20,14 +20,31 @@ current shuttle still accepts that for an analog project.
 
 ## Pins (proposal)
 
-| TT pin     | Signal  | Note                                                       |
-|:-----------|:--------|:-----------------------------------------------------------|
-| clk        | CK_REF  | 8 MHz reference                                            |
-| ui_in[0]   | PWRUP   | powers the bias and the oscillator up                      |
-| ui_in[3:1] | TRIM    | oscillator bias trim, set per die                          |
-| uo_out[0]  | CK/64   | the feedback clock, 8 MHz when locked, compare with CK_REF |
-| uo_out[1]  | CK/16   | 32 MHz, the TT outputs cannot carry 512 MHz                |
-| uo_out[2]  | LOCK    | optional                                                   |
+| TT pin     | Signal   | At lock (512 MHz)                                         |
+|:-----------|:---------|:----------------------------------------------------------|
+| clk        | CK_REF   | 8 MHz reference                                           |
+| ui_in[0]   | PWRUP    | powers the bias and the oscillator up                     |
+| ui_in[3:1] | TRIM     | oscillator bias trim, set per die                         |
+| uo_out[0]  | CK/8     | 64 MHz, may be more than the TT output path carries       |
+| uo_out[1]  | CK/16    | 32 MHz                                                    |
+| uo_out[2]  | CK/32    | 16 MHz                                                    |
+| uo_out[3]  | CK/64    | 8 MHz, the PLL feedback clock, compare with CK_REF        |
+| uo_out[4]  | CK/128   | 4 MHz                                                     |
+| uo_out[5]  | CK/256   | 2 MHz                                                     |
+| uo_out[6]  | CK/512   | 1 MHz                                                     |
+| uo_out[7]  | CK/1024  | 500 kHz                                                   |
+
+All eight uo_out pins carry a divider tap, so the oscillator can be measured
+at as many ratios as the pins allow. DIVN is a ripple chain of ten flops:
+the PLL feedback is taken after the sixth (/64), and the four flops after it
+only feed the pins. Every tap gets its own output buffer, so the pin load
+does not slow the chain. CK/2 (256 MHz) and CK/4 (128 MHz) are left off,
+since the TT output path cannot carry them. If the shuttle's I/O turns out
+faster than expected, shift the window down one step.
+
+With the PLL open (VCTRL forced) the taps also measure the free running
+oscillator over TRIM, which is the per-die trim procedure: pick the code
+whose CK/64 lands closest to 8 MHz.
 
 ## Area budget
 
@@ -38,10 +55,10 @@ Transistor cells are all 8 x 4 um (FIXED_BBOX 1600 x 800), RPPO2 is
 |:---------------------|:-----------------------------------------------|-------------:|
 | REY_PLL_ROSC         | ~66 transistors, taps and rings; 6 RPPO cells  | 5 000        |
 | PFD + CP             | rey_tr cells, CP mirrors                       | 1 500        |
-| DIVN (/64)           | 6 x REYTR_DFRNQNX1 and buffers                 | 1 000        |
+| DIVN (/1024)         | 10 x REYTR_DFRNQNX1, 8 output buffers          | 1 600        |
 | Loop filter, Icp 2uA | C1 4.0 pF, C2 0.31 pF, R 369 kOhm (HRPPO)      | 2 500        |
 | Routing, rings       |                                                | 3 000        |
-| Total                |                                                | ~13 000 = 72 % |
+| Total                |                                                | ~13 600 = 76 % |
 
 Loop filter, from `python3 py/pll.py --icp 2e-6` (N = 64, fc = fref/20,
 PM 60 degrees, |Kvco| 235 MHz/V):
