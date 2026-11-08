@@ -56,9 +56,9 @@ Transistor cells are all 8 x 4 um (FIXED_BBOX 1600 x 800), RPPO2 is
 | REY_PLL_ROSC         | ~66 transistors, taps and rings; 6 RPPO cells  | 5 000        |
 | PFD + CP             | rey_tr cells, CP mirrors                       | 1 500        |
 | DIVN (/1024)         | 10 x REYTR_DFRNQNX1, 8 output buffers          | 1 600        |
-| Loop filter, Icp 1.3uA | C1 52 + C2 4 x CAPX1 MiM over R 567 kOhm HRPPO | 3 600        |
+| Loop filter, Icp 1.6uA | 8 x REYPLL_RCU (R 461 kOhm, C1 3.2 + C2 0.25 pF) | 2 700        |
 | Routing, rings       |                                                | 3 000        |
-| Total                |                                                | ~14 700 = 82 % |
+| Total                |                                                | ~13 800 = 77 % |
 
 The loop filter capacitors are MiM (REYATR_CAPX1, cap_mim_m3_1 4.8 x 5 um,
 51.2 fF in an 8 x 8 um cell, so 0.8 fF/um2 of footprint), not MOS: MiM is
@@ -75,6 +75,31 @@ fc = fref/20, PM 60 degrees, |Kvco| 235 MHz/V):
 | 1 uA   | 2.01 pF (40)   | 0.16 pF (4)    | 737 kOhm | 22 %                  |
 | 1.3 uA | 2.62 pF (52)   | 0.20 pF (4)    | 567 kOhm | 20 %                  |
 | 2 uA   | 4.03 pF (79)   | 0.31 pF (7)    | 369 kOhm | 31 %                  |
+
+### REYPLL_RCU, the stacked unit cell
+
+`cic/lpf.json`, compiled with `cd work && make cic` (cicpy compile against
+rey_atr's resistor patterns, prefix REYPLL_):
+
+- REYPLL_MIMU16: a 13 x 17.8 um MiM (473 fF, simulated tt) on a 16 x 20.8 um
+  cell, plates 0.4 um and MiM 1.5 um from the edge as in CAPX1
+- REYPLL_RCU: a `Layout::LayoutRotateCell`, which places every instance at
+  the origin, holding one REYPLL_HRPPO8 (4 x 15.3 kOhm) and one MIMU16 on
+  top. Ports P0..P3/N0..N3/BR on M1, A (bottom plate) on M4, B (top) on M5
+
+Both are DRC clean and LVS "Circuits match uniquely". 1.4 fF/um2 of
+footprint against 0.8 for CAPX1, and the resistor comes for free underneath.
+In RCU cells (`python3 py/pll.py --icp 1.6e-6`):
+
+| Icp    | R kOhm | R cells | C cells | Cells | um2  | Tile |
+|:------:|:------:|:-------:|:-------:|:-----:|:----:|:----:|
+| 1.3 uA | 567    | 10      | 7       | 10    | 3328 | 19 % |
+| 1.6 uA | 461    | 8       | 8       | 8     | 2662 | 15 % |
+| 2.0 uA | 369    | 7       | 10      | 10    | 3328 | 19 % |
+
+At 1.6 uA: R is 30 of the 15.3 kOhm resistors (7.5 cells), C1 seven MiMs
+(3.3 pF) and C2 one (0.47 pF against 0.25 pF; check the phase margin with
+the real values, or make a smaller C2 unit).
 
 C1 and C2 are referenced to VDD_1V8. Put the BOTTOM plate (met3, the one
 with the parasitic to substrate) on VDD_1V8 and the top plate on VCTRL, so

@@ -1,0 +1,6293 @@
+{
+ "cells": [
+  {
+   "abstract": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 75200,
+     "x2": 84800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 78400,
+     "x2": 81600,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 78400,
+     "x2": 81600,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 78400,
+     "x2": 81600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 78400,
+     "x2": 81600,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 78400,
+     "x2": 81600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PWT",
+     "net": "",
+     "x1": -9200,
+     "x2": 89200,
+     "y1": -6400,
+     "y2": 46400
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [],
+    "name": "REYPLL_11CWALL",
+    "nodes": [],
+    "properties": {}
+   },
+   "class": "PatternTile",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_11CWALL",
+   "net": "",
+   "physicalOnly": false,
+   "x1": 0,
+   "x2": 80000,
+   "y1": 0,
+   "y2": 40000
+  },
+  {
+   "abstract": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 52200,
+     "x2": 55800,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 9000,
+     "x2": 23400,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 30600,
+     "x2": 45000,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 9000,
+     "x2": 23400,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 30600,
+     "x2": 45000,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 102000,
+     "y2": 114000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 19800,
+     "x2": 23400,
+     "y1": 102000,
+     "y2": 114000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 30600,
+     "x2": 34200,
+     "y1": 102000,
+     "y2": 114000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 102000,
+     "y2": 114000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N",
+     "net": "",
+     "spicePort": true,
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 9000,
+     "x2": 12600,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 19800,
+     "x2": 34200,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P",
+     "net": "",
+     "spicePort": true,
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "OP",
+     "net": "",
+     "x1": -9800,
+     "x2": 63800,
+     "y1": 18000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "PWT",
+     "net": "",
+     "x1": -6200,
+     "x2": 60200,
+     "y1": -10400,
+     "y2": 130400
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [
+     {
+      "class": "cIcSpice::Resistor",
+      "deviceName": "rppo",
+      "name": "R1",
+      "nodes": [
+       "N",
+       "P",
+       "B"
+      ],
+      "properties": {
+       "length": 7.2,
+       "nf": 4,
+       "width": 0.36
+      }
+     }
+    ],
+    "instances": [],
+    "name": "REYPLL_RES4",
+    "nodes": [
+     "N",
+     "P",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "PatternHighResistor",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RES4",
+   "net": "",
+   "physicalOnly": false,
+   "x1": 0,
+   "x2": 54000,
+   "y1": 0,
+   "y2": 120000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA1",
+       "net": "",
+       "x1": 0,
+       "x2": 0,
+       "y1": 4000,
+       "y2": 4000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 0,
+     "xcell": 0,
+     "y1": 4000,
+     "y2": 4000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA2",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 24000,
+       "y2": 24000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA2",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 4000,
+     "y2": 44000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA3",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 64000,
+       "y2": 64000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA3",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 44000,
+     "y2": 84000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA4",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 104000,
+       "y2": 104000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA4",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 84000,
+     "y2": 124000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA5",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 144000,
+       "y2": 144000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA5",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 124000,
+     "y2": 164000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA6",
+       "net": "",
+       "x1": 0,
+       "x2": 0,
+       "y1": 164000,
+       "y2": 164000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA6",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 0,
+     "xcell": 0,
+     "y1": 164000,
+     "y2": 164000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES4",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N",
+       "net": "",
+       "spicePort": true,
+       "x1": 22000,
+       "x2": 25600,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P",
+       "net": "",
+       "spicePort": true,
+       "x1": 54400,
+       "x2": 58000,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA7",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 60000,
+       "y2": 60000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA7",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES4",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 13000,
+     "x2": 67000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 120000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P",
+     "net": "",
+     "spicePort": true,
+     "x1": 54400,
+     "x2": 58000,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N",
+     "net": "",
+     "spicePort": true,
+     "x1": 22000,
+     "x2": 25600,
+     "y1": 114000,
+     "y2": 126000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "1",
+      "name": "XA1",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_NCH_11CTAPBOT"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "2",
+      "name": "XA2",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "3",
+      "name": "XA3",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "4",
+      "name": "XA4",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "5",
+      "name": "XA5",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "6",
+      "name": "XA6",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_NCH_11CTAPTOP"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "7",
+      "name": "XA7",
+      "nodes": [
+       "N",
+       "P",
+       "B"
+      ],
+      "properties": {
+       "xoffset": "4.0625",
+       "yoffset": "-41"
+      },
+      "subcktName": "REYPLL_RES4"
+     }
+    ],
+    "name": "REYPLL_RPPO4",
+    "nodes": [
+     "P",
+     "N",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "meta": {
+    "symbol": "cic/res"
+   },
+   "name": "REYPLL_RPPO4",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 80000,
+   "y1": 0,
+   "y2": 164000
+  },
+  {
+   "abstract": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 18000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 30000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 42000,
+     "y2": 54000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 54000,
+     "y2": 66000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 66000,
+     "y2": 78000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": -1800,
+     "x2": 1800,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPO",
+     "net": "",
+     "x1": 41400,
+     "x2": 45000,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 12600,
+     "x2": 30600,
+     "y1": -6000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 12600,
+     "x2": 30600,
+     "y1": 6000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 78000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 90000,
+     "y2": 102000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 102000,
+     "y2": 114000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 102000,
+     "y2": 114000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N",
+     "net": "",
+     "spicePort": true,
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 12600,
+     "x2": 16200,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P",
+     "net": "",
+     "spicePort": true,
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 27000,
+     "x2": 30600,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Rect",
+     "layer": "OP",
+     "net": "",
+     "x1": -9800,
+     "x2": 53000,
+     "y1": 18000,
+     "y2": 90000
+    },
+    {
+     "class": "Rect",
+     "layer": "PWT",
+     "net": "",
+     "x1": -6200,
+     "x2": 49400,
+     "y1": -10400,
+     "y2": 130400
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [
+     {
+      "class": "cIcSpice::Resistor",
+      "deviceName": "rppo",
+      "name": "R1",
+      "nodes": [
+       "N",
+       "P",
+       "B"
+      ],
+      "properties": {
+       "length": 7.2,
+       "nf": 2,
+       "width": 0.36
+      }
+     }
+    ],
+    "instances": [],
+    "name": "REYPLL_RES2",
+    "nodes": [
+     "N",
+     "P",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "PatternHighResistor",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RES2",
+   "net": "",
+   "physicalOnly": false,
+   "x1": 0,
+   "x2": 43200,
+   "y1": 0,
+   "y2": 120000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA1",
+       "net": "",
+       "x1": 0,
+       "x2": 0,
+       "y1": 4000,
+       "y2": 4000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 0,
+     "xcell": 0,
+     "y1": 4000,
+     "y2": 4000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA2",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 24000,
+       "y2": 24000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA2",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 4000,
+     "y2": 44000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA3",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 64000,
+       "y2": 64000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA3",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 44000,
+     "y2": 84000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA4",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 104000,
+       "y2": 104000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA4",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 84000,
+     "y2": 124000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_11CWALL",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA5",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 144000,
+       "y2": 144000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA5",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_11CWALL",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 124000,
+     "y2": 164000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA6",
+       "net": "",
+       "x1": 0,
+       "x2": 0,
+       "y1": 164000,
+       "y2": 164000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA6",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 0,
+     "xcell": 0,
+     "y1": 164000,
+     "y2": 164000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES2",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N",
+       "net": "",
+       "spicePort": true,
+       "x1": 31000,
+       "x2": 34600,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P",
+       "net": "",
+       "spicePort": true,
+       "x1": 45400,
+       "x2": 49000,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA7",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 60000,
+       "y2": 60000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA7",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES2",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 18400,
+     "x2": 61600,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 120000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P",
+     "net": "",
+     "spicePort": true,
+     "x1": 45400,
+     "x2": 49000,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N",
+     "net": "",
+     "spicePort": true,
+     "x1": 31000,
+     "x2": 34600,
+     "y1": 114000,
+     "y2": 126000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "1",
+      "name": "XA1",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_NCH_11CTAPBOT"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "2",
+      "name": "XA2",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "3",
+      "name": "XA3",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "4",
+      "name": "XA4",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "5",
+      "name": "XA5",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_11CWALL"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "6",
+      "name": "XA6",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_NCH_11CTAPTOP"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "7",
+      "name": "XA7",
+      "nodes": [
+       "N",
+       "P",
+       "B"
+      ],
+      "properties": {
+       "xoffset": "5.75",
+       "yoffset": "-41"
+      },
+      "subcktName": "REYPLL_RES2"
+     }
+    ],
+    "name": "REYPLL_RPPO2",
+    "nodes": [
+     "P",
+     "N",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "meta": {
+    "symbol": "cic/res"
+   },
+   "name": "REYPLL_RPPO2",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 80000,
+   "y1": 0,
+   "y2": 164000
+  },
+  {
+   "abstract": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 8000,
+     "x2": 148800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PWT",
+     "net": "",
+     "x1": -9200,
+     "x2": 169200,
+     "y1": -6400,
+     "y2": 30400
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [],
+    "name": "REYPLL_RES_36CTAPBOT",
+    "nodes": [],
+    "properties": {}
+   },
+   "class": "PatternTile",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RES_36CTAPBOT",
+   "net": "",
+   "physicalOnly": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 24000
+  },
+  {
+   "abstract": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 8000,
+     "x2": 152000,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PWT",
+     "net": "",
+     "x1": -9200,
+     "x2": 169200,
+     "y1": -6400,
+     "y2": 30400
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [],
+    "name": "REYPLL_RES_36CTAPTOP",
+    "nodes": [],
+    "properties": {}
+   },
+   "class": "PatternTile",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RES_36CTAPTOP",
+   "net": "",
+   "physicalOnly": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 24000
+  },
+  {
+   "abstract": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAP",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": -2000,
+     "y2": 2000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 6000,
+     "y2": 10000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 120000,
+     "x2": 145600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 120000,
+     "x2": 145600,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 120000,
+     "x2": 145600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 30000,
+     "y2": 34000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "M1",
+     "net": "",
+     "x1": 155200,
+     "x2": 164800,
+     "y1": 38000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 158400,
+     "x2": 161600,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 158400,
+     "x2": 161600,
+     "y1": 14000,
+     "y2": 18000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 158400,
+     "x2": 161600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 158400,
+     "x2": 161600,
+     "y1": 22000,
+     "y2": 26000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": -1600,
+     "x2": 1600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "PTAPC",
+     "net": "",
+     "x1": 158400,
+     "x2": 161600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 14400,
+     "x2": 145600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "POR",
+     "net": "",
+     "x1": 14400,
+     "x2": 145600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 120000,
+     "x2": 145600,
+     "y1": 18000,
+     "y2": 22000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "CPOXR",
+     "net": "",
+     "x1": 120000,
+     "x2": 145600,
+     "y1": 26000,
+     "y2": 30000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPOR",
+     "net": "",
+     "x1": 14400,
+     "x2": 145600,
+     "y1": 2000,
+     "y2": 6000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPOR",
+     "net": "",
+     "x1": 14400,
+     "x2": 145600,
+     "y1": 10000,
+     "y2": 14000
+    },
+    {
+     "class": "Rect",
+     "layer": "DMYPOR",
+     "net": "",
+     "x1": 14400,
+     "x2": 145600,
+     "y1": 34000,
+     "y2": 38000
+    },
+    {
+     "class": "Rect",
+     "layer": "OP",
+     "net": "",
+     "x1": 32000,
+     "x2": 113600,
+     "y1": -2000,
+     "y2": 42000
+    },
+    {
+     "class": "Rect",
+     "layer": "PWT",
+     "net": "",
+     "x1": -9200,
+     "x2": 169200,
+     "y1": -6400,
+     "y2": 46400
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [
+     {
+      "class": "cIcSpice::Resistor",
+      "deviceName": "rppo",
+      "name": "R1",
+      "nodes": [
+       "N",
+       "P",
+       "B"
+      ],
+      "properties": {
+       "length": 8.16,
+       "nf": 2,
+       "width": 0.4
+      }
+     }
+    ],
+    "instances": [],
+    "name": "REYPLL_RES_36C2F0",
+    "nodes": [
+     "N",
+     "P",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "PatternHighResistor",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "meta": {
+    "symbol": "cic/res"
+   },
+   "name": "REYPLL_RES_36C2F0",
+   "net": "",
+   "physicalOnly": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 40000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36CTAPBOT",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA1",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 12000,
+       "y2": 12000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36CTAPBOT",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 24000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 50000,
+       "y2": 54000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 42000,
+       "y2": 46000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 54000,
+       "y2": 58000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA2",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 44000,
+       "y2": 44000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA2",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 24000,
+     "y2": 64000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36CTAPTOP",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA3",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 76000,
+       "y2": 76000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA3",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36CTAPTOP",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 64000,
+     "y2": 88000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 42000,
+     "y2": 46000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 50000,
+     "y2": 54000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 54000,
+     "y2": 58000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "1",
+      "name": "XA1",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36CTAPBOT"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "2",
+      "name": "XA2",
+      "nodes": [
+       "N0",
+       "P0",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "3",
+      "name": "XA3",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36CTAPTOP"
+     }
+    ],
+    "name": "REYPLL_HRPPO2",
+    "nodes": [
+     "P0",
+     "N0",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_HRPPO2",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 88000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36CTAPBOT",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA1",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 12000,
+       "y2": 12000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36CTAPBOT",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 24000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 50000,
+       "y2": 54000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 42000,
+       "y2": 46000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 54000,
+       "y2": 58000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA2",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 44000,
+       "y2": 44000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA2",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 24000,
+     "y2": 64000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N1",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 90000,
+       "y2": 94000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P1",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 82000,
+       "y2": 86000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 94000,
+       "y2": 98000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA3",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 84000,
+       "y2": 84000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA3",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 64000,
+     "y2": 104000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N2",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 130000,
+       "y2": 134000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P2",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 122000,
+       "y2": 126000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 134000,
+       "y2": 138000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA4",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 124000,
+       "y2": 124000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA4",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 104000,
+     "y2": 144000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N3",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 170000,
+       "y2": 174000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P3",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 162000,
+       "y2": 166000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 174000,
+       "y2": 178000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA5",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 164000,
+       "y2": 164000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA5",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 144000,
+     "y2": 184000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36CTAPTOP",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA6",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 196000,
+       "y2": 196000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA6",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36CTAPTOP",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 184000,
+     "y2": 208000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 42000,
+     "y2": 46000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P1",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 82000,
+     "y2": 86000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P2",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 122000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P3",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 162000,
+     "y2": 166000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 50000,
+     "y2": 54000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N1",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 90000,
+     "y2": 94000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N2",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 130000,
+     "y2": 134000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N3",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 170000,
+     "y2": 174000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 54000,
+     "y2": 58000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "1",
+      "name": "XA1",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36CTAPBOT"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "2",
+      "name": "XA2",
+      "nodes": [
+       "N0",
+       "P0",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "3",
+      "name": "XA3",
+      "nodes": [
+       "N1",
+       "P1",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "4",
+      "name": "XA4",
+      "nodes": [
+       "N2",
+       "P2",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "5",
+      "name": "XA5",
+      "nodes": [
+       "N3",
+       "P3",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "6",
+      "name": "XA6",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36CTAPTOP"
+     }
+    ],
+    "name": "REYPLL_HRPPO8",
+    "nodes": [
+     "P0",
+     "N0",
+     "P1",
+     "N1",
+     "P2",
+     "N2",
+     "P3",
+     "N3",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_HRPPO8",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 208000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36CTAPBOT",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA1",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 12000,
+       "y2": 12000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36CTAPBOT",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 24000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 50000,
+       "y2": 54000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 42000,
+       "y2": 46000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 54000,
+       "y2": 58000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA2",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 44000,
+       "y2": 44000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA2",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 24000,
+     "y2": 64000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N1",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 90000,
+       "y2": 94000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P1",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 82000,
+       "y2": 86000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 94000,
+       "y2": 98000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA3",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 84000,
+       "y2": 84000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA3",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 64000,
+     "y2": 104000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N2",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 130000,
+       "y2": 134000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P2",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 122000,
+       "y2": 126000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 134000,
+       "y2": 138000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA4",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 124000,
+       "y2": 124000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA4",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 104000,
+     "y2": 144000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N3",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 170000,
+       "y2": 174000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P3",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 162000,
+       "y2": 166000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 174000,
+       "y2": 178000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA5",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 164000,
+       "y2": 164000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA5",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 144000,
+     "y2": 184000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N4",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 210000,
+       "y2": 214000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P4",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 202000,
+       "y2": 206000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 214000,
+       "y2": 218000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA6",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 204000,
+       "y2": 204000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA6",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 184000,
+     "y2": 224000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36C2F0",
+     "children": [
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N5",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 250000,
+       "y2": 254000
+      },
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P5",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 242000,
+       "y2": 246000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 254000,
+       "y2": 258000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA7",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 244000,
+       "y2": 244000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA7",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36C2F0",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 224000,
+     "y2": 264000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RES_36CTAPTOP",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XA8",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 276000,
+       "y2": 276000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XA8",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RES_36CTAPTOP",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 264000,
+     "y2": 288000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 42000,
+     "y2": 46000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P1",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 82000,
+     "y2": 86000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P2",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 122000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P3",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 162000,
+     "y2": 166000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P4",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 202000,
+     "y2": 206000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P5",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 242000,
+     "y2": 246000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 50000,
+     "y2": 54000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N1",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 90000,
+     "y2": 94000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N2",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 130000,
+     "y2": 134000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N3",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 170000,
+     "y2": 174000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N4",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 210000,
+     "y2": 214000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N5",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 250000,
+     "y2": 254000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 54000,
+     "y2": 58000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "1",
+      "name": "XA1",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36CTAPBOT"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "2",
+      "name": "XA2",
+      "nodes": [
+       "N0",
+       "P0",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "3",
+      "name": "XA3",
+      "nodes": [
+       "N1",
+       "P1",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "4",
+      "name": "XA4",
+      "nodes": [
+       "N2",
+       "P2",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "5",
+      "name": "XA5",
+      "nodes": [
+       "N3",
+       "P3",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "6",
+      "name": "XA6",
+      "nodes": [
+       "N4",
+       "P4",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "7",
+      "name": "XA7",
+      "nodes": [
+       "N5",
+       "P5",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36C2F0"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XA",
+      "groupTag": "8",
+      "name": "XA8",
+      "nodes": [],
+      "properties": {},
+      "subcktName": "REYPLL_RES_36CTAPTOP"
+     }
+    ],
+    "name": "REYPLL_HRPPO12",
+    "nodes": [
+     "P0",
+     "N0",
+     "P1",
+     "N1",
+     "P2",
+     "N2",
+     "P3",
+     "N3",
+     "P4",
+     "N4",
+     "P5",
+     "N5",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_HRPPO12",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 288000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RPPO2",
+     "children": [
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P1",
+       "net": "",
+       "spicePort": true,
+       "x1": 45400,
+       "x2": 49000,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N1",
+       "net": "",
+       "spicePort": true,
+       "x1": 31000,
+       "x2": 34600,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XR1",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 82000,
+       "y2": 82000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XR1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RPPO2",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 164000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RPPO2",
+     "children": [
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P2",
+       "net": "",
+       "spicePort": true,
+       "x1": 45400,
+       "x2": 49000,
+       "y1": 278000,
+       "y2": 290000
+      },
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N2",
+       "net": "",
+       "spicePort": true,
+       "x1": 31000,
+       "x2": 34600,
+       "y1": 278000,
+       "y2": 290000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XR2",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 246000,
+       "y2": 246000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XR2",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RPPO2",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 164000,
+     "y2": 328000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P1",
+     "net": "",
+     "spicePort": true,
+     "x1": 45400,
+     "x2": 49000,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N1",
+     "net": "",
+     "spicePort": true,
+     "x1": 31000,
+     "x2": 34600,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P2",
+     "net": "",
+     "spicePort": true,
+     "x1": 45400,
+     "x2": 49000,
+     "y1": 278000,
+     "y2": 290000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N2",
+     "net": "",
+     "spicePort": true,
+     "x1": 31000,
+     "x2": 34600,
+     "y1": 278000,
+     "y2": 290000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XR",
+      "groupTag": "1",
+      "name": "XR1",
+      "nodes": [
+       "P1",
+       "N1",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RPPO2"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XR",
+      "groupTag": "2",
+      "name": "XR2",
+      "nodes": [
+       "P2",
+       "N2",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RPPO2"
+     }
+    ],
+    "name": "REYPLL_RESABUTR",
+    "nodes": [
+     "P1",
+     "N1",
+     "P2",
+     "N2",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RESABUTR",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 80000,
+   "y1": 0,
+   "y2": 328000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_RPPO2",
+     "children": [
+      {
+       "childName": "P",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P1",
+       "net": "",
+       "spicePort": true,
+       "x1": 45400,
+       "x2": 49000,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "childName": "N",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N1",
+       "net": "",
+       "spicePort": true,
+       "x1": 31000,
+       "x2": 34600,
+       "y1": 114000,
+       "y2": 126000
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XR1",
+       "net": "",
+       "x1": 40000,
+       "x2": 40000,
+       "y1": 82000,
+       "y2": 82000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XR1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_RPPO2",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 164000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_",
+     "children": [
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "XM1",
+       "net": "",
+       "x1": 80000,
+       "x2": 80000,
+       "y1": 0,
+       "y2": 0
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XM1",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 80000,
+     "x2": 80000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 0,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P1",
+     "net": "",
+     "spicePort": true,
+     "x1": 45400,
+     "x2": 49000,
+     "y1": 114000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N1",
+     "net": "",
+     "spicePort": true,
+     "x1": 31000,
+     "x2": 34600,
+     "y1": 114000,
+     "y2": 126000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XR",
+      "groupTag": "1",
+      "name": "XR1",
+      "nodes": [
+       "P1",
+       "N1",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_RPPO2"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XM",
+      "groupTag": "1",
+      "name": "XM1",
+      "nodes": [
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_NCH_11CTOP"
+     }
+    ],
+    "name": "REYPLL_RESABUTM",
+    "nodes": [
+     "P1",
+     "N1",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RESABUTM",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 80000,
+   "y1": 0,
+   "y2": 164000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "class": "Rect",
+     "layer": "M4",
+     "net": "",
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 0,
+     "y2": 5000
+    },
+    {
+     "class": "Port",
+     "layer": "M4",
+     "name": "A",
+     "net": "",
+     "spicePort": true,
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 0,
+     "y2": 5000
+    },
+    {
+     "class": "Rect",
+     "layer": "M5",
+     "net": "",
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 0,
+     "y2": 5000
+    },
+    {
+     "class": "Port",
+     "layer": "M5",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 0,
+     "y2": 5000
+    },
+    {
+     "class": "Rect",
+     "layer": "PR",
+     "net": "",
+     "x1": 0,
+     "x2": 160000,
+     "y1": 0,
+     "y2": 208000
+    },
+    {
+     "class": "Rect",
+     "layer": "M4",
+     "net": "",
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 4000,
+     "y2": 204000
+    },
+    {
+     "class": "Rect",
+     "layer": "MIM",
+     "net": "",
+     "x1": 15000,
+     "x2": 145000,
+     "y1": 15000,
+     "y2": 193000
+    },
+    {
+     "class": "Rect",
+     "layer": "MIMC",
+     "net": "",
+     "x1": 16500,
+     "x2": 143500,
+     "y1": 16500,
+     "y2": 191500
+    },
+    {
+     "class": "Rect",
+     "layer": "M5",
+     "net": "",
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 4000,
+     "y2": 204000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [
+     {
+      "class": "mimcap",
+      "deviceName": "mim",
+      "name": "C1",
+      "nodes": [
+       "B",
+       "A"
+      ],
+      "properties": {
+       "L": 17.8,
+       "W": 13
+      }
+     }
+    ],
+    "instances": [],
+    "name": "REYPLL_MIMU16",
+    "nodes": [
+     "A",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "cIcCore::LayoutCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "meta": {
+    "symbol": "cic/cap"
+   },
+   "name": "REYPLL_MIMU16",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 208000
+  },
+  {
+   "abstract": false,
+   "alternateGroup": false,
+   "children": [
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_HRPPO8",
+     "children": [
+      {
+       "childName": "P0",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 42000,
+       "y2": 46000
+      },
+      {
+       "childName": "N0",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N0",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 50000,
+       "y2": 54000
+      },
+      {
+       "childName": "P1",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P1",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 82000,
+       "y2": 86000
+      },
+      {
+       "childName": "N1",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N1",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 90000,
+       "y2": 94000
+      },
+      {
+       "childName": "P2",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P2",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 122000,
+       "y2": 126000
+      },
+      {
+       "childName": "N2",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N2",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 130000,
+       "y2": 134000
+      },
+      {
+       "childName": "P3",
+       "class": "Port",
+       "layer": "M1",
+       "name": "P3",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 162000,
+       "y2": 166000
+      },
+      {
+       "childName": "N3",
+       "class": "Port",
+       "layer": "M1",
+       "name": "N3",
+       "net": "",
+       "spicePort": true,
+       "x1": 14400,
+       "x2": 40000,
+       "y1": 170000,
+       "y2": 174000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M1",
+       "name": "BR",
+       "net": "",
+       "spicePort": true,
+       "x1": -4800,
+       "x2": 4800,
+       "y1": 54000,
+       "y2": 58000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XR",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_HRPPO8",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 208000,
+     "ycell": 0
+    },
+    {
+     "abstract": false,
+     "angle": "",
+     "cell": "REYPLL_MIMU16",
+     "children": [
+      {
+       "childName": "A",
+       "class": "Port",
+       "layer": "M4",
+       "name": "A",
+       "net": "",
+       "spicePort": true,
+       "x1": 4000,
+       "x2": 156000,
+       "y1": 0,
+       "y2": 5000
+      },
+      {
+       "childName": "B",
+       "class": "Port",
+       "layer": "M5",
+       "name": "B",
+       "net": "",
+       "spicePort": true,
+       "x1": 4000,
+       "x2": 156000,
+       "y1": 0,
+       "y2": 5000
+      }
+     ],
+     "ckt": {},
+     "class": "Instance",
+     "has_pr": false,
+     "instanceName": "XC",
+     "layer": "PR",
+     "libcell": false,
+     "libpath": "",
+     "name": "REYPLL_MIMU16",
+     "net": "",
+     "physicalOnly": false,
+     "x1": 0,
+     "x2": 160000,
+     "xcell": 0,
+     "y1": 0,
+     "y2": 208000,
+     "ycell": 0
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 42000,
+     "y2": 46000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N0",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 50000,
+     "y2": 54000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P1",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 82000,
+     "y2": 86000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N1",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 90000,
+     "y2": 94000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P2",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 122000,
+     "y2": 126000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N2",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 130000,
+     "y2": 134000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "P3",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 162000,
+     "y2": 166000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "N3",
+     "net": "",
+     "spicePort": true,
+     "x1": 14400,
+     "x2": 40000,
+     "y1": 170000,
+     "y2": 174000
+    },
+    {
+     "class": "Port",
+     "layer": "M1",
+     "name": "BR",
+     "net": "",
+     "spicePort": true,
+     "x1": -4800,
+     "x2": 4800,
+     "y1": 54000,
+     "y2": 58000
+    },
+    {
+     "class": "Port",
+     "layer": "M4",
+     "name": "A",
+     "net": "",
+     "spicePort": true,
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 0,
+     "y2": 5000
+    },
+    {
+     "class": "Port",
+     "layer": "M5",
+     "name": "B",
+     "net": "",
+     "spicePort": true,
+     "x1": 4000,
+     "x2": 156000,
+     "y1": 0,
+     "y2": 5000
+    }
+   ],
+   "ckt": {
+    "class": "",
+    "devices": [],
+    "instances": [
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XR",
+      "groupTag": null,
+      "name": "XR",
+      "nodes": [
+       "P0",
+       "N0",
+       "P1",
+       "N1",
+       "P2",
+       "N2",
+       "P3",
+       "N3",
+       "BR"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_HRPPO8"
+     },
+     {
+      "class": "",
+      "deviceName": "subckt",
+      "groupName": "XC",
+      "groupTag": null,
+      "name": "XC",
+      "nodes": [
+       "A",
+       "B"
+      ],
+      "properties": {},
+      "subcktName": "REYPLL_MIMU16"
+     }
+    ],
+    "name": "REYPLL_RCU",
+    "nodes": [
+     "P0",
+     "N0",
+     "P1",
+     "N1",
+     "P2",
+     "N2",
+     "P3",
+     "N3",
+     "BR",
+     "A",
+     "B"
+    ],
+    "properties": {}
+   },
+   "class": "LayoutRotateCell",
+   "has_pr": false,
+   "layer": "PR",
+   "libcell": false,
+   "name": "REYPLL_RCU",
+   "net": "",
+   "noPowerRoute": false,
+   "physicalOnly": false,
+   "useHalfHeight": false,
+   "x1": 0,
+   "x2": 160000,
+   "y1": 0,
+   "y2": 208000
+  }
+ ],
+ "info": {
+  "arguments": "/opt/eda/python3/bin/cicpy compile --I ../cic --I ../../rey_atr_sky130a/cic --prefix REYPLL_ --exclude (RPPO2|RPPO4|RES2|RES4|11CWALL|RESABUT[RM]|HRPPO2|HRPPO12)$ --spice --magic --xschem ../cic/lpf.json ../cic/sky130.tech REY_PLL_SKY130A",
+  "file": "../cic/lpf.json",
+  "library": "REY_PLL_SKY130A",
+  "rules": "../cic/sky130.tech"
+ }
+}

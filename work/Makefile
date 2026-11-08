@@ -17,3 +17,10 @@ CELL=REY_PLL
 CELLS = REY_PLL
 
 include ../tech/make/core.make
+
+#- Loop filter unit cells (cic/lpf.json), compiled with cicpy against the
+#- rey_atr resistor patterns. Writes design/REY_PLL_SKY130A.cic and the
+#- REYPLL_* .mag/.sch/.sym views
+cic:
+	cd ../design && cicpy compile --I ../cic --I ../../rey_atr_sky130a/cic --prefix REYPLL_ --exclude "(RPPO2|RPPO4|RES2|RES4|11CWALL|RESABUT[RM]|HRPPO2|HRPPO12)$$" --spice --magic --xschem ../cic/lpf.json ../cic/sky130.tech ${LIB}
+

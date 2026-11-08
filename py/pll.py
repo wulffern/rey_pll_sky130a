@@ -38,6 +38,11 @@ import numpy as np
 #- sit over the HRPPO resistor, which uses neither
 MIM_UNIT_F = 51.2e-15
 MIM_UNIT_UM2 = 8 * 8
+#- REYPLL_RCU (cic/lpf.json): one HRPPO8 (4 x 15.3 kOhm) with a 13 x 17.8 um
+#- MiM on top (473 fF, simulated tt), 16 x 20.8 um
+RCU_R = 4*15.3e3
+RCU_C = 473e-15
+RCU_UM2 = 16 * 20.8
 #- REYATR_HRPPO8: four 15.3k resistors in a 16 x 20.8 um cell
 RES_OHM_PER_UM2 = 61.2e3 / (16 * 20.8)
 
@@ -85,6 +90,14 @@ def area(d):
     return n1, n2, a_c, a_r, max(a_c, a_r)
 
 
+def rcu(d):
+    """REYPLL_RCU cells for the filter: R in series, C1 and C2 as MiMs."""
+    nr = int(np.ceil(d["R"]/RCU_R))
+    nc = int(np.ceil(d["C1"]/RCU_C)) + int(np.ceil(d["C2"]/RCU_C))
+    n = max(nr, nc)
+    return nr, nc, n, n*RCU_UM2
+
+
 def report(d):
     fc, pm = check(d)
     n1, n2, a_c, a_r, a_fp = area(d)
@@ -96,6 +109,9 @@ def report(d):
           f"R={d['R']/1e3:.4g} kOhm")
     print(f"  area: MiM {a_c:.0f} um2, R {a_r:.0f} um2, MiM over R {a_fp:.0f} um2 "
           f"= {a_fp/TILE_UM2*100:.0f}% of a tile")
+    nr, nc, n, a = rcu(d)
+    print(f"  REYPLL_RCU: {nr} for R, {nc} for C1+C2 -> {n} cells, {a:.0f} um2 "
+          f"= {a/TILE_UM2*100:.0f}% of a tile")
 
 
 def kvco_from_log(logfile, code, ftarget):
@@ -151,11 +167,9 @@ if __name__ == "__main__":
     report(design(8e6, 32, 1.6e9, 1e-6, a.fc_ratio, a.pm))
 
     #- the trade: C ~ Icp*Kvco, R ~ 1/(Icp*Kvco)
-    print("\nfootprint vs Icp and |Kvco|, MiM over HRPPO R, fc = fref/%g, PM %g:" % (a.fc_ratio, a.pm))
-    print(f"{'Icp':>8s} {'Kvco':>10s} {'C1 pF':>7s} {'units':>6s} {'R kOhm':>8s} {'MiM um2':>8s} {'R um2':>7s} {'tile %':>7s}")
-    for icp in (0.5e-6, 1e-6, 1.3e-6, 2e-6, 4e-6):
-        for kv in (100e6, 235e6, 500e6):
-            d = design(a.fref, a.n, kv, icp, a.fc_ratio, a.pm)
-            n1, n2, a_c, a_r, a_fp = area(d)
-            print(f"{icp*1e6:6.2f}uA {kv/1e6:7.0f}M/V {d['C1']*1e12:7.2f} {n1 + n2:6d} {d['R']/1e3:8.0f} "
-                  f"{a_c:8.0f} {a_r:7.0f} {a_fp/TILE_UM2*100:6.0f}%")
+    print("\nREYPLL_RCU cells vs Icp (|Kvco| %.3g MHz/V):" % (kvco/1e6))
+    print(f"{'Icp':>8s} {'C1 pF':>7s} {'R kOhm':>8s} {'R cells':>8s} {'C cells':>8s} {'cells':>6s} {'um2':>6s} {'tile %':>7s}")
+    for icp in (1e-6, 1.3e-6, 1.6e-6, 1.8e-6, 2e-6, 2.5e-6):
+        d = design(a.fref, a.n, kvco, icp, a.fc_ratio, a.pm)
+        nr, nc, n, ar = rcu(d)
+        print(f"{icp*1e6:6.2f}uA {d['C1']*1e12:7.2f} {d['R']/1e3:8.0f} {nr:8d} {nc:8d} {n:6d} {ar:6.0f} {ar/TILE_UM2*100:6.0f}%")

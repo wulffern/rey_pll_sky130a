@@ -111,6 +111,8 @@ procedure applied to sun_pll's numbers needs 27 pF.
 | Oscillator testbench     | sim/REY_PLL_ROSC/tran.spi                     |
 | Startup testbench        | sim/REY_PLL_ROSC/startup.spi                  |
 | Ring only testbench      | sim/REY_PLL_ROSC/iext.spi                     |
+| Loop filter unit cells   | cic/lpf.json, design/REY_PLL_SKY130A/REYPLL_RCU.mag |
+| Layout plan              | plans/LAYOUT.md                               |
 
 # Simulation
 
@@ -128,18 +130,32 @@ the first ~20 ns are the start-up transient. Frequencies below 100 MHz are not
 measured. `trim.py` prints, for each corner, the range per code and the codes
 whose VCTRL range contains the target.
 
-Results so far, schematic, ring frequency in MHz at VCTRL = 0, Ktt, Vt (from
-the previous bias variant, which had a 46 kOhm fixed R and a single non-LVT
-MN2):
+Results, schematic, all 45 corners (process Ktt/Kss/Kff/Ksf/Kfs, -40/27/125 C,
+1.7/1.8/1.9 V). For every process there is ONE trim code that reaches 512 MHz
+inside the VCTRL range at every temperature and supply:
 
-| Trim code | Tl  | Tt  | Th  |
-|:---------:|:---:|:---:|:---:|
-| 3         | 555 | 565 | 571 |
+| Process | Codes that work over all T and V |
+|:-------:|:--------------------------------:|
+| Ktt     | 1..6                             |
+| Kss     | 4..7                             |
+| Kff     | 0..1                             |
+| Ksf     | 3..5                             |
+| Kfs     | 0..7                             |
 
-With that variant every process corner had one code that reached 512 MHz
-over all temperatures and supplies (45 corners): Ktt 3..7, Kfs 3..7,
-Ksf 5..6, Kff 0..2, Kss 7. The fixed R was then lowered to 38.5 kOhm to give
-Kss more margin.
+At VCTRL = 0 the frequency is almost flat over temperature (Ktt, code 3 of
+the previous 46 kOhm variant: 555 / 565 / 571 MHz at -40 / 27 / 125 C).
+The startup turns off in every corner (XST at most 20 mV), and `startup.spi`
+starts the bias from a 10 us and a 100 ns supply ramp at codes 0 and 7 in
+the five extreme corners. Open: the MPB mirror has only 39 mV of headroom at
+Kfs, -40 C, 1.7 V.
+
+## Loop filter cells
+
+The loop filter is built from REYPLL_RCU, a unit cell with a REYPLL_HRPPO8
+(4 x 15.3 kOhm) and a 473 fF MiM stacked on top in 16 x 20.8 um, compiled from
+[cic/lpf.json](cic/lpf.json) with cicpy (`cd work && make cic`). DRC clean,
+LVS matches. At Icp = 1.6 uA the filter is 8 cells, 15 % of a tile, see
+[plans/LAYOUT.md](plans/LAYOUT.md).
 
 # Signal interface (REY_PLL_ROSC)
 

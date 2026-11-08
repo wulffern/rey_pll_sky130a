@@ -1,0 +1,52 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794092400
+<< checkpaint >>
+rect 0 0 3200 4160
+<< locali >>
+rect 288 840 800 920
+rect 288 1000 800 1080
+rect 288 1640 800 1720
+rect 288 1800 800 1880
+rect 288 2440 800 2520
+rect 288 2600 800 2680
+rect 288 3240 800 3320
+rect 288 3400 800 3480
+rect -96 1080 96 1160
+<< m3 >>
+rect 80 0 3120 100
+<< m4 >>
+rect 80 0 3120 100
+use REYPLL_HRPPO8 XR 
+transform 1 0 0 0 1 0
+box 0 0 3200 4160
+use REYPLL_MIMU16 XC 
+transform 1 0 0 0 1 0
+box 0 0 3200 4160
+<< labels >>
+flabel locali s 288 840 800 920 0 FreeSans 400 0 0 0 P0
+port 1 nsew signal bidirectional
+flabel locali s 288 1000 800 1080 0 FreeSans 400 0 0 0 N0
+port 2 nsew signal bidirectional
+flabel locali s 288 1640 800 1720 0 FreeSans 400 0 0 0 P1
+port 3 nsew signal bidirectional
+flabel locali s 288 1800 800 1880 0 FreeSans 400 0 0 0 N1
+port 4 nsew signal bidirectional
+flabel locali s 288 2440 800 2520 0 FreeSans 400 0 0 0 P2
+port 5 nsew signal bidirectional
+flabel locali s 288 2600 800 2680 0 FreeSans 400 0 0 0 N2
+port 6 nsew signal bidirectional
+flabel locali s 288 3240 800 3320 0 FreeSans 400 0 0 0 P3
+port 7 nsew signal bidirectional
+flabel locali s 288 3400 800 3480 0 FreeSans 400 0 0 0 N3
+port 8 nsew signal bidirectional
+flabel locali s -96 1080 96 1160 0 FreeSans 400 0 0 0 BR
+port 9 nsew signal bidirectional
+flabel m3 s 80 0 3120 100 0 FreeSans 400 0 0 0 A
+port 10 nsew signal bidirectional
+flabel m4 s 80 0 3120 100 0 FreeSans 400 0 0 0 B
+port 11 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 3200 4160
+<< end >>

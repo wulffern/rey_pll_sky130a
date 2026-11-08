@@ -1,0 +1,91 @@
+{
+  "comment": [
+    "Loop filter unit cells for REY_PLL, compiled with cicpy:",
+    "  cd work && make cic",
+    "Units are 0.1 nm (10000 per um). HRPPO8 from rey_atr is 16 x 20.8 um",
+    "(160000 x 208000): four 15.3 kOhm res_high_po resistors on poly and M1,",
+    "nothing above M1. The MiM (met3 / capm / met4, cicpy M4 / MIM / M5) can",
+    "therefore cover the same footprint, and RCU puts both in one cell.",
+    "Margins follow REYATR_CAPX1: plates 0.4 um in from the cell edge, MIM",
+    "1.5 um in, the MIM contact 0.15 um inside the MIM."
+  ],
+  "include": [
+    "resistors_uniform.json"
+  ],
+  "cells": [
+    {
+      "name": "MIMU16",
+      "boundaryIgnoreRouting": 0,
+      "abstract": 0,
+      "meta": {
+        "symbol": "cic/cap"
+      },
+      "parseSubckt": {
+        "devices": [
+          {
+            "class": "mimcap",
+            "deviceName": "mim",
+            "name": "C1",
+            "nodes": [
+              "B",
+              "A"
+            ],
+            "properties": {
+              "W": 13,
+              "L": 17.8
+            }
+          }
+        ],
+        "instances": [],
+        "name": "MIMU16",
+        "nodes": [
+          "A",
+          "B"
+        ],
+        "properties": {}
+      },
+      "afterNew": {
+        "addRectangles": [
+          [ "PR", 0, 0, 160000, 208000, "" ],
+          [ "M4", 4000, 4000, 152000, 200000, "" ],
+          [ "MIM", 15000, 15000, 130000, 178000, "" ],
+          [ "MIMC", 16500, 16500, 127000, 175000, "" ],
+          [ "M5", 4000, 4000, 152000, 200000, "" ]
+        ],
+        "addPortRectangles": [
+          [ "M4", 4000, 0, 152000, 5000, "", "A" ],
+          [ "M5", 4000, 0, 152000, 5000, "", "B" ]
+        ]
+      },
+      "afterRoute": {
+        "addPortOnRects": [
+          [ "A", "M4" ],
+          [ "B", "M5" ]
+        ]
+      }
+    },
+    {
+      "name": "RCU",
+      "class": "Layout::LayoutRotateCell",
+      "boundaryIgnoreRouting": 1,
+      "comment": "LayoutRotateCell places every instance at the origin: the MiM lands on top of the resistors",
+      "spice": [
+        ".subckt RCU P0 N0 P1 N1 P2 N2 P3 N3 BR A B",
+        "XR P0 N0 P1 N1 P2 N2 P3 N3 BR HRPPO8",
+        "XC A B MIMU16",
+        ".ends"
+      ],
+      "afterRoute": {
+        "addPortOnRects": [
+          [ "P0", "M1" ], [ "N0", "M1" ],
+          [ "P1", "M1" ], [ "N1", "M1" ],
+          [ "P2", "M1" ], [ "N2", "M1" ],
+          [ "P3", "M1" ], [ "N3", "M1" ],
+          [ "BR", "M1" ],
+          [ "A", "M4" ],
+          [ "B", "M5" ]
+        ]
+      }
+    }
+  ]
+}
