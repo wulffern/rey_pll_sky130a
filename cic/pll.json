@@ -3,7 +3,23 @@
         "REY_PLL digital blocks, ciccreator object file compiled with",
         "cicpy (cd work && make cic, through cic/ip.json). The cells are rey_tr standard",
         "cells read from the built REY_TR_SKY130A library; routes are by",
-        "net name, no coordinates. Ported from sun_pll's SUN_PLL.json."
+        "net name, no coordinates. Ported from sun_pll's SUN_PLL.json.",
+        "",
+        "Routing rules for rey_tr columns, learned on REY_PLL_CTRL (clean):",
+        " - a cell's output Y lies under its own VSS strip on M4, so outputs",
+        "   leave on M2/M3; inputs (A, B, D, CK) are clear of the strips and",
+        "   can climb to M4",
+        " - a DFRNQNX1 uses M1..M3 across its width inside: no M2/M3 trunk",
+        "   over a flop; M4 beside the strips, M5 across",
+        " - hops on one layer must not share a row: alternate M2/M3 down the",
+        "   column",
+        " - no net should run the length of a column: duplicate a driver",
+        "   locally instead (CTRL's PWRUP_NB)",
+        " - an edge port on a net that already has a via stack on its pin",
+        "   takes nostartcut, or the two stacks overlap (cut layers may not",
+        "   partially overlap between subcells)",
+        " - trunks move by trackN (pitches, relative to the pins), never by",
+        "   coordinates"
     ],
     "cells": [
         {
@@ -44,13 +60,13 @@
                         "M4",
                         "VSS",
                         "X:AVSS||rail_b_VSS",
-                        "routeWidth=wide_width"
+                        ""
                     ],
                     [
                         "M4",
                         "VDD_1V8",
                         "X:AVDD||rail_t_VDD_1V8",
-                        "routeWidth=wide_width"
+                        ""
                     ]
                 ],
                 "addConnectivityRoutes": [
@@ -172,33 +188,33 @@
                         "M4",
                         "VSS",
                         "X:AVSS||rail_b_VSS",
-                        "routeWidth=wide_width"
+                        ""
                     ],
                     [
                         "M4",
                         "VDD_1V8",
                         "X:AVDD||rail_t_VDD_1V8",
-                        "routeWidth=wide_width"
+                        ""
                     ]
                 ],
                 "addConnectivityRoutes": [
                     [
                         "M2",
-                        "^(KD[0-4])$",
+                        "^(KD[024]|VHI_N)$",
                         "-|--",
                         ""
                     ],
                     [
                         "M3",
-                        "^PWRUP_N$",
-                        "-|--",
-                        "onTopL"
-                    ],
-                    [
-                        "M2",
-                        "^VHI_N$",
+                        "^(KD[13]|PWRUP_N|PWRUP_NB)$",
                         "-|--",
                         ""
+                    ],
+                    [
+                        "M4",
+                        "^PWRUP_1V8$",
+                        "-|--",
+                        "track-2"
                     ]
                 ]
             },
@@ -206,21 +222,21 @@
                 "resetOrigin": 1,
                 "addPortOnEdges": [
                     [
-                        "M3",
+                        "M4",
                         "PWRUP_1V8",
                         "left",
                         "--|-",
-                        ""
+                        "nostartcut"
                     ],
                     [
-                        "M3",
+                        "M4",
                         "OLH",
                         "left",
                         "--|-",
                         ""
                     ],
                     [
-                        "M3",
+                        "M4",
                         "OLL",
                         "left",
                         "--|-",
@@ -255,12 +271,12 @@
                     [
                         "OLH",
                         "M1",
-                        "XA8:B"
+                        "XA9:B"
                     ],
                     [
                         "OLL",
                         "M1",
-                        "XA9:B"
+                        "XA10:B"
                     ]
                 ]
             }
@@ -303,13 +319,13 @@
                         "M4",
                         "VSS",
                         "X:AVSS||rail_b_VSS",
-                        "routeWidth=wide_width"
+                        ""
                     ],
                     [
                         "M4",
                         "VDD_1V8",
                         "X:AVDD||rail_t_VDD_1V8",
-                        "routeWidth=wide_width"
+                        ""
                     ]
                 ],
                 "addConnectivityRoutes": [
@@ -475,7 +491,7 @@
                         "M4",
                         "VDD_1V8",
                         "X:A||rail_t_VDD_1V8",
-                        "routeWidth=wide_width"
+                        ""
                     ],
                     [
                         "M1",

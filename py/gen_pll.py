@@ -98,21 +98,26 @@ CTRL = dict(
     title="REY_PLL_CTRL: power up, start-up kick and open loop modes",
     notes=["KICK: a pulse when PWRUP_1V8 rises. KD4 is PWRUP_1V8 delayed "
            "by five inverters, so NOR(PWRUP_N, KD4) is high between the "
-           "edge and KD4",
+           "edge and KD4. PWRUP_NB is a second PWRUP_N, local to the "
+           "NORs, so no net runs the length of the column",
            "Open loop, for the per-die trim: VHI_N = PWRUP and not OLH "
            "parks VCTRL at VDD_1V8 (slowest), VLO = VHI_N and OLL at VSS "
            "(fastest). Powered down is OLH"],
     columns=[("A: power up, kick, open loop", [
         tap("XA0"),
+        #- every internal net is a hop between neighbouring cells, so
+        #- no trunk crosses the column: PWRUP_1V8 drives two inverters,
+        #- PWRUP_N for the delay line and PWRUP_NB for the two NORs
         g("XA1", "IVX1", A="PWRUP_1V8", Y="PWRUP_N"),
         g("XA2", "IVX1", A="PWRUP_N", Y="KD0"),
         g("XA3", "IVX1", A="KD0", Y="KD1"),
         g("XA4", "IVX1", A="KD1", Y="KD2"),
         g("XA5", "IVX1", A="KD2", Y="KD3"),
         g("XA6", "IVX1", A="KD3", Y="KD4"),
-        g("XA7", "NRX1", A="PWRUP_N", B="KD4", Y="KICK"),
-        g("XA8", "NRX1", A="PWRUP_N", B="OLH", Y="VHI_N"),
-        g("XA9", "ANX1", A="VHI_N", B="OLL", Y="VLO")])])
+        g("XA7", "IVX1", A="PWRUP_1V8", Y="PWRUP_NB"),
+        g("XA8", "NRX1", A="PWRUP_NB", B="KD4", Y="KICK"),
+        g("XA9", "NRX1", A="PWRUP_NB", B="OLH", Y="VHI_N"),
+        g("XA10", "ANX1", A="VHI_N", B="OLL", Y="VLO")])])
 
 #- REY_PLL_PFD ----------------------------------------------------------
 PFD_PINS = [(VDD, "in"), (VSS, "in"), ("PWRUP_1V8", "in"), ("CK_REF", "in"),
