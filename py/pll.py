@@ -15,9 +15,9 @@ extra pole placed symmetric around wc (maximum phase at wc):
   R        = sqrt(b) / (wc C1)
 
 So the capacitance scales with Icp*Kvco/(N wc^2): a smaller Kvco or
-a smaller Icp shrinks C, but R scales as 1/C and grows. The sweep at
-the bottom prints the area of both, for picking a point that fits a
-Tiny Tapeout tile.
+a smaller Icp shrinks C, but R scales as 1/C and grows. C1 and C2 are
+MiM (REYATR_CAPX1) placed over the HRPPO resistor, so the footprint is
+the larger of the two; the sweep at the bottom prints it.
 
 The VCO here has NEGATIVE gain (f falls as VCTRL rises); the loop
 uses |Kvco| with UP/DN swapped at the charge pump, and the filter is
@@ -33,8 +33,11 @@ import re
 import numpy as np
 
 #- Area densities, sky130 (assumptions, check against the cells)
-MIM_F_PER_UM2 = 2e-15        # cap_mim_m3_1, ~2 fF/um2, can sit over devices
-MOS_F_PER_UM2 = 8e-15        # nfet_01v8 gate cap, ~8 fF/um2 in inversion
+#- REYATR_CAPX1: cap_mim_m3_1 W 4.8 L 5 = 51.2 fF (simulated, tt) in an
+#- 8 x 8 um cell, so 0.8 fF/um2 of footprint. MiM is met3/met4, so it can
+#- sit over the HRPPO resistor, which uses neither
+MIM_UNIT_F = 51.2e-15
+MIM_UNIT_UM2 = 8 * 8
 #- REYATR_HRPPO8: four 15.3k resistors in a 16 x 20.8 um cell
 RES_OHM_PER_UM2 = 61.2e3 / (16 * 20.8)
 
@@ -74,23 +77,25 @@ def check(d):
 
 
 def area(d):
-    a_c_mim = (d["C1"] + d["C2"])/MIM_F_PER_UM2
-    a_c_mos = (d["C1"] + d["C2"])/MOS_F_PER_UM2
+    """MiM units, MiM area, R area, and the footprint with MiM over R."""
+    n1 = int(np.ceil(d["C1"]/MIM_UNIT_F))
+    n2 = int(np.ceil(d["C2"]/MIM_UNIT_F))
+    a_c = (n1 + n2)*MIM_UNIT_UM2
     a_r = d["R"]/RES_OHM_PER_UM2
-    return a_c_mim, a_c_mos, a_r
+    return n1, n2, a_c, a_r, max(a_c, a_r)
 
 
 def report(d):
     fc, pm = check(d)
-    a_mim, a_mos, a_r = area(d)
+    n1, n2, a_c, a_r, a_fp = area(d)
     print(f"fref={d['fref']/1e6:.3g} MHz  N={d['N']}  fout={d['fref']*d['N']/1e6:.4g} MHz  "
           f"|Kvco|={abs(d['kvco_hz'])/1e6:.3g} MHz/V  Icp={d['icp']*1e6:.3g} uA")
     print(f"  target fc={d['fc']/1e3:.4g} kHz PM={d['pm_deg']}  ->  "
           f"check fc={fc/1e3:.4g} kHz PM={pm:.1f} deg")
-    print(f"  C1={d['C1']*1e12:.3g} pF  C2={d['C2']*1e12:.3g} pF  R={d['R']/1e3:.4g} kOhm")
-    print(f"  area: C as MiM {a_mim:.0f} um2 (or MOS {a_mos:.0f} um2), "
-          f"R {a_r:.0f} um2  = {(a_mos + a_r)/TILE_UM2*100:.0f}% of a tile "
-          f"(MOS C), {(a_mim + a_r)/TILE_UM2*100:.0f}% (MiM C, not stacked)")
+    print(f"  C1={d['C1']*1e12:.3g} pF ({n1} x CAPX1)  C2={d['C2']*1e12:.3g} pF ({n2} x CAPX1)  "
+          f"R={d['R']/1e3:.4g} kOhm")
+    print(f"  area: MiM {a_c:.0f} um2, R {a_r:.0f} um2, MiM over R {a_fp:.0f} um2 "
+          f"= {a_fp/TILE_UM2*100:.0f}% of a tile")
 
 
 def kvco_from_log(logfile, code, ftarget):
@@ -146,11 +151,11 @@ if __name__ == "__main__":
     report(design(8e6, 32, 1.6e9, 1e-6, a.fc_ratio, a.pm))
 
     #- the trade: C ~ Icp*Kvco, R ~ 1/(Icp*Kvco)
-    print("\narea vs Icp*|Kvco| (MOS C + HRPPO R), fc = fref/%g, PM %g:" % (a.fc_ratio, a.pm))
-    print(f"{'Icp':>8s} {'Kvco':>10s} {'C1 pF':>7s} {'R kOhm':>8s} {'C um2':>7s} {'R um2':>7s} {'tile %':>7s}")
-    for icp in (0.25e-6, 0.5e-6, 1e-6, 2e-6, 4e-6):
+    print("\nfootprint vs Icp and |Kvco|, MiM over HRPPO R, fc = fref/%g, PM %g:" % (a.fc_ratio, a.pm))
+    print(f"{'Icp':>8s} {'Kvco':>10s} {'C1 pF':>7s} {'units':>6s} {'R kOhm':>8s} {'MiM um2':>8s} {'R um2':>7s} {'tile %':>7s}")
+    for icp in (0.5e-6, 1e-6, 1.3e-6, 2e-6, 4e-6):
         for kv in (100e6, 235e6, 500e6):
             d = design(a.fref, a.n, kv, icp, a.fc_ratio, a.pm)
-            _, a_mos, a_r = area(d)
-            print(f"{icp*1e6:6.2f}uA {kv/1e6:7.0f}M/V {d['C1']*1e12:7.2f} {d['R']/1e3:8.0f} "
-                  f"{a_mos:7.0f} {a_r:7.0f} {(a_mos + a_r)/TILE_UM2*100:6.0f}%")
+            n1, n2, a_c, a_r, a_fp = area(d)
+            print(f"{icp*1e6:6.2f}uA {kv/1e6:7.0f}M/V {d['C1']*1e12:7.2f} {n1 + n2:6d} {d['R']/1e3:8.0f} "
+                  f"{a_c:8.0f} {a_r:7.0f} {a_fp/TILE_UM2*100:6.0f}%")

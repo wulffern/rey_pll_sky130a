@@ -56,24 +56,31 @@ Transistor cells are all 8 x 4 um (FIXED_BBOX 1600 x 800), RPPO2 is
 | REY_PLL_ROSC         | ~66 transistors, taps and rings; 6 RPPO cells  | 5 000        |
 | PFD + CP             | rey_tr cells, CP mirrors                       | 1 500        |
 | DIVN (/1024)         | 10 x REYTR_DFRNQNX1, 8 output buffers          | 1 600        |
-| Loop filter, Icp 2uA | C1 4.0 pF, C2 0.31 pF, R 369 kOhm (HRPPO)      | 2 500        |
+| Loop filter, Icp 1.3uA | C1 52 + C2 4 x CAPX1 MiM over R 567 kOhm HRPPO | 3 600        |
 | Routing, rings       |                                                | 3 000        |
-| Total                |                                                | ~13 600 = 76 % |
+| Total                |                                                | ~14 700 = 82 % |
 
-Loop filter, from `python3 py/pll.py --icp 2e-6` (N = 64, fc = fref/20,
-PM 60 degrees, |Kvco| 235 MHz/V):
+The loop filter capacitors are MiM (REYATR_CAPX1, cap_mim_m3_1 4.8 x 5 um,
+51.2 fF in an 8 x 8 um cell, so 0.8 fF/um2 of footprint), not MOS: MiM is
+linear, so C1 does not depend on where VCTRL sits. MiM is met3/met4 and the
+HRPPO resistor uses neither, so the cap bank sits on top of R and the
+filter costs the larger of the two areas, not the sum.
 
-| Icp  | C1      | R        | Area, MOS C + HRPPO R |
-|:----:|:-------:|:--------:|:---------------------:|
-| 1 uA | 2.0 pF  | 737 kOhm | 24 % of a tile        |
-| 2 uA | 4.0 pF  | 369 kOhm | 14 %                  |
-| 4 uA | 8.1 pF  | 184 kOhm | 12 % (30 % as MiM)    |
+C area grows with Icp and R area shrinks, so the footprint is smallest
+where they meet. From `python3 py/pll.py --icp 1.3e-6` (N = 64,
+fc = fref/20, PM 60 degrees, |Kvco| 235 MHz/V):
 
-C1 is referenced to VDD_1V8. As a MOS cap it would be a PMOS with S/D/B
-on VDD_1V8 and the gate on VCTRL. It stays in inversion only while
-VDD - VCTRL > |Vtp|, so check the capacitance over the locking range of
-VCTRL, or use MiM over the resistor (which does not use met3/met4 for
-routing).
+| Icp    | C1 (CAPX1)     | C2 (CAPX1)     | R        | MiM over R, % of tile |
+|:------:|:--------------:|:--------------:|:--------:|:---------------------:|
+| 1 uA   | 2.01 pF (40)   | 0.16 pF (4)    | 737 kOhm | 22 %                  |
+| 1.3 uA | 2.62 pF (52)   | 0.20 pF (4)    | 567 kOhm | 20 %                  |
+| 2 uA   | 4.03 pF (79)   | 0.31 pF (7)    | 369 kOhm | 31 %                  |
+
+C1 and C2 are referenced to VDD_1V8. Put the BOTTOM plate (met3, the one
+with the parasitic to substrate) on VDD_1V8 and the top plate on VCTRL, so
+the bottom plate parasitic does not couple VCTRL to VSS. In cicpy names the
+CAPX1 plates are M4 (A, bottom) and M5 (B, top), see REY_LDO's `_Caps`,
+which also draws the bank as a comb.
 
 ## REY_PLL_ROSC floorplan (cicpy sidecar)
 
