@@ -15,6 +15,9 @@ Topology (osc_ring_adv_tikz.svg):
     MS1-3       startup: MS1/MS2 inverter on VBN, MS3 pulls VBP low while
                 no current flows
   Bias, BIAS=r: PMOS diode on VBP with an RPPO ladder to VSS
+  Bias, BIAS=vt: Vgs/R source, MN1 gate on R, MN2 follower; R is the
+                trim ladder (46k fixed + 7.7k, 15.4k, 30.8k switched)
+  Bias, BIAS=ext: PMOS diode on pin VBP, current from outside (CELL=..._IEXT)
   MPF<k>_<j>    PMOS mirror, S=VDD G=VBP D=VS<k>    fixed current, sets f_min
   MPC<k>_<j>    PMOS mirror, S=VDD G=VBP D=NC<k>    tunable current
   MPV<k>        PMOS, S=NC<k> G=VCTRL D=VS<k>       steers the tunable current,
@@ -30,12 +33,12 @@ import sys, os
 N = int(os.environ.get("NSTAGE", 7))
 USE_CAP = int(os.environ.get("USE_CAP", 0))
 BIAS = os.environ.get("BIAS", "gm")
-ND = int(os.environ.get("ND", 4 if BIAS == "gm" else 9))   # diode units
+ND = int(os.environ.get("ND", 9 if BIAS == "r" else 4))   # diode units
 K = int(os.environ.get("K", 4))     # beta multiplier ratio
 NF = int(os.environ.get("NF", 2))   # fixed units per stage
 NT = int(os.environ.get("NT", 1))   # tunable units per stage
 lib = "REY_PLL_SKY130A"
-cell = "REY_PLL_ROSC"
+cell = os.environ.get("CELL", "REY_PLL_ROSC")
 outdir = sys.argv[1]
 
 PCH_MIR = "REY_ATR_SKY130A/" + os.environ.get("MIR", "REYATR_LVT_PCH_8C5F0") + ".sym"
@@ -48,6 +51,11 @@ CAP = "REY_ATR_SKY130A/REYATR_CAPX1.sym"
 
 pins = [("VDD_1V8", "in"), ("VSS", "in"), ("TRIM0", "in"), ("TRIM1", "in"),
         ("TRIM2", "in"), ("VCTRL", "in"), ("CK", "out")]
+if BIAS == "ext":
+    #- ideal bias current pulled out of the PMOS diode, for characterizing
+    #- the ring alone
+    pins = [("VDD_1V8", "in"), ("VSS", "in"), ("VBP", "in"),
+            ("VCTRL", "in"), ("CK", "out")]
 
 L = ["v {xschem version=3.4.7 file_version=1.2}", "G {}", "K {}", "V {}", "S {}", "E {}"]
 L.append("T {Current starved ring oscillator. Coarse frequency from IBNS_20U, "
@@ -147,6 +155,35 @@ if BIAS == "gm":
             y += 200
         for j in range(ns):
             nch(SW, f"XST{bit}_{j}", xr + 200, y - 100 - 120*j, p_, f"TRIM{bit}", n_, "VSS")
+elif BIAS == "vt":
+    #- Vgs/R (threshold referenced) source: R carries Vgs(MN1)/R. The
+    #- ring's swing tracks the thresholds too, so f ~ 1/(R C) and the
+    #- temperature drift of Vgs mostly cancels
+    for j in range(ND):
+        pch(PCH_MIR, f"XMP0_{j}", -200, -200 - 120*j, "VBP", "VBP", "VDD_1V8", "VDD_1V8")
+        pch(PCH_MIR, f"XMPB_{j}", -350, -200 - 120*j, "VX", "VBP", "VDD_1V8", "VDD_1V8")
+    nch(NCH5, "XMN1", -350, 100, "VX", "VG", "VSS", "VSS")
+    nch(NCH5, "XMN2", -200, 100, "VBP", "VX", "VG", "VSS")
+    # Startup: while VG (= I R) is low, MS3 pulls VBP down INTO VG, so
+    # the startup current goes through R and lifts VG until the MS1/MS2
+    # inverter turns MS3 off (to VSS it latched: VG never rose)
+    pch(PCH5, "XMS1", -500, 100, "XST", "VG", "VDD_1V8", "VDD_1V8")
+    for j in range(2):
+        nch(SW, f"XMS2_{j}", -500, 220 + 120*j, "XST", "VG", "VSS", "VSS")
+    nch(SW, "XMS3", -500, 500, "VBP", "XST", "VG", "VSS")
+    # R from VG to VSS: fixed 3 x RPPO2 (46k), then trim 7.7k, 15.4k, 30.8k
+    res(RPPO4, "XRF0", xr, -400, "VG", "RF")
+    res(RPPO2, "XRF1", xr, -340, "RF", "RT0")
+    res(RPPO2, "XRT0_0", xr, -280, "RT0", "RT1")
+    res(RPPO2, "XRT0_1", xr, -220, "RT0", "RT1")
+    nch(SW, "XST0", xr + 200, -250, "RT0", "TRIM0", "RT1", "VSS")
+    res(RPPO2, "XRT1", xr, -160, "RT1", "RT2")
+    nch(SW, "XST1", xr + 200, -160, "RT1", "TRIM1", "RT2", "VSS")
+    res(RPPO4, "XRT2", xr, -100, "RT2", "VSS")
+    nch(SW, "XST2", xr + 200, -70, "RT2", "TRIM2", "VSS", "VSS")
+elif BIAS == "ext":
+    for j in range(ND):
+        pch(PCH_MIR, f"XMP0_{j}", -200, -200 - 120*j, "VBP", "VBP", "VDD_1V8", "VDD_1V8")
 else:
     res(RPPO4, "XRF0", xr, -400, "VBP", "RF")
     res(RPPO2, "XRF1", xr, -340, "RF", "RT0")

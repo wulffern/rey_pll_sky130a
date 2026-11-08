@@ -120,7 +120,7 @@ def kvco_from_log(logfile, code, ftarget):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--fref", type=float, default=8e6)
-    ap.add_argument("--n", type=int, default=32)
+    ap.add_argument("--n", type=int, default=64)
     ap.add_argument("--kvco", type=float, default=235e6, help="|Kvco| in Hz/V")
     ap.add_argument("--icp", type=float, default=1e-6)
     ap.add_argument("--fc_ratio", type=float, default=20)

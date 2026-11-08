@@ -1,0 +1,80 @@
+*REY_PLL_ROSC_IEXT: ring with an ideal bias current, frequency vs VCTRL and temperature
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_PLL_ROSC_IEXT_lpe.spi
+#else
+.include ../../../work/xsch/REY_PLL_ROSC_IEXT.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param TRF = 10p
+
+.param AVDD = {vdda}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD_1V8  VSS  dc {AVDD}
+IBN  VBP      VSS  dc 9u
+* VCTRL = VDD_1V8 - x, so the sweep reaches the supply in all corners
+VCT  VDD_1V8  VCTRL  dc 1.8
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+XDUT VDD_1V8 VSS VBP VCTRL CK REY_PLL_ROSC_IEXT
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+#ifdef Debug
+.save all
+#else
+.save v(CK) v(VCTRL) v(xdut.N0) v(VBP)
+#endif
+
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+set color0=white
+set color1=black
+unset askquit
+
+#ifdef Debug
+alter VCT 1.2
+tran 10p 50n 1p
+write
+#else
+let code = 0
+let v_act = 1.8
+while v_act ge -0.01
+set appendwrite
+alter VCT v_act
+tran 10p 200n
+let trimcode = code
+print trimcode
+meas tran vctrl avg v(VCTRL)
+meas tran vbp avg v(VBP)
+meas tran tpd trig v(xdut.N0) val='0.6' td=100n rise=1 targ v(xdut.N0) val='0.6' td=100n rise=11
+write
+let v_act = v_act - 0.3
+end
+#endif
+quit
+
+.endc
+
+.end
