@@ -107,59 +107,27 @@ C {devices/lab_pin.sym} -420 -10 3 0 {name=l49 sig_type=std_logic lab=RT2}
 C {devices/lab_pin.sym} -420 50 1 0 {name=l50 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} -420 20 2 0 {name=l51 sig_type=std_logic lab=VSS}
 T {38.5k fixed, then 7.7k / 15.4k / 30.8k, each shorted when TRIM<k> is high} -1450 100 0 0 0.3 0.3 {}
-T {Ring: 7 stages, one drawn, the rest by the bus} 100 -620 0 0 0.4 0.4 {}
-C {REY_ATR_SKY130A/REYATR_LVT_PCH_8C5F0.sym} 200 -490 0 0 {name=xmpca[6:0]}
-C {devices/lab_pin.sym} 200 -490 0 0 {name=l52 sig_type=std_logic lab=VBP}
-C {devices/lab_pin.sym} 240 -520 3 0 {name=l53 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 240 -490 2 0 {name=l54 sig_type=std_logic lab=VDD_1V8}
-N 240 -460 240 -435 {}
-N 240 -435 240 -410 {}
-C {devices/lab_pin.sym} 240 -435 0 0 {name=l55 sig_type=std_logic lab=NC6,NC5,NC4,NC3,NC2,NC1,NC0}
-C {REY_ATR_SKY130A/REYATR_LVT_PCH_4C5F0.sym} 200 -380 0 0 {name=xmpv[6:0]}
-C {devices/lab_pin.sym} 200 -380 0 0 {name=l56 sig_type=std_logic lab=VCTRL}
-C {devices/lab_pin.sym} 240 -380 2 0 {name=l57 sig_type=std_logic lab=VDD_1V8}
-C {REY_ATR_SKY130A/REYATR_LVT_PCH_8C5F0.sym} 500 -380 0 0 {name=xmpfa[6:0]}
-C {devices/lab_pin.sym} 500 -380 0 0 {name=l58 sig_type=std_logic lab=VBP}
-C {devices/lab_pin.sym} 540 -410 3 0 {name=l59 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 540 -380 2 0 {name=l60 sig_type=std_logic lab=VDD_1V8}
-C {REY_ATR_SKY130A/REYATR_LVT_PCH_8C5F0.sym} 760 -380 0 0 {name=xmpfb[6:0]}
-C {devices/lab_pin.sym} 760 -380 0 0 {name=l61 sig_type=std_logic lab=VBP}
-C {devices/lab_pin.sym} 800 -410 3 0 {name=l62 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 800 -380 2 0 {name=l63 sig_type=std_logic lab=VDD_1V8}
-N 240 -350 240 -300 {}
-N 540 -350 540 -300 {}
-N 800 -350 800 -300 {}
-N 240 -300 800 -300 {}
-C {devices/lab_pin.sym} 800 -300 2 0 {name=l64 sig_type=std_logic lab=VS6,VS5,VS4,VS3,VS2,VS1,VS0}
-C {REY_ATR_SKY130A/REYATR_PCH_2C1F2.sym} 200 -230 0 0 {name=xip[6:0]}
-C {devices/lab_pin.sym} 240 -230 2 0 {name=l65 sig_type=std_logic lab=VDD_1V8}
-N 240 -300 240 -260 {}
-C {REY_ATR_SKY130A/REYATR_NCH_2C1F2.sym} 200 -110 0 0 {name=xin[6:0]}
-C {devices/lab_pin.sym} 240 -80 1 0 {name=l66 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 240 -110 2 0 {name=l67 sig_type=std_logic lab=VSS}
-N 240 -200 240 -170 {}
-N 240 -170 240 -140 {}
-N 240 -170 340 -170 {}
-C {devices/lab_pin.sym} 340 -170 2 0 {name=l68 sig_type=std_logic lab=N6,N5,N4,N3,N2,N1,N0}
-N 200 -230 160 -230 {}
-N 160 -230 160 -170 {}
-N 160 -170 160 -110 {}
-N 160 -110 200 -110 {}
-C {devices/lab_pin.sym} 160 -170 0 0 {name=l69 sig_type=std_logic lab=N5,N4,N3,N2,N1,N0,N6}
-T {stage k: N<k-1> -> N<k>, stage 0 takes the last node} 100 -60 0 0 0.3 0.3 {}
-T {fixed mirror: sets f_min; tunable mirror through the VCTRL device: the rest} 100 -30 0 0 0.3 0.3 {}
+T {Ring: 7 stages of REY_PLL_ROSC_STAGE} 100 -620 0 0 0.4 0.4 {}
+C {REY_PLL_SKY130A/REY_PLL_ROSC_STAGE.sym} 400 -350 0 0 {name=xstg[6:0]}
+C {devices/lab_pin.sym} 250 -440 0 0 {name=l70 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_pin.sym} 250 -420 0 0 {name=l71 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 250 -400 0 0 {name=l72 sig_type=std_logic lab=VBP}
+C {devices/lab_pin.sym} 250 -380 0 0 {name=l73 sig_type=std_logic lab=VCTRL}
+C {devices/lab_pin.sym} 250 -360 0 0 {name=l74 sig_type=std_logic lab=N5,N4,N3,N2,N1,N0,N6}
+C {devices/lab_pin.sym} 550 -440 2 0 {name=l75 sig_type=std_logic lab=N6,N5,N4,N3,N2,N1,N0}
+T {stage k: N<k-1> -> N<k>} 100 -60 0 0 0.3 0.3 {}
 T {Output buffer} 1370 -620 0 0 0.4 0.4 {}
 C {REY_TR_SKY130A/REYTR_IVX1_CV.sym} 1370 -170 0 0 {name=xo0}
-C {devices/lab_pin.sym} 1410 -210 3 0 {name=l70 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 1410 -130 1 0 {name=l71 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 1370 -170 0 0 {name=l72 sig_type=std_logic lab=N6}
+C {devices/lab_pin.sym} 1410 -210 3 0 {name=l76 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_pin.sym} 1410 -130 1 0 {name=l77 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 1370 -170 0 0 {name=l78 sig_type=std_logic lab=N6}
 N 1450 -170 1510 -170 {}
 N 1510 -170 1570 -170 {}
-C {devices/lab_pin.sym} 1510 -170 3 0 {name=l73 sig_type=std_logic lab=CKN}
+C {devices/lab_pin.sym} 1510 -170 3 0 {name=l79 sig_type=std_logic lab=CKN}
 C {REY_TR_SKY130A/REYTR_IVX4_CV.sym} 1570 -170 0 0 {name=xo1}
-C {devices/lab_pin.sym} 1610 -210 3 0 {name=l74 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 1610 -130 1 0 {name=l75 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 1650 -170 2 0 {name=l76 sig_type=std_logic lab=CK}
+C {devices/lab_pin.sym} 1610 -210 3 0 {name=l80 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_pin.sym} 1610 -130 1 0 {name=l81 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 1650 -170 2 0 {name=l82 sig_type=std_logic lab=CK}
 C {REY_TR_SKY130A/REYTR_TAPCELLB_CV.sym} 1790 -170 0 0 {name=xotap}
-C {devices/lab_pin.sym} 1790 -190 3 0 {name=l77 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} 1790 -150 1 0 {name=l78 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 1790 -190 3 0 {name=l83 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_pin.sym} 1790 -150 1 0 {name=l84 sig_type=std_logic lab=VSS}

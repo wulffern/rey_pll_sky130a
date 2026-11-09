@@ -221,60 +221,90 @@ elif BIAS == "ext":
     lab(x - 30, y, 0, "VBP")
 
 #- ------------------------------------------------------------------
-#- Ring stage, drawn once as bus instances
+#- Ring stage: its own cell, REY_PLL_ROSC_STAGE, laid out and routed on
+#- its own; the oscillator places seven of them
 #- ------------------------------------------------------------------
-S = range(N - 1, -1, -1)                         # bus index order
-nets = lambda p, idx: ",".join(f"{p}{i}" for i in idx)
-NOUT = nets("N", S)                              # stage k drives N<k>
-NIN = nets("N", [(k - 1) % N for k in S])        # from N<k-1>
-VS = nets("VS", S)
-NC = nets("NC", S)
-B = f"[{N-1}:0]"
+STAGE = "REY_PLL_ROSC_STAGE"
+STAGE_PINS = [(VDD, "in"), (VSS, "in"), ("VBP", "in"), ("VCTRL", "in"),
+              ("A", "in"), ("Y", "out")]
 
+
+def draw_stage():
+    """One stage on its own sheet: A in, Y out."""
+    x0 = 100
+    text("REY_PLL_ROSC_STAGE: one ring stage, a starved inverter A -> Y",
+         -1450, -820, 0.5)
+    for i, (p, d) in enumerate(STAGE_PINS):
+        sym = {"in": "ipin", "out": "opin"}[d]
+        L.append(f"C {{devices/{sym}.sym}} {-1400 + 160*i} -740 0 0 "
+                 f"{{name=p{i} lab={p}}}")
+    #- tunable branch: mirror then VCTRL device, NC between them
+    xt = x0 + 100
+    for j in range(NT):
+        pch(MIR, f"xmpc{chr(97+j)}", xt - 150*j, -490, g="VBP", s=VDD)
+        if j:
+            wire(xt - 150*j + 40, -460, xt + 40, -460)
+    wlab(xt + 40, -460, xt + 40, -410, 0, "NC")
+    pch(CTL, "xmpv", xt, -380, g="VCTRL")
+    #- fixed branch, drains on VS
+    xf = xt + 300
+    for j in range(NF):
+        pch(MIR, f"xmpf{chr(97+j)}", xf + 260*j, -380, g="VBP", s=VDD)
+    yvs = -300
+    wire(xt + 40, -350, xt + 40, yvs)
+    for j in range(NF):
+        wire(xf + 260*j + 40, -350, xf + 260*j + 40, yvs)
+    wire(xt + 40, yvs, xf + 260*(NF - 1) + 40, yvs)
+    lab(xf + 260*(NF - 1) + 40, yvs, 2, "VS")
+    #- the inverter, PMOS source on VS
+    xi = xt
+    pch(INVP, "xip", xi, -230)
+    wire(xi + 40, yvs, xi + 40, -260)
+    nch(INVN, "xin", xi, -110, s=VSS)
+    wire(xi + 40, -200, xi + 40, -170)
+    wire(xi + 40, -170, xi + 40, -140)
+    wire(xi + 40, -170, xi + 140, -170)
+    lab(xi + 140, -170, 2, "Y")
+    wire(xi, -230, xi - 40, -230)
+    wire(xi - 40, -230, xi - 40, -170)
+    wire(xi - 40, -170, xi - 40, -110)
+    wire(xi - 40, -110, xi, -110)
+    lab(xi - 40, -170, 0, "A")
+    text("fixed mirror: sets f_min; tunable mirror through the VCTRL "
+         "device: the rest", x0, -30, 0.3)
+
+
+from cicpy.eda.schgen import write_box_symbol, box_symbol
+_main = L
+L = ["v {xschem version=3.4.7 file_version=1.2}", "G {}", "K {}", "V {}",
+     "S {}", "E {}"]
+draw_stage()
+with open(os.path.join(outdir, STAGE + ".sch"), "w") as f:
+    f.write("\n".join(L) + "\n")
+write_box_symbol(os.path.join(outdir, STAGE + ".sym"), STAGE_PINS)
+L = _main
+
+#- the ring: seven stages as one bus instance, stage k drives N<k> from
+#- N<k-1>, stage 0 takes the last node
+S = range(N - 1, -1, -1)
+nets = lambda p, idx: ",".join(f"{p}{i}" for i in idx)
 x0, y0 = 100, -620
-text(f"Ring: {N} stages, one drawn, the rest by the bus", x0, y0)
-#- tunable branch: mirror then VCTRL device, NC between them
-xt = x0 + 100
-for j in range(NT):
-    pch(MIR, f"xmpc{chr(97+j)}{B}", xt - 150*j, -490, g="VBP", s=VDD)
-    if j:
-        wire(xt - 150*j + 40, -460, xt + 40, -460)
-wlab(xt + 40, -460, xt + 40, -410, 0, NC)
-pch(CTL, f"xmpv{B}", xt, -380, g="VCTRL")
-#- fixed branch, NF bus symbols to the right, drains on VS
-xf = xt + 300
-for j in range(NF):
-    pch(MIR, f"xmpf{chr(97+j)}{B}", xf + 260*j, -380, g="VBP", s=VDD)
-#- the VS node, a horizontal wire joining every drain
-yvs = -300
-wire(xt + 40, -350, xt + 40, yvs)
-for j in range(NF):
-    wire(xf + 260*j + 40, -350, xf + 260*j + 40, yvs)
-wire(xt + 40, yvs, xf + 260*(NF - 1) + 40, yvs)
-lab(xf + 260*(NF - 1) + 40, yvs, 2, VS)
-#- the inverter, source on VS
-xi = xt
-pch(INVP, f"xip{B}", xi, -230)
-wire(xi + 40, yvs, xi + 40, -260)
-nch(INVN, f"xin{B}", xi, -110, s=VSS)
-wire(xi + 40, -200, xi + 40, -170)
-wire(xi + 40, -170, xi + 40, -140)
-wire(xi + 40, -170, xi + 140, -170)
-lab(xi + 140, -170, 2, NOUT)
-#- the gates, joined, from the previous stage
-wire(xi, -230, xi - 40, -230)
-wire(xi - 40, -230, xi - 40, -170)
-wire(xi - 40, -170, xi - 40, -110)
-wire(xi - 40, -110, xi, -110)
-lab(xi - 40, -170, 0, NIN)
-text("stage k: N<k-1> -> N<k>, stage 0 takes the last node", x0, -60, 0.3)
-text("fixed mirror: sets f_min; tunable mirror through the VCTRL "
-     "device: the rest", x0, -30, 0.3)
+text(f"Ring: {N} stages of REY_PLL_ROSC_STAGE", x0, y0)
+_sym = box_symbol(STAGE_PINS)
+xs, ys = 400, -350
+inst(f"REY_PLL_SKY130A/{STAGE}.sym", f"xstg[{N-1}:0]", xs, ys)
+for p, net in ((VDD, VDD), (VSS, VSS), ("VBP", "VBP"), ("VCTRL", "VCTRL"),
+               ("A", nets("N", [(k - 1) % N for k in S])),
+               ("Y", nets("N", S))):
+    px, py, side = _sym.pins[p]
+    lab(xs + px, ys + py, side, net)
+text("stage k: N<k-1> -> N<k>", x0, -60, 0.3)
+xf, NF_ = x0 + 400, NF
 
 #- ------------------------------------------------------------------
 #- Output buffer
 #- ------------------------------------------------------------------
-xo = xf + 260*NF + 350
+xo = xf + 260*NF_ + 350
 text("Output buffer", xo, y0)
 #- REYTR_IVX1 then IVX4. The first one must be small: it loads the last
 #- ring node, and a 2C1F2 pair there (2x the gate cap of IVX1) slowed the

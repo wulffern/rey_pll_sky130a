@@ -1,0 +1,81 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794178800
+<< checkpaint >>
+rect 0 0 1792 8120
+<< locali >>
+rect 96 7940 1792 8120
+rect 96 7940 1792 8120
+rect 0 6900 192 8120
+rect 96 0 1792 180
+rect 96 0 1792 180
+rect 0 0 192 1220
+rect 1150 1172 1214 1340
+rect 1150 3732 1214 3900
+rect 840 1146 1008 1210
+rect 912 3706 1080 3770
+rect 1344 5380 1408 5460
+rect 1216 4580 1280 4660
+<< metal2 >>
+rect 1036 2090 1332 2150
+rect 1036 2090 1332 2150
+rect 1096 2086 1272 2154
+rect 1096 2086 1272 2154
+rect 780 2330 1154 2390
+rect 780 2330 1154 2390
+rect 840 2326 1016 2394
+rect 918 2326 1094 2394
+<< metal1 >>
+rect 1154 1260 1214 2120
+rect 1150 1172 1218 1348
+rect 1096 2086 1272 2154
+rect 1154 2120 1214 3820
+rect 1150 3732 1218 3908
+rect 1096 2086 1272 2154
+rect 898 1180 958 2360
+rect 840 1146 1016 1214
+rect 840 2326 1016 2394
+rect 1028 2360 1088 3740
+rect 912 3706 1088 3774
+rect 918 2326 1094 2394
+<< viali >>
+rect 1156 1184 1208 1236
+rect 1156 1276 1208 1328
+rect 1156 3744 1208 3796
+rect 1156 3836 1208 3888
+rect 852 1152 904 1204
+rect 944 1152 996 1204
+rect 924 3712 976 3764
+rect 1016 3712 1068 3764
+<< via1 >>
+rect 1108 2092 1164 2148
+rect 1204 2092 1260 2148
+rect 1108 2092 1164 2148
+rect 1204 2092 1260 2148
+rect 852 2332 908 2388
+rect 948 2332 1004 2388
+rect 930 2332 986 2388
+rect 1026 2332 1082 2388
+use REY_PLL_ROSC_STAGE_N_ST xn_st 
+transform 1 0 96 0 1 300
+box 96 300 1792 2060
+use REY_PLL_ROSC_STAGE_P_ST xp_st 
+transform 1 0 96 0 1 2860
+box 96 2860 1792 7820
+<< labels >>
+flabel locali s 96 7940 1792 8120 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew power bidirectional
+flabel locali s 96 0 1792 180 0 FreeSans 400 0 0 0 VSS
+port 2 nsew ground bidirectional
+flabel metal2 s 1036 2090 1332 2150 0 FreeSans 400 0 0 0 A
+port 5 nsew signal bidirectional
+flabel metal2 s 780 2330 1154 2390 0 FreeSans 400 0 0 0 Y
+port 6 nsew signal bidirectional
+flabel locali s 1344 5380 1408 5460 0 FreeSans 400 0 0 0 VBP
+port 3 nsew signal bidirectional
+flabel locali s 1216 4580 1280 4660 0 FreeSans 400 0 0 0 VCTRL
+port 4 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 1792 8120
+<< end >>
