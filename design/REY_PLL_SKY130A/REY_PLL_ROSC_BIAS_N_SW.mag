@@ -1,0 +1,68 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794178800
+<< checkpaint >>
+rect 0 0 1600 3360
+<< locali >>
+rect 0 620 704 700
+rect 680 2280 848 2344
+rect 680 1640 848 1704
+rect 680 1480 848 1544
+rect 680 840 848 904
+rect 608 2440 1056 2520
+rect 480 2280 928 2360
+rect 480 1480 928 1560
+rect 1120 2520 1184 2600
+rect 1120 1720 1184 1800
+rect 1120 920 1184 1000
+rect -96 840 96 920
+<< viali >>
+rect 692 2286 744 2338
+rect 784 2286 836 2338
+rect 692 1646 744 1698
+rect 784 1646 836 1698
+rect 692 1486 744 1538
+rect 784 1486 836 1538
+rect 692 846 744 898
+rect 784 846 836 898
+<< metal1 >>
+rect 680 2280 856 2348
+rect 680 1640 856 1708
+rect 738 1680 798 2320
+rect 680 1480 856 1548
+rect 680 840 856 908
+rect 738 880 798 1520
+use REYATR_NCH_4C1F2 xst2 ../REY_ATR_SKY130A
+transform 1 0 0 0 1 480
+box 0 480 1600 1280
+use REYATR_NCH_4C1F2 xst1 ../REY_ATR_SKY130A
+transform 1 0 0 0 1 1280
+box 0 1280 1600 2080
+use REYATR_NCH_4C1F2 xst0 ../REY_ATR_SKY130A
+transform 1 0 0 0 1 2080
+box 0 2080 1600 2880
+use REYATR_NCH_4CTAPBOT xstack_n_sw_bot ../REY_ATR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1600 480
+use REYATR_NCH_4CTAPTOP xstack_n_sw_top ../REY_ATR_SKY130A
+transform 1 0 0 0 1 2880
+box 0 2880 1600 3360
+<< labels >>
+flabel locali s 608 2440 1056 2520 0 FreeSans 400 0 0 0 RT0
+port 1 nsew signal bidirectional
+flabel locali s 480 2280 928 2360 0 FreeSans 400 0 0 0 RT1
+port 2 nsew signal bidirectional
+flabel locali s 480 1480 928 1560 0 FreeSans 400 0 0 0 RT2
+port 3 nsew signal bidirectional
+flabel locali s 1120 2520 1184 2600 0 FreeSans 400 0 0 0 TRIM0
+port 4 nsew signal bidirectional
+flabel locali s 1120 1720 1184 1800 0 FreeSans 400 0 0 0 TRIM1
+port 5 nsew signal bidirectional
+flabel locali s 1120 920 1184 1000 0 FreeSans 400 0 0 0 TRIM2
+port 6 nsew signal bidirectional
+flabel locali s -96 840 96 920 0 FreeSans 400 0 0 0 VSS
+port 7 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 1600 3360
+<< end >>

@@ -1,0 +1,61 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794178800
+<< checkpaint >>
+rect 0 0 3200 4160
+<< locali >>
+rect -30 2720 30 3520
+rect -30 1120 30 3520
+rect -30 1920 30 3520
+rect 456 3400 624 3464
+rect 456 2440 624 2504
+rect 456 1000 624 1064
+rect 456 1800 624 1864
+rect 288 1000 800 1080
+rect 288 3240 800 3320
+rect -96 1080 96 1160
+<< viali >>
+rect 468 3406 520 3458
+rect 560 3406 612 3458
+rect 468 2446 520 2498
+rect 560 2446 612 2498
+rect 468 1006 520 1058
+rect 560 1006 612 1058
+rect 468 1806 520 1858
+rect 560 1806 612 1858
+<< metal1 >>
+rect 456 3400 632 3468
+rect 456 2440 632 2508
+rect 514 2480 574 3440
+rect 456 1000 632 1068
+rect 456 1800 632 1868
+rect 514 1040 574 1840
+use REYATR_RES_36C2F0 xrf2<0> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 480
+box 0 480 3200 1280
+use REYATR_RES_36C2F0 xrf2<1> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 1280
+box 0 1280 3200 2080
+use REYATR_RES_36C2F0 xrf1 ../REY_ATR_SKY130A
+transform 1 0 0 0 1 2080
+box 0 2080 3200 2880
+use REYATR_RES_36C2F0 xrf0 ../REY_ATR_SKY130A
+transform 1 0 0 0 1 2880
+box 0 2880 3200 3680
+use REYATR_RES_36CTAPBOT xstack_r_fix_bot ../REY_ATR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 3200 480
+use REYATR_RES_36CTAPTOP xstack_r_fix_top ../REY_ATR_SKY130A
+transform 1 0 0 0 1 3680
+box 0 3680 3200 4160
+<< labels >>
+flabel locali s 288 1000 800 1080 0 FreeSans 400 0 0 0 RT0
+port 1 nsew signal bidirectional
+flabel locali s 288 3240 800 3320 0 FreeSans 400 0 0 0 VG
+port 2 nsew signal bidirectional
+flabel locali s -96 1080 96 1160 0 FreeSans 400 0 0 0 VSS
+port 3 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 3200 4160
+<< end >>

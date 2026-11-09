@@ -152,7 +152,19 @@ for i, (p, d) in enumerate(pins):
 #- ------------------------------------------------------------------
 #- Bias
 #- ------------------------------------------------------------------
-if BIAS == "vt":
+BIASCELL = "REY_PLL_ROSC_BIAS"
+BIAS_PINS = [(VDD, "in"), (VSS, "in"), ("TRIM0", "in"), ("TRIM1", "in"),
+             ("TRIM2", "in"), ("VBP", "out")]
+
+
+def draw_bias():
+    """The Vgs/R bias on its own sheet: VBP out, TRIM in."""
+    text("REY_PLL_ROSC_BIAS: the Vgs/R bias of the ring, VBP out",
+         -1450, -820, 0.5)
+    for i, (p, d) in enumerate(BIAS_PINS):
+        sym = {"in": "ipin", "out": "opin"}[d]
+        L.append(f"C {{devices/{sym}.sym}} {-1400 + 160*i} -740 0 0 "
+                 f"{{name=p{i} lab={p}}}")
     text("Bias: I = Vgs(MN1) / R", -1450, -620)
     #- PMOS diode xmpd, its drain down to the follower xmn2
     x, y = -1200, -500
@@ -210,6 +222,26 @@ if BIAS == "vt":
     text("38.5k fixed, then 7.7k / 15.4k / 30.8k, each shorted when "
          "TRIM<k> is high", xr, yr + 200, 0.3)
 
+
+
+if BIAS == "vt":
+    from cicpy.eda.schgen import write_box_symbol, box_symbol
+    _main = L
+    L = ["v {xschem version=3.4.7 file_version=1.2}", "G {}", "K {}",
+         "V {}", "S {}", "E {}"]
+    draw_bias()
+    with open(os.path.join(outdir, BIASCELL + ".sch"), "w") as f:
+        f.write("\n".join(L) + "\n")
+    write_box_symbol(os.path.join(outdir, BIASCELL + ".sym"), BIAS_PINS)
+    L = _main
+    #- the bias block, its own cell
+    text("Bias: I = Vgs(MN1) / R, its own cell", -1450, -620)
+    _bsym = box_symbol(BIAS_PINS)
+    xb, yb = -1100, -350
+    inst(f"REY_PLL_SKY130A/{BIASCELL}.sym", "xbias", xb, yb)
+    for p, _ in BIAS_PINS:
+        px, py, side = _bsym.pins[p]
+        lab(xb + px, yb + py, side, p)
 elif BIAS == "ext":
     text("Bias: external current into VBP", -1450, -620)
     x, y = -1200, -500
