@@ -18,6 +18,12 @@ CELLS = REY_PLL
 
 include ../tech/make/core.make
 
+#- sch2mag reads THIS IP's rules (cic/sky130A.tech: the shared
+#- tech_sky130A file plus the met3/met4 minimum area, which cicpy needs
+#- to size the middle pads of a via stack); the shared file stays as it
+#- is. Scoped to `mag`: OPT also reaches checklvs.
+mag: OPT += --tech ../cic/sky130A.tech
+
 #- ciccreator cells (cic/ip.json), compiled with cicpy: the loop filter
 #- units (lpf.json, against rey_atr's resistor patterns, prefixed REYPLL_)
 #- and the digital blocks (pll.json, on the built rey_tr library,

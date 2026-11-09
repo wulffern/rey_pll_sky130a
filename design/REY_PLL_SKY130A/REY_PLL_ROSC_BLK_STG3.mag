@@ -1,0 +1,33 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794178800
+<< checkpaint >>
+rect 0 0 1792 8120
+<< metal2 >>
+rect 1036 2090 1332 2150
+rect 780 2330 1154 2390
+<< locali >>
+rect 1344 5380 1408 5460
+rect 1216 4580 1280 4660
+rect 96 7940 1792 8120
+rect 96 0 1792 180
+use REY_PLL_ROSC_STAGE xstg<3> ../REY_PLL_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1792 8120
+<< labels >>
+flabel metal2 s 1036 2090 1332 2150 0 FreeSans 400 0 0 0 N2
+port 1 nsew signal bidirectional
+flabel metal2 s 780 2330 1154 2390 0 FreeSans 400 0 0 0 N3
+port 2 nsew signal bidirectional
+flabel locali s 1344 5380 1408 5460 0 FreeSans 400 0 0 0 VBP
+port 3 nsew signal bidirectional
+flabel locali s 1216 4580 1280 4660 0 FreeSans 400 0 0 0 VCTRL
+port 4 nsew signal bidirectional
+flabel locali s 96 7940 1792 8120 0 FreeSans 400 0 0 0 VDD_1V8
+port 5 nsew power bidirectional
+flabel locali s 96 0 1792 180 0 FreeSans 400 0 0 0 VSS
+port 6 nsew ground bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 1792 8120
+<< end >>
