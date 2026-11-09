@@ -98,7 +98,10 @@ class REY_PLL_ROSC(SidecarCell):
     blk_bias = _block("bias", r'^xbias$', ['xbias'],
                       "REY_PLL_ROSC_BIAS, finished.")
     blk_dig = _block("dig", r'^(xo0|xo1|xotap)$', ['xotap', 'xo0', 'xo1'],
-                     "The output buffer on its tap cell.", xspace=1)
+                     "The output buffer on its tap cell.",
+                     #- as stage 0's gap: the buffer stands 0.75 um past
+                     #- its box, the bias's pmos guard 0.4 past its own
+                     xspace=1.6)
 
     supplies = [
         {"net": "VDD_1V8", "ring": "t", "strap": "top", "pin_strap": True},

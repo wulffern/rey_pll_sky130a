@@ -3,18 +3,18 @@ tech sky130A
 magscale 1 2
 timestamp 1794178800
 << checkpaint >>
-rect 0 0 11392 12320
+rect 0 0 14992 7360
 << locali >>
 rect 7616 2820 7680 2900
 rect 7616 2020 7680 2100
 rect 7616 1220 7680 1300
-rect 96 12140 11392 12320
-rect 96 0 11392 180
+rect 96 7180 14992 7360
+rect 96 0 14992 180
 << metal2 >>
-rect 844 5770 10676 5830
+rect 8636 5770 14724 5830
 use REY_PLL_ROSC_BIAS xbias ../REY_PLL_SKY130A
 transform 1 0 0 0 1 0
-box 0 0 11392 12320
+box 0 0 14992 7360
 << labels >>
 flabel locali s 7616 2820 7680 2900 0 FreeSans 400 0 0 0 TRIM0
 port 1 nsew signal bidirectional
@@ -22,12 +22,12 @@ flabel locali s 7616 2020 7680 2100 0 FreeSans 400 0 0 0 TRIM1
 port 2 nsew signal bidirectional
 flabel locali s 7616 1220 7680 1300 0 FreeSans 400 0 0 0 TRIM2
 port 3 nsew signal bidirectional
-flabel metal2 s 844 5770 10676 5830 0 FreeSans 400 0 0 0 VBP
+flabel metal2 s 8636 5770 14724 5830 0 FreeSans 400 0 0 0 VBP
 port 4 nsew signal bidirectional
-flabel locali s 96 12140 11392 12320 0 FreeSans 400 0 0 0 VDD_1V8
+flabel locali s 96 7180 14992 7360 0 FreeSans 400 0 0 0 VDD_1V8
 port 5 nsew power bidirectional
-flabel locali s 96 0 11392 180 0 FreeSans 400 0 0 0 VSS
+flabel locali s 96 0 14992 180 0 FreeSans 400 0 0 0 VSS
 port 6 nsew ground bidirectional
 << properties >>
-string FIXED_BBOX 0 0 11392 12320
+string FIXED_BBOX 0 0 14992 7360
 << end >>

@@ -1,11 +1,15 @@
 """REY_PLL_ROSC_BIAS: the ring's Vgs/R bias, laid out and routed on its
 own. The oscillator places it beside the stages and takes VBP from it.
 
-    top (n-well):  p_diode  p_mirb
-    bottom:        r_trim  r_fix  n_sw  n_su  n_bias
+    r_trim  r_fix  n_sw  n_su  n_bias  |  p_mirb  p_diode
+    ------------ nmos, resistors ------    -- n-well --
 
-The nets that cross between the stacks run in the channel, a track
-each. No coordinates here.
+One row, split VERTICALLY: the pmos columns sit beside the rest past a
+gap that keeps the wells apart, not in a row of their own over it. The
+tallest column sets the height (24.8 um), about a ring stage's, which
+is what the oscillator places this beside. The nets that cross between
+the columns climb out of the top of each to the channel over the row,
+a track each. No coordinates here.
 """
 from cicpy.core.path import pin, PITCH
 from cicpy.sidecar import SidecarCell, Stack
@@ -112,6 +116,7 @@ def _r_fix_paths():
 class _P(Stack):
     group = "pmos"
     fill = False
+    xspace = 0
     blocked = [("VDD_1V8", "sources and bulks; the guard carries it")]
 
 
@@ -129,9 +134,15 @@ class REY_PLL_ROSC_BIAS(SidecarCell):
         order = [r'xmpd<\d+>']
 
     class p_mirb(_P):
-        """The mirror into MN1 (VX), and the startup PMOS on top."""
+        """The mirror into MN1 (VX), and the startup PMOS. First
+        past the split: VX and VBP are n_bias's too."""
+        #- the well gap: n-well against the nmos guard (um)
+        xspace = 2
         match = r'^(xmpb<\d+>|xms1)$'
-        order = [r'xmpb<\d+>', 'xms1']
+        #- xms1 at the BOTTOM: the channel is above the row, and the
+        #- mirror's drops climb straight out over their own devices
+        #- (xms1 on top had VX and VBP climbing through its VG/XST)
+        order = ['xms1', r'xmpb<\d+>']
 
     class n_bias(_N):
         """MN1 and the LVT follower MN2.
@@ -186,9 +197,11 @@ class REY_PLL_ROSC_BIAS(SidecarCell):
     #- the space of the next lane's bar
     channel = 9
     #- VG in n_su climbs from MS3's source past its drain (VBP): left of
-    #- the drain, which starts 0.64 um right of the source
+    #- the drain, which starts 0.64 um right of the source. In p_mirb
+    #- it climbs from xms1's gate past the mirror's gates (VBP): on M4
     routes = [{"net": "VG", "track": 0,
-               "drops": [[n_su, "M2", "left", "nopin"]]},
+               "drops": [[n_su, "M2", "left", "nopin"],
+                         [p_mirb, "M4", "center"]]},
               {"net": "VX", "track": 2}]
     #- VBP in n_su on the left of the drain, clear of
     #- XST's trunk
@@ -205,6 +218,6 @@ class REY_PLL_ROSC_BIAS(SidecarCell):
 
 _C = REY_PLL_ROSC_BIAS
 REY_PLL_ROSC_BIAS.rows = [
-    [_C.r_trim, _C.r_fix, _C.n_sw, _C.n_su, _C.n_bias],
-    [_C.p_diode, _C.p_mirb],
+    [_C.r_trim, _C.r_fix, _C.n_sw, _C.n_su, _C.n_bias, _C.p_mirb,
+     _C.p_diode],
 ]

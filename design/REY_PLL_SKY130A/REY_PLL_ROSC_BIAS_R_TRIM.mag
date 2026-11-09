@@ -44,8 +44,8 @@ rect -16 1130 30 1190
 rect -16 1090 30 1150
 rect -30 1120 30 1190
 rect -16 1090 30 1150
-rect 288 3240 800 3320
-rect 288 3400 800 3480
+rect 288 4040 800 4120
+rect 288 4200 800 4280
 rect 288 2600 800 2680
 rect -96 1080 96 1160
 << viali >>
@@ -130,9 +130,9 @@ use REYATR_RES_36CTAPTOP xstack_r_trim_top ../REY_ATR_SKY130A
 transform 1 0 0 0 1 4480
 box 0 4480 3200 4960
 << labels >>
-flabel locali s 288 3240 800 3320 0 FreeSans 400 0 0 0 RT0
+flabel locali s 288 4040 800 4120 0 FreeSans 400 0 0 0 RT0
 port 1 nsew signal bidirectional
-flabel locali s 288 3400 800 3480 0 FreeSans 400 0 0 0 RT1
+flabel locali s 288 4200 800 4280 0 FreeSans 400 0 0 0 RT1
 port 2 nsew signal bidirectional
 flabel locali s 288 2600 800 2680 0 FreeSans 400 0 0 0 RT2
 port 3 nsew signal bidirectional
