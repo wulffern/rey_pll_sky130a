@@ -59,76 +59,6 @@
                             "tbrl",
                             4,
                             2
-                        ],
-                        [
-                            "M5",
-                            "CK_REF",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "CK_FB",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "PWRUP_1V8",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "PWRUP_N",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "RST",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "DN",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "RN_U",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "RN_D",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "UP",
-                            "rtbl",
-                            1,
-                            2
-                        ],
-                        [
-                            "M5",
-                            "DN_N",
-                            "rtbl",
-                            1,
-                            2
                         ]
                     ]
                 },
@@ -141,173 +71,203 @@
                     [
                         "M4",
                         "VSS",
-                        "X:AVSS||rail_b_VSS",
+                        "XA\\d+:AVSS||rail_b_VSS",
                         ""
                     ],
                     [
                         "M4",
                         "VDD_1V8",
-                        "X:AVDD||rail_t_VDD_1V8",
+                        "XA\\d+:AVDD||rail_t_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XB\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XB\\d+:AVDD||rail_t_VDD_1V8",
                         ""
                     ],
                     [
                         "M2",
+                        "RN_U",
+                        "XA1:RN-|--XA2:Y",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M3",
                         "UP",
-                        "XA1:Q-|--XA2:A",
+                        "XA1:Q-|--XA3:B",
                         "track-13"
                     ],
                     [
                         "M2",
                         "HU",
-                        "XA4:Y-|--XA3:A,XA5:A",
+                        "XA4:Y-|--XA2:A,XA5:A",
+                        "track-13"
+                    ],
+                    [
+                        "M3",
+                        "RST",
+                        "XA3:Y-|--XA4:A",
                         "track-13"
                     ],
                     [
                         "M3",
                         "HAU",
-                        "XA5:Y-|--XA4:A",
+                        "XA5:Y-|--XA4:B",
                         "track-13"
+                    ],
+                    [
+                        "M4",
+                        "CK_REF",
+                        "XA1:CK|-XA5:B",
+                        "track1"
+                    ],
+                    [
+                        "M2",
+                        "RN_D",
+                        "XB1:RN--|-XB2:Y",
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M3",
+                        "DN",
+                        "XB1:Q-|--XB3:A",
+                        "track6"
                     ],
                     [
                         "M2",
                         "HD",
-                        "XA9:Y-|--XA8:A,XA10:A",
-                        "track-13"
+                        "XB5:Y-|--XB2:A,XB6:A",
+                        "track6"
                     ],
                     [
                         "M3",
                         "HAD",
-                        "XA10:Y-|--XA9:A",
-                        "track-13"
-                    ]
-                ],
-                "addRouteConnections": [
-                    [
-                        "^CK_REF$",
-                        "XA(1|5)$",
-                        "left",
-                        "M4",
-                        ""
+                        "XB6:Y-|--XB5:A",
+                        "track6"
                     ],
                     [
-                        "^CK_FB$",
-                        "XA(7|10)$",
-                        "left",
-                        "M4",
-                        ""
-                    ],
-                    [
-                        "^PWRUP_1V8$",
-                        "XA6$",
-                        "left",
-                        "M4",
-                        ""
-                    ],
-                    [
-                        "^PWRUP_1V8$",
-                        "XA(1|7)$",
-                        "right",
-                        "M4",
-                        ""
-                    ],
-                    [
-                        "^PWRUP_N$",
-                        "XA6$",
-                        "right",
                         "M3",
+                        "PWRUP_N",
+                        "XB2:B--|-XB4:Y",
                         ""
                     ],
                     [
-                        "^PWRUP_N$",
-                        "XA(3|8)$",
-                        "left",
                         "M4",
-                        ""
+                        "CK_FB",
+                        "XB1:CK-|XB6:B",
+                        "track1"
                     ],
                     [
-                        "^RST$",
-                        "XA2$",
-                        "right",
-                        "M3",
-                        ""
+                        "M5",
+                        "PWRUP_N",
+                        "XA2:B-XB2:B",
+                        "stopLayer=M3"
                     ],
                     [
-                        "^RST$",
-                        "XA(4|9)$",
-                        "left",
+                        "M5",
+                        "DN",
+                        "XA3:A-XB3:A",
+                        "stopLayer=M3"
+                    ],
+                    [
+                        "M5",
+                        "RST",
+                        "XA4:A-XB5:B",
+                        "startLayer=M3"
+                    ],
+                    [
                         "M4",
+                        "PWRUP_1V8",
+                        "XA1:D-XB1:D",
                         ""
                     ],
                     [
-                        "^DN$",
-                        "XA7$",
-                        "right",
-                        "M3",
-                        ""
-                    ],
-                    [
-                        "^DN$",
-                        "XA2$",
-                        "left",
-                        "M4",
-                        ""
-                    ],
-                    [
-                        "^RN_U$",
-                        "XA3$",
-                        "right",
-                        "M3",
-                        ""
-                    ],
-                    [
-                        "^RN_U$",
-                        "XA1$",
-                        "left",
-                        "M4",
-                        "startLayer=M2"
-                    ],
-                    [
-                        "^RN_D$",
-                        "XA8$",
-                        "right",
-                        "M3",
-                        ""
-                    ],
-                    [
-                        "^RN_D$",
-                        "XA7$",
-                        "left",
-                        "M4",
-                        "startLayer=M2"
-                    ],
-                    [
-                        "^UP$",
-                        "XA1$",
-                        "right",
-                        "M3",
-                        ""
-                    ],
-                    [
-                        "^DN$",
-                        "XA11$",
-                        "left",
-                        "M4",
-                        ""
-                    ],
-                    [
-                        "^DN_N$",
-                        "XA11$",
-                        "right",
-                        "M3",
-                        ""
+                        "M5",
+                        "PWRUP_1V8",
+                        "XB4:A-|--XB1:D",
+                        "track0,stopLayer=M4"
                     ]
                 ],
                 "addConnectivityRoutes": []
             },
             "afterPaint": {
-                "resetOrigin": 1
+                "resetOrigin": 1,
+                "addPortOnEdges": [
+                    [
+                        "M3",
+                        "UP",
+                        "top",
+                        "-|--",
+                        "nostartcut"
+                    ],
+                    [
+                        "M3",
+                        "DN_N",
+                        "top",
+                        "--|-",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "CK_REF",
+                        "bottom",
+                        "||",
+                        "nostartcut"
+                    ],
+                    [
+                        "M4",
+                        "CK_FB",
+                        "top",
+                        "||",
+                        "nostartcut"
+                    ],
+                    [
+                        "M4",
+                        "PWRUP_1V8",
+                        "bottom",
+                        "||",
+                        "nostartcut"
+                    ]
+                ]
             },
-            "noPrefix": 1
+            "noPrefix": 1,
+            "alternateGroup": 1,
+            "afterRoute": {
+                "addPortOnRects": [
+                    [
+                        "UP",
+                        "M1",
+                        "XA1:Q"
+                    ],
+                    [
+                        "DN_N",
+                        "M1",
+                        "XB3:Y"
+                    ],
+                    [
+                        "CK_REF",
+                        "M1",
+                        "XA1:CK"
+                    ],
+                    [
+                        "CK_FB",
+                        "M1",
+                        "XB6:B"
+                    ],
+                    [
+                        "PWRUP_1V8",
+                        "M1",
+                        "XA1:D"
+                    ]
+                ]
+            }
         },
         {
             "name": "REY_PLL_CTRL",

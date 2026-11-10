@@ -136,29 +136,35 @@ PFD = dict(
            "HU = RST or (HU and CK_REF), RN_U = PWRUP and not HU; the same "
            "for DN on CK_FB"],
     columns=[
-        #- one column, bottom to top. Each latch sits over its flop, by
-        #- the flop's RN pin (high in the flop); RST = UP and DN over the
-        #- UP flop, by its Q. D is PWRUP_1V8, high whenever the PLL runs
-        #- (powered down the flops are held in reset anyway). Nets that
-        #- are not a hop between neighbours run on rings round the block
-        ("A: UP flop, RST, UP latch, PWRUP_N, DN flop, DN latch", [
+        #- two mirrored columns, an UP half and a DN half, each a flop
+        #- with its reset latch over it: NR by the flop's RN pin, then
+        #- OR and AN. Rows line up across the columns, so a net that
+        #- crosses is one straight bar between two input pins at one
+        #- height: PWRUP_N (the NRs' B), DN (XB3.A to XA3.A) and RST
+        #- (XA4.A to XB5.B: the two inverters in B are 0.8 um less than
+        #- the AND beside them, which is the pitch from pin A to pin B).
+        #- D is PWRUP_1V8, high whenever the PLL runs (powered down the
+        #- flops are held in reset anyway)
+        ("A: UP flop, UP latch, RST", [
             tap("XA0"),
             g("XA1", "DFRNQNX1", D="PWRUP_1V8", CK="CK_REF", RN="RN_U",
               Q="UP", QN="UP_N"),
-            g("XA2", "ANX1", A="UP", B="DN", Y="RST"),
-            g("XA3", "NRX1", A="HU", B="PWRUP_N", Y="RN_U"),
-            g("XA4", "ORX1", A="HAU", B="RST", Y="HU"),
-            g("XA5", "ANX1", A="HU", B="CK_REF", Y="HAU"),
-            g("XA6", "IVX1", A="PWRUP_1V8", Y="PWRUP_N"),
-            g("XA7", "DFRNQNX1", D="PWRUP_1V8", CK="CK_FB", RN="RN_D",
+            g("XA2", "NRX1", A="HU", B="PWRUP_N", Y="RN_U"),
+            g("XA3", "ANX1", A="DN", B="UP", Y="RST"),
+            g("XA4", "ORX1", A="RST", B="HAU", Y="HU"),
+            g("XA5", "ANX1", A="HU", B="CK_REF", Y="HAU")]),
+        ("B: DN flop, DN latch, DN_N, PWRUP_N", [
+            tap("XB0"),
+            g("XB1", "DFRNQNX1", D="PWRUP_1V8", CK="CK_FB", RN="RN_D",
               Q="DN", QN="DN_Q_N"),
-            g("XA8", "NRX1", A="HD", B="PWRUP_N", Y="RN_D"),
-            g("XA9", "ORX1", A="HAD", B="RST", Y="HD"),
-            g("XA10", "ANX1", A="HD", B="CK_FB", Y="HAD"),
+            g("XB2", "NRX1", A="HD", B="PWRUP_N", Y="RN_D"),
             #- DN_N from DN: the flop's own QN carries a via of the
             #- flop's wiring right on the pin, which an outside stack
             #- cannot share
-            g("XA11", "IVX1", A="DN", Y="DN_N")])])
+            g("XB3", "IVX1", A="DN", Y="DN_N"),
+            g("XB4", "IVX1", A="PWRUP_1V8", Y="PWRUP_N"),
+            g("XB5", "ORX1", A="HAD", B="RST", Y="HD"),
+            g("XB6", "ANX1", A="HD", B="CK_FB", Y="HAD")])])
 
 #- REY_PLL_DIVN ---------------------------------------------------------
 DIVN_PINS = ([(VDD, "in"), (VSS, "in"), ("CK", "in"),
@@ -412,6 +418,7 @@ def main():
     top(subs).write(outdir)
     cic = os.path.join(os.path.dirname(__file__), "..", "cic")
     write_spi(os.path.join(cic, "pll.spi"))
+    pfd_layout(cic)
     divn_layout(cic)
     lpf_layout(cic)
 
@@ -530,6 +537,92 @@ def divn_layout(cic):
                                                "nostartcut"]]}
     json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
     log.info(f"pll.json: REY_PLL_DIVN, {len(directed)} directed routes")
+
+
+
+#- --------------------------------------------------------------------
+#- REY_PLL_PFD's routes
+#- --------------------------------------------------------------------
+#- Column B is mirrored (alternateGroup): the flops' D pins face each
+#- other across the seam, the input pins stand along the block's two
+#- outer edges. A rey_tr cell leaves three lanes for a trunk:
+#-
+#-   outer   between the cell's edge and its input pins, M2 and M3:
+#-           from an OUTPUT to inputs (track-13, mirrored track6)
+#-   middle  between the input pins and the outputs, M2 and M3: from
+#-           an INPUT, no offset; its stubs cross no other lane
+#-   edge    left of the outer lane, M4 and M5: input to input, since
+#-           an output lies under its VSS strip and stops at M3
+#-
+#- An outer route's stub from its output crosses the middle lane, so
+#- the two never share a layer where they overlap. Across the columns
+#- a net goes on M5, straight, between input pins at one height.
+PO, PO_M = "track-13", "track6"          # outer lane
+
+
+def pfd_layout(cic):
+    """Directed routes for REY_PLL_PFD, replacing the ten signal rings
+    the block had: every net is a hop in its column or one bar across."""
+    import json
+    directed = []
+    for L in "AB":
+        directed += [["M4", "VSS", f"X{L}\\d+:AVSS||rail_b_VSS", ""],
+                     ["M4", "VDD_1V8", f"X{L}\\d+:AVDD||rail_t_VDD_1V8", ""]]
+    directed += [
+        #- A, the UP half. RN from the latch: up the middle lane on M2,
+        #- off the flop's own via on RN
+        ["M2", "RN_U", "XA1:RN-|--XA2:Y", "startLayer=M2"],
+        ["M3", "UP", "XA1:Q-|--XA3:B", PO],
+        ["M2", "HU", "XA4:Y-|--XA2:A,XA5:A", PO],
+        ["M3", "RST", "XA3:Y-|--XA4:A", PO],
+        ["M3", "HAU", "XA5:Y-|--XA4:B", PO],
+        ["M4", "CK_REF", "XA1:CK|-XA5:B", "track1"],
+        #- B, the DN half, mirrored. PWRUP_N overlaps DN and HD, so it
+        #- takes the middle lane, on M3 over RN_D's M2
+        ["M2", "RN_D", "XB1:RN--|-XB2:Y", "startLayer=M2"],
+        ["M3", "DN", "XB1:Q-|--XB3:A", PO_M],
+        ["M2", "HD", "XB5:Y-|--XB2:A,XB6:A", PO_M],
+        ["M3", "HAD", "XB6:Y-|--XB5:A", PO_M],
+        ["M3", "PWRUP_N", "XB2:B--|-XB4:Y", ""],
+        ["M4", "CK_FB", "XB1:CK-|XB6:B", "track1"],
+        #- across. The end a hop already stands on starts from the
+        #- hop's layer: one stack on a pin, not two
+        ["M5", "PWRUP_N", "XA2:B-XB2:B", "stopLayer=M3"],
+        ["M5", "DN", "XA3:A-XB3:A", "stopLayer=M3"],
+        ["M5", "RST", "XA4:A-XB5:B", "startLayer=M3"],
+        #- PWRUP_1V8: the two D pins across the seam on M4, then from
+        #- the inverter down B's edge lane on M5, over the flop to D
+        ["M4", "PWRUP_1V8", "XA1:D-XB1:D", ""],
+        ["M5", "PWRUP_1V8", "XB4:A-|--XB1:D", "track0,stopLayer=M4"],
+    ]
+
+    o = json.load(open(os.path.join(cic, 'pll.json')))
+    for c in o['cells']:
+        if c['name'] != 'REY_PLL_PFD':
+            continue
+        c['alternateGroup'] = 1
+        c['afterPlace'] = [{"addRouteRings": [
+            ["M1", "VSS", "tbrl", 4, 2], ["M1", "VDD_1V8", "tbrl", 4, 2]]},
+            {"addPowerRings": []}]
+        c['beforeRoute'] = {
+            "addDirectedRoutes": directed,
+            "addConnectivityRoutes": []}
+        #- the pin each port leaves from
+        c['afterRoute'] = {"addPortOnRects": [
+            ["UP", "M1", "XA1:Q"], ["DN_N", "M1", "XB3:Y"],
+            ["CK_REF", "M1", "XA1:CK"], ["CK_FB", "M1", "XB6:B"],
+            ["PWRUP_1V8", "M1", "XA1:D"]]}
+        #- outputs up the lane between the cells' supply strips on M3
+        #- (free above the flops), inputs straight off a pin with
+        #- nothing between it and the edge, on the M4 it already has
+        c['afterPaint'] = {"resetOrigin": 1, "addPortOnEdges": [
+            ["M3", "UP", "top", "-|--", "nostartcut"],
+            ["M3", "DN_N", "top", "--|-", ""],
+            ["M4", "CK_REF", "bottom", "||", "nostartcut"],
+            ["M4", "CK_FB", "top", "||", "nostartcut"],
+            ["M4", "PWRUP_1V8", "bottom", "||", "nostartcut"]]}
+    json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
+    log.info(f"pll.json: REY_PLL_PFD, {len(directed)} directed routes")
 
 
 

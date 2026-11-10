@@ -6,13 +6,13 @@ The whole PLL is laid out with cicpy sidecars and checks clean:
 
 | Cell              | Size (um)    | DRC | LVS   |
 |:------------------|:-------------|:----|:------|
-| REY_PLL (top)     | 209 x 155    | OK  | match |
+| REY_PLL (top)     | 209 x 155    | stale, see below |  |
 | REY_PLL_ROSC      | 150.8 x 43.7 | OK  | match |
 | REY_PLL_ROSC_BIAS | 75 x 36.8    | OK  | match |
 | REY_PLL_ROSC_STAGE|              | OK  | match |
 | REY_PLL_CP        | 17 x 38.6    | OK  | match |
 | REY_PLL_DIVN      | 57.9 x 52.2  | OK  | match |
-| REY_PLL_PFD       | 37.7 x 95.8  | OK  | match |
+| REY_PLL_PFD       | 27.2 x 42.7  | OK  | match |
 | REY_PLL_CTRL      | 17.3 x 29    | OK  | match |
 | REY_PLL_LPF       | 73.4 x 49    | OK  | match |
 
@@ -25,19 +25,68 @@ Commits (both pushed):
 
 ## The open problem: size
 
-The top is 209 x 155 um, but the tile is 161 x 111.52 um (core about
-155 x 110.5). The plan, in order:
+The tile is 161 x 111.52 um. lelo_temp's core is 154.52 x 110.95 in it.
 
-1. **PFD rework.** The PFD is a 10 um column of cells inside ten M5 signal
-   rings (`rtbl`, 1.02 um pitch), so it is 37.7 x 95.8 um. That height also
-   sets the top row's height. Rebuild it as two mirrored columns, an UP
-   half and a DN half (DFF, NR, OR, AN, IV), with directed paths instead of
-   rings. That should come to about 1300 um2, against 3600 now.
-2. **Re-floorplan the top** around the 150.8 um ROSC strip. The ROSC
-   already fits the tile width. Squeeze the whitespace and reshape the LPF
-   (73.4 x 49 is the next largest block).
+### Step 1, the PFD: done
+
+`pfd_layout` in `py/gen_pll.py`. Two mirrored columns (A: UP flop and its
+reset latch, B: DN flop and latch, the two inverters), 21 directed routes
+and no signal rings: 27.16 x 42.72 um, 1160 um2 against 3600. DRC clean,
+LVS "Circuits match uniquely".
+
+- Three trunk lanes per column: outer (cell edge to input pins, M2/M3,
+  output to inputs), middle (between the input pins and the outputs,
+  M2/M3, started from an input pin) and edge (M4/M5, input to input).
+- Rows line up across the columns, so PWRUP_N, DN and RST each cross as
+  one straight M5 bar between two input pins.
+- Ports: UP and DN_N on the top edge (M3), CK_FB top (M4), CK_REF and
+  PWRUP_1V8 bottom (M4). These sides are provisional.
+- Pins A and B are swapped on XA3 and XA4 (symmetric gates), so the
+  corner sims in step 4 cover it.
+- `checkroutes` reports XA1/CKB shorted to XA1/CKN in every flop, in
+  DIVN too. That is the checker, not the layout: LVS matches.
+
+**The top is stale.** `REY_PLL.py` still routes to the old PFD's M5
+rings (`_pfd_cp`, `_pwrup`, `_ck_fb`, the PFD supply strap), and
+`REY_PLL.mag` was not rebuilt. It gets rewritten with the floorplan.
+
+### Step 2, the floorplan: does not fit as planned
+
+With the new PFD the height is met: ROSC 43.66 + channel 6 + DIVN 52.16
++ rings 6 is about 108 of 110.95. The width is not. The top row is
+
+    DIVN 57.88 + PFD 27.16 + CTRL 17.26 + CP 18.56 + LPF 73.40 = 194.3
+
+against about 151 inside the rings, and it is not a matter of
+arrangement: the blocks sum to 15 511 um2, which is 86 % of the raw tile
+and 98 % of what is left inside the top's rings, before any routing.
+
+| Block | um2  | Of which rings and margins |
+|:------|-----:|---------------------------:|
+| ROSC  | 6583 | bias is 75 x 36.8 beside 43.66 tall stages; 13 x 34 empty over `dig` |
+| LPF   | 3594 | 930 (the eight RCU cells are 64 x 41.6) |
+| DIVN  | 3019 | 800 |
+| PFD   | 1160 | 460 |
+| CP    |  655 | |
+| CTRL  |  500 | 290 |
+
+What squeezing can give without touching the circuit, roughly:
+
+- thinner block rings (`addRouteRings` widthmult 4 to 1 or 2): 900
+- LPF without its M2 rings and M5 side rails: 700
+- ROSC_BIAS rebuilt to the stages' height: 800
+
+That is 2400 um2, leaving 13 100 (83 % inside the rings), and it needs a
+packing that is not one row. Dropping divider taps 7 to 10 (two DIVN
+columns) gives another 940. A 1x2 tile (161 x 225.76) fits what exists
+today in three rows. This is waiting for the user's decision.
+
+### Steps 3 and 4, unchanged
+
 3. **TT wrapper.** Copy `gen_tt_um.py` from lelo_temp and route the IO
    pins to the edges: PWRUP_1V8, CK_REF, TRIM0-2, OLH, OLL, CK, CKO0-7.
+   The wrapper's power rails are met4 (cicpy M5) at x 0 to 4.4 um, full
+   height, so the core keeps M5 out of its west 4 um.
 4. **Wrap-up.**
    - Run kdrc on the top.
    - Rerun the corner sims on the extracted netlist.
@@ -93,8 +142,9 @@ Run these in `work/`:
   beforeRoute, and the PFD/CTRL->CP, CK_FB, channel and supply paths.
 - `design/REY_PLL_SKY130A/REY_PLL_ROSC.py`, `REY_PLL_ROSC_BIAS.py` and
   `REY_PLL_CP.py` are the blocks.
-- `py/gen_pll.py` is the generator. `divn_layout` publishes CK_FB on the
-  top edge.
+- `py/gen_pll.py` is the generator. `pfd_layout`, `divn_layout` and
+  `lpf_layout` write the routes into `cic/pll.json`; `divn_layout`
+  publishes CK_FB on the top edge.
 - `cic/sky130A.tech` is the local tech file.
 - cicpy changes:
   - `core/layoutcell.py`: promoteInstancePort with offset/jog,
