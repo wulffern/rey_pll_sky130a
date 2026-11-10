@@ -758,7 +758,16 @@
                 "addConnectivityRoutes": []
             },
             "afterPaint": {
-                "resetOrigin": 1
+                "resetOrigin": 1,
+                "addPortOnEdges": [
+                    [
+                        "M5",
+                        "CK_FB",
+                        "top",
+                        "||",
+                        "nostartcut"
+                    ]
+                ]
             },
             "noPrefix": 1,
             "afterRoute": {

@@ -58298,14 +58298,59 @@
     },
     {
      "class": "Port",
-     "layer": "M1",
+     "layer": "M5",
      "name": "CK_FB",
      "net": "",
      "spicePort": true,
      "x1": 276500,
      "x2": 285500,
+     "y1": 518600,
+     "y2": 521600
+    },
+    {
+     "class": "Rect",
+     "layer": "M5",
+     "net": "CK_FB",
+     "x1": 276500,
+     "x2": 285500,
+     "y1": 518600,
+     "y2": 521600
+    },
+    {
+     "abstract": false,
+     "children": [
+      {
+       "class": "Rect",
+       "layer": "M5",
+       "net": "CK_FB",
+       "x1": 279100,
+       "x2": 282900,
+       "y1": 455300,
+       "y2": 521600
+      },
+      {
+       "class": "Text",
+       "layer": "TXT",
+       "name": "CK_FB",
+       "net": "CK_FB",
+       "x1": 276500,
+       "x2": 276500,
+       "y1": 455300,
+       "y2": 455300
+      }
+     ],
+     "ckt": {},
+     "class": "cIcCore::Route",
+     "has_pr": false,
+     "layer": "PR",
+     "libcell": false,
+     "name": "CK_FB",
+     "net": "CK_FB",
+     "physicalOnly": false,
+     "x1": 276500,
+     "x2": 282900,
      "y1": 455300,
-     "y2": 458300
+     "y2": 521600
     }
    ],
    "ckt": {

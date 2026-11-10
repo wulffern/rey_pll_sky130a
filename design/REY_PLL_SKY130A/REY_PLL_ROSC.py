@@ -111,6 +111,37 @@ class REY_PLL_ROSC(SidecarCell):
     paths = _ring_paths() + _bias_paths()
     routes = []
 
+    #- the stage whose VCTRL pin the top's VCTRL lands over: the one
+    #- under the charge pump's VCTRL port
+    VCTRL_STAGE = 2
+
+    def afterRoute(self, layout):
+        """The ports the top reaches, carried to the top edge, M4:
+
+          VBP    from the bias's bar
+          VCTRL  from a stage's pin, off the M5 the stages' bar already
+                 brought it up on
+          CK     out of the buffer sideways first: the output pin lies
+                 under the cell's VSS M4 strip, so M3 at the pin's own
+                 height (between the strip's cut stacks) to the gap
+                 before stage 0, and up there
+        """
+        super().afterRoute(layout)
+        layout.promoteInstancePort("VBP", r"^xblk_bias$", "top", "M4")
+        #- six pitches left along VCTRL's own M5 bar, into the stage's
+        #- empty left half: straight up from the pin the riser passed
+        #- VBP's pin stack 0.05 um away (met3.2), and a pitch or less
+        #- left still ran beside that stack or onto the pin's own via
+        layout.promoteInstancePort("VCTRL",
+                                   rf"^xblk_stg{self.VCTRL_STAGE}$",
+                                   "top", "M4", stopLayer="M5",
+                                   offset=-6 * PITCH.resolve("M4"))
+        dig = layout.getInstanceFromInstanceName("xblk_dig")
+        nxt = layout.getInstanceFromInstanceName(f"xblk_stg{ORDER[0]}")
+        gap = (int(dig.x2) + int(nxt.x1)) // 2
+        layout.promoteInstancePort("CK", r"^xblk_dig$", "top", "M4",
+                                   jog=("M3", gap))
+
 
 _C = REY_PLL_ROSC
 for _k in range(NSTAGE):

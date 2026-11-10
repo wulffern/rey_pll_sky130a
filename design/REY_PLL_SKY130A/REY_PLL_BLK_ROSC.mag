@@ -1,38 +1,39 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794092400
+timestamp 1794265200
 << checkpaint >>
-rect 0 0 16476 11332
+rect 0 0 30156 8732
+<< metal3 >>
+rect 17392 8480 17512 8720
+rect 8666 8480 8786 8720
+rect 25248 8480 25368 8720
 << locali >>
-rect 15126 1150 15306 1210
-rect 7616 2820 7680 2900
-rect 7616 2020 7680 2100
-rect 7616 1220 7680 1300
-rect 10368 4340 10688 4420
-rect 4416 7780 4480 7860
-rect 96 11140 16476 11320
-rect 96 0 16476 180
+rect 7616 3120 7680 3200
+rect 7616 2320 7680 2400
+rect 7616 1520 7680 1600
+rect 0 8540 30156 8720
+rect 0 0 30156 180
 use REY_PLL_ROSC xrosc ../REY_PLL_SKY130A
 transform 1 0 0 0 1 0
-box 0 0 16476 11332
+box 0 0 30156 8732
 << labels >>
-flabel locali s 15126 1150 15306 1210 0 FreeSans 400 0 0 0 CK
+flabel metal3 s 17392 8480 17512 8720 0 FreeSans 400 0 0 0 CK
 port 1 nsew signal bidirectional
-flabel locali s 7616 2820 7680 2900 0 FreeSans 400 0 0 0 TRIM0
+flabel locali s 7616 3120 7680 3200 0 FreeSans 400 0 0 0 TRIM0
 port 2 nsew signal bidirectional
-flabel locali s 7616 2020 7680 2100 0 FreeSans 400 0 0 0 TRIM1
+flabel locali s 7616 2320 7680 2400 0 FreeSans 400 0 0 0 TRIM1
 port 3 nsew signal bidirectional
-flabel locali s 7616 1220 7680 1300 0 FreeSans 400 0 0 0 TRIM2
+flabel locali s 7616 1520 7680 1600 0 FreeSans 400 0 0 0 TRIM2
 port 4 nsew signal bidirectional
-flabel locali s 10368 4340 10688 4420 0 FreeSans 400 0 0 0 VBP
+flabel metal3 s 8666 8480 8786 8720 0 FreeSans 400 0 0 0 VBP
 port 5 nsew signal bidirectional
-flabel locali s 4416 7780 4480 7860 0 FreeSans 400 0 0 0 VCTRL
+flabel metal3 s 25248 8480 25368 8720 0 FreeSans 400 0 0 0 VCTRL
 port 6 nsew signal bidirectional
-flabel locali s 96 11140 16476 11320 0 FreeSans 400 0 0 0 VDD_1V8
+flabel locali s 0 8540 30156 8720 0 FreeSans 400 0 0 0 VDD_1V8
 port 7 nsew power bidirectional
-flabel locali s 96 0 16476 180 0 FreeSans 400 0 0 0 VSS
+flabel locali s 0 0 30156 180 0 FreeSans 400 0 0 0 VSS
 port 8 nsew ground bidirectional
 << properties >>
-string FIXED_BBOX 0 0 16476 11332
+string FIXED_BBOX 0 0 30156 8732
 << end >>

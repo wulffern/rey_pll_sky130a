@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794092400
+timestamp 1794178800
 << checkpaint >>
 rect 0 0 11576 10432
 << locali >>
@@ -23,7 +23,6 @@ rect 8050 5266 8230 5326
 rect 8050 9586 8230 9646
 rect 9490 5266 9670 5326
 rect 9490 9586 9670 9646
-rect 5530 9106 5710 9166
 << m4 >>
 rect 0 0 76 10432
 rect 0 0 76 10432
@@ -49,6 +48,9 @@ rect 6518 1506 6594 9422
 rect 8500 9346 8798 9422
 rect 8798 1506 9220 1582
 rect 8798 1506 8874 9422
+rect 5530 10372 5710 10432
+rect 5530 10372 5710 10432
+rect 5582 9106 5658 10432
 << m3 >>
 rect 76 1506 1210 1566
 rect 1620 368 1696 9056
@@ -474,7 +476,7 @@ flabel locali s 9490 5266 9670 5326 0 FreeSans 400 0 0 0 CKO6
 port 11 nsew signal bidirectional
 flabel locali s 9490 9586 9670 9646 0 FreeSans 400 0 0 0 CKO7
 port 12 nsew signal bidirectional
-flabel locali s 5530 9106 5710 9166 0 FreeSans 400 0 0 0 CK_FB
+flabel m4 s 5530 10372 5710 10432 0 FreeSans 400 0 0 0 CK_FB
 port 4 nsew signal bidirectional
 << properties >>
 string FIXED_BBOX 0 0 11576 10432

@@ -522,7 +522,12 @@ def divn_layout(cic):
             "addConnectivityRoutes": []}
         c['afterRoute'] = {"addPortOnRects": [
             [t[2], "M1", t[0] + ":Y"] for t in insts if t[-1] == 'REYTR_BFX1_CV']}
-        c['afterPaint'] = {"resetOrigin": 1}
+        #- CK_FB to the top edge for the PFD: straight up on M5 from the
+        #- tap buffer's input, where the crossing to the next column
+        #- already stacks the net up to M5 (no second cut on the pin)
+        c['afterPaint'] = {"resetOrigin": 1,
+                           "addPortOnEdges": [["M5", "CK_FB", "top", "||",
+                                               "nostartcut"]]}
     json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
     log.info(f"pll.json: REY_PLL_DIVN, {len(directed)} directed routes")
 
