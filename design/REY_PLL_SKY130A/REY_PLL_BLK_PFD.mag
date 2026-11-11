@@ -1,36 +1,38 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794265200
+timestamp 1794351600
 << checkpaint >>
-rect 0 0 7532 19152
+rect 0 0 3988 8080
+<< metal3 >>
+rect 3524 8004 3704 8064
+rect 284 8004 464 8064
+<< metal2 >>
+rect 3164 7988 3344 8048
+rect 644 7972 824 8032
 << metal4 >>
-rect 5824 1632 5900 17520
-rect 5620 1836 5696 17316
-rect 7456 0 7532 19152
-rect 6028 1428 6104 17724
-rect 7252 204 7328 18948
+rect 3524 8004 3704 8064
 << locali >>
-rect 5252 2040 5492 17112
-rect 4884 2408 5124 16744
+rect 14 7912 3974 8032
+rect 14 7664 3974 7784
 use REY_PLL_PFD xpfd ../REY_PLL_SKY130A
 transform 1 0 0 0 1 0
-box 0 0 7532 19152
+box 0 0 3988 8080
 << labels >>
-flabel metal4 s 5824 1632 5900 17520 0 FreeSans 400 0 0 0 CK_FB
+flabel metal3 s 3524 8004 3704 8064 0 FreeSans 400 0 0 0 CK_FB
 port 1 nsew signal bidirectional
-flabel metal4 s 5620 1836 5696 17316 0 FreeSans 400 0 0 0 CK_REF
+flabel metal3 s 284 8004 464 8064 0 FreeSans 400 0 0 0 CK_REF
 port 2 nsew signal bidirectional
-flabel metal4 s 7456 0 7532 19152 0 FreeSans 400 0 0 0 DN_N
+flabel metal2 s 3164 7988 3344 8048 0 FreeSans 400 0 0 0 DN_N
 port 3 nsew signal bidirectional
-flabel metal4 s 6028 1428 6104 17724 0 FreeSans 400 0 0 0 PWRUP_1V8
+flabel metal4 s 3524 8004 3704 8064 0 FreeSans 400 0 0 0 PWRUP_1V8
 port 4 nsew power bidirectional
-flabel metal4 s 7252 204 7328 18948 0 FreeSans 400 0 0 0 UP
+flabel metal2 s 644 7972 824 8032 0 FreeSans 400 0 0 0 UP
 port 5 nsew signal bidirectional
-flabel locali s 5252 2040 5492 17112 0 FreeSans 400 0 0 0 VDD_1V8
+flabel locali s 14 7912 3974 8032 0 FreeSans 400 0 0 0 VDD_1V8
 port 6 nsew power bidirectional
-flabel locali s 4884 2408 5124 16744 0 FreeSans 400 0 0 0 VSS
+flabel locali s 14 7664 3974 7784 0 FreeSans 400 0 0 0 VSS
 port 7 nsew ground bidirectional
 << properties >>
-string FIXED_BBOX 0 0 7532 19152
+string FIXED_BBOX 0 0 3988 8080
 << end >>

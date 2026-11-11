@@ -49,15 +49,15 @@
                         [
                             "M1",
                             "VSS",
-                            "tbrl",
-                            4,
+                            "tb",
+                            2,
                             2
                         ],
                         [
                             "M1",
                             "VDD_1V8",
-                            "tbrl",
-                            4,
+                            "tb",
+                            2,
                             2
                         ]
                     ]
@@ -76,6 +76,18 @@
                     ],
                     [
                         "M4",
+                        "VSS",
+                        "XA\\d+:AVSS||rail_t_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XA\\d+:AVDD||rail_b_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
                         "VDD_1V8",
                         "XA\\d+:AVDD||rail_t_VDD_1V8",
                         ""
@@ -84,6 +96,18 @@
                         "M4",
                         "VSS",
                         "XB\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XB\\d+:AVSS||rail_t_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XB\\d+:AVDD||rail_b_VDD_1V8",
                         ""
                     ],
                     [
@@ -217,7 +241,7 @@
                     [
                         "M4",
                         "CK_REF",
-                        "bottom",
+                        "top",
                         "||",
                         "nostartcut"
                     ],
@@ -229,10 +253,10 @@
                         "nostartcut"
                     ],
                     [
-                        "M4",
+                        "M5",
                         "PWRUP_1V8",
-                        "bottom",
-                        "||",
+                        "top",
+                        "-|--",
                         "nostartcut"
                     ]
                 ]
@@ -254,7 +278,7 @@
                     [
                         "CK_REF",
                         "M1",
-                        "XA1:CK"
+                        "XA5:B"
                     ],
                     [
                         "CK_FB",
@@ -264,7 +288,7 @@
                     [
                         "PWRUP_1V8",
                         "M1",
-                        "XA1:D"
+                        "XB4:A"
                     ]
                 ]
             }
@@ -284,15 +308,15 @@
                         [
                             "M1",
                             "VSS",
-                            "tbrl",
-                            4,
+                            "tb",
+                            2,
                             2
                         ],
                         [
                             "M1",
                             "VDD_1V8",
-                            "tbrl",
-                            4,
+                            "tb",
+                            2,
                             2
                         ]
                     ]
@@ -306,13 +330,25 @@
                     [
                         "M4",
                         "VSS",
-                        "X:AVSS||rail_b_VSS",
+                        "XA\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XA\\d+:AVSS||rail_t_VSS",
                         ""
                     ],
                     [
                         "M4",
                         "VDD_1V8",
-                        "X:AVDD||rail_t_VDD_1V8",
+                        "XA\\d+:AVDD||rail_b_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XA\\d+:AVDD||rail_t_VDD_1V8",
                         ""
                     ]
                 ],
@@ -348,18 +384,18 @@
                         "nostartcut"
                     ],
                     [
-                        "M4",
-                        "OLH",
-                        "left",
-                        "--|-",
+                        "M5",
+                        "OLL",
+                        "top",
+                        "-|--",
                         ""
                     ],
                     [
-                        "M4",
-                        "OLL",
-                        "left",
-                        "--|-",
-                        ""
+                        "M5",
+                        "OLH",
+                        "top",
+                        "-|--",
+                        "track4,offset_track7"
                     ],
                     [
                         "M3",
@@ -415,15 +451,15 @@
                         [
                             "M1",
                             "VSS",
-                            "tbrl",
-                            4,
+                            "tb",
+                            2,
                             2
                         ],
                         [
                             "M1",
                             "VDD_1V8",
-                            "tbrl",
-                            4,
+                            "tb",
+                            2,
                             2
                         ],
                         [
@@ -449,6 +485,18 @@
                     ],
                     [
                         "M4",
+                        "VSS",
+                        "XA\\d+:AVSS||rail_t_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XA\\d+:AVDD||rail_b_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
                         "VDD_1V8",
                         "XA\\d+:AVDD||rail_t_VDD_1V8",
                         ""
@@ -457,6 +505,18 @@
                         "M4",
                         "VSS",
                         "XB\\d+:AVSS||rail_b_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VSS",
+                        "XB\\d+:AVSS||rail_t_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XB\\d+:AVDD||rail_b_VDD_1V8",
                         ""
                     ],
                     [
@@ -473,32 +533,20 @@
                     ],
                     [
                         "M4",
+                        "VSS",
+                        "XC\\d+:AVSS||rail_t_VSS",
+                        ""
+                    ],
+                    [
+                        "M4",
+                        "VDD_1V8",
+                        "XC\\d+:AVDD||rail_b_VDD_1V8",
+                        ""
+                    ],
+                    [
+                        "M4",
                         "VDD_1V8",
                         "XC\\d+:AVDD||rail_t_VDD_1V8",
-                        ""
-                    ],
-                    [
-                        "M4",
-                        "VSS",
-                        "XD\\d+:AVSS||rail_b_VSS",
-                        ""
-                    ],
-                    [
-                        "M4",
-                        "VDD_1V8",
-                        "XD\\d+:AVDD||rail_t_VDD_1V8",
-                        ""
-                    ],
-                    [
-                        "M4",
-                        "VSS",
-                        "XE\\d+:AVSS||rail_b_VSS",
-                        ""
-                    ],
-                    [
-                        "M4",
-                        "VDD_1V8",
-                        "XE\\d+:AVDD||rail_t_VDD_1V8",
                         ""
                     ],
                     [
@@ -538,30 +586,6 @@
                         "startLayer=M2,track13"
                     ],
                     [
-                        "M3",
-                        "QN6",
-                        "XD1:QN-|--XD1:D",
-                        "startLayer=M2,track-22"
-                    ],
-                    [
-                        "M3",
-                        "QN7",
-                        "XD3:QN-|--XD3:D",
-                        "startLayer=M2,track-22"
-                    ],
-                    [
-                        "M3",
-                        "QN8",
-                        "XE1:QN-|--XE1:D",
-                        "startLayer=M2,track13"
-                    ],
-                    [
-                        "M3",
-                        "QN9",
-                        "XE3:QN-|--XE3:D",
-                        "startLayer=M2,track13"
-                    ],
-                    [
                         "M5",
                         "VDD_1V8",
                         "XA1:RN-XA1:AVDD",
@@ -595,30 +619,6 @@
                         "M5",
                         "VDD_1V8",
                         "XC3:RN-XC3:AVDD",
-                        "startLayer=M2"
-                    ],
-                    [
-                        "M5",
-                        "VDD_1V8",
-                        "XD1:RN-XD1:AVDD",
-                        "startLayer=M2"
-                    ],
-                    [
-                        "M5",
-                        "VDD_1V8",
-                        "XD3:RN-XD3:AVDD",
-                        "startLayer=M2"
-                    ],
-                    [
-                        "M5",
-                        "VDD_1V8",
-                        "XE1:RN-XE1:AVDD",
-                        "startLayer=M2"
-                    ],
-                    [
-                        "M5",
-                        "VDD_1V8",
-                        "XE3:RN-XE3:AVDD",
                         "startLayer=M2"
                     ],
                     [
@@ -668,42 +668,6 @@
                         "CK_FB",
                         "XC3:Q-|--XC4:A",
                         "track-13,endoffsetcutlow"
-                    ],
-                    [
-                        "M5",
-                        "CK_FB",
-                        "XC4:A-|--XD1:CK",
-                        "startLayer=M2,track16"
-                    ],
-                    [
-                        "M2",
-                        "Q6",
-                        "XD1:Q-|--XD2:A,XD3:CK",
-                        "track6,endoffsetcutlow"
-                    ],
-                    [
-                        "M2",
-                        "Q7",
-                        "XD3:Q-|--XD4:A",
-                        "track6,endoffsetcutlow"
-                    ],
-                    [
-                        "M5",
-                        "Q7",
-                        "XD4:A-|--XE1:CK",
-                        "startLayer=M2,track1"
-                    ],
-                    [
-                        "M2",
-                        "Q8",
-                        "XE1:Q-|--XE2:A,XE3:CK",
-                        "track-13,endoffsetcutlow"
-                    ],
-                    [
-                        "M2",
-                        "Q9",
-                        "XE3:Q-|--XE4:A",
-                        "track-13,endoffsetcutlow"
                     ]
                 ],
                 "addRouteConnections": [
@@ -725,7 +689,35 @@
                         "CK_FB",
                         "top",
                         "||",
-                        "nostartcut"
+                        "startLayer=M2"
+                    ],
+                    [
+                        "M3",
+                        "CKO0",
+                        "top",
+                        "-|--",
+                        "track6,offset_track7"
+                    ],
+                    [
+                        "M3",
+                        "CKO1",
+                        "top",
+                        "-|--",
+                        ""
+                    ],
+                    [
+                        "M3",
+                        "CKO2",
+                        "top",
+                        "-|--",
+                        "track-13,offset_track-9"
+                    ],
+                    [
+                        "M3",
+                        "CKO3",
+                        "top",
+                        "-|--",
+                        ""
                     ]
                 ]
             },
@@ -753,24 +745,9 @@
                         "XC4:Y"
                     ],
                     [
-                        "CKO4",
+                        "CK_FB",
                         "M1",
-                        "XD2:Y"
-                    ],
-                    [
-                        "CKO5",
-                        "M1",
-                        "XD4:Y"
-                    ],
-                    [
-                        "CKO6",
-                        "M1",
-                        "XE2:Y"
-                    ],
-                    [
-                        "CKO7",
-                        "M1",
-                        "XE4:Y"
+                        "XC4:A"
                     ]
                 ]
             },
@@ -791,14 +768,14 @@
                         [
                             "M2",
                             "VSS",
-                            "tbrl",
+                            "t",
                             4,
                             2
                         ],
                         [
                             "M2",
                             "VDD_1V8",
-                            "tbrl",
+                            "t",
                             4,
                             2
                         ],
@@ -833,7 +810,7 @@
                     [
                         "M2",
                         "VSS",
-                        "XA\\d+:BR||rail_b_VSS",
+                        "XA\\d+:BR||rail_t_VSS",
                         ""
                     ],
                     [
@@ -845,7 +822,7 @@
                     [
                         "M2",
                         "VSS",
-                        "XB\\d+:BR||rail_b_VSS",
+                        "XB\\d+:BR||rail_t_VSS",
                         ""
                     ],
                     [
@@ -857,7 +834,7 @@
                     [
                         "M2",
                         "VSS",
-                        "XC\\d+:BR||rail_b_VSS",
+                        "XC\\d+:BR||rail_t_VSS",
                         ""
                     ],
                     [
@@ -869,7 +846,7 @@
                     [
                         "M2",
                         "VSS",
-                        "XD\\d+:BR||rail_b_VSS",
+                        "XD\\d+:BR||rail_t_VSS",
                         ""
                     ],
                     [

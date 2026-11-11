@@ -1,40 +1,41 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794265200
+timestamp 1794351600
 << checkpaint >>
-rect 0 0 3452 5792
+rect 0 0 1980 5344
 << metal2 >>
-rect 3272 3506 3452 3566
-rect 3272 3986 3452 4046
-rect 3272 4946 3452 5006
+rect 1800 3266 1980 3326
+rect 1800 3746 1980 3806
+rect 1800 4706 1980 4766
+<< metal4 >>
+rect 718 5268 898 5328
+rect 270 5252 450 5312
 << metal3 >>
-rect 0 4066 180 4126
-rect 0 4546 180 4606
-rect 0 1186 180 1246
+rect 0 946 180 1006
 << locali >>
-rect 3212 0 3452 5792
-rect 2844 368 3084 5424
+rect 0 5192 1980 5312
+rect 0 4944 1980 5064
 use REY_PLL_CTRL xctrl ../REY_PLL_SKY130A
 transform 1 0 0 0 1 0
-box 0 0 3452 5792
+box 0 0 1980 5344
 << labels >>
-flabel metal2 s 3272 3506 3452 3566 0 FreeSans 400 0 0 0 KICK
+flabel metal2 s 1800 3266 1980 3326 0 FreeSans 400 0 0 0 KICK
 port 1 nsew signal bidirectional
-flabel metal3 s 0 4066 180 4126 0 FreeSans 400 0 0 0 OLH
+flabel metal4 s 718 5268 898 5328 0 FreeSans 400 0 0 0 OLH
 port 2 nsew signal bidirectional
-flabel metal3 s 0 4546 180 4606 0 FreeSans 400 0 0 0 OLL
+flabel metal4 s 270 5252 450 5312 0 FreeSans 400 0 0 0 OLL
 port 3 nsew signal bidirectional
-flabel metal3 s 0 1186 180 1246 0 FreeSans 400 0 0 0 PWRUP_1V8
+flabel metal3 s 0 946 180 1006 0 FreeSans 400 0 0 0 PWRUP_1V8
 port 4 nsew power bidirectional
-flabel locali s 3212 0 3452 5792 0 FreeSans 400 0 0 0 VDD_1V8
+flabel locali s 0 5192 1980 5312 0 FreeSans 400 0 0 0 VDD_1V8
 port 5 nsew power bidirectional
-flabel metal2 s 3272 3986 3452 4046 0 FreeSans 400 0 0 0 VHI_N
+flabel metal2 s 1800 3746 1980 3806 0 FreeSans 400 0 0 0 VHI_N
 port 6 nsew signal bidirectional
-flabel metal2 s 3272 4946 3452 5006 0 FreeSans 400 0 0 0 VLO
+flabel metal2 s 1800 4706 1980 4766 0 FreeSans 400 0 0 0 VLO
 port 7 nsew signal bidirectional
-flabel locali s 2844 368 3084 5424 0 FreeSans 400 0 0 0 VSS
+flabel locali s 0 4944 1980 5064 0 FreeSans 400 0 0 0 VSS
 port 8 nsew ground bidirectional
 << properties >>
-string FIXED_BBOX 0 0 3452 5792
+string FIXED_BBOX 0 0 1980 5344
 << end >>

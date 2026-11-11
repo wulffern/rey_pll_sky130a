@@ -1,27 +1,27 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794265200
+timestamp 1794351600
 << checkpaint >>
-rect 0 0 14680 9792
+rect 0 0 13208 9056
 << metal4 >>
-rect 0 0 76 9792
-rect 14604 0 14680 9792
+rect 0 0 76 9056
+rect 13132 0 13208 9056
 << metal1 >>
-rect 14236 0 14476 9792
-rect 13868 368 14108 9424
+rect 204 8816 13004 9056
+rect 204 8448 13004 8688
 use REY_PLL_LPF xlpf ../REY_PLL_SKY130A
 transform 1 0 0 0 1 0
-box 0 0 14680 9792
+box 0 0 13208 9056
 << labels >>
-flabel metal4 s 0 0 76 9792 0 FreeSans 400 0 0 0 VCTRL
+flabel metal4 s 0 0 76 9056 0 FreeSans 400 0 0 0 VCTRL
 port 1 nsew signal bidirectional
-flabel metal1 s 14236 0 14476 9792 0 FreeSans 400 0 0 0 VDD_1V8
+flabel metal1 s 204 8816 13004 9056 0 FreeSans 400 0 0 0 VDD_1V8
 port 2 nsew power bidirectional
-flabel metal4 s 14604 0 14680 9792 0 FreeSans 400 0 0 0 VLPFZ
+flabel metal4 s 13132 0 13208 9056 0 FreeSans 400 0 0 0 VLPFZ
 port 3 nsew signal bidirectional
-flabel metal1 s 13868 368 14108 9424 0 FreeSans 400 0 0 0 VSS
+flabel metal1 s 204 8448 13004 8688 0 FreeSans 400 0 0 0 VSS
 port 4 nsew ground bidirectional
 << properties >>
-string FIXED_BBOX 0 0 14680 9792
+string FIXED_BBOX 0 0 13208 9056
 << end >>

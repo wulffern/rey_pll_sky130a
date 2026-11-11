@@ -17,8 +17,9 @@ oscillator needs (negative Kvco, filter on VDD_1V8, no OTA buffer):
   REY_PLL_LPF   loop filter, eight REYPLL_RCU cells: R = 32 x 15.3 kOhm
                 from VCTRL to VLPFZ, C1 = 7 MiM from VLPFZ to VDD_1V8,
                 C2 = 1 MiM from VCTRL to VDD_1V8 (bottom plates on VDD)
-  REY_PLL_DIVN  ten flop ripple divider, CK/64 is the feedback, eight
-                buffered taps CK/8..CK/1024 for the pins
+  REY_PLL_DIVN  six flop ripple divider, CK/64 is the feedback, four
+                buffered taps CK/8..CK/64 for the pins (ten flops and
+                eight taps did not fit the tile's width)
   REY_PLL       the top
 
 The schematics are written with cicpy.eda.schgen; the oscillator comes
@@ -38,9 +39,9 @@ P = "REY_PLL_SKY130A/"
 VDD, VSS = "VDD_1V8", "VSS"
 SUP = dict(AVDD=VDD, AVSS=VSS)
 
-NDIV = 10                 # flops in the divider
+NDIV = 6                  # flops in the divider
 NFB = 6                   # feedback after this many: CK/64
-TAPS = range(2, 10)       # Q2 (CK/8) .. Q9 (CK/1024)
+TAPS = range(2, 6)        # Q2 (CK/8) .. Q5 (CK/64)
 NRCU = 8                  # loop filter unit cells
 NC1 = 7                   # of which C1; the last one is C2
 
@@ -177,7 +178,7 @@ def _q(i):
 
 
 def _divn_columns():
-    """Five columns of two stages. A stage is its flop with the tap
+    """Columns of two stages (NDIV / 2 of them). A stage is its flop with the tap
     buffer right above it, so Q reaches the buffer and the next flop's
     CK in one hop; Q of a column's top stage crosses to the next."""
     cols = []
@@ -215,7 +216,7 @@ DIVN = dict(
            f"D = QN<k>. Q{NFB-1} is CK_FB. No reset: a ripple divider "
            "runs from any state",
            "Each tap has its buffer over its flop, so the pins do not "
-           "load the chain: CKO<t> = Q<t+2>, CK/8 .. CK/1024"],
+           f"load the chain: CKO<t> = Q<t+2>, CK/8 .. CK/{2**(TAPS[-1]+1)}"],
     columns=_divn_columns())
 
 #- REY_PLL_LPF ----------------------------------------------------------
@@ -418,6 +419,7 @@ def main():
     top(subs).write(outdir)
     cic = os.path.join(os.path.dirname(__file__), "..", "cic")
     write_spi(os.path.join(cic, "pll.spi"))
+    ctrl_layout(cic)
     pfd_layout(cic)
     divn_layout(cic)
     lpf_layout(cic)
@@ -430,6 +432,21 @@ def main():
 #- Columns B and D are mirrored (alternateGroup) so n-wells face n-wells;
 #- there the pins sit on the other side and the offsets differ. Offsets
 #- are in routing tracks from each route's default, never coordinates:
+#- the supply rings round a digital block, li: width and space in
+#- multiples of the rule. The cells' M4 strips carry the current; the
+#- rings are where the strips and the top's straps land
+RING = (2, 2)
+#- rails above and below only: no ring sides, the strips reach both
+SIDES = "tb"
+
+
+def _straps(pat):
+    """One M4 strap per column and supply, onto the rail below AND the
+    rail above, which are joined by nothing else."""
+    return [["M4", net, f"{pat}:{pin}||rail_{s}_{net}", ""]
+            for net, pin in (("VSS", "AVSS"), ("VDD_1V8", "AVDD"))
+            for s in "bt"]
+
 DTRK, DTRK_M = "track13", "track-22"     # D = QN loop: trunk right of the
                                          # flop's own M3 (x > 8.83 um)
 HTRK = "track-13,endoffsetcutlow"        # Q hops: trunk left of the input
@@ -437,6 +454,8 @@ HTRK_M = "track6,endoffsetcutlow"        # pins; via low on BFX1.A (li.3)
 XOPT = "startLayer=M2,track16"           # crossings from a normal column:
                                          # right of its M5 reset jumpers
 XOPT_M = "startLayer=M2,track1"          # ... from a mirrored column
+TAP = "track-13,offset_track-9"          # a mid-height tap up the outer
+TAP_M = "track6,offset_track7"           # lane, its pin over the lane
 
 
 def divn_layout(cic):
@@ -485,8 +504,7 @@ def divn_layout(cic):
     #- into ONE strap at one x, and leaves the other columns open
     directed = []
     for L in sorted({t[0][1] for t in insts}):
-        directed += [["M4", "VSS", f"X{L}\\d+:AVSS||rail_b_VSS", ""],
-                     ["M4", "VDD_1V8", f"X{L}\\d+:AVDD||rail_t_VDD_1V8", ""]]
+        directed += _straps(f"X{L}\\d+")
     for name, p in dffs:
         #- D = QN: start on M2 where the flop has its own via on QN, out at
         #- QN's height, down a trunk beyond the flop's own M3, into D
@@ -520,7 +538,7 @@ def divn_layout(cic):
             continue
         c['alternateGroup'] = 1
         c['afterPlace'] = [{"addRouteRings": [
-            ["M1", "VSS", "tbrl", 4, 2], ["M1", "VDD_1V8", "tbrl", 4, 2],
+            ["M1", "VSS", SIDES, *RING], ["M1", "VDD_1V8", SIDES, *RING],
             ["M5", "CK", "l", 1, 2]]},
             {"addPowerRings": []}]
         c['beforeRoute'] = {
@@ -528,16 +546,65 @@ def divn_layout(cic):
             "addRouteConnections": [["^CK$", "XA1$", "left", "M4", ""]],
             "addConnectivityRoutes": []}
         c['afterRoute'] = {"addPortOnRects": [
-            [t[2], "M1", t[0] + ":Y"] for t in insts if t[-1] == 'REYTR_BFX1_CV']}
+            [t[2], "M1", t[0] + ":Y"] for t in insts if t[-1] == 'REYTR_BFX1_CV']
+            #- CK_FB leaves upwards from its tap buffer's input
+            + [["CK_FB", "M1", "%s:%s" % ins["CK_FB"][0]]]}
         #- CK_FB to the top edge for the PFD: straight up on M5 from the
         #- tap buffer's input, where the crossing to the next column
         #- already stacks the net up to M5 (no second cut on the pin)
-        c['afterPaint'] = {"resetOrigin": 1,
-                           "addPortOnEdges": [["M5", "CK_FB", "top", "||",
-                                               "nostartcut"]]}
+        #- The taps leave upwards too, on M3: a buffer's Y lies under
+        #- its VSS strip on M4. The buffer at the top of a column goes
+        #- straight off its pin; the one at mid height takes the outer
+        #- lane, which the hops use on M2 only, and its pin stands over
+        #- that lane, clear of the other tap's
+        edge = [["M5", "CK_FB", "top", "||", "startLayer=M2"]]
+        bufs = [t for t in insts if t[-1] == 'REYTR_BFX1_CV']
+        for t in bufs:
+            top = t[0] == max((b[0] for b in bufs if col(b[0]) == col(t[0])),
+                              key=lambda n: int(n[2:]))
+            if top:
+                o_ = ""
+            else:
+                o_ = TAP_M if mir(t[0]) else TAP
+            edge.append(["M3", t[2], "top", "-|--", o_])
+        c['afterPaint'] = {"resetOrigin": 1, "addPortOnEdges": edge}
     json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
     log.info(f"pll.json: REY_PLL_DIVN, {len(directed)} directed routes")
 
+
+
+#- --------------------------------------------------------------------
+#- REY_PLL_CTRL's supplies and ports
+#- --------------------------------------------------------------------
+#- The signal routes are the connectivity routes already in pll.json:
+#- every net is a hop between neighbouring cells.
+def ctrl_layout(cic):
+    import json
+    o = json.load(open(os.path.join(cic, 'pll.json')))
+    for c in o['cells']:
+        if c['name'] != 'REY_PLL_CTRL':
+            continue
+        c['afterPlace'] = [{"addRouteRings": [
+            ["M1", "VSS", SIDES, *RING], ["M1", "VDD_1V8", SIDES, *RING]]},
+            {"addPowerRings": []}]
+        c['beforeRoute']['addDirectedRoutes'] = _straps("XA\\d+")
+        c['afterRoute'] = {"addPortOnRects": [
+            ["OLH", "M1", "XA9:B"], ["OLL", "M1", "XA10:B"]]}
+        #- PWRUP_1V8 out to the left, towards the PFD; the three outputs
+        #- to the right, towards the pump. OLH and OLL go to pads: up on
+        #- M5, which nothing else in the block uses, right of the input
+        #- pins. OLL's cell is the upper one and takes the near lane,
+        #- OLH's stub passes below where that lane starts; its edge pin
+        #- stands over its own lane, clear of OLL's
+        c['afterPaint'] = {"resetOrigin": 1, "addPortOnEdges": [
+            ["M4", "PWRUP_1V8", "left", "--|-", "nostartcut"],
+            ["M5", "OLL", "top", "-|--", ""],
+            ["M5", "OLH", "top", "-|--", "track4,offset_track7"],
+            ["M3", "KICK", "right", "-|--", ""],
+            ["M3", "VHI_N", "right", "-|--", ""],
+            ["M3", "VLO", "right", "-|--", ""]]}
+    json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
+    log.info("pll.json: REY_PLL_CTRL")
 
 
 #- --------------------------------------------------------------------
@@ -566,8 +633,7 @@ def pfd_layout(cic):
     import json
     directed = []
     for L in "AB":
-        directed += [["M4", "VSS", f"X{L}\\d+:AVSS||rail_b_VSS", ""],
-                     ["M4", "VDD_1V8", f"X{L}\\d+:AVDD||rail_t_VDD_1V8", ""]]
+        directed += _straps(f"X{L}\\d+")
     directed += [
         #- A, the UP half. RN from the latch: up the middle lane on M2,
         #- off the flop's own via on RN
@@ -602,7 +668,7 @@ def pfd_layout(cic):
             continue
         c['alternateGroup'] = 1
         c['afterPlace'] = [{"addRouteRings": [
-            ["M1", "VSS", "tbrl", 4, 2], ["M1", "VDD_1V8", "tbrl", 4, 2]]},
+            ["M1", "VSS", SIDES, *RING], ["M1", "VDD_1V8", SIDES, *RING]]},
             {"addPowerRings": []}]
         c['beforeRoute'] = {
             "addDirectedRoutes": directed,
@@ -610,17 +676,20 @@ def pfd_layout(cic):
         #- the pin each port leaves from
         c['afterRoute'] = {"addPortOnRects": [
             ["UP", "M1", "XA1:Q"], ["DN_N", "M1", "XB3:Y"],
-            ["CK_REF", "M1", "XA1:CK"], ["CK_FB", "M1", "XB6:B"],
-            ["PWRUP_1V8", "M1", "XA1:D"]]}
-        #- outputs up the lane between the cells' supply strips on M3
-        #- (free above the flops), inputs straight off a pin with
-        #- nothing between it and the edge, on the M4 it already has
+            ["CK_REF", "M1", "XA5:B"], ["CK_FB", "M1", "XB6:B"],
+            ["PWRUP_1V8", "M1", "XB4:A"]]}
+        #- every port on the top edge: the block stands in the top row,
+        #- its neighbours and the pads are reached from above. Outputs up
+        #- the lane between the cells' supply strips on M3 (free above
+        #- the flops); the clocks straight off the topmost pin of the
+        #- net, on the M4 it already has; PWRUP_1V8 on up B's edge lane,
+        #- where its M5 already runs down to the flops
         c['afterPaint'] = {"resetOrigin": 1, "addPortOnEdges": [
             ["M3", "UP", "top", "-|--", "nostartcut"],
             ["M3", "DN_N", "top", "--|-", ""],
-            ["M4", "CK_REF", "bottom", "||", "nostartcut"],
+            ["M4", "CK_REF", "top", "||", "nostartcut"],
             ["M4", "CK_FB", "top", "||", "nostartcut"],
-            ["M4", "PWRUP_1V8", "bottom", "||", "nostartcut"]]}
+            ["M5", "PWRUP_1V8", "top", "-|--", "nostartcut"]]}
     json.dump(o, open(os.path.join(cic, 'pll.json'), 'w'), indent=4)
     log.info(f"pll.json: REY_PLL_PFD, {len(directed)} directed routes")
 
@@ -650,7 +719,7 @@ def lpf_layout(cic):
     directed = []
     for L in sorted({n[1] for n, _ in cells}):
         directed += [["M4", "VDD_1V8", f"X{L}\\d+:A||rail_t_VDD_1V8", ""],
-                     ["M2", "VSS", f"X{L}\\d+:BR||rail_b_VSS", ""]]
+                     ["M2", "VSS", f"X{L}\\d+:BR||rail_t_VSS", ""]]
     #- the chain: N<k> to the next resistor's P, in the cell or the next
     for idx, (name, p) in enumerate(cells):
         for k in range(4):
@@ -686,10 +755,12 @@ def lpf_layout(cic):
         if c["name"] != "REY_PLL_LPF":
             continue
         c.pop("alternateGroup", None)
-        #- supply rings on M2: on li they come too close to the RCUs'
-        #- own li at the cell edge (BR sticks out of the cell's box)
+        #- supply rails on M2: on li they come too close to the RCUs'
+        #- own li at the cell edge (BR sticks out of the cell's box).
+        #- Both above the cells only, where the top's straps reach them:
+        #- ring sides would cost the row 7 um
         c["afterPlace"] = [{"addRouteRings": [
-            ["M2", "VSS", "tbrl", 4, 2], ["M2", "VDD_1V8", "tbrl", 4, 2],
+            ["M2", "VSS", "t", 4, 2], ["M2", "VDD_1V8", "t", 4, 2],
             ["M5", "VCTRL", "l", 1, 2], ["M5", "VLPFZ", "r", 1, 2]]},
             {"addPowerRings": []}]
         c["beforeRoute"] = {"addDirectedRoutes": directed,
