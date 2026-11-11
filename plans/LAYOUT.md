@@ -2,51 +2,61 @@
 
 ## Target: one Tiny Tapeout tile
 
-A 1x1 tile is 161 x 111.52 um (17 950 um2), see `tt_block_1x1_pg.def`
-in lelo_temp_sky130a. We follow lelo_temp's recipe:
+A 1x1 tile is 161 x 111.52 um (17 950 um2), see
+`design/REY_PLL_SKY130A/tt_block_1x1_pg.def` (from lelo_temp_sky130a). We
+follow lelo_temp's recipe:
 
-- the core, REY_PLL, is laid out to fit the tile, about 155 x 110.5 um,
-  with its own supply rings
-- the wrapper `tt_um_rey_pll_wulffern.mag` is GENERATED from the DEF (copy
-  `design/LELO_TEMP_SKY130A/gen_tt_um.py`). It adds two west met4 power
-  rails with via stacks onto the core rings, the signal routes to the met4
-  port pads on the top edge, antenna diodes on the inputs, and the uio_oe
-  tie-low through res_generic_m4
+- the core, REY_PLL, is laid out to fit the tile, 156.96 x 106.94 um, with
+  its own supply rings and every tile pin on a met4 riser at its top edge
+- the wrapper `tt_um_rey_pll_wulffern` is GENERATED, layout and schematic,
+  by [py/gen_tt_um.py](../py/gen_tt_um.py) from the DEF and the core's
+  ports. Never edit it by hand:
+
+      python3 py/gen_tt_um.py design/REY_PLL_SKY130A
+
+  It adds the two west met4 power rails (VDPWR x 0 to 2.0 um, VGND 2.4 to
+  4.4 um, full height) with via stacks onto the core's rings, the signal
+  routes to the met4 port pads on the top edge, an antenna diode on every
+  input, and a tie-low through res_generic_m4 on every pad the PLL does
+  not drive
 - `make deliver` / `make precheck` (tech/make/core.make) copy gds, lef,
-  spice and reports into the `tapeout/` submodule
+  spice and reports into the `tapeout/` submodule. The submodule does not
+  exist yet
 
 lelo_temp ships as `tiles: "1x1"` with `analog_pins: 0`; check that the
 current shuttle still accepts that for an analog project.
 
-## Pins (proposal)
+## Pins
 
-| TT pin     | Signal   | At lock (512 MHz)                                         |
-|:-----------|:---------|:----------------------------------------------------------|
-| clk        | CK_REF   | 8 MHz reference                                           |
-| ui_in[0]   | PWRUP    | powers the bias and the oscillator up                     |
-| ui_in[3:1] | TRIM     | oscillator bias trim, set per die                         |
-| uo_out[0]  | CK/8     | 64 MHz, may be more than the TT output path carries       |
-| uo_out[1]  | CK/16    | 32 MHz                                                    |
-| uo_out[2]  | CK/32    | 16 MHz                                                    |
-| uo_out[3]  | CK/64    | 8 MHz, the PLL feedback clock, compare with CK_REF        |
-| uo_out[4]  | CK/128   | 4 MHz                                                     |
-| uo_out[5]  | CK/256   | 2 MHz                                                     |
-| uo_out[6]  | CK/512   | 1 MHz                                                     |
-| uo_out[7]  | CK/1024  | 500 kHz                                                   |
+| TT pin       | Signal    | At lock (512 MHz)                                     |
+|:-------------|:----------|:------------------------------------------------------|
+| clk          | CK_REF    | 8 MHz reference                                       |
+| ui_in[0]     | PWRUP_1V8 | powers the loop up, starts the kick pulse             |
+| ui_in[3:1]   | TRIM[2:0] | oscillator bias trim, set per die                     |
+| ui_in[4]     | OLH       | open loop, VCTRL to VDD_1V8: the oscillator's slowest |
+| ui_in[5]     | OLL       | open loop, VCTRL to VSS: the oscillator's fastest     |
+| uo_out[0]    | CK/8      | 64 MHz, may be more than the TT output path carries   |
+| uo_out[1]    | CK/16     | 32 MHz                                                |
+| uo_out[2]    | CK/32     | 16 MHz                                                |
+| uo_out[3]    | CK/64     | 8 MHz, the PLL feedback clock, compare with CK_REF    |
+| uo_out[7:4]  |           | tied low                                              |
+| uio_out[7:0] |           | tied low                                              |
+| uio_oe[7:0]  |           | tied low (the uio pins are inputs)                    |
+| ui_in[7:6], uio_in[7:0], ena, rst_n | | not connected                          |
 
-All eight uo_out pins carry a divider tap, so the oscillator can be measured
-at as many ratios as the pins allow. DIVN is a ripple chain of ten flops:
-the PLL feedback is taken after the sixth (/64), and the four flops after it
-only feed the pins. Every tap gets its own output buffer, so the pin load
-does not slow the chain. CK/2 (256 MHz) and CK/4 (128 MHz) are left off,
-since the TT output path cannot carry them. If the shuttle's I/O turns out
-faster than expected, shift the window down one step.
+DIVN is a ripple chain of six flops: the PLL feedback is taken after the
+sixth (/64), and four buffered taps feed the pins, so the pin load does not
+slow the chain. The first plan had ten flops and a tap on every uo_out pin
+(down to CK/1024); the top row of the floorplan was about 10 um too wide with
+them, so the four flops that only fed pins went. CK/2 (256 MHz) and CK/4
+(128 MHz) are left off, since the TT output path cannot carry them, and CK
+itself (512 MHz) has no pad for the same reason.
 
-With the PLL open (VCTRL forced) the taps also measure the free running
+With the PLL open (OLH or OLL) the taps also measure the free running
 oscillator over TRIM, which is the per-die trim procedure: pick the code
-whose CK/64 lands closest to 8 MHz.
+whose CK/64 range, between OLH and OLL, has 8 MHz nearest its middle.
 
-## Area budget
+## Area budget (the estimate before layout)
 
 Transistor cells are all 8 x 4 um (FIXED_BBOX 1600 x 800), RPPO2 is
 8 x 20.8 um and HRPPO8 16 x 20.8 um.
@@ -55,7 +65,7 @@ Transistor cells are all 8 x 4 um (FIXED_BBOX 1600 x 800), RPPO2 is
 |:---------------------|:-----------------------------------------------|-------------:|
 | REY_PLL_ROSC         | ~66 transistors, taps and rings; 6 RPPO cells  | 5 000        |
 | PFD + CP             | rey_tr cells, CP mirrors                       | 1 500        |
-| DIVN (/1024)         | 10 x REYTR_DFRNQNX1, 8 output buffers          | 1 600        |
+| DIVN (/1024)         | 10 x REYTR_DFRNQNX1, 8 output buffers (built: six flops, four buffers) | 1 600        |
 | Loop filter, Icp 1.6uA | 8 x REYPLL_RCU (R 461 kOhm, C1 3.2 + C2 0.25 pF) | 2 700        |
 | Routing, rings       |                                                | 3 000        |
 | Total                |                                                | ~13 800 = 77 % |
@@ -107,89 +117,54 @@ the bottom plate parasitic does not couple VCTRL to VSS. In cicpy names the
 CAPX1 plates are M4 (A, bottom) and M5 (B, top), see REY_LDO's `_Caps`,
 which also draws the bank as a comb.
 
-## REY_PLL_ROSC floorplan (cicpy sidecar)
+## Floorplan, as built (2026-11-11)
 
-`design/REY_PLL_SKY130A/REY_PLL_ROSC.py`, a SidecarCell. Two rows, because
-an nmos column abutted to a pmos one breaks the well rules (REY_LDO):
-
-```
-top row (n-well):    p_bias | p_st0 | p_st1 | ... | p_st6 | p_out
-bottom row (p-sub):  n_bias | n_sw  | n_st0 | ... | n_st6 | n_out | r_lad
-```
-
-- `p_st<k>`, one column per stage, bottom to top: inverter PMOS xip<k>
-  (drain N<k>, nearest the nmos row), VCTRL device xmpv<k>, tunable mirror
-  xmpc<k>, fixed mirrors xmpf<k>. VS<k> and NC<k> stay inside the column;
-  VBP and VCTRL run as gate rails on the tab lane
-- `n_st<k>` under it: xin<k>. The ring nodes N<k-1>/N<k> are the only nets
-  between stage columns, plus the wrap N6 -> stage 0, one channel track
-- `p_bias`: xmp0 diodes, xmpb mirror, xms1. `n_bias`: xmn1, xmn2 followers
-- `n_sw`: startup xms2/xms3 and trim switches xst
-- `r_lad`: the RPPO ladder, mirrored and ascending as in REY_LDO's `_ResCol`
-- supplies through the guard (`addPowerGuardConnection`), not straps
-
-Before the first `make mag`, the generator needs:
-
-1. lowercase instance names (cicpy groups by `^(x\D+)`, and the conventions
-   say lowercase), named per column: xip<k>, xmpv<k>, xmpc<k>, xmpf<k>_<j>,
-   xin<k>, ...
-2. the output buffer (REYTR_IVX1/IVX4) as discrete rey_atr devices in the
-   `p_out`/`n_out` columns, so the whole cell is from one library
-3. every transistor cell has the same 8 x 4 um box, so mixed device types
-   stack in one column (the rule is one WIDTH per column)
-
-Order of work: ROSC layout (DRC/LVS clean, then extracted Kvco and corners
-with `Lay`), then the loop filter, CP/PFD/DIVN, the top, and the wrapper.
-
-## Status, REY_PLL_ROSC layout (2026-11-08)
-
-`design/REY_PLL_SKY130A/REY_PLL_ROSC.py`, built with `cd work && make mag
-CELL=REY_PLL_ROSC`. Placement is done: 82.4 x 56.7 um (4 670 um2, 26 % of a
-tile), every column five devices or fewer:
+Every cell is a cicpy sidecar (`design/REY_PLL_SKY130A/<CELL>.py`) or
+directed routes written by `py/gen_pll.py` into `cic/pll.json`; each file's
+own header describes its floorplan. Hierarchical: a block is laid out,
+routed and checked on its own, and the level over it places finished blocks
+and routes only between them. No sidecar holds a coordinate.
 
 ```
-top (n-well):  p_diode p_mirb p_st0 .. p_st6
-bottom:        r_trim r_fix n_sw n_su n_bias n_ring_a n_ring_b dig
+tt_um_rey_pll_wulffern   161 x 111.52     rails west, pads on the top edge
+  REY_PLL                156.96 x 106.94  mirrored in x, 2.66 um from the west edge
+    top row:     PFD | CTRL | CP | DIVN | LPF
+    channel:     6 um, eight M3 tracks (CK, VBP, VCTRL, VLPFZ)
+    bottom row:  ROSC = bias | dig | stg0 stg6 stg1 stg5 stg2 stg4 stg3
 ```
 
-Changes the layout forced on the schematic, all in py/gen_rosc.py:
+| Cell               | Size (um)       | Content                                      |
+|:-------------------|:----------------|:---------------------------------------------|
+| REY_PLL            | 156.96 x 106.94 | two M1 rings round the whole, VSS inside VDD_1V8 |
+| REY_PLL_ROSC       | 150.78 x 43.66  | seven interleaved stages, bias, output buffer |
+| REY_PLL_ROSC_BIAS  | 74.96 x 36.80   | Vgs/R bias, trim ladder and switches         |
+| REY_PLL_ROSC_STAGE | 8.96 x 40.60    | one ring stage                               |
+| REY_PLL_LPF        | 66.04 x 45.28   | eight REYPLL_RCU (16 x 20.8 each)            |
+| REY_PLL_DIVN       | 30.72 x 50.08   | three columns of two flops, four tap buffers |
+| REY_PLL_PFD        | 19.94 x 40.40   | two mirrored columns                         |
+| REY_PLL_CP         | 16.96 x 38.60   | NMOS under PMOS                              |
+| REY_PLL_CTRL       | 9.90 x 26.72    | one column                                   |
+
+The blocks of the top row carry no rings of their own: their supply rails
+run along their tops and are strapped to the top's rings on M4. They stand
+1.6 um apart (the cells' wells and implants reach 0.4 to 0.75 um past their
+boxes), the pump 2.6 um from CTRL (n-well to n-well).
+
+Changes the layout forced on the schematic:
 
 - the trim resistor is REYATR_RES_36C2F0 units (15.3 kOhm), not RPPO2/RPPO4:
-  the composite RPPO cells lost their bulk pin when cicpy split the cell into
-  columns. Typical is unchanged within 0.3 %
+  the composite RPPO cells lost their bulk pin when cicpy split the cell
+  into columns. Typical is unchanged within 0.3 %
 - the output buffer stays REYTR_IVX1 + IVX4: a discrete 2C1F2 first stage
   loads the last ring node and slowed the ring by 20 %
+- the divider has six flops and four taps, not ten and eight (see Pins)
 
-DRC (magic), routes from cicpy's automatic stack routing. The sidecar
-declares no coordinates; supplies are blocked in the transistor columns
-(the guard carries them).
+Checks: every cell is clean in magic DRC and LVS ("Circuits match
+uniquely"); REY_PLL and the wrapper are also clean in KLayout DRC, and the
+wrapper in the antenna check.
 
-| Column   | First build | cicpy fix/route-pad-spacing |
-|:---------|------------:|----------------------------:|
-| P_DIODE  | 80          | 0                           |
-| P_MIRB   | 0           | 0                           |
-| P_ST0..6 | 33 each     | 4 each                      |
-| N_BIAS   | 79          | 37                          |
-| N_SU     | 157         | 20                          |
-| N_SW     | 3           | 0                           |
-| R_TRIM   | 21          | 23                          |
-| R_FIX    | 0           | 0                           |
-| N_RING_A | 7           | 7                           |
-| N_RING_B | 7           | 7                           |
-| DIG      | 0           | 0, but NOT ROUTED           |
-| top      | 616         | 156                         |
-
-The fixes are in cicpy (branch fix/route-pad-spacing): a path joins its
-own nearby cut instead of placing a second one, routeVertical's
-one-cut-per-cluster check looks at the pads, and the stack search sees
-the metal of the nets it already routed (searched legs and canned rails
-with their landing pads). Open:
-
-- DIG: the router finds no path for CKN or the M4 supplies of the rey_tr
-  cells, so the column has no routes (0 DRC means nothing was drawn)
-- R_TRIM: VSS as five searched legs beside the RT0/RT2 trunks, li.3/met1.2
-- N_BIAS, N_SU, N_RING, P_ST: still to be looked at one by one
-- the router still picks some trunks as coordinates internally
-  (`trunkx=...`, logged as "not a pin anchor"); none of them are written
-  into the sidecar
-- then the channel routes between the rows, LVS and extraction
+Not done: the extracted core does not lock. The wiring on the ring nodes
+(about 10 fF each, 7.4 fF of it inside a stage) slows the oscillator 2.4
+times, to 265 MHz at trim code 3. The first plan was to extract the
+oscillator before building on it; that was skipped. See
+[HANDOFF.md](HANDOFF.md) for the numbers, the options and the build notes.

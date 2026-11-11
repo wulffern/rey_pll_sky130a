@@ -44,10 +44,30 @@ VREF CK_REF   VSS  pulse 0 {AVDD} 50n 100p 100p 62.4n 125n
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
+* The loop's inner nets under one name in both views (P_ for probe):
+* the flat extraction names an inner net after a block that has it.
+* Not their plain names: tran.meas has a measurement called vctrl,
+* and v(vctrl) then reads the measurement
+#ifdef Lay
+EVCTRL P_VCTRL 0 xdut.xblk_cp.VCTRL 0 1
+EUP P_UP 0 xdut.xblk_cp.UP 0 1
+EDN_N P_DN_N 0 xdut.xblk_cp.DN_N 0 1
+EKICK P_KICK 0 xdut.xblk_cp.KICK 0 1
+EVLPFZ P_VLPFZ 0 xdut.xblk_cp.VLPFZ 0 1
+ECK_FB P_CK_FB 0 xdut.xblk_divn.CK_FB 0 1
+#else
+EVCTRL P_VCTRL 0 xdut.VCTRL 0 1
+EUP P_UP 0 xdut.UP 0 1
+EDN_N P_DN_N 0 xdut.DN_N 0 1
+EKICK P_KICK 0 xdut.KICK 0 1
+EVLPFZ P_VLPFZ 0 xdut.VLPFZ 0 1
+ECK_FB P_CK_FB 0 xdut.CK_FB 0 1
+#endif
+
 #ifdef Debug
 .save all
 #else
-.save v(xdut.VCTRL) v(xdut.VLPFZ) v(xdut.CK_FB) v(CK_REF) v(CKO3) v(CK) v(xdut.UP) v(xdut.DN_N) v(xdut.KICK)
+.save v(P_VCTRL) v(P_UP) v(P_DN_N) v(P_KICK) v(P_VLPFZ) v(P_CK_FB) v(CK_REF) v(CKO3) v(CK)
 #endif
 
 *----------------------------------------------------------------

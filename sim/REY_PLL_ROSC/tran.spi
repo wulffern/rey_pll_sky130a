@@ -39,10 +39,24 @@ VCT  VDD_1V8  VCTRL  dc 1.8
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
+* Inner nets under one name in both views (P_ for probe): the flat
+* extraction names an inner net after a block that has it
+#ifdef Lay
+EN0  P_N0  0 xdut.xblk_stg0.N0 0 1
+EVG  P_VG  0 xdut.xblk_bias.xbias.xn_bias.VG 0 1
+EVX  P_VX  0 xdut.xblk_bias.xbias.xn_bias.VX 0 1
+EXST P_XST 0 xdut.xblk_bias.xbias.xn_su.XST 0 1
+#else
+EN0  P_N0  0 xdut.N0 0 1
+EVG  P_VG  0 xdut.xbias.VG 0 1
+EVX  P_VX  0 xdut.xbias.VX 0 1
+EXST P_XST 0 xdut.xbias.XST 0 1
+#endif
+
 #ifdef Debug
 .save all
 #else
-.save v(CK) v(VCTRL) v(xdut.N0) v(xdut.VBP) v(xdut.VG) v(xdut.VX) v(xdut.XST)
+.save v(CK) v(VCTRL) v(VBP) v(P_N0) v(P_VG) v(P_VX) v(P_XST) i(VDD)
 #endif
 
 
@@ -78,11 +92,11 @@ meas tran trim avg v(TRIM0)
 let trimcode = code
 print trimcode
 meas tran vctrl avg v(VCTRL)
-meas tran vbp avg v(xdut.VBP)
-meas tran vbn avg v(xdut.VG)
-meas tran vx avg v(xdut.VX) from=100n to=200n
-meas tran xst max v(xdut.XST) from=100n to=200n
-meas tran tpd trig v(xdut.N0) val='0.6' td=100n rise=1 targ v(xdut.N0) val='0.6' td=100n rise=11
+meas tran vbp avg v(VBP)
+meas tran vbn avg v(P_VG)
+meas tran vx avg v(P_VX) from=100n to=200n
+meas tran xst max v(P_XST) from=100n to=200n
+meas tran tpd trig v(P_N0) val='0.6' td=100n rise=1 targ v(P_N0) val='0.6' td=100n rise=11
 meas tran tck trig v(CK) val='0.9' td=100n rise=1 targ v(CK) val='0.9' td=100n rise=11
 write
 let v_act = v_act - 0.6

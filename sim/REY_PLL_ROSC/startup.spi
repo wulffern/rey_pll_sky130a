@@ -40,10 +40,22 @@ VCT  VDD_1V8  VCTRL  dc 0.9
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
+* Inner nets under one name in both views (P_ for probe): the flat
+* extraction names an inner net after a block that has it
+#ifdef Lay
+EN0  P_N0  0 xdut.xblk_stg0.N0 0 1
+EVG  P_VG  0 xdut.xblk_bias.xbias.xn_bias.VG 0 1
+EXST P_XST 0 xdut.xblk_bias.xbias.xn_su.XST 0 1
+#else
+EN0  P_N0  0 xdut.N0 0 1
+EVG  P_VG  0 xdut.xbias.VG 0 1
+EXST P_XST 0 xdut.xbias.XST 0 1
+#endif
+
 #ifdef Debug
 .save all
 #else
-.save v(VDD_1V8) v(xdut.N0) v(xdut.VG) v(xdut.XST)
+.save v(VDD_1V8) v(P_N0) v(P_VG) v(P_XST)
 #endif
 
 
@@ -68,9 +80,9 @@ let trimcode = $c
 print trimcode
 meas tran ramp find v(VDD_1V8) at=0
 echo "ramp $tr"
-meas tran vg find v(xdut.VG) at=13.9u
-meas tran xst find v(xdut.XST) at=13.9u
-meas tran tpd trig v(xdut.N0) val='0.6' td=13u rise=1 targ v(xdut.N0) val='0.6' td=13u rise=11
+meas tran vg find v(P_VG) at=13.9u
+meas tran xst find v(P_XST) at=13.9u
+meas tran tpd trig v(P_N0) val='0.6' td=13u rise=1 targ v(P_N0) val='0.6' td=13u rise=11
 write
 end
 end

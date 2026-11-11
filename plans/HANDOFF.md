@@ -1,106 +1,181 @@
-# REY_PLL handoff (2026-11-10)
+# REY_PLL handoff (2026-11-11)
 
 ## Where it stands
 
-The whole PLL is laid out with cicpy sidecars and checks clean:
+The PLL fits one Tiny Tapeout tile, and the core and the wrapper check
+clean. **The extracted layout does not lock**: the oscillator runs at less
+than half its schematic frequency, see "The open problem" below. The
+layout is not ready for tapeout.
 
-| Cell              | Size (um)    | DRC | LVS   |
-|:------------------|:-------------|:----|:------|
-| REY_PLL (top)     | 209 x 155    | stale, see below |  |
-| REY_PLL_ROSC      | 150.8 x 43.7 | OK  | match |
-| REY_PLL_ROSC_BIAS | 75 x 36.8    | OK  | match |
-| REY_PLL_ROSC_STAGE|              | OK  | match |
-| REY_PLL_CP        | 17 x 38.6    | OK  | match |
-| REY_PLL_DIVN      | 57.9 x 52.2  | OK  | match |
-| REY_PLL_PFD       | 27.2 x 42.7  | OK  | match |
-| REY_PLL_CTRL      | 17.3 x 29    | OK  | match |
-| REY_PLL_LPF       | 73.4 x 49    | OK  | match |
+| Cell                   | Size (um)       | DRC | KLayout DRC | LVS   | Antenna |
+|:-----------------------|:----------------|:----|:------------|:------|:--------|
+| tt_um_rey_pll_wulffern | 161 x 111.52    | OK  | OK          | match | 0 errors |
+| REY_PLL (core)         | 156.96 x 106.94 | OK  | OK          | match |         |
+| REY_PLL_ROSC           | 150.78 x 43.66  | OK  |             | match |         |
+| REY_PLL_ROSC_BIAS      | 74.96 x 36.80   | OK  |             | match |         |
+| REY_PLL_ROSC_STAGE     | 8.96 x 40.60    | OK  |             | match |         |
+| REY_PLL_LPF            | 66.04 x 45.28   | OK  |             | match |         |
+| REY_PLL_DIVN           | 30.72 x 50.08   | OK  |             | match |         |
+| REY_PLL_PFD            | 19.94 x 40.40   | OK  |             | match |         |
+| REY_PLL_CP             | 16.96 x 38.60   | OK  |             | match |         |
+| REY_PLL_CTRL           | 9.90 x 26.72    | OK  |             | match |         |
 
-DRC is magic. KLayout DRC (kdrc) has not been run on ROSC or the top.
+DRC is magic. KLayout DRC was run on the core and the wrapper, which hold
+every block.
 
-Commits (both pushed):
-- rey_pll_sky130a `c43658e` "REY_PLL top assembled, DRC and LVS clean"
-- cicpy `e455c4a` on branch `fix/route-pad-spacing`. Earlier commits on
-  that branch are `19234af` and `2e66d45`.
+Commits (all pushed to `main`):
 
-## The open problem: size
+- `e02d2d0` REY_PLL_PFD as two mirrored columns
+- `79468c7` Top re-floorplanned to fit one Tiny Tapeout tile
+- `17a33aa` Tiny Tapeout wrapper tt_um_rey_pll_wulffern, generated
+- cicpy `e455c4a` on branch `fix/route-pad-spacing`, unchanged since the
+  first top
 
-The tile is 161 x 111.52 um. lelo_temp's core is 154.52 x 110.95 in it.
+## How the size was met
 
-### Step 1, the PFD: done
+The first top was 209 x 155 um, against a tile of 161 x 111.52. The
+decision (user, 2026-11-10) was "squeeze, taps last": stay on a 1x1 tile,
+first make the changes that leave the circuit alone, measure, and drop
+divider taps only if it is still short.
 
-`pfd_layout` in `py/gen_pll.py`. Two mirrored columns (A: UP flop and its
-reset latch, B: DN flop and latch, the two inverters), 21 directed routes
-and no signal rings: 27.16 x 42.72 um, 1160 um2 against 3600. DRC clean,
-LVS "Circuits match uniquely".
+Without touching the circuit:
 
-- Three trunk lanes per column: outer (cell edge to input pins, M2/M3,
-  output to inputs), middle (between the input pins and the outputs,
-  M2/M3, started from an input pin) and edge (M4/M5, input to input).
-- Rows line up across the columns, so PWRUP_N, DN and RST each cross as
-  one straight M5 bar between two input pins.
-- Ports: UP and DN_N on the top edge (M3), CK_FB top (M4), CK_REF and
-  PWRUP_1V8 bottom (M4). These sides are provisional.
-- Pins A and B are swapped on XA3 and XA4 (symmetric gates), so the
-  corner sims in step 4 cover it.
-- `checkroutes` reports XA1/CKB shorted to XA1/CKN in every flop, in
-  DIVN too. That is the checker, not the layout: LVS matches.
+- the blocks of the top row lost their own rings. Their supply rails run
+  along their tops and are strapped on M4 to the top's two M1 rings
+- PFD as two mirrored columns with directed routes, 19.94 x 40.40
+- one row over the oscillator, PFD | CTRL | CP | DIVN | LPF, 1.6 um
+  between blocks, a 6 um channel between the rows
 
-**The top is stale.** `REY_PLL.py` still routes to the old PFD's M5
-rings (`_pfd_cp`, `_pwrup`, `_ck_fb`, the PFD supply strap), and
-`REY_PLL.mag` was not rebuilt. It gets rewritten with the floorplan.
+It was still short: with ten divider stages the row was 162.8 um against
+about 151 inside the rings. So the divider went from ten flops and eight
+taps to six flops and four taps (CK/8 to CK/64). This changes the circuit
+and the pins: uo_out[7:4] carry no tap and are tied low.
 
-### Step 2, the floorplan: does not fit as planned
+An earlier version of this file listed "ROSC_BIAS rebuilt to the stages'
+height: 800 um2" among the savings. That saving did not exist, and it
+was not needed.
 
-With the new PFD the height is met: ROSC 43.66 + channel 6 + DIVN 52.16
-+ rings 6 is about 108 of 110.95. The width is not. The top row is
+## The wrapper
 
-    DIVN 57.88 + PFD 27.16 + CTRL 17.26 + CP 18.56 + LPF 73.40 = 194.3
+`py/gen_tt_um.py` writes `tt_um_rey_pll_wulffern.mag` and `.sch` from one
+set of tables (PINS, ROUTES, TIED), the DEF and the core's ports.
 
-against about 151 inside the rings, and it is not a matter of
-arrangement: the blocks sum to 15 511 um2, which is 86 % of the raw tile
-and 98 % of what is left inside the top's rings, before any routing.
+- The core is used mirrored in x, 2.66 um from the west edge, so its ring
+  columns face the wrapper's rails (VDPWR x 0 to 2.0, VGND 2.4 to 4.4 um).
+  Each rail has one met1 to met4 pad onto its ring.
+- Each route: the core's met4 riser, a met3 track under the pads, a met4
+  drop into the pad. Inputs get a `diode_pw2nd_05v5` at the pad.
+- Pin choices made without asking, change them in ROUTES if wanted:
+  OLH on ui_in[4], OLL on ui_in[5]; CK (512 MHz) has no pad.
+- uio_oe[7:0], uio_out[7:0] and uo_out[7:4] are tied to VGND, each through
+  a 0.3 x 0.3 um res_generic_m4 (lelo_temp ties only uio_oe; an undriven
+  output pad seemed worse than twelve more resistors).
 
-| Block | um2  | Of which rings and margins |
-|:------|-----:|---------------------------:|
-| ROSC  | 6583 | bias is 75 x 36.8 beside 43.66 tall stages; 13 x 34 empty over `dig` |
-| LPF   | 3594 | 930 (the eight RCU cells are 64 x 41.6) |
-| DIVN  | 3019 | 800 |
-| PFD   | 1160 | 460 |
-| CP    |  655 | |
-| CTRL  |  500 | 290 |
+## The open problem: the extracted oscillator is too slow
 
-What squeezing can give without touching the circuit, roughly:
+Typical corner (Ktt, 27 C, 1.8 V), trim code 3, `sim/REY_PLL`:
 
-- thinner block rings (`addRouteRings` widthmult 4 to 1 or 2): 900
-- LPF without its M2 rings and M5 side rails: 700
-- ROSC_BIAS rebuilt to the stages' height: 800
+| View      | CK        | CK/64     | VCTRL   | Result |
+|:----------|:----------|:----------|:--------|:-------|
+| Schematic | 512.0 MHz | 8.000 MHz | 0.952 V | locks, ripple 8.5 mV |
+| Extracted | 264.9 MHz | 4.139 MHz | 0 V     | no lock: the loop holds VCTRL at VSS, the oscillator's fastest |
 
-That is 2400 um2, leaving 13 100 (83 % inside the rings), and it needs a
-packing that is not one row. Dropping divider taps 7 to 10 (two DIVN
-columns) gives another 940. A 1x2 tile (161 x 225.76) fits what exists
-today in three rows. This is waiting for the user's decision.
+The oscillator alone (`sim/REY_PLL_ROSC`, typical), CK at VCTRL = 0, its
+fastest:
 
-### Steps 3 and 4, unchanged
+| Trim code | Schematic, MHz | Extracted, MHz |
+|:---------:|:--------------:|:--------------:|
+| 0         | 509            | 211            |
+| 1         | 545            | 226            |
+| 2         | 589            | 245            |
+| 3         | 638            | 265            |
+| 4         | 704            | 291            |
+| 5         | 775            | 318            |
+| 6         | 862            | 346            |
+| 7         | 953            | 371            |
 
-3. **TT wrapper.** Copy `gen_tt_um.py` from lelo_temp and route the IO
-   pins to the edges: PWRUP_1V8, CK_REF, TRIM0-2, OLH, OLL, CK, CKO0-7.
-   The wrapper's power rails are met4 (cicpy M5) at x 0 to 4.4 um, full
-   height, so the core keeps M5 out of its west 4 um.
-4. **Wrap-up.**
-   - Run kdrc on the top.
-   - Rerun the corner sims on the extracted netlist.
-   - Update README, `plans/LAYOUT.md` and this file.
+No code reaches 512 MHz. The bias is the same in both views (VBP 1.258 V,
+VG 0.784 V at code 2), so it is the load on the ring nodes, not the
+current. The C-only extraction puts about 10 fF of wiring on every ring
+node (N6, which also drives the buffer, 12.8 fF):
+
+- 7.4 fF is inside the stages (REY_PLL_ROSC_STAGE extracted alone: the
+  input A 4.65 fF, the output Y 2.75 fF). 1.0 fF of each stage is A to
+  Y, input to output of an inverter, so it counts about twice
+- 2.7 fF is the routing between the stages in REY_PLL_ROSC
+
+With the same current and 2.4 times slower, the devices' own load on a
+ring node comes to about 7 fF, and the wiring more than doubles it. The
+schematic simulations never had it: the oscillator was not simulated
+extracted before the top was built.
+
+The 7.4 fF inside a stage is not split further here, between the rey_atr
+unit cells' own rails and the stage's routes. With the routing between
+the stages gone altogether the ring would still be 2 times slow, so
+shorter hops alone do not close it. The stages need about 2.4 times
+their current at the same swing, or the loop a lower target. The
+options, none started:
+
+1. More current per stage from the same devices: a smaller R, or fewer
+   units in the VBP diode. No area. R alone is weak: code 7 has 2.4
+   times less R than code 0 and is 1.76 times faster. The mirrors run at
+   a higher overdrive either way, and the MPB mirror had 39 mV of
+   headroom at Kfs, -40 C, 1.7 V. Needs the 45 corner oscillator sweep
+   again.
+2. Five stages, not seven: 1.4 times, and two stage columns of room.
+3. Lock at 256 MHz, N = 32 (the feedback after the fifth flop). Codes
+   3 to 7 reach it in typical; it gives up the 512 MHz goal.
+
+Whatever the choice: extract and sweep the oscillator (`make lpe
+CELL=REY_PLL_ROSC` in `work/`, `cicsim run ... tran Lay ...` in
+`sim/REY_PLL_ROSC`) before the top is rebuilt.
+
+The corner runs on the extracted netlist were not started, since typical
+already fails. The schematic corners in `sim/REY_PLL/results` are from
+before the divider went to six flops; only typical was rerun.
+
+## What else is left
+
+1. **`make lpe` crashes in its last step.** The extraction writes
+   `work/lpe/REY_PLL_lpe.spi`, then netgen (1.5.305) dies with a
+   segmentation fault comparing the flat netlist against the schematic
+   (379 devices and 208 nets on both sides when it dies). The same for
+   REY_PLL_ROSC; REY_PLL_ROSC_STAGE runs through. The hierarchical
+   LVS matches, so the layout is not in doubt, but `make typical VIEW=Lay`
+   stops there. Run `cicsim run ... Lay ...` directly after `make lpe`
+   has written the netlist. Not debugged.
+2. **Tapeout.** There is no `tapeout/` submodule, so `make deliver` and
+   `make precheck` cannot run. lelo_temp_sky130a is the model (`info.yaml`,
+   `tiles: "1x1"`, `analog_pins: 0`); check that the shuttle still accepts
+   that for an analog project.
+3. `info.yaml` lists only REY_PLL_ROSC under `doc`.
+4. **Start-up testbench.** `sim/REY_PLL_ROSC/startup.spi` runs on
+   schematic with the new probes (four cases, all oscillate). It has
+   not been run on the extracted netlist. One thing seen and not
+   followed up: at code 0 the ring period 13 us after the ramp is
+   22.5 ns per 10 periods with the 10 us supply ramp and 28.7 ns with
+   the 100 ns ramp, at the same VG (0.766 V). Code 7 agrees between
+   the ramps (15.5 ns).
 
 ## How to build
 
-Run these in `work/`:
+Generators, from the repository root:
 
-    make mag CELL=REY_PLL     # about 18 min for the top
+    python3 py/gen_pll.py design/REY_PLL_SKY130A      # blocks and top schematic
+    python3 py/gen_tt_um.py design/REY_PLL_SKY130A    # the wrapper
+
+Then in `work/`:
+
+    make cic                  # unit cells and digital blocks from cic/*.json
+    make mag CELL=REY_PLL     # about 5 min for the top
     make drc CELL=REY_PLL
-    make lvs CELL=REY_PLL     # needs cdl/REY_PLL.spice
-    make gds CELL=REY_PLL
+    make gds cdl lvs CELL=REY_PLL
+    make kdrc CELL=REY_PLL
+    make ant CELL=tt_um_rey_pll_wulffern
 
+- Read LVS as the "Final result:" line of `work/lvs/<CELL>_lvs.log`. The
+  16 "Netlists match uniquely with port errors" lines above it are the
+  device cells and have always been there.
 - xschem netlisting is intermittent. If LVS fails at readnet, or
   `cdl/<CELL>.spice` is missing, run `make cdl CELL=...` again.
 - `work/Makefile` adds `mag: OPT += --tech ../cic/sky130A.tech`. That is a
@@ -108,8 +183,31 @@ Run these in `work/`:
   the shared `aicex/ip/tech_sky130A`.
 - To locate a magic DRC error, write a tcl script with `drc listall why`.
   The extraction is in `lvs/<CELL>.spi`.
+- `make mag` rewrites the timestamp of every `.mag` it touches. Restore
+  the files whose only change is the timestamp before committing.
 - A repository hook blocks `git add -A` / `.` / `--all`. Name the paths
   instead, for example `git add -u design py cic`.
+
+## Simulation
+
+`sim/REY_PLL/tran.spi` is the lock testbench: 16 us, the frequency of CK
+and CK/64 and the VCTRL ripple measured over the last 2 us. Specs are in
+`tran.yaml` (510 to 514 MHz, 7.97 to 8.03 MHz, ripple under 30 mV).
+
+    cd sim/REY_PLL
+    make typical              # schematic
+    ./corners.sh              # schematic, 20 corners
+    ./corners.sh Lay          # extracted, after make lpe in work/
+
+The flat extracted netlist names an inner net after a block that has it
+(`xblk_cp.VCTRL`, not `VCTRL`), so the testbenches (`sim/REY_PLL` and
+`sim/REY_PLL_ROSC`) copy the inner nets they look at to top-level nodes
+`P_<net>` with a unity VCVS per view, and measure those. If a rebuild
+moves a name, the list is at PROBE in each `.spi`.
+
+`trim.py` in `sim/REY_PLL_ROSC` reads the ring period (tpd) and prints
+nothing for a code where ten periods do not fit the window; the table
+above is from the CK period (tck) in the logs.
 
 ## Layout conventions (user's direction)
 
@@ -127,26 +225,33 @@ Run these in `work/`:
 
 - The rey_tr cells stand 0.75 um past their box, the stage guards 0.44 um
   and the pmos guards 0.4-0.7 um. Abutting blocks can short VDD to VSS.
-  `xspace=1.6` fixes it; it is used for ROSC `dig` and stage ORDER[0], and
-  top `blk_cp`.
+  `xspace=1.6` between blocks fixes it; two n-wells need 2.6.
 - li->M5 stacks need the M4/M5 area rule. cicpy `Cut` grows the
   intermediate metal pads square to min area.
 - A top-level render needs a GDS. A `.cic` from a build still in progress
   is stale.
+- In magic, viali needs 0.06 um of met1 over it, and a met1 strap narrower
+  than the stack pad it leaves makes a met1.2 notch against the diode's
+  own met1. The wrapper's straps are as wide as their pads.
+- TT precheck refuses a power pin with an nwell port (from lelo_temp), so
+  the core stands in from the west edge.
+- `checkroutes` reports XA1/CKB shorted to XA1/CKN in every flop. That is
+  the checker, not the layout: LVS matches.
 - The REY_LDO working tree has regenerated files that are not committed.
   Leave them for the user.
 
 ## Key files
 
 - `design/REY_PLL_SKY130A/REY_PLL.py` is the top: the rows, the rings in
-  beforeRoute, and the PFD/CTRL->CP, CK_FB, channel and supply paths.
-- `design/REY_PLL_SKY130A/REY_PLL_ROSC.py`, `REY_PLL_ROSC_BIAS.py` and
-  `REY_PLL_CP.py` are the blocks.
-- `py/gen_pll.py` is the generator. `pfd_layout`, `divn_layout` and
-  `lpf_layout` write the routes into `cic/pll.json`; `divn_layout`
-  publishes CK_FB on the top edge.
+  beforeRoute, the PFD/CTRL->CP, CK_FB, channel and supply paths, and the
+  pins' risers to the top edge in afterRoute.
+- `design/REY_PLL_SKY130A/REY_PLL_ROSC.py`, `REY_PLL_ROSC_BIAS.py`,
+  `REY_PLL_ROSC_STAGE.py` and `REY_PLL_CP.py` are the analog blocks.
+- `py/gen_pll.py` is the generator. `pfd_layout`, `divn_layout`,
+  `ctrl_layout` and `lpf_layout` write the routes into `cic/pll.json`.
+- `py/gen_tt_um.py` is the wrapper generator.
 - `cic/sky130A.tech` is the local tech file.
-- cicpy changes:
+- cicpy changes (branch `fix/route-pad-spacing`):
   - `core/layoutcell.py`: promoteInstancePort with offset/jog,
     promoteRailPort and rail cut reuse.
   - `core/cut.py`: pad growth.
