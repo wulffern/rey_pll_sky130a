@@ -28,33 +28,34 @@ current shuttle still accepts that for an analog project.
 
 ## Pins
 
-| TT pin       | Signal    | At lock (512 MHz)                                     |
+| TT pin       | Signal    | At lock (128 MHz)                                     |
 |:-------------|:----------|:------------------------------------------------------|
 | clk          | CK_REF    | 8 MHz reference                                       |
 | ui_in[0]     | PWRUP_1V8 | powers the loop up, starts the kick pulse             |
 | ui_in[3:1]   | TRIM[2:0] | oscillator bias trim, set per die                     |
 | ui_in[4]     | OLH       | open loop, VCTRL to VDD_1V8: the oscillator's slowest |
 | ui_in[5]     | OLL       | open loop, VCTRL to VSS: the oscillator's fastest     |
-| uo_out[0]    | CK/8      | 64 MHz, may be more than the TT output path carries   |
-| uo_out[1]    | CK/16     | 32 MHz                                                |
-| uo_out[2]    | CK/32     | 16 MHz                                                |
-| uo_out[3]    | CK/64     | 8 MHz, the PLL feedback clock, compare with CK_REF    |
+| uo_out[0]    | CK/8      | 16 MHz                                                |
+| uo_out[1]    | CK/16     | 8 MHz, the PLL feedback clock, compare with CK_REF    |
+| uo_out[2]    | CK/32     | 4 MHz                                                 |
+| uo_out[3]    | CK/64     | 2 MHz                                                 |
 | uo_out[7:4]  |           | tied low                                              |
 | uio_out[7:0] |           | tied low                                              |
 | uio_oe[7:0]  |           | tied low (the uio pins are inputs)                    |
 | ui_in[7:6], uio_in[7:0], ena, rst_n | | not connected                          |
 
 DIVN is a ripple chain of six flops: the PLL feedback is taken after the
-sixth (/64), and four buffered taps feed the pins, so the pin load does not
-slow the chain. The first plan had ten flops and a tap on every uo_out pin
+fourth (/16; it was the sixth, /64, until the extracted oscillator turned
+out too slow for 512 MHz), and four buffered taps feed the pins, so the pin
+load does not slow the chain. The first plan had ten flops and a tap on every uo_out pin
 (down to CK/1024); the top row of the floorplan was about 10 um too wide with
-them, so the four flops that only fed pins went. CK/2 (256 MHz) and CK/4
-(128 MHz) are left off, since the TT output path cannot carry them, and CK
-itself (512 MHz) has no pad for the same reason.
+them, so the four flops that only fed pins went. CK/2 and CK/4 are left
+off and CK itself has no pad: at the 512 MHz first planned the TT output
+path could not carry them.
 
 With the PLL open (OLH or OLL) the taps also measure the free running
 oscillator over TRIM, which is the per-die trim procedure: pick the code
-whose CK/64 range, between OLH and OLL, has 8 MHz nearest its middle.
+whose CK/16 range, between OLH and OLL, has 8 MHz nearest its middle.
 
 ## Area budget (the estimate before layout)
 
@@ -163,8 +164,9 @@ Checks: every cell is clean in magic DRC and LVS ("Circuits match
 uniquely"); REY_PLL and the wrapper are also clean in KLayout DRC, and the
 wrapper in the antenna check.
 
-Not done: the extracted core does not lock. The wiring on the ring nodes
+The extracted core does not reach 512 MHz. The wiring on the ring nodes
 (about 10 fF each, 7.4 fF of it inside a stage) slows the oscillator 2.4
-times, to 265 MHz at trim code 3. The first plan was to extract the
+times, to 265 MHz at trim code 3, so the loop is closed at 128 MHz
+(N = 16) with the loop filter as it was. The first plan was to extract the
 oscillator before building on it; that was skipped. See
 [HANDOFF.md](HANDOFF.md) for the numbers, the options and the build notes.

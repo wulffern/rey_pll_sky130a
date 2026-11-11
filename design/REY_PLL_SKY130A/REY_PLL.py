@@ -229,7 +229,8 @@ class REY_PLL(SidecarCell):
 
           CK_REF, PWRUP_1V8   the PFD's top edge
           OLL, OLH            CTRL's top edge
-          CKO<n>              the divider's top edge
+          CKO<n>              the divider's top edge (the one beside
+                              CK_FB a step aside)
           TRIM<n>             the oscillator's pins, through the channel
                               and over the pump's left end, which holds
                               no M5: M3 at the pin's height to the lane,
@@ -239,11 +240,23 @@ class REY_PLL(SidecarCell):
         for net, blk in (("CK_REF", "pfd"), ("PWRUP_1V8", "pfd"),
                          ("OLL", "ctrl"), ("OLH", "ctrl")):
             layout.promoteInstancePort(net, rf"^{_b(blk)}$", "top", "M5")
+        #- CK_FB leaves the divider's top edge on M5 as well, and its
+        #- path stacks down from there. A tap whose riser would stand
+        #- within a pitch and a half of that pin (the stack's pad, a
+        #- space, half the riser) steps aside to there on its own layer
         divn = layout.getInstanceFromInstanceName(_b("divn"))
+        fb = int(divn.instancePorts["CK_FB"].get().centerX())
+        keep = 3 * PITCH.resolve("M5") // 2
         for net in sorted(divn.instancePorts):
-            if net.startswith("CKO"):
-                layout.promoteInstancePort(net, rf"^{_b('divn')}$", "top",
-                                           "M5")
+            if not net.startswith("CKO"):
+                continue
+            r = divn.instancePorts[net].get()
+            d = int(r.centerX()) - fb
+            jog = None
+            if abs(d) < keep:
+                jog = (r.layer, fb + (keep if d >= 0 else -keep))
+            layout.promoteInstancePort(net, rf"^{_b('divn')}$", "top",
+                                       "M5", jog=jog)
         rosc = layout.getInstanceFromInstanceName(_b("rosc"))
         for net, k in self.TRIM_LANES.items():
             x = int(rosc.instancePorts[net].get().centerX())

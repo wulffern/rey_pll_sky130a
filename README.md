@@ -17,9 +17,10 @@ replaces it with a current starved ring oscillator
 ([osc_ring_adv](https://analogicus.com/aic2027/assets/media/osc_ring_adv_tikz.svg)):
 the bias sets the frequency, VCTRL only trims it, and there is no OTA buffer.
 
-The goal is 512 MHz from an 8 MHz reference (N = 64), working over process,
+The goal was 512 MHz from an 8 MHz reference (N = 64), working over process,
 1.7 to 1.9 V and -40 to 125 C with one trim code per die, and small enough
-for a Tiny Tapeout tile.
+for a Tiny Tapeout tile. As laid out it locks at 128 MHz (N = 16): with its
+wiring the oscillator is too slow for 512 MHz, see below.
 
 # How
 
@@ -28,10 +29,15 @@ Status: the whole PLL is designed and laid out. The core, REY_PLL, is
 is one 161 x 111.52 um tile. Both are DRC (magic and KLayout) and LVS clean,
 the wrapper also in the antenna check.
 
-**The extracted layout does not lock.** The schematic locks at 512 MHz,
-but with the layout's wiring the oscillator reaches only 211 to 371 MHz
-over the trim codes (typical), so the design is not ready for tapeout.
-The numbers and the options are in [plans/HANDOFF.md](plans/HANDOFF.md).
+**The loop is closed at 128 MHz, not 512.** With the layout's wiring the
+oscillator reaches only 211 to 371 MHz over the trim codes (typical) and
+146 to 189 MHz in the slow corner, so the feedback is CK/16 (N = 16) and
+the oscillator is as it was. The extracted layout locks at 128 MHz in
+typical and in the Ktt and Kfs corners; the Kss, Kff and Ksf corners were
+still running when this was written. The loop filter was sized for N = 64
+and has not been retuned: by hand calculation the phase margin at N = 16
+is 20 to 38 degrees. The numbers are in
+[plans/HANDOFF.md](plans/HANDOFF.md).
 
 ## REY_PLL
 
@@ -43,7 +49,7 @@ The numbers and the options are in [plans/HANDOFF.md](plans/HANDOFF.md).
 | REY_PLL_PFD  | tri-state phase frequency detector, two reset flops            |
 | REY_PLL_CP   | charge pump biased from the oscillator's VBP (1.1 to 2.8 uA over the trim codes). UP sinks and DN sources, since Kvco is negative |
 | REY_PLL_LPF  | eight REYPLL_RCU cells: R = 32 x 15.3 kOhm, C1 = 7 MiM, C2 = 1 MiM, both to VDD_1V8 |
-| REY_PLL_DIVN | six flop ripple divider. CK/64 is the feedback, CK/8 to CK/64 are buffered to the pins |
+| REY_PLL_DIVN | six flop ripple divider. CK/16 is the feedback, CK/8 to CK/64 are buffered to the pins |
 | REY_PLL_CTRL | power up, the start-up kick on the loop filter, and the open loop modes |
 
 Powered down (PWRUP_1V8 low) VCTRL is parked at VDD_1V8, the oscillator's
@@ -95,11 +101,11 @@ cd work && make drc gds cdl lvs kdrc ant CELL=tt_um_rey_pll_wulffern
 | ui_in[3:1]   | TRIM[2:0] | Bias trim, higher code gives a higher frequency   |
 | ui_in[4]     | OLH       | Open loop, VCTRL to VDD_1V8 (slowest)             |
 | ui_in[5]     | OLL       | Open loop, VCTRL to VSS (fastest)                 |
-| uo_out[3:0]  | CKO[3:0]  | CK/8, CK/16, CK/32, CK/64 (64 to 8 MHz at lock)   |
+| uo_out[3:0]  | CKO[3:0]  | CK/8, CK/16, CK/32, CK/64 (16, 8, 4, 2 MHz at lock) |
 | uo_out[7:4], uio_out, uio_oe | | Tied low                                    |
 | VDPWR, VGND  | VDD_1V8, VSS | 1.8 V supply                                   |
 
-The 512 MHz clock itself has no pad.
+The 128 MHz clock itself has no pad. uo_out[1] is the feedback clock.
 
 ## REY_PLL_ROSC
 
@@ -239,13 +245,19 @@ make typical          # schematic, 16 us, about 15 min
 ```
 
 `tran.spi` powers up at 200 ns and measures the frequency of CK (200
-periods) and CK/64 (8 periods) and the VCTRL ripple over the last 2 us.
+periods) and CK_FB (8 periods) and the VCTRL ripple over the last 2 us.
 Typical corner, trim code 3:
 
-| View      | CK        | CK/64     | VCTRL   |                          |
-|:----------|:----------|:----------|:--------|:-------------------------|
-| Schematic | 512.0 MHz | 8.000 MHz | 0.952 V | locks, ripple 8.5 mV     |
-| Extracted | 264.9 MHz | 4.139 MHz | 0 V     | no lock, VCTRL at VSS    |
+| View      | N  | CK        | CK_FB     | VCTRL   |                          |
+|:----------|:--:|:----------|:----------|:--------|:-------------------------|
+| Schematic | 64 | 512.0 MHz | 8.000 MHz | 0.952 V | locks, ripple 8.5 mV     |
+| Extracted | 64 | 264.9 MHz | 4.139 MHz | 0 V     | no lock, VCTRL at VSS    |
+| Extracted | 16 | 128.0 MHz | 8.001 MHz | 1.077 V | locks, ripple 12.6 mV    |
+
+The layout is the N = 16 one. The schematic view cannot lock at N = 16:
+without the wiring the oscillator's slowest is 274 MHz. At N = 16 the
+extracted view also locks at -40 and 125 C, 1.7 and 1.9 V, in Ktt and Kfs
+(code 3, VCTRL 0.73 to 1.43 V, ripple under 14 mV).
 
 The oscillator alone, CK at VCTRL = 0 (its fastest), typical:
 
@@ -289,5 +301,5 @@ LVS matches. At Icp = 1.6 uA the filter is 8 cells, 15 % of a tile, see
 | Technology          |         | Skywater 130 nm |         |       |
 | AVDD                | 1.7     | 1.8             | 1.9     | V     |
 | Temperature         | -40     | 27              | 125     | C     |
-| Output frequency    |         | 512             |         | MHz   |
+| Output frequency    |         | 128             |         | MHz   |
 | Reference frequency |         | 8               |         | MHz   |

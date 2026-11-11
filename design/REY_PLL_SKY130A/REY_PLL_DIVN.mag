@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794265200
+timestamp 1794351600
 << checkpaint >>
 rect 0 0 6144 10016
 << locali >>
@@ -26,9 +26,9 @@ rect 1822 1266 1898 8702
 rect 3804 9106 4102 9182
 rect 4102 1266 4524 1342
 rect 4102 1266 4178 9182
-rect 4434 9892 4614 9952
-rect 4434 9892 4614 9952
-rect 4486 9106 4562 9952
+rect 3766 9892 3842 9952
+rect 3766 9892 3842 9952
+rect 3766 9106 3842 9952
 << m3 >>
 rect 76 1266 474 1326
 rect 884 248 960 8816
@@ -313,19 +313,16 @@ box 4794 8866 4978 8934
 use REYPLL_cut_M1M2_2x1 xcut55 
 transform 1 0 4434 0 1 9072
 box 4434 9072 4618 9140
-use REYPLL_cut_M2M5_2x1 xcut56 
-transform 1 0 4424 0 1 9106
-box 4424 9106 4624 9182
-use REYPLL_cut_M1M3_2x1 xcut57 
+use REYPLL_cut_M1M3_2x1 xcut56 
 transform 1 0 3354 0 1 5026
 box 3354 5026 3554 5102
-use REYPLL_cut_M1M3_2x1 xcut58 
+use REYPLL_cut_M1M3_2x1 xcut57 
 transform 1 0 3354 0 1 9346
 box 3354 9346 3554 9422
-use REYPLL_cut_M1M3_2x1 xcut59 
+use REYPLL_cut_M1M3_2x1 xcut58 
 transform 1 0 4794 0 1 5026
 box 4794 5026 4994 5102
-use REYPLL_cut_M1M3_2x1 xcut60 
+use REYPLL_cut_M1M3_2x1 xcut59 
 transform 1 0 4794 0 1 9346
 box 4794 9346 4994 9422
 << labels >>
@@ -343,7 +340,7 @@ flabel m2 s 4218 9924 4398 9984 0 FreeSans 400 0 0 0 CKO2
 port 7 nsew signal bidirectional
 flabel m2 s 4794 9940 4974 10000 0 FreeSans 400 0 0 0 CKO3
 port 8 nsew signal bidirectional
-flabel m4 s 4434 9892 4614 9952 0 FreeSans 400 0 0 0 CK_FB
+flabel m4 s 3766 9892 3842 9952 0 FreeSans 400 0 0 0 CK_FB
 port 4 nsew signal bidirectional
 << properties >>
 string FIXED_BBOX 0 0 6144 10016

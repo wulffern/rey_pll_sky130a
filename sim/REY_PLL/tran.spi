@@ -1,4 +1,4 @@
-*REY_PLL: closed loop lock from power up, 8 MHz reference, N = 64
+*REY_PLL: closed loop lock from power up, 8 MHz reference, N = 16
 *----------------------------------------------------------------
 * Include
 *----------------------------------------------------------------

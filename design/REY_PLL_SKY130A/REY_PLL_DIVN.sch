@@ -4,7 +4,7 @@ K {}
 V {}
 S {}
 E {}
-T {REY_PLL_DIVN: 6 flop ripple divider, CK/64 to the PFD} -1450 -820 0 0 0.5 0.5 {}
+T {REY_PLL_DIVN: 6 flop ripple divider, CK/16 to the PFD} -1450 -820 0 0 0.5 0.5 {}
 C {devices/ipin.sym} -1400 -740 0 0 {name=p0 lab=VDD_1V8}
 C {devices/ipin.sym} -1240 -740 0 0 {name=p1 lab=VSS}
 C {devices/ipin.sym} -1080 -740 0 0 {name=p2 lab=CK}
@@ -13,7 +13,7 @@ C {devices/opin.sym} -760 -740 0 0 {name=p4 lab=CKO0}
 C {devices/opin.sym} -600 -740 0 0 {name=p5 lab=CKO1}
 C {devices/opin.sym} -440 -740 0 0 {name=p6 lab=CKO2}
 C {devices/opin.sym} -280 -740 0 0 {name=p7 lab=CKO3}
-T {Flop k divides the previous one by two: Q<k> is CK/2^(k+1), D = QN<k>. Q5 is CK_FB. No reset: a ripple divider runs from any state} -1450 -660 0 0 0.3 0.3 {}
+T {Flop k divides the previous one by two: Q<k> is CK/2^(k+1), D = QN<k>. Q3 is CK_FB. No reset: a ripple divider runs from any state} -1450 -660 0 0 0.3 0.3 {}
 T {Each tap has its buffer over its flop, so the pins do not load the chain: CKO<t> = Q<t+2>, CK/8 .. CK/64} -1450 -630 0 0 0.3 0.3 {}
 T {A: stages 0 and 1} -1360 -500 0 0 0.35 0.35 {}
 C {REY_TR_SKY130A/REYTR_TAPCELLB_CV.sym} -1300 -400 0 0 {name=XA0}
@@ -68,13 +68,13 @@ C {REY_TR_SKY130A/REYTR_DFRNQNX1_CV.sym} -820 90 0 0 {name=XB3}
 C {devices/lab_pin.sym} -820 30 0 0 {name=l34 sig_type=std_logic lab=QN3}
 C {devices/lab_pin.sym} -820 90 0 0 {name=l35 sig_type=std_logic lab=Q2}
 C {devices/lab_pin.sym} -790 120 1 0 {name=l36 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} -720 30 2 0 {name=l37 sig_type=std_logic lab=Q3}
+C {devices/lab_pin.sym} -720 30 2 0 {name=l37 sig_type=std_logic lab=CK_FB}
 C {devices/lab_pin.sym} -720 90 2 0 {name=l38 sig_type=std_logic lab=QN3}
 C {devices/lab_pin.sym} -760 0 3 0 {name=l39 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -760 120 1 0 {name=l40 sig_type=std_logic lab=VSS}
 T {XB3} -700 84.0 0 0 0.25 0.25 {}
 C {REY_TR_SKY130A/REYTR_BFX1_CV.sym} -820 220 0 0 {name=XB4}
-C {devices/lab_pin.sym} -820 220 0 0 {name=l41 sig_type=std_logic lab=Q3}
+C {devices/lab_pin.sym} -820 220 0 0 {name=l41 sig_type=std_logic lab=CK_FB}
 C {devices/lab_pin.sym} -740 220 2 0 {name=l42 sig_type=std_logic lab=CKO1}
 C {devices/lab_pin.sym} -780 180 3 0 {name=l43 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -780 260 1 0 {name=l44 sig_type=std_logic lab=VSS}
@@ -86,7 +86,7 @@ C {devices/lab_pin.sym} -340 -380 1 0 {name=l46 sig_type=std_logic lab=VSS}
 T {XC0} -220 -406.0 0 0 0.25 0.25 {}
 C {REY_TR_SKY130A/REYTR_DFRNQNX1_CV.sym} -340 -230 0 0 {name=XC1}
 C {devices/lab_pin.sym} -340 -290 0 0 {name=l47 sig_type=std_logic lab=QN4}
-C {devices/lab_pin.sym} -340 -230 0 0 {name=l48 sig_type=std_logic lab=Q3}
+C {devices/lab_pin.sym} -340 -230 0 0 {name=l48 sig_type=std_logic lab=CK_FB}
 C {devices/lab_pin.sym} -310 -200 1 0 {name=l49 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -240 -290 2 0 {name=l50 sig_type=std_logic lab=Q4}
 C {devices/lab_pin.sym} -240 -230 2 0 {name=l51 sig_type=std_logic lab=QN4}
@@ -103,13 +103,13 @@ C {REY_TR_SKY130A/REYTR_DFRNQNX1_CV.sym} -340 90 0 0 {name=XC3}
 C {devices/lab_pin.sym} -340 30 0 0 {name=l58 sig_type=std_logic lab=QN5}
 C {devices/lab_pin.sym} -340 90 0 0 {name=l59 sig_type=std_logic lab=Q4}
 C {devices/lab_pin.sym} -310 120 1 0 {name=l60 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_pin.sym} -240 30 2 0 {name=l61 sig_type=std_logic lab=CK_FB}
+C {devices/lab_pin.sym} -240 30 2 0 {name=l61 sig_type=std_logic lab=Q5}
 C {devices/lab_pin.sym} -240 90 2 0 {name=l62 sig_type=std_logic lab=QN5}
 C {devices/lab_pin.sym} -280 0 3 0 {name=l63 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -280 120 1 0 {name=l64 sig_type=std_logic lab=VSS}
 T {XC3} -220 84.0 0 0 0.25 0.25 {}
 C {REY_TR_SKY130A/REYTR_BFX1_CV.sym} -340 220 0 0 {name=XC4}
-C {devices/lab_pin.sym} -340 220 0 0 {name=l65 sig_type=std_logic lab=CK_FB}
+C {devices/lab_pin.sym} -340 220 0 0 {name=l65 sig_type=std_logic lab=Q5}
 C {devices/lab_pin.sym} -260 220 2 0 {name=l66 sig_type=std_logic lab=CKO3}
 C {devices/lab_pin.sym} -300 180 3 0 {name=l67 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -300 260 1 0 {name=l68 sig_type=std_logic lab=VSS}

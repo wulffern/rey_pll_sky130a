@@ -2,9 +2,9 @@ fck:
   src:
     - fck
   name: Output frequency, 200 periods
-  typ: 512
-  min: 510
-  max: 514
+  typ: 128
+  min: 127.5
+  max: 128.5
   scale: 1
   digits: 4
   unit: MHz

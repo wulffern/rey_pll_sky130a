@@ -17,9 +17,10 @@ oscillator needs (negative Kvco, filter on VDD_1V8, no OTA buffer):
   REY_PLL_LPF   loop filter, eight REYPLL_RCU cells: R = 32 x 15.3 kOhm
                 from VCTRL to VLPFZ, C1 = 7 MiM from VLPFZ to VDD_1V8,
                 C2 = 1 MiM from VCTRL to VDD_1V8 (bottom plates on VDD)
-  REY_PLL_DIVN  six flop ripple divider, CK/64 is the feedback, four
-                buffered taps CK/8..CK/64 for the pins (ten flops and
-                eight taps did not fit the tile's width)
+  REY_PLL_DIVN  six flop ripple divider, CK/16 is the feedback (the
+                oscillator as laid out reaches 128 MHz in every corner,
+                not 512), four buffered taps CK/8..CK/64 for the pins
+                (ten flops and eight taps did not fit the tile's width)
   REY_PLL       the top
 
 The schematics are written with cicpy.eda.schgen; the oscillator comes
@@ -40,7 +41,8 @@ VDD, VSS = "VDD_1V8", "VSS"
 SUP = dict(AVDD=VDD, AVSS=VSS)
 
 NDIV = 6                  # flops in the divider
-NFB = 6                   # feedback after this many: CK/64
+NFB = 4                   # feedback after this many: CK/16
+FREF = 8                  # MHz
 TAPS = range(2, 6)        # Q2 (CK/8) .. Q5 (CK/64)
 NRCU = 8                  # loop filter unit cells
 NC1 = 7                   # of which C1; the last one is C2
@@ -385,8 +387,8 @@ TOP_PINS = ([(VDD, "in"), (VSS, "in"), ("PWRUP_1V8", "in"),
 
 def top(subs):
     sh = sheet("REY_PLL", TOP_PINS,
-               "REY_PLL: 512 MHz from 8 MHz, current starved ring "
-               "oscillator")
+               f"REY_PLL: {FREF * 2**NFB} MHz from {FREF} MHz, current starved "
+               "ring oscillator")
     for name, s in subs.items():
         sh.add_local(P + name + ".sym", s)
     sh.local[P + "REY_PLL_ROSC.sym"] = box_symbol(ROSC_PINS)
@@ -550,14 +552,22 @@ def divn_layout(cic):
             #- CK_FB leaves upwards from its tap buffer's input
             + [["CK_FB", "M1", "%s:%s" % ins["CK_FB"][0]]]}
         #- CK_FB to the top edge for the PFD: straight up on M5 from the
-        #- tap buffer's input, where the crossing to the next column
-        #- already stacks the net up to M5 (no second cut on the pin)
+        #- tap buffer's input. Where the net goes on to the next column,
+        #- that crossing already stacks it up to M5 there (no second cut
+        #- on the pin); the last stage's has only the hop on M2. The
+        #- pin on the edge is one wire across, not the input's 0.9 um:
+        #- the tap beside it rises on M5 too, from the top level
         #- The taps leave upwards too, on M3: a buffer's Y lies under
         #- its VSS strip on M4. The buffer at the top of a column goes
         #- straight off its pin; the one at mid height takes the outer
         #- lane, which the hops use on M2 only, and its pin stands over
         #- that lane, clear of the other tap's
-        edge = [["M5", "CK_FB", "top", "||", "startLayer=M2"]]
+        fb = [n for n, pp in dffs if pp["Q"] == "CK_FB"][0]
+        crosses = any(pp["CK"] == "CK_FB" and col(n) != col(fb)
+                      for n, pp in dffs)
+        edge = [["M5", "CK_FB", "top", "||",
+                 opt("nostartcut" if crosses else "startLayer=M2",
+                     "narrowpin")]]
         bufs = [t for t in insts if t[-1] == 'REYTR_BFX1_CV']
         for t in bufs:
             top = t[0] == max((b[0] for b in bufs if col(b[0]) == col(t[0])),

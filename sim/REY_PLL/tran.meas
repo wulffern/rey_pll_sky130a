@@ -5,7 +5,7 @@ load {cicname}.raw
 
 echo "MEAS_START"
 meas tran tck trig v(ck) val=0.9 td=14u rise=1 targ v(ck) val=0.9 td=14u rise=201
-meas tran tfb trig v(cko3) val=0.9 td=14u rise=1 targ v(cko3) val=0.9 td=14u rise=9
+meas tran tfb trig v(p_ck_fb) val=0.9 td=14u rise=1 targ v(p_ck_fb) val=0.9 td=14u rise=9
 meas tran vctrl avg v(p_vctrl) from=14u to=16u
 meas tran vctrl_max max v(p_vctrl) from=14u to=16u
 meas tran vctrl_min min v(p_vctrl) from=14u to=16u

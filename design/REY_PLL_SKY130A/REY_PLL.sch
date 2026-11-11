@@ -4,7 +4,7 @@ K {}
 V {}
 S {}
 E {}
-T {REY_PLL: 512 MHz from 8 MHz, current starved ring oscillator} -1450 -820 0 0 0.5 0.5 {}
+T {REY_PLL: 128 MHz from 8 MHz, current starved ring oscillator} -1450 -820 0 0 0.5 0.5 {}
 C {devices/ipin.sym} -1400 -740 0 0 {name=p0 lab=VDD_1V8}
 C {devices/ipin.sym} -1240 -740 0 0 {name=p1 lab=VSS}
 C {devices/ipin.sym} -1080 -740 0 0 {name=p2 lab=PWRUP_1V8}

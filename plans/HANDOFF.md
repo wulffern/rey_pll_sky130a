@@ -3,9 +3,19 @@
 ## Where it stands
 
 The PLL fits one Tiny Tapeout tile, and the core and the wrapper check
-clean. **The extracted layout does not lock**: the oscillator runs at less
-than half its schematic frequency, see "The open problem" below. The
-layout is not ready for tapeout.
+clean. **The loop is now closed at 128 MHz (N = 16), not 512**: the
+extracted oscillator runs at less than half its schematic frequency, see
+"The open problem" below, so the feedback moved to CK/16 with the
+oscillator untouched (the user's choice, 2026-11-11). The extracted core
+locks at 128 MHz in typical (code 3: CK 128.0 MHz, CK_FB 8.001 MHz, VCTRL
+1.077 V, ripple 12.6 mV) and in Ktt and Kfs at -40/125 C, 1.7/1.9 V
+(VCTRL 0.73 to 1.43 V). Kss, Kff and Ksf were still running at this
+commit; `./corners.sh Lay` in `sim/REY_PLL`.
+
+Not done for N = 16: the loop filter is the N = 64 one. By hand
+calculation with the built filter the crossover is 0.8 to 1.9 MHz and the
+phase margin 20 to 38 degrees (N = 64: 37 to 51). The rest of this file
+below "The open problem" still describes the N = 64 state.
 
 | Cell                   | Size (um)       | DRC | KLayout DRC | LVS   | Antenna |
 |:-----------------------|:----------------|:----|:------------|:------|:--------|

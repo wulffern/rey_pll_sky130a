@@ -6,7 +6,7 @@ timestamp 1794351600
 rect 0 0 6144 10016
 << metal4 >>
 rect 0 0 76 9952
-rect 4434 9892 4614 9952
+rect 3766 9892 3842 9952
 << metal2 >>
 rect 3802 9892 3982 9952
 rect 3354 9908 3534 9968
@@ -29,7 +29,7 @@ flabel metal2 s 4218 9924 4398 9984 0 FreeSans 400 0 0 0 CKO2
 port 4 nsew signal bidirectional
 flabel metal2 s 4794 9940 4974 10000 0 FreeSans 400 0 0 0 CKO3
 port 5 nsew signal bidirectional
-flabel metal4 s 4434 9892 4614 9952 0 FreeSans 400 0 0 0 CK_FB
+flabel metal4 s 3766 9892 3842 9952 0 FreeSans 400 0 0 0 CK_FB
 port 6 nsew signal bidirectional
 flabel locali s 204 9832 6144 9952 0 FreeSans 400 0 0 0 VDD_1V8
 port 7 nsew power bidirectional
