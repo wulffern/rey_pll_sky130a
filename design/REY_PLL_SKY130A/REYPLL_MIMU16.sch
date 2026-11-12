@@ -13,6 +13,6 @@ m=1
 spiceprefix=X
 }
 N 400.0 -50.0 400.0 -30.0 {lab=B}
-C {devices/lab_pin.sym} 400.0 -50.0 3 0 {name=l0 sig_type=std_logic lab=B }
+C {devices/lab_pin.sym} 400.0 -50.0 1 0 {name=l0 sig_type=std_logic lab=B }
 N 400.0 50.0 400.0 30.0 {lab=A}
-C {devices/lab_pin.sym} 400.0 50.0 1 0 {name=l1 sig_type=std_logic lab=A }
+C {devices/lab_pin.sym} 400.0 50.0 3 0 {name=l1 sig_type=std_logic lab=A }

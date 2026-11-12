@@ -29,10 +29,11 @@ from py/gen_rosc.py.
 import logging
 import os
 import sys
+import textwrap
 
 log = logging.getLogger('gen_pll')
 
-from cicpy.eda.schgen import Sheet, box_symbol, RIGHT
+from cicpy.eda.schgen import Sheet, box_symbol, LEFT, RIGHT, UP, DOWN
 
 A = "REY_ATR_SKY130A/"
 T = "REY_TR_SKY130A/"
@@ -45,6 +46,7 @@ NFB = 4                   # feedback after this many: CK/16
 FREF = 8                  # MHz
 TAPS = range(2, 6)        # Q2 (CK/8) .. Q5 (CK/64)
 NRCU = 8                  # loop filter unit cells
+NOTE = 110                # characters a line of notes on a sheet
 NC1 = 7                   # of which C1; the last one is C2
 
 outdir = sys.argv[1]
@@ -84,6 +86,15 @@ PORTS = {
 #- REYPLL_RCU is RCU; rey_tr's cells come from a built library as is)
 LIBS = {"REYPLL_RCU": P}
 BUILD = {"REYPLL_RCU": "RCU"}
+
+
+#- where a pin's label goes when not straight away from the body. The
+#- supplies sit beside their pins; under the flop and the tap the cell's
+#- own name is written there, so VSS hangs below, and the flop's reset
+#- goes left, clear of the cell under it
+BESIDE = dict(AVDD=RIGHT, AVSS=RIGHT)
+LABELS = {"REYTR_DFRNQNX1_CV": dict(AVDD=RIGHT, AVSS=DOWN, RN=LEFT),
+         "REYTR_TAPCELLB_CV": dict(AVDD=RIGHT, AVSS=DOWN)}
 
 
 def tap(name):
@@ -265,13 +276,16 @@ BLOCKS = [CTRL, PFD, DIVN, LPF]
 def columns(blk):
     """The xschem view: each layout column drawn as a column."""
     sh = sheet(blk["cell"], blk["pins"], blk["title"])
-    for k, n in enumerate(blk["notes"]):
+    #- the notes wrapped: one long line sets the width of the sheet, and
+    #- the drawing under it shrinks to fit
+    lines = [w for n in blk["notes"] for w in textwrap.wrap(n, NOTE)]
+    for k, n in enumerate(lines):
         sh.text(n, -1450, -660 + 30*k, 0.3)
-    y0 = -560 + 30*len(blk["notes"])
+    y0 = -560 + 30*len(lines)
     for c, (label, insts) in enumerate(blk["columns"]):
         x = -1300 + 480*c
         sh.text(label, x - 60, y0, 0.35)
-        y = y0 + 80
+        y = y0 + 110
         for name, cell, conn in insts:
             ref = LIBS.get(cell, T) + cell + ".sym"
             sym = sh.symbol(ref)
@@ -281,9 +295,13 @@ def columns(blk):
             for p in ("AVDD", "AVSS"):
                 if p in sym.pins:
                     pins[p] = VDD if p == "AVDD" else VSS
-            sh.inst(ref, name, x, y, **pins)
-            sh.text(name, x + 120, y - 6, 0.25)
-            y += max(ys) + 60
+            #- the supplies beside their pins, not stood on end over
+            #- and under every gate: the column stays as tight as the
+            #- cells, and the nets that matter are the ones that show
+            sh.inst(ref, name, x, y, sides=LABELS.get(cell, BESIDE), **pins)
+            #- the layout's name above the cell, clear of every label
+            sh.text(name, x - 60, y + min(ys) - 32, 0.25)
+            y += max(ys) + 70
     return sh
 
 
@@ -367,9 +385,10 @@ def cp():
             S=VSS, B=VSS)
     sh.inst(A + BIG_N + ".sym", "xmnk", x, -110, G="KICK", D="VLPFZ",
             S=VSS, B=VSS)
-    sh.text("VHI_N low: VCTRL to VDD_1V8 (powered down, or OLH). VLO "
-            "high: VCTRL to VSS (OLL). KICK pulls C1 down at power up",
+    sh.text("VHI_N low: VCTRL to VDD_1V8 (powered down, or OLH)",
             -550, -20, 0.3)
+    sh.text("VLO high: VCTRL to VSS (OLL). KICK pulls C1 down at power up",
+            -550, 10, 0.3)
     return sh
 
 
@@ -394,18 +413,61 @@ def top(subs):
     sh.local[P + "REY_PLL_ROSC.sym"] = box_symbol(ROSC_PINS)
     same = {p: p for p, _ in TOP_PINS}
 
-    def place(cell, name, x, y, pins, **ren):
-        conn = {p: ren.get(p, same.get(p, p)) for p, _ in pins}
-        sh.inst(P + cell + ".sym", name, x, y, **conn)
+    def place(cell, name, x, y, pins, wired=()):
+        #- a label on every pin but the ones a wire is drawn to
+        sh.inst(P + cell + ".sym", name, x, y,
+                **{p: same.get(p, p) for p, _ in pins if p not in wired})
+
+    def run(net, rot, *pts, at=0):
+        """A wire through pts carrying net, its label on segment at."""
+        segs = [(a, b) for a, b in zip(pts, pts[1:]) if a != b]
+        for k, ((x1, y1), (x2, y2)) in enumerate(segs):
+            if k == at:
+                sh.wlab(x1, y1, x2, y2, rot, net)
+            else:
+                sh.wire(x1, y1, x2, y2)
 
     sh.text("CK_REF -> PFD -> CP -> LPF -> VCTRL -> ROSC -> DIVN -> CK_FB",
             -1450, -640, 0.4)
-    place("REY_PLL_CTRL", "xctrl", -1200, -150, CTRL_PINS)
-    place("REY_PLL_PFD", "xpfd", -1200, -450, PFD_PINS)
-    place("REY_PLL_CP", "xcp", -800, -450, CP_PINS)
-    place("REY_PLL_LPF", "xlpf", -800, -150, LPF_PINS)
-    place("REY_PLL_ROSC", "xrosc", -400, -450, ROSC_PINS)
-    place("REY_PLL_DIVN", "xdivn", -400, -100, DIVN_PINS)
+    #- The loop drawn as a loop, left to right, its nets as wires. Each
+    #- block sits at the height that makes its wire straight: PFD and CP
+    #- share UP and DN_N, the oscillator's VCTRL pin is on the charge
+    #- pump's, the divider's CK on the oscillator's. The filter hangs
+    #- under VCTRL, the control block under the PFD; what the control
+    #- block and the bias hand over (KICK, VHI_N, VLO, VBP) stays a label.
+    #- Same order of instances as ever, so the netlist does not move
+    y = -250
+    place("REY_PLL_CTRL", "xctrl", -1150, y + 280, CTRL_PINS)
+    place("REY_PLL_PFD", "xpfd", -1150, y, PFD_PINS,
+          wired=("UP", "DN_N", "CK_FB"))
+    place("REY_PLL_CP", "xcp", -600, y, CP_PINS,
+          wired=("UP", "DN_N", "VCTRL", "VLPFZ"))
+    place("REY_PLL_LPF", "xlpf", -50, y + 130, LPF_PINS,
+          wired=("VCTRL", "VLPFZ"))
+    place("REY_PLL_ROSC", "xrosc", 100, y - 140, ROSC_PINS,
+          wired=("VCTRL", "CK"))
+    place("REY_PLL_DIVN", "xdivn", 650, y - 200, DIVN_PINS,
+          wired=("CK", "CK_FB"))
+    pin = sh.pin
+    run("UP", UP, pin("xpfd", "UP"), pin("xcp", "UP"))
+    run("DN_N", DOWN, pin("xpfd", "DN_N"), pin("xcp", "DN_N"))
+    #- VCTRL: charge pump to oscillator, the filter's R on a branch down
+    (x1, y1), (x2, y2) = pin("xcp", "VCTRL"), pin("xrosc", "VCTRL")
+    assert y1 == y2, "VCTRL is drawn straight"
+    xt = x1 + 100
+    sh.path((x1, y1), (xt, y1), (x2, y2))
+    xl, yl = pin("xlpf", "VCTRL")
+    run("VCTRL", RIGHT, (xt, y1), (xt, yl), (xl, yl))
+    #- VLPFZ: the filter's zero, C1 and the kick, inside that branch
+    (x1, y1), (xl, yl) = pin("xcp", "VLPFZ"), pin("xlpf", "VLPFZ")
+    run("VLPFZ", LEFT, (x1, y1), (xt - 50, y1), (xt - 50, yl), (xl, yl),
+        at=1)
+    run("CK", UP, pin("xrosc", "CK"), pin("xdivn", "CK"))
+    #- CK_FB: out of the divider and back round under everything
+    (x1, y1), (x2, y2) = pin("xdivn", "CK_FB"), pin("xpfd", "CK_FB")
+    xr, yb, xw = x1 + 120, y + 450, x2 - 150
+    run("CK_FB", RIGHT, (x1, y1), (xr, y1), (xr, yb), (xw, yb), (xw, y2),
+        (x2, y2), at=1)
     return sh
 
 

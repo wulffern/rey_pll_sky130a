@@ -38,6 +38,7 @@ Settings (environment): NSTAGE, BIAS, ND, NF, NT, NFOL, MIR, CTL, INVP,
 INVN, FOL, CELL.
 """
 import sys, os
+from cicpy.eda.schgen import frame
 
 N = int(os.environ.get("NSTAGE", 7))
 BIAS = os.environ.get("BIAS", "vt")
@@ -86,8 +87,8 @@ def wire(x1, y1, x2, y2):
 
 
 def lab(x, y, rot, net):
-    """A label pin; rot 0 points left (pin on its right), 2 points right,
-    1 down, 3 up."""
+    """A label pin; rot 0 has its text to the left (pin on its right), 2
+    to the right, 1 standing up from the pin, 3 hanging below it."""
     L.append(f"C {{devices/lab_pin.sym}} {x} {y} {rot} 0 "
              f"{{name=l{nid()} sig_type=std_logic lab={net}}}")
 
@@ -114,16 +115,16 @@ def inst(sym, name, x, y):
 def pch(sym, name, x, y, g=None, s=None, d=None, b=VDD):
     inst(sym, name, x, y)
     if g: lab(x, y, 0, g)
-    if s: lab(x + 40, y - 30, 3, s)
-    if d: lab(x + 40, y + 30, 1, d)
+    if s: lab(x + 40, y - 30, 1, s)
+    if d: lab(x + 40, y + 30, 3, d)
     if b: lab(x + 40, y, 2, b)
 
 
 def nch(sym, name, x, y, g=None, d=None, s=None, b=VSS):
     inst(sym, name, x, y)
     if g: lab(x, y, 0, g)
-    if d: lab(x + 40, y - 30, 3, d)
-    if s: lab(x + 40, y + 30, 1, s)
+    if d: lab(x + 40, y - 30, 1, d)
+    if s: lab(x + 40, y + 30, 3, s)
     if b: lab(x + 40, y, 2, b)
 
 
@@ -131,7 +132,7 @@ def res(sym, name, x, y, p=None, n=None):
     inst(sym, name, x, y)
     if p: lab(x, y, 0, p)
     if n: lab(x + 80, y, 2, n)
-    lab(x + 40, y + 20, 1, VSS)
+    lab(x + 40, y + 20, 3, VSS)
 
 
 def bus(name, w):
@@ -231,7 +232,7 @@ if BIAS == "vt":
          "V {}", "S {}", "E {}"]
     draw_bias()
     with open(os.path.join(outdir, BIASCELL + ".sch"), "w") as f:
-        f.write("\n".join(L) + "\n")
+        f.write("\n".join(frame(L)) + "\n")
     write_box_symbol(os.path.join(outdir, BIASCELL + ".sym"), BIAS_PINS)
     L = _main
     #- the bias block, its own cell
@@ -263,7 +264,7 @@ STAGE_PINS = [(VDD, "in"), (VSS, "in"), ("VBP", "in"), ("VCTRL", "in"),
 
 def draw_stage():
     """One stage on its own sheet: A in, Y out."""
-    x0 = 100
+    x0 = -1300
     text("REY_PLL_ROSC_STAGE: one ring stage, a starved inverter A -> Y",
          -1450, -820, 0.5)
     for i, (p, d) in enumerate(STAGE_PINS):
@@ -312,7 +313,7 @@ L = ["v {xschem version=3.4.7 file_version=1.2}", "G {}", "K {}", "V {}",
      "S {}", "E {}"]
 draw_stage()
 with open(os.path.join(outdir, STAGE + ".sch"), "w") as f:
-    f.write("\n".join(L) + "\n")
+    f.write("\n".join(frame(L)) + "\n")
 write_box_symbol(os.path.join(outdir, STAGE + ".sym"), STAGE_PINS)
 L = _main
 
@@ -320,23 +321,22 @@ L = _main
 #- N<k-1>, stage 0 takes the last node
 S = range(N - 1, -1, -1)
 nets = lambda p, idx: ",".join(f"{p}{i}" for i in idx)
-x0, y0 = 100, -620
+x0, y0 = -700, -620
 text(f"Ring: {N} stages of REY_PLL_ROSC_STAGE", x0, y0)
 _sym = box_symbol(STAGE_PINS)
-xs, ys = 400, -350
+xs, ys = x0 + 300, -350
 inst(f"REY_PLL_SKY130A/{STAGE}.sym", f"xstg[{N-1}:0]", xs, ys)
 for p, net in ((VDD, VDD), (VSS, VSS), ("VBP", "VBP"), ("VCTRL", "VCTRL"),
                ("A", nets("N", [(k - 1) % N for k in S])),
                ("Y", nets("N", S))):
     px, py, side = _sym.pins[p]
     lab(xs + px, ys + py, side, net)
-text("stage k: N<k-1> -> N<k>", x0, -60, 0.3)
-xf, NF_ = x0 + 400, NF
+text("stage k: N<k-1> -> N<k>", x0, -180, 0.3)
 
 #- ------------------------------------------------------------------
 #- Output buffer
 #- ------------------------------------------------------------------
-xo = xf + 260*NF_ + 350
+xo = x0 + 800
 text("Output buffer", xo, y0)
 #- REYTR_IVX1 then IVX4. The first one must be small: it loads the last
 #- ring node, and a 2C1F2 pair there (2x the gate cap of IVX1) slowed the
@@ -346,33 +346,37 @@ T = "REY_TR_SKY130A/"
 
 def inv(sym, name, x, y, a, yy):
     inst(sym, name, x, y)
-    lab(x + 40, y - 40, 3, VDD)
-    lab(x + 40, y + 40, 1, VSS)
+    lab(x + 40, y - 40, 1, VDD)
+    lab(x + 40, y + 40, 3, VSS)
     if a: lab(x, y, 0, a)
     if yy: lab(x + 80, y, 2, yy)
 
 
-inv(T + "REYTR_IVX1_CV.sym", "xo0", xo, -170, f"N{N-1}", None)
-wlab(xo + 80, -170, xo + 200, -170, 3, "CKN")
-inv(T + "REYTR_IVX4_CV.sym", "xo1", xo + 200, -170, None, "CK")
+#- on the row of the two blocks
+yo = ys
+inv(T + "REYTR_IVX1_CV.sym", "xo0", xo, yo, f"N{N-1}", None)
+wlab(xo + 80, yo, xo + 200, yo, 3, "CKN")
+inv(T + "REYTR_IVX4_CV.sym", "xo1", xo + 200, yo, None, "CK")
 #- every rey_tr column needs a TAPCELLB (well and substrate taps) to be
 #- LVS clean. Pins: AVDD (0,-20) AVSS (0,20)
-inst(T + "REYTR_TAPCELLB_CV.sym", "xotap", xo + 420, -170)
-lab(xo + 420, -190, 3, VDD)
-lab(xo + 420, -150, 1, VSS)
+inst(T + "REYTR_TAPCELLB_CV.sym", "xotap", xo + 420, yo)
+lab(xo + 420, yo - 20, 1, VDD)
+lab(xo + 420, yo + 20, 3, VSS)
 
 with open(os.path.join(outdir, cell + ".sch"), "w") as f:
-    f.write("\n".join(L) + "\n")
+    f.write("\n".join(frame(L)) + "\n")
 
 #- ------------------------------------------------------------------
 #- Symbol: inputs left, outputs right
 #- ------------------------------------------------------------------
 Y = ["v {xschem version=3.4.7 file_version=1.2}",
      'K {type=subcircuit\nformat="@name @pinlist @symname"\ntemplate="name=x1"\n}',
-     "T {@symname} -60 -6 0 0 0.3 0.3 {}", "T {@name} 135 -52 0 0 0.2 0.2 {}"]
+     "T {@symname} -60 -6 0 0 0.3 0.3 {}"]
 ins = [p for p, d in pins if d != "out"]
 outs = [p for p, d in pins if d == "out"]
 h = 20*max(len(ins), len(outs)) + 10
+#- the name over the corner, as cicpy's box symbols have it
+Y.append(f"T {{@name}} -130 {-h - 22} 0 0 0.25 0.25 {{}}")
 Y.append(f"P 4 5 130 {-h} -130 {-h} -130 {h} 130 {h} 130 {-h} {{}}")
 for i, p in enumerate(ins):
     y = -h + 20 + 20*i

@@ -36,6 +36,6 @@ N 360.0 160.0 380.0 160.0 {lab=BR}
 C {devices/lab_pin.sym} 360.0 160.0 0 0 {name=l8 sig_type=std_logic lab=BR }
 C {REY_PLL_SKY130A/REYPLL_MIMU16.sym} 400 280 0 0 {name=XXC}
 N 400.0 200.0 400.0 220.0 {lab=A}
-C {devices/lab_pin.sym} 400.0 200.0 3 0 {name=l9 sig_type=std_logic lab=A }
+C {devices/lab_pin.sym} 400.0 200.0 1 0 {name=l9 sig_type=std_logic lab=A }
 N 400.0 310.0 400.0 290.0 {lab=B}
-C {devices/lab_pin.sym} 400.0 310.0 1 0 {name=l10 sig_type=std_logic lab=B }
+C {devices/lab_pin.sym} 400.0 310.0 3 0 {name=l10 sig_type=std_logic lab=B }

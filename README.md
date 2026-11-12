@@ -33,11 +33,16 @@ the wrapper also in the antenna check.
 oscillator reaches only 211 to 371 MHz over the trim codes (typical) and
 146 to 189 MHz in the slow corner, so the feedback is CK/16 (N = 16) and
 the oscillator is as it was. The extracted layout locks at 128 MHz in
-typical and in the Ktt and Kfs corners; the Kss, Kff and Ksf corners were
-still running when this was written. The loop filter was sized for N = 64
-and has not been retuned: by hand calculation the phase margin at N = 16
-is 20 to 38 degrees. The numbers are in
+typical and in all 20 corners (five processes, -40 and 125 C, 1.7 and
+1.9 V), each process at one trim code: VCTRL 0.56 to 1.53 V, ripple under
+14 mV. The loop filter was sized for N = 64 and has not been retuned: by
+hand calculation the phase margin at N = 16 is 20 to 38 degrees. The
+numbers are in [sim/REY_PLL/README.md](sim/REY_PLL/README.md) and
 [plans/HANDOFF.md](plans/HANDOFF.md).
+
+Every schematic of the design has a short description in
+`design/REY_PLL_SKY130A/<cell>.md`. The documentation pages built from
+`info.yaml` show them with the schematics.
 
 ## REY_PLL
 
@@ -202,6 +207,9 @@ procedure applied to sun_pll's numbers needs 27 pF.
 
 # Simulation
 
+The oscillator on its own, schematic, swept for the original 512 MHz
+target (see also [sim/REY_PLL_ROSC/README.md](sim/REY_PLL_ROSC/README.md)):
+
 ```bash
 cd sim/REY_PLL_ROSC
 make netlist
@@ -239,9 +247,9 @@ Kfs, -40 C, 1.7 V.
 
 ```bash
 cd sim/REY_PLL
-make typical          # schematic, 16 us, about 15 min
-./corners.sh          # 20 corners, each process at its trim code
-./corners.sh Lay      # the same on the extracted netlist
+cicsim run --name Lay_typical tran Lay Gt C3 Ktt Tt Vt   # extracted, 16 us
+./corners.sh Lay      # extracted, 20 corners, each process at its trim code
+./corners.sh          # the same on the schematic (cannot lock at N = 16)
 ```
 
 `tran.spi` powers up at 200 ns and measures the frequency of CK (200
@@ -256,8 +264,12 @@ Typical corner, trim code 3:
 
 The layout is the N = 16 one. The schematic view cannot lock at N = 16:
 without the wiring the oscillator's slowest is 274 MHz. At N = 16 the
-extracted view also locks at -40 and 125 C, 1.7 and 1.9 V, in Ktt and Kfs
-(code 3, VCTRL 0.73 to 1.43 V, ripple under 14 mV).
+extracted view also locks in all 20 corners: Ktt, Kss, Kff, Ksf and Kfs at
+-40 and 125 C, 1.7 and 1.9 V, with trim codes 3, 6, 0, 4 and 3. CK is
+127.99 to 128.01 MHz, VCTRL 0.56 to 1.53 V and the ripple 8 to 13 mV. The
+table of every corner is in [sim/REY_PLL/README.md](sim/REY_PLL/README.md).
+The trim codes are the ones from the schematic sweep above. The sweep has
+not been repeated on the extracted oscillator for 128 MHz.
 
 The oscillator alone, CK at VCTRL = 0 (its fastest), typical:
 

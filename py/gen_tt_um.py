@@ -285,7 +285,7 @@ def schematic(outdir, diodes):
             "each", -1400, 300)
     for i, name in enumerate(TIED):
         sh.inst("sky130_fd_pr/res_generic_m4.sym",
-                f"R{i}[{len(bits(name)) - 1}:0]", -1300 + 300 * i, 430,
+                f"R{i}[{len(bits(name)) - 1}:0]", -1300 + 300 * i, 520,
                 props="W=0.3 L=0.3 model=res_generic_m4 mult=1",
                 P=name, M="VGND")
     sh.write(outdir, symbol=False)

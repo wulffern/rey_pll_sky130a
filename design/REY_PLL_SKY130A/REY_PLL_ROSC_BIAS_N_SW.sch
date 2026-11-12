@@ -13,28 +13,28 @@ C {devices/iopin.sym} 0 100 0 0 {name=p5 lab=TRIM2}
 C {devices/iopin.sym} 0 120 0 0 {name=p6 lab=VSS}
 C {REY_ATR_SKY130A/REYATR_NCH_4C1F2.sym} 400 0 0 0 {name=Xxst0}
 N 440.0 -50.0 440.0 -30.0 {lab=RT0}
-C {devices/lab_pin.sym} 440.0 -50.0 3 0 {name=l0 sig_type=std_logic lab=RT0 }
+C {devices/lab_pin.sym} 440.0 -50.0 1 0 {name=l0 sig_type=std_logic lab=RT0 }
 N 380.0 0.0 400.0 0.0 {lab=TRIM0}
 C {devices/lab_pin.sym} 380.0 0.0 0 0 {name=l1 sig_type=std_logic lab=TRIM0 }
 N 440.0 50.0 440.0 30.0 {lab=RT1}
-C {devices/lab_pin.sym} 440.0 50.0 1 0 {name=l2 sig_type=std_logic lab=RT1 }
+C {devices/lab_pin.sym} 440.0 50.0 3 0 {name=l2 sig_type=std_logic lab=RT1 }
 N 460.0 0.0 440.0 0.0 {lab=VSS}
 C {devices/lab_pin.sym} 460.0 0.0 2 0 {name=l3 sig_type=std_logic lab=VSS }
 C {REY_ATR_SKY130A/REYATR_NCH_4C1F2.sym} 400 170 0 0 {name=Xxst1}
 N 440.0 120.0 440.0 140.0 {lab=RT1}
-C {devices/lab_pin.sym} 440.0 120.0 3 0 {name=l4 sig_type=std_logic lab=RT1 }
+C {devices/lab_pin.sym} 440.0 120.0 1 0 {name=l4 sig_type=std_logic lab=RT1 }
 N 380.0 170.0 400.0 170.0 {lab=TRIM1}
 C {devices/lab_pin.sym} 380.0 170.0 0 0 {name=l5 sig_type=std_logic lab=TRIM1 }
 N 440.0 220.0 440.0 200.0 {lab=RT2}
-C {devices/lab_pin.sym} 440.0 220.0 1 0 {name=l6 sig_type=std_logic lab=RT2 }
+C {devices/lab_pin.sym} 440.0 220.0 3 0 {name=l6 sig_type=std_logic lab=RT2 }
 N 460.0 170.0 440.0 170.0 {lab=VSS}
 C {devices/lab_pin.sym} 460.0 170.0 2 0 {name=l7 sig_type=std_logic lab=VSS }
 C {REY_ATR_SKY130A/REYATR_NCH_4C1F2.sym} 400 340 0 0 {name=Xxst2}
 N 440.0 290.0 440.0 310.0 {lab=RT2}
-C {devices/lab_pin.sym} 440.0 290.0 3 0 {name=l8 sig_type=std_logic lab=RT2 }
+C {devices/lab_pin.sym} 440.0 290.0 1 0 {name=l8 sig_type=std_logic lab=RT2 }
 N 380.0 340.0 400.0 340.0 {lab=TRIM2}
 C {devices/lab_pin.sym} 380.0 340.0 0 0 {name=l9 sig_type=std_logic lab=TRIM2 }
 N 440.0 390.0 440.0 370.0 {lab=VSS}
-C {devices/lab_pin.sym} 440.0 390.0 1 0 {name=l10 sig_type=std_logic lab=VSS }
+C {devices/lab_pin.sym} 440.0 390.0 3 0 {name=l10 sig_type=std_logic lab=VSS }
 N 460.0 340.0 440.0 340.0 {lab=VSS}
 C {devices/lab_pin.sym} 460.0 340.0 2 0 {name=l11 sig_type=std_logic lab=VSS }

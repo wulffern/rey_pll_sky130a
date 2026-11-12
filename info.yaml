@@ -11,7 +11,25 @@ email: carsten@wulff.no
 # Your github site, usually <github username>.github.io
 url: analogicus.com
 doc:
-  # Make docs
+  # Make docs. The schematics of the design, top down. Each cell's text on
+  # the Schematics page is design/REY_PLL_SKY130A/<cell>.md, and a cell
+  # with a sim/<cell>/README.md gets that on the Simulations page.
+  # Not listed: the REY_PLL_*_BLK_*, *_N_*, *_P_* and *_R_* schematics,
+  # which cicpy writes for the layout groups, the two empty resistor tap
+  # cells, and REY_PLL_ROSC_IEXT, the flat ring of sim/REY_PLL_ROSC/iext.spi
   libraries:
     REY_PLL_SKY130A:
+      - REY_PLL
+      - REY_PLL_PFD
+      - REY_PLL_CP
+      - REY_PLL_LPF
+      - REYPLL_RCU
+      - REYPLL_HRPPO8
+      - REYPLL_RES_36C2F0
+      - REYPLL_MIMU16
       - REY_PLL_ROSC
+      - REY_PLL_ROSC_BIAS
+      - REY_PLL_ROSC_STAGE
+      - REY_PLL_DIVN
+      - REY_PLL_CTRL
+      - tt_um_rey_pll_wulffern
