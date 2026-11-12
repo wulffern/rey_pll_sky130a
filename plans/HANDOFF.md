@@ -50,7 +50,10 @@ Commits (all pushed to `main`):
 - `de712a4` Lock at 128 MHz: feedback from CK/16, layout clean again
 - `7756f46` Docs: every design schematic on the page, redrawn; all 21
   corners lock
-- the commit after it: `make lpe` runs through (local netgen setup)
+- `790cf7c` `make lpe` runs through (local netgen setup), and the commit
+  after it: the setup through `NETGENSETUP`
+- tech_sky130A `f817410` lpe, lper: the netgen check reads NETGENSETUP,
+  like lvs
 - cicpy, branch `fix/route-pad-spacing`: `236cb50` Edge pins: narrowpin,
   and a jog on the pin's own layer, and `1f47dc6` Schematics: labels the
   right way up, a frame, room for port names
@@ -176,17 +179,17 @@ oscillator's slowest is 274 MHz.
    ladder to get there: flat it is ((r+r)||(r+r)) + r+r + r+r of
    `res_high_po`, in the schematic four two-segment resistor cells. Each
    netlist against itself is fine.
-   The workaround is local: `work/Makefile` points `PDKPATH` at
-   `cic/netgen` for the `lpe` target, and the one file there sources the
-   PDK setup and turns series merging off for `res_high_po`. Every
-   resistor segment is then matched one to one (456 devices on both
-   sides, match unique). The file is ignored by `*.tcl` in `.gitignore`,
-   it was added with `git add -f`.
-   Left to do: the `lpe` rule in the shared `tech/make/core.make` has the
-   PDK setup path written out; it should read `${NETGENSETUP}` like the
-   `lvs` rule does, then the `PDKPATH` trick can go. And report the crash
-   to netgen: the function is unchanged in 1.5.328, but that version has
-   not been run here.
+   The workaround: `work/netgen_lpe_setup.tcl` sources the PDK setup and
+   turns series merging off for `res_high_po`, and `work/Makefile` has
+   `lpe: NETGENSETUP = netgen_lpe_setup.tcl`. Every resistor segment is
+   then matched one to one (456 devices on both sides, match unique);
+   `make lvs` keeps the PDK setup. The shared `tech/make/core.make` reads
+   `NETGENSETUP` in the `lpe` and `lper` checks since tech_sky130A
+   `f817410` (it had the PDK path written out), and its troubleshooting
+   guide has the recipe. The setup file is ignored by `*.tcl` and `work/`
+   in `.gitignore`, it was added with `git add -f`.
+   Left to do: report the crash to netgen. The function is unchanged in
+   1.5.328, but that version has not been run here.
 2. **Tapeout.** There is no `tapeout/` submodule, so `make deliver` and
    `make precheck` cannot run. lelo_temp_sky130a is the model (`info.yaml`,
    `tiles: "1x1"`, `analog_pins: 0`); check that the shuttle still accepts

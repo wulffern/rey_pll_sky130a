@@ -1,6 +1,6 @@
 #---------------------------------------------------------------
 # netgen setup for the LVS check at the end of `make lpe`
-# (work/Makefile points PDKPATH here for that target only).
+# (work/Makefile: lpe: NETGENSETUP = netgen_lpe_setup.tcl).
 #
 # That check compares the flat extracted netlist with the hierarchical
 # schematic. With the PDK setup netgen 1.5.305 segfaults in
@@ -17,9 +17,8 @@
 source $::env(PDK_ROOT)/sky130A/libs.tech/netgen/sky130A_setup.tcl
 
 set dev sky130_fd_pr__res_high_po
-if {[lsearch [cells list -all -circuit1] $dev] >= 0} {
-    property "-circuit1 $dev" series disable
-}
-if {[lsearch [cells list -all -circuit2] $dev] >= 0} {
-    property "-circuit2 $dev" series disable
+foreach c {circuit1 circuit2} {
+    if {[lsearch [cells list -all -$c] $dev] >= 0} {
+        property "-$c $dev" series disable
+    }
 }
