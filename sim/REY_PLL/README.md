@@ -12,9 +12,8 @@ cicsim run --name Lay_typical tran Lay Gt C3 Ktt Tt Vt   # extracted, typical
 ```
 
 The extracted netlist is `work/lpe/REY_PLL_lpe.spi` (`make lpe
-CELL=REY_PLL` in `work/`), capacitance only. `make typical VIEW=Lay` does
-not get this far: netgen crashes at the end of `make lpe`, after the
-netlist is written.
+CELL=REY_PLL` in `work/`), capacitance only. `make typical VIEW=Lay`
+extracts first and then runs the typical corner.
 
 **Extracted layout, N = 16.** All 21 runs lock: CK is 127.99 to
 128.01 MHz, VCTRL settles between 0.56 and 1.53 V and its ripple is 8 to

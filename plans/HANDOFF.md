@@ -48,8 +48,9 @@ Commits (all pushed to `main`):
 - `73553c6` Wrap-up: docs as built, testbenches for both views, extracted
   core does not lock
 - `de712a4` Lock at 128 MHz: feedback from CK/16, layout clean again
-- the commit after it: schematics redrawn, every design schematic on the
-  documentation page, all corners
+- `7756f46` Docs: every design schematic on the page, redrawn; all 21
+  corners lock
+- the commit after it: `make lpe` runs through (local netgen setup)
 - cicpy, branch `fix/route-pad-spacing`: `236cb50` Edge pins: narrowpin,
   and a jog on the pin's own layer, and `1f47dc6` Schematics: labels the
   right way up, a frame, room for port names
@@ -163,14 +164,29 @@ oscillator's slowest is 274 MHz.
 
 ## What else is left
 
-1. **`make lpe` crashes in its last step.** The extraction writes
-   `work/lpe/REY_PLL_lpe.spi`, then netgen (1.5.305) dies with a
-   segmentation fault comparing the flat netlist against the schematic
-   (379 devices and 208 nets on both sides when it dies). The same for
-   REY_PLL_ROSC; REY_PLL_ROSC_STAGE runs through. The hierarchical
-   LVS matches, so the layout is not in doubt, but `make typical VIEW=Lay`
-   stops there. Run `cicsim run ... Lay ...` directly after `make lpe`
-   has written the netlist. Not debugged.
+1. **netgen crashes on the LVS check of `make lpe`: worked around, not
+   fixed.** `make lpe` ends by comparing the flat extracted netlist with
+   the hierarchical schematic. With the PDK's netgen setup netgen
+   (1.5.305) dies there with a segmentation fault, and that is what
+   failed the LVS workflow on GitHub: the action runs `make cdl lvs`,
+   which matches, and then `make lpe`. The crash is a NULL pointer in
+   `remove_group_tags` (`base/netgen.c`, called from
+   `PropertySortAndCombine`): a closing series/parallel group tag without
+   its opening one. It takes the fixed branch of the oscillator bias
+   ladder to get there: flat it is ((r+r)||(r+r)) + r+r + r+r of
+   `res_high_po`, in the schematic four two-segment resistor cells. Each
+   netlist against itself is fine.
+   The workaround is local: `work/Makefile` points `PDKPATH` at
+   `cic/netgen` for the `lpe` target, and the one file there sources the
+   PDK setup and turns series merging off for `res_high_po`. Every
+   resistor segment is then matched one to one (456 devices on both
+   sides, match unique). The file is ignored by `*.tcl` in `.gitignore`,
+   it was added with `git add -f`.
+   Left to do: the `lpe` rule in the shared `tech/make/core.make` has the
+   PDK setup path written out; it should read `${NETGENSETUP}` like the
+   `lvs` rule does, then the `PDKPATH` trick can go. And report the crash
+   to netgen: the function is unchanged in 1.5.328, but that version has
+   not been run here.
 2. **Tapeout.** There is no `tapeout/` submodule, so `make deliver` and
    `make precheck` cannot run. lelo_temp_sky130a is the model (`info.yaml`,
    `tiles: "1x1"`, `analog_pins: 0`); check that the shuttle still accepts
@@ -264,9 +280,9 @@ are in `tran.yaml` (127.5 to 128.5 MHz, 7.97 to 8.03 MHz, ripple under
     cicsim run --name Lay_typical tran Lay Gt C3 Ktt Tt Vt   # extracted
     ./corners.sh Lay          # extracted, 20 corners, about 2 hours
 
-Both need `work/lpe/REY_PLL_lpe.spi` from `make lpe` in `work/` (item 1
-of "What else is left"). The schematic view (`make typical`,
-`./corners.sh`) cannot lock at N = 16.
+Both need `work/lpe/REY_PLL_lpe.spi` from `make lpe CELL=REY_PLL` in
+`work/`; `make typical VIEW=Lay` runs that first. The schematic view
+(`make typical`, `./corners.sh`) cannot lock at N = 16.
 
 The flat extracted netlist names an inner net after a block that has it
 (`xblk_cp.VCTRL`, not `VCTRL`), so the testbenches (`sim/REY_PLL` and

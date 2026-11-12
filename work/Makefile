@@ -18,6 +18,16 @@ CELLS = REY_PLL
 
 include ../tech/make/core.make
 
+#- `make lpe` ends with an LVS of the flat extracted netlist against the
+#- hierarchical schematic. With the PDK's netgen setup netgen segfaults
+#- there, on the series merging of the oscillator bias ladder's poly
+#- resistors (see cic/netgen/libs.tech/netgen/sky130A_setup.tcl). The lpe
+#- rule builds its setup path from PDKPATH (it does not read
+#- NETGENSETUP), so for this target PDKPATH is a local directory that
+#- holds only that one file: the PDK setup with series merging of
+#- res_high_po switched off. Nothing else in the rule reads PDKPATH.
+lpe: PDKPATH = ../cic/netgen
+
 #- sch2mag reads THIS IP's rules (cic/sky130A.tech: the shared
 #- tech_sky130A file plus the met3/met4 minimum area, which cicpy needs
 #- to size the middle pads of a via stack); the shared file stays as it
