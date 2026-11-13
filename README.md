@@ -51,6 +51,17 @@ Every schematic of the design has a short description in
 
     CK_REF -> PFD -> CP -> LPF -> VCTRL -> ROSC -> DIVN -> CK_FB
 
+![](media/rey_pll_how.svg)
+
+The phase frequency detector compares CK_REF with CK_FB, and the charge
+pump turns UP and DN into a current on the loop filter. The filter's
+voltage, VCTRL, sits on the gate of the device that steers the tuned branch
+of each oscillator stage: a higher VCTRL gives less current and a slower
+ring, which is why UP sinks and DN sources. CK_FB is CK/16, so CK settles
+at 16 x 8 MHz = 128 MHz. The figure is drawn with
+[cictikz](https://github.com/wulffern/cictikz) from
+[media/rey_pll_how.tex](media/rey_pll_how.tex).
+
 | Block        | What                                                           |
 |:-------------|:---------------------------------------------------------------|
 | REY_PLL_ROSC | current starved ring oscillator with its Vgs/R bias, see below |

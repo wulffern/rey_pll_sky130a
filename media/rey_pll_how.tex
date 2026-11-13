@@ -1,0 +1,120 @@
+% REY_PLL from the top: how the loop works.
+%
+% The forward path runs left to right on one line, and that line is VCTRL
+% all the way into the gate of the oscillator's control device, so the
+% reader can follow one net from the charge pump to the thing it steers.
+% The charge pump and the loop filter are drawn as circuits, not boxes,
+% because the two facts worth explaining are in them: UP sinks and DN
+% sources (the oscillator slows down as VCTRL rises), and the filter hangs
+% from VDD like the control device does. Only one of the seven stages has
+% its supply drawn: every stage has its own starved node, and one shared
+% rail would be a different circuit. The divider runs right to left under
+% everything, so the feedback is the only wire that returns.
+% The feedback wire sits low enough to clear the note under the charge pump.
+% Green is for numbers that follow from lock, as in the course figures.
+
+\def\yf{0}        % forward path = VCTRL
+\def\yfb{-4.4}    % the feedback wire
+\def\yd{-5.6}     % divider row
+\def\yp{-6.7}     % pins
+\def\yn{4.3}      % block names
+
+\newcommand{\pllBlk}[5]{% x0 y0 x1 y1 label
+  \draw (#1,#2) rectangle (#3,#4);
+  \node at ({(#1+#3)/2},{(#2+#4)/2}) {#5};}
+\newcommand{\pllTap}[3]{% x, name, frequency
+  \fill (#1,\yd) circle (0.075);
+  \draw (#1,\yd) to [short,-o] (#1,\yp);
+  \node[anchor=north,align=center] at (#1,{\yp-0.1}) {#2\\ \color{armygreen}#3};}
+
+% ---- block names ----
+\node at (2.5,\yn)  {\textbf{PFD}};
+\node at (5.3,\yn)  {\textbf{CP}};
+\node at (8.1,\yn)  {\textbf{LPF}};
+\node at (14.9,\yn) {\textbf{ROSC}};
+
+% ---- reference and phase frequency detector ----
+\draw (0.2,0.45) \portIn{CK\_REF};
+\node[anchor=north east,armygreen] at (0.1,0.2) {8 MHz};
+\draw[->] (0.2,0.45) -- (1.6,0.45);
+\pllBlk{1.6}{-1.0}{3.4}{1.0}{PFD}
+\draw[->] (3.4,0.45) -- (4.3,0.45);
+\node[anchor=south] at (3.85,0.45) {\small UP};
+\draw[->] (3.4,-0.45) -- (4.3,-0.45);
+\node[anchor=south] at (3.85,-0.45) {\small DN};
+
+% ---- charge pump: DN sources, UP sinks ----
+\draw[dashed] (4.3,-3.1) rectangle (6.3,3.1);
+\draw (5.4,2.5) \vsupply;
+\draw (5.4,2.5) to [I] (5.4,1.3);
+\scSwV{5.4}{1.3}{DN}
+\draw (5.4,0.3) -- (5.4,-0.3);
+\scSwV{5.4}{-0.3}{UP}
+\draw (5.4,-1.3) to [I] (5.4,-2.5);
+\draw (5.4,-2.5) \vground;
+\fill (5.4,\yf) circle (0.075);
+\node[anchor=north,align=center] at (5.3,-3.2) {\small UP sinks, DN sources\\ \small currents mirrored from the bias};
+
+% ---- loop filter, to VDD ----
+\draw (7.4,\yf) \vcapacitor{$C_2$} -- (7.4,3.2) \vsupply;
+\draw (8.8,\yf) \vresistor{$R$} \vcapacitor{$C_1$} \vsupply;
+\fill (7.4,\yf) circle (0.075);
+\fill (8.8,\yf) circle (0.075);
+
+% ---- control: parks or kicks VCTRL ----
+\pllBlk{9.1}{-2.5}{10.9}{-1.5}{CTRL}
+\draw[->] (10.0,-1.5) -- (10.0,\yf);
+\draw[->] (8.4,-2.0) -- (9.1,-2.0);
+\node[anchor=east,align=right] at (8.35,-2.0) {\small PWRUP\\ \small OLH\\ \small OLL};
+
+% ---- oscillator: one starved stage of seven ----
+\draw[dashed] (11.2,-3.3) rectangle (18.6,2.9);
+\draw (13.0,-0.8) \lvpmos{MC}{};
+\draw (5.4,\yf) -- (MC.gate);
+\node[anchor=south] at (10.6,\yf) {$V_{CTRL}$};
+\draw (13.0,2.0) \vsupply;
+\draw (13.0,2.0) to [I] (13.0,0.8);
+\draw (15.3,2.0) \vsupply;
+\draw (15.3,2.0) to [I] (15.3,0.8) -- (15.3,-0.8) -- (13.0,-0.8);
+\fill (14.15,-0.8) circle (0.075);
+\draw (14.15,-0.8) -- (14.15,-1.533);
+\node[anchor=south] at (14.15,-0.75) {\small $V_S$};
+\node[anchor=east,align=right] at (12.6,1.4) {\small tuned\\ \small $I$};
+\node[anchor=east,align=right] at (14.9,1.4) {\small fixed\\ \small $2I$};
+
+% the bias makes I from a Vgs over a trimmed resistor, so f goes as 1/(RC)
+\pllBlk{16.2}{1.3}{18.3}{2.5}{\small\shortstack{bias\\ $I = V_{GS}/R$}}
+\draw[->] (19.3,1.9) -- (18.3,1.9);
+\node[anchor=west] at (19.3,1.9) {\small TRIM[2:0]};
+
+\draw (12.0,-1.9) \cicInv{ia} \cicInv{ib} \cicInv{ic} \cicBuf{bo};
+\fill (ic_out) circle (0.075);
+\draw (ic_out) -- (16.8,-2.7) -- (12.0,-2.7) -- (12.0,-1.9);
+\node[anchor=north] at (14.4,-2.75) {\small 7 stages, each with its own $V_S$};
+\node[anchor=north west,align=left] at (15.7,0.7) {\small higher $V_{CTRL}$,\\ \small less current,\\ \small slower};
+
+% ---- output ----
+\draw (bo_out) -- (19.8,-1.9);
+\node[anchor=west] at (19.8,-1.9) {CK};
+\node[anchor=north west,armygreen] at (19.8,-2.15) {128 MHz};
+\fill (19.1,-1.9) circle (0.075);
+
+% ---- divider, right to left; the fourth flop closes the loop ----
+\draw[->] (19.1,-1.9) -- (19.1,\yd) -- (18.0,\yd);
+\pllBlk{16.8}{-6.05}{18.0}{-5.15}{$\div 8$}
+\draw[->] (16.8,\yd) -- (15.0,\yd);
+\pllBlk{13.8}{-6.05}{15.0}{-5.15}{$\div 2$}
+\draw[->] (13.8,\yd) -- (12.0,\yd);
+\pllBlk{10.8}{-6.05}{12.0}{-5.15}{$\div 2$}
+\draw[->] (10.8,\yd) -- (9.0,\yd);
+\pllBlk{7.8}{-6.05}{9.0}{-5.15}{$\div 2$}
+\draw (7.8,\yd) -- (6.9,\yd) to [short,-o] (6.9,\yp);
+\node[anchor=north,align=center] at (6.9,{\yp-0.1}) {CK/64\\ \color{armygreen}2 MHz};
+\pllTap{15.9}{CK/8}{16 MHz}
+\pllTap{12.9}{CK/16}{8 MHz}
+\pllTap{9.9}{CK/32}{4 MHz}
+\node[anchor=west] at (19.4,\yd) {\textbf{DIVN}};
+
+% ---- feedback ----
+\draw[->] (12.9,\yd) -- (12.9,\yfb) -- (0.9,\yfb) -- (0.9,-0.45) -- (1.6,-0.45);
+\node[anchor=south] at (9.6,\yfb) {CK\_FB = CK/16};
