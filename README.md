@@ -17,6 +17,9 @@ replaces it with a current starved ring oscillator
 ([osc_ring_adv](https://analogicus.com/aic2027/assets/media/osc_ring_adv_tikz.svg)):
 the bias sets the frequency, VCTRL only trims it, and there is no OTA buffer.
 
+It was made in five days by a human and an AI agent. The story, with
+every prompt, is in [How It Was Made](documents/howitwasmade.md).
+
 The goal was 512 MHz from an 8 MHz reference (N = 64), working over process,
 1.7 to 1.9 V and -40 to 125 C with one trim code per die, and small enough
 for a Tiny Tapeout tile. As laid out it locks at 128 MHz (N = 16): with its
