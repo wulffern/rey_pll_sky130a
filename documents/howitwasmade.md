@@ -13,6 +13,8 @@ documentation, this page included.
 This page is the record of that: what came out, what was said each day,
 and where the human's words changed the course. Every prompt is here.
 
+The same story as a deck of 16 slides: [slides.pdf](slides.pdf).
+
 ## What got built
 
 | What                   | Result                                                                     |
